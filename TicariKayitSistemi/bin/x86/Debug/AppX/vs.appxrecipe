@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>SAMSUNG</Machine>
+    <WindowsUser>İbrahim</WindowsUser>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <SolutionConfiguration>Debug|x86</SolutionConfiguration>
+    <PackageArchitecture>x86</PackageArchitecture>
+    <PackageIdentityName>1d02fe12-04c5-4fc8-8d34-efeaa98fd400</PackageIdentityName>
+    <IntermediateOutputPath>C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\obj\x86\Debug\</IntermediateOutputPath>
+    <RegisteredManifestChecksum>7EAF9E61B02EE6F9E13BB232FFC3220F37B11BE462831FB4B05DB70B50337551</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>1d02fe12-04c5-4fc8-8d34-efeaa98fd400_1.0.0.0_x86__r2c2x92mwpwpj</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>1d02fe12-04c5-4fc8-8d34-efeaa98fd400_r2c2x92mwpwpj!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>1d02fe12-04c5-4fc8-8d34-efeaa98fd400</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=İbrahim</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+    <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-08-16T14:58:04.143</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\TicariKayitSistemi.exe">
+      <PackagePath>TicariKayitSistemi.exe</PackagePath>
+      <Modified>2014-08-16T14:58:02.822</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization.dll">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization.dll</PackagePath>
+      <Modified>2014-01-20T20:25:28.935</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit.dll">
+      <PackagePath>WinRTXamlToolkit.dll</PackagePath>
+      <Modified>2014-01-20T20:22:33.046</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\SQLite.WinRT81\3.8.5\Redist\Debug\x86\sqlite3.dll">
+      <PackagePath>sqlite3.dll</PackagePath>
+      <Modified>2014-08-06T19:58:09.318</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\Assets\barcode.png">
+      <PackagePath>Assets\barcode.png</PackagePath>
+      <Modified>2014-08-14T21:21:44.464</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\Assets\SplashScreen.scale-180.png">
+      <PackagePath>Assets\SplashScreen.scale-180.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2014-01-05T00:47:04.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\Assets\Logo.scale-100.png">
+      <PackagePath>Assets\Logo.scale-100.png</PackagePath>
+      <Modified>2013-07-31T06:01:26.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\Assets\SmallLogo.scale-100.png">
+      <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-07-31T06:01:26.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-07-31T06:01:26.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-07-31T06:01:26.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\Assets\marshall.jpg">
+      <PackagePath>Assets\marshall.jpg</PackagePath>
+      <Modified>2014-03-07T23:08:19.097</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\Assets\musluk.jpg">
+      <PackagePath>Assets\musluk.jpg</PackagePath>
+      <Modified>2014-03-07T21:04:31.067</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\Assets\ymjtryu.jpg">
+      <PackagePath>Assets\ymjtryu.jpg</PackagePath>
+      <Modified>2007-02-08T10:44:42.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\Assets\background.jpg">
+      <PackagePath>Assets\background.jpg</PackagePath>
+      <Modified>2014-01-16T01:16:26.923</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\Assets\vesika.jpg">
+      <PackagePath>Assets\vesika.jpg</PackagePath>
+      <Modified>2014-01-11T18:38:00.214</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+      <Modified>2014-08-11T19:58:18.362</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\Views\FirmInfoView.xbf">
+      <PackagePath>Views\FirmInfoView.xbf</PackagePath>
+      <Modified>2014-08-14T22:02:52.961</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\Views\GoodInfoView.xbf">
+      <PackagePath>Views\GoodInfoView.xbf</PackagePath>
+      <Modified>2014-08-16T14:58:02.206</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\Views\SaleTypeSelector.xbf">
+      <PackagePath>Views\SaleTypeSelector.xbf</PackagePath>
+      <Modified>2014-08-11T19:58:18.391</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\Views\PaymentsView.xbf">
+      <PackagePath>Views\PaymentsView.xbf</PackagePath>
+      <Modified>2014-08-11T21:19:35.800</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\Views\CustomerInfoView.xbf">
+      <PackagePath>Views\CustomerInfoView.xbf</PackagePath>
+      <Modified>2014-08-14T20:07:29.646</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\Views\SalesView.xbf">
+      <PackagePath>Views\SalesView.xbf</PackagePath>
+      <Modified>2014-08-11T21:19:35.817</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\Views\CustomerAccountView.xbf">
+      <PackagePath>Views\CustomerAccountView.xbf</PackagePath>
+      <Modified>2014-08-11T21:19:35.819</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\Views\GoodsView.xbf">
+      <PackagePath>Views\GoodsView.xbf</PackagePath>
+      <Modified>2014-08-16T14:58:02.210</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\ResourceDictionary.xbf">
+      <PackagePath>ResourceDictionary.xbf</PackagePath>
+      <Modified>2014-08-11T19:58:18.476</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\Views\CustomersView.xbf">
+      <PackagePath>Views\CustomersView.xbf</PackagePath>
+      <Modified>2014-08-11T21:19:35.822</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\Views\MainPage.xbf">
+      <PackagePath>Views\MainPage.xbf</PackagePath>
+      <Modified>2014-08-13T20:32:36.654</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\TicariKayitSistemi.xr.xml">
+      <PackagePath>TicariKayitSistemi.xr.xml</PackagePath>
+      <Modified>2014-08-16T12:36:03.723</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\AnimatingContainer.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\AnimatingContainer.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.070</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\CascadingTextBlock.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\CascadingTextBlock.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.099</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\CountdownControl.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\CountdownControl.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.115</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\AlternativeFrame\AlternativeFrame.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\AlternativeFrame\AlternativeFrame.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.068</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\CameraCaptureControl\CameraCaptureControl.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\CameraCaptureControl\CameraCaptureControl.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.080</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\CascadingImageControl\CascadingImageControl.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\CascadingImageControl\CascadingImageControl.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.097</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\ColorPicker\ColorPicker.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\ColorPicker\ColorPicker.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.113</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\CustomAppBar\CustomAppBar.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\CustomAppBar\CustomAppBar.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.118</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\CustomGridSplitter\CustomGridSplitter.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\CustomGridSplitter\CustomGridSplitter.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.127</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\DelayedLoadControl\DelayedLoadControl.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\DelayedLoadControl\DelayedLoadControl.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.131</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\ImageButton\ImageButton.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\ImageButton\ImageButton.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.164</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\ImageToggleButton\ImageToggleButton.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\ImageToggleButton\ImageToggleButton.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.167</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\InputDialog\InputDialog.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\InputDialog\InputDialog.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.176</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\ListItemButton\ListItemButton.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\ListItemButton\ListItemButton.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.179</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\NumericUpDown\NumericUpDown.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\NumericUpDown\NumericUpDown.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.184</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\TreeView\TreeView.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\TreeView\TreeView.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.187</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\TreeView\TreeViewItem.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\TreeView\TreeViewItem.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.190</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\TreeView\TreeViewMouse.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\TreeView\TreeViewMouse.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.193</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\TreeView\TreeViewTouch.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\TreeView\TreeViewTouch.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.195</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\WatermarkPasswordBox\WatermarkPasswordBox.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\WatermarkPasswordBox\WatermarkPasswordBox.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.200</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\WatermarkTextBox\WatermarkTextBox.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\WatermarkTextBox\WatermarkTextBox.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.206</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\WebBrowser\WebBrowser.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\WebBrowser\WebBrowser.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.220</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Themes\Generic.xaml">
+      <PackagePath>WinRTXamlToolkit\Themes\Generic.xaml</PackagePath>
+      <Modified>2014-01-20T20:22:33.223</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Axis\AxisLabel.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Axis\AxisLabel.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.943</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Axis\DateTimeAxisLabel.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Axis\DateTimeAxisLabel.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.945</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Axis\DisplayAxis.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Axis\DisplayAxis.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.948</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Axis\NumericAxisLabel.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Axis\NumericAxisLabel.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.951</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Axis\RangeAxis.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Axis\RangeAxis.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.956</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Chart\Chart.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Chart\Chart.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.960</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\AreaDataPoint.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\AreaDataPoint.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.964</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\BarDataPoint.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\BarDataPoint.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.966</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\BubbleDataPoint.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\BubbleDataPoint.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.969</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\ColumnDataPoint.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\ColumnDataPoint.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.972</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\LineDataPoint.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\LineDataPoint.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.975</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\PieDataPoint.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\PieDataPoint.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.983</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\ScatterDataPoint.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\DataPoint\ScatterDataPoint.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.985</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Primitives\DelegatingListBox.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Primitives\DelegatingListBox.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.989</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\AreaSeries.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\AreaSeries.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.993</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\DataPointSeries.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\DataPointSeries.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.995</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\DefinitionSeries.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\DefinitionSeries.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:28.998</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\LegendItem.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\LegendItem.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:29.001</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\LineSeries.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\LineSeries.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:29.003</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\PieSeries.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Charting\Series\PieSeries.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:29.007</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Legend\Legend.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Legend\Legend.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:29.010</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Themes\Generic.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Themes\Generic.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:29.014</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization\Title\Title.xaml">
+      <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Title\Title.xaml</PackagePath>
+      <Modified>2014-01-20T20:25:29.017</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Visual Studio 2013\Projects\TicariKayitSistemi\TicariKayitSistemi\bin\x86\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2014-08-16T15:26:24.737</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\Microsoft.VCLibs\12.0\">
+      <Name>Microsoft.VCLibs.120.00.Debug</Name>
+      <Version>12.0.21005.1</Version>
+      <Architecture>ARM</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.120.00.Debug, MinVersion = 12.0.21005.1</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\Microsoft.VCLibs\12.0\.\AppX\Debug\ARM\Microsoft.VCLibs.ARM.Debug.12.00.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\Microsoft.VCLibs\12.0\">
+      <Name>Microsoft.VCLibs.120.00.Debug</Name>
+      <Version>12.0.21005.1</Version>
+      <Architecture>x64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.120.00.Debug, MinVersion = 12.0.21005.1</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\Microsoft.VCLibs\12.0\.\AppX\Debug\x64\Microsoft.VCLibs.x64.Debug.12.00.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\Microsoft.VCLibs\12.0\">
+      <Name>Microsoft.VCLibs.120.00.Debug</Name>
+      <Version>12.0.21005.1</Version>
+      <Architecture>x86</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.120.00.Debug, MinVersion = 12.0.21005.1</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\Microsoft.VCLibs\12.0\.\AppX\Debug\x86\Microsoft.VCLibs.x86.Debug.12.00.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+  </ItemGroup>
+</Project>
