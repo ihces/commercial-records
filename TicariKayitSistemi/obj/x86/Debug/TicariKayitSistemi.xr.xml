@@ -145,7 +145,7 @@
       <RootMethod Name="GetItemType" />
       <RootMethod Name="SetItemType" />
     </RootType>
-    <RootType FullName="TicariKayitSistemi.Views.FirmConfigView" />
+    <RootType FullName="TicariKayitSistemi.Views.FirmInfo" />
     <RootType FullName="Windows.UI.Xaml.Controls.Border">
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
@@ -166,7 +166,7 @@
       <RootProperty Name="Margin" />
       <RootEvent Name="Tapped" />
     </RootType>
-    <RootType FullName="TicariKayitSistemi.Views.GoodInfoView" />
+    <RootType FullName="TicariKayitSistemi.Views.GoodInfo" />
     <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
       <RootProperty Name="FontSize" />
       <RootProperty Name="FontWeight" />
@@ -192,8 +192,8 @@
       <RootProperty Name="IsChecked" />
       <RootProperty Name="Content" />
     </RootType>
-    <RootType FullName="TicariKayitSistemi.Payment" />
-    <RootType FullName="TicariKayitSistemi.CustomerInfoConfig" />
+    <RootType FullName="TicariKayitSistemi.Payments" />
+    <RootType FullName="TicariKayitSistemi.CustomerInfo" />
     <RootType FullName="TicariKayitSistemi.Sales" />
     <RootType FullName="Windows.UI.Xaml.Documents.Run">
       <RootProperty Name="Text" />
@@ -225,7 +225,7 @@
       <RootProperty Name="DependentValuePath" />
       <RootProperty Name="IsSelectionEnabled" />
     </RootType>
-    <RootType FullName="TicariKayitSistemi.Account" />
+    <RootType FullName="TicariKayitSistemi.CustomerAccount" />
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
       <RootProperty Name="HorizontalScrollBarVisibility" />
       <RootProperty Name="HorizontalScrollMode" />

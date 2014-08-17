@@ -149,13 +149,13 @@ namespace TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo
         private void InitTypeTables()
         {
             _typeNameTable = new string[51];
-            _typeNameTable[0] = "TicariKayitSistemi.Views.FirmConfigView";
+            _typeNameTable[0] = "TicariKayitSistemi.Views.FirmInfo";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[3] = "TicariKayitSistemi.Views.GoodInfoView";
+            _typeNameTable[3] = "TicariKayitSistemi.Views.GoodInfo";
             _typeNameTable[4] = "TicariKayitSistemi.SaleTypeSelector";
-            _typeNameTable[5] = "TicariKayitSistemi.Payment";
-            _typeNameTable[6] = "TicariKayitSistemi.CustomerInfoConfig";
+            _typeNameTable[5] = "TicariKayitSistemi.Payments";
+            _typeNameTable[6] = "TicariKayitSistemi.CustomerInfo";
             _typeNameTable[7] = "TicariKayitSistemi.Sales";
             _typeNameTable[8] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart";
             _typeNameTable[9] = "Windows.UI.Xaml.Controls.Control";
@@ -196,19 +196,19 @@ namespace TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo
             _typeNameTable[44] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries";
             _typeNameTable[45] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>";
             _typeNameTable[46] = "Windows.UI.Xaml.Media.PointCollection";
-            _typeNameTable[47] = "TicariKayitSistemi.Account";
+            _typeNameTable[47] = "TicariKayitSistemi.CustomerAccount";
             _typeNameTable[48] = "TicariKayitSistemi.Goods";
             _typeNameTable[49] = "TicariKayitSistemi.Costumers";
             _typeNameTable[50] = "TicariKayitSistemi.MainPage";
 
             _typeTable = new global::System.Type[51];
-            _typeTable[0] = typeof(global::TicariKayitSistemi.Views.FirmConfigView);
+            _typeTable[0] = typeof(global::TicariKayitSistemi.Views.FirmInfo);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[3] = typeof(global::TicariKayitSistemi.Views.GoodInfoView);
+            _typeTable[3] = typeof(global::TicariKayitSistemi.Views.GoodInfo);
             _typeTable[4] = typeof(global::TicariKayitSistemi.SaleTypeSelector);
-            _typeTable[5] = typeof(global::TicariKayitSistemi.Payment);
-            _typeTable[6] = typeof(global::TicariKayitSistemi.CustomerInfoConfig);
+            _typeTable[5] = typeof(global::TicariKayitSistemi.Payments);
+            _typeTable[6] = typeof(global::TicariKayitSistemi.CustomerInfo);
             _typeTable[7] = typeof(global::TicariKayitSistemi.Sales);
             _typeTable[8] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart);
             _typeTable[9] = typeof(global::Windows.UI.Xaml.Controls.Control);
@@ -249,7 +249,7 @@ namespace TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo
             _typeTable[44] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries);
             _typeTable[45] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>);
             _typeTable[46] = typeof(global::Windows.UI.Xaml.Media.PointCollection);
-            _typeTable[47] = typeof(global::TicariKayitSistemi.Account);
+            _typeTable[47] = typeof(global::TicariKayitSistemi.CustomerAccount);
             _typeTable[48] = typeof(global::TicariKayitSistemi.Goods);
             _typeTable[49] = typeof(global::TicariKayitSistemi.Costumers);
             _typeTable[50] = typeof(global::TicariKayitSistemi.MainPage);
@@ -287,11 +287,11 @@ namespace TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo
             return -1;
         }
 
-        private object Activate_0_FirmConfigView() { return new global::TicariKayitSistemi.Views.FirmConfigView(); }
-        private object Activate_3_GoodInfoView() { return new global::TicariKayitSistemi.Views.GoodInfoView(); }
+        private object Activate_0_FirmInfo() { return new global::TicariKayitSistemi.Views.FirmInfo(); }
+        private object Activate_3_GoodInfo() { return new global::TicariKayitSistemi.Views.GoodInfo(); }
         private object Activate_4_SaleTypeSelector() { return new global::TicariKayitSistemi.SaleTypeSelector(); }
-        private object Activate_5_Payment() { return new global::TicariKayitSistemi.Payment(); }
-        private object Activate_6_CustomerInfoConfig() { return new global::TicariKayitSistemi.CustomerInfoConfig(); }
+        private object Activate_5_Payments() { return new global::TicariKayitSistemi.Payments(); }
+        private object Activate_6_CustomerInfo() { return new global::TicariKayitSistemi.CustomerInfo(); }
         private object Activate_7_Sales() { return new global::TicariKayitSistemi.Sales(); }
         private object Activate_8_Chart() { return new global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart(); }
         private object Activate_10_Collection() { return new global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>(); }
@@ -304,7 +304,7 @@ namespace TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo
         private object Activate_26_Collection() { return new global::System.Collections.ObjectModel.Collection<global::Windows.UI.Xaml.ResourceDictionary>(); }
         private object Activate_28_ColumnSeries() { return new global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnSeries(); }
         private object Activate_44_LineSeries() { return new global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries(); }
-        private object Activate_47_Account() { return new global::TicariKayitSistemi.Account(); }
+        private object Activate_47_CustomerAccount() { return new global::TicariKayitSistemi.CustomerAccount(); }
         private object Activate_48_Goods() { return new global::TicariKayitSistemi.Goods(); }
         private object Activate_49_Costumers() { return new global::TicariKayitSistemi.Costumers(); }
         private object Activate_50_MainPage() { return new global::TicariKayitSistemi.MainPage(); }
@@ -373,9 +373,9 @@ namespace TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo
             switch (typeIndex)
             {
 
-            case 0:   //  TicariKayitSistemi.Views.FirmConfigView
+            case 0:   //  TicariKayitSistemi.Views.FirmInfo
                 userType = new global::TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_0_FirmConfigView;
+                userType.Activator = Activate_0_FirmInfo;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -388,9 +388,9 @@ namespace TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo
                 xamlType = new global::TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 3:   //  TicariKayitSistemi.Views.GoodInfoView
+            case 3:   //  TicariKayitSistemi.Views.GoodInfo
                 userType = new global::TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_3_GoodInfoView;
+                userType.Activator = Activate_3_GoodInfo;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -402,16 +402,16 @@ namespace TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 5:   //  TicariKayitSistemi.Payment
+            case 5:   //  TicariKayitSistemi.Payments
                 userType = new global::TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_5_Payment;
+                userType.Activator = Activate_5_Payments;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 6:   //  TicariKayitSistemi.CustomerInfoConfig
+            case 6:   //  TicariKayitSistemi.CustomerInfo
                 userType = new global::TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_6_CustomerInfoConfig;
+                userType.Activator = Activate_6_CustomerInfo;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -683,9 +683,9 @@ namespace TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo
                 xamlType = new global::TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 47:   //  TicariKayitSistemi.Account
+            case 47:   //  TicariKayitSistemi.CustomerAccount
                 userType = new global::TicariKayitSistemi.TicariKayitSistemi_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_47_Account;
+                userType.Activator = Activate_47_CustomerAccount;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
