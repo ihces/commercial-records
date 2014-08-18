@@ -1,7 +1,7 @@
 ﻿using System;
 using SQLite;
 
-namespace TicariKayitSistemi.Models
+namespace CommercialRecordSystem.Models
 {
     class Customer
     {

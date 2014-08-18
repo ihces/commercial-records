@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TicariKayitSistemi.ViewModels
+﻿
+namespace CommercialRecordSystem.ViewModels
 {
-    class CurrentAccountVM
+    class CurrentAccountVM : VMBase
     {
     }
 }

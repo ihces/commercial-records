@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace TicariKayitSistemi.Models
+namespace CommercialRecordSystem.Models
 {
     class Sale
     {

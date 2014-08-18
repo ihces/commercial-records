@@ -14,10 +14,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using TicariKayitSistemi.Models;
+using CommercialRecordSystem.Models;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
-namespace TicariKayitSistemi
+namespace CommercialRecordSystem
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

@@ -191,3 +191,4 @@ C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\obj\x
 C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\obj\x86\Debug\WinRTXamlToolkit.pri.xml
 C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\obj\x86\Debug\WinRTXamlToolkit.Controls.DataVisualization.pri.xml
 C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\obj\x86\Debug\ProjectArchitectures.txt
+C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\obj\x86\Debug\TicariKayitSistemi.csprojResolveAssemblyReference.cache

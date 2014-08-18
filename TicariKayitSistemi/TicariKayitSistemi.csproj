@@ -118,6 +118,7 @@
     <Compile Include="ViewModels\GoodVM.cs" />
     <Compile Include="ViewModels\Payment.cs" />
     <Compile Include="ViewModels\SaleVM.cs" />
+    <Compile Include="ViewModels\VMBase.cs" />
     <Compile Include="Views\CustomerAccount.xaml.cs">
       <DependentUpon>CustomerAccount.xaml</DependentUpon>
     </Compile>

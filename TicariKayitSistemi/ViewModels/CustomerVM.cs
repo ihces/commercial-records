@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicariKayitSistemi.ViewModels
+namespace CommercialRecordSystem.ViewModels
 {
     class CustomerVM
     {
