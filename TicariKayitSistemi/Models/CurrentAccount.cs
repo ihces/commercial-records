@@ -8,9 +8,9 @@ namespace TicariKayitSistemi.Models
         public enum AccountType{SALE, PAYMENT, PRE_ORDER};
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public int custumerId { get; set; }
-        public DateTime transactDate { get; set; }
-        public AccountType type { get; set; }
-        public double amount { get; set; }
+        public int CustumerId { get; set; }
+        public DateTime TransactDate { get; set; }
+        public AccountType Type { get; set; }
+        public double Amount { get; set; }
     }
 }

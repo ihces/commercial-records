@@ -6,10 +6,10 @@ namespace TicariKayitSistemi.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public int accountId { get; set; }
-        public int quantity { get; set; }
-        public int unitType { get; set; }
-        public string detail { get; set; }
-        public double unitCost { get; set; }
+        public int AccountId { get; set; }
+        public int Quantity { get; set; }
+        public int UnitType { get; set; }
+        public string Detail { get; set; }
+        public double UnitCost { get; set; }
     }
 }

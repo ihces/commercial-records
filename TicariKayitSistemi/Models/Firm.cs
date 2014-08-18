@@ -7,13 +7,13 @@ namespace TicariKayitSistemi.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string name { get; set; }
-        public string authorizedReseller { get; set; }
-        public string address { get; set; }
-        public string phone { get; set; }
-        public string mobile { get; set; }
-        public string pictureFileName { get; set; }
-        public DateTime createdDate { get; set; }
-        public DateTime modifiedDate { get; set; }
+        public string Name { get; set; }
+        public string AuthorizedReseller { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Mobile { get; set; }
+        public string PictureFileName { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
     }
 }
