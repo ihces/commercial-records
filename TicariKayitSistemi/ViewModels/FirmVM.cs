@@ -1,20 +1,19 @@
 ﻿using System;
-using SQLiteDemo.ViewModels;
 
 namespace CommercialRecordSystem.ViewModels
 {
     class FirmVM : VMBase
     {
         #region Properties
-        private int id { get; set; }
-        private string name { get; set; }
-        private string authorizedReseller { get; set; }
-        private string address { get; set; }
-        private string phone { get; set; }
-        private string mobile { get; set; }
-        private string pictureFileName { get; set; }
-        private DateTime createdDate { get; set; }
-        private DateTime modifiedDate { get; set; }
+        private int id;
+        private string name;
+        private string authorizedReseller;
+        private string address;
+        private string phone;
+        private string mobile;
+        private string pictureFileName;
+        private DateTime createdDate;
+        private DateTime modifiedDate;
         
         public int Id
         {

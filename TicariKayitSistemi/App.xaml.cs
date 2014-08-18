@@ -75,14 +75,18 @@ namespace CommercialRecordSystem
 
             // Get a reference to the SQLite database
             DBPath = Path.Combine(
-                Windows.Storage.ApplicationData.Current.LocalFolder.Path, "test.db");
+                Windows.Storage.ApplicationData.Current.LocalFolder.Path, "customers.s3db");
             // Initialize the database if necessary
-            //using (var db = new SQLite.SQLiteConnection(DBPath))
-            //{
+            using (var db = new SQLite.SQLiteConnection("customers.s3db"))
+            {
                 // Create the tables if they don't exist
-              //  db.CreateTable<Customer>();
-                //db.CreateTable<Account>();
-            //}
+                db.CreateTable<CurrentAccount>(); 
+                db.CreateTable<Customer>();
+                db.CreateTable<Firm>();
+                db.CreateTable<Good>();
+                db.CreateTable<Payment>();
+                db.CreateTable<Sale>();
+            }
 
             if (rootFrame.Content == null)
             {

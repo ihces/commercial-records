@@ -9,7 +9,7 @@
   -->
   <Identity Name="1d02fe12-04c5-4fc8-8d34-efeaa98fd400" Publisher="CN=İbrahim" Version="1.0.0.0" ProcessorArchitecture="x86" />
   <Properties>
-    <DisplayName>TicariKayitSistemi</DisplayName>
+    <DisplayName>CommercialRecordSystem</DisplayName>
     <PublisherDisplayName>İbrahim</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -21,8 +21,8 @@
     <Resource Language="EN-US" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="TicariKayitSistemi.exe" EntryPoint="TicariKayitSistemi.App">
-      <m2:VisualElements DisplayName="TicariKayitSistemi" Square150x150Logo="Assets\SplashScreen.scale-180.png" Square30x30Logo="Assets\SmallLogo.png" Description="TicariKayitSistemi" ForegroundText="light" BackgroundColor="#d74f2a">
+    <Application Id="App" Executable="TicariKayitSistemi.exe" EntryPoint="CommercialRecordSystem.App">
+      <m2:VisualElements DisplayName="CommercialRecordSystem" Square150x150Logo="Assets\SplashScreen.scale-180.png" Square30x30Logo="Assets\SmallLogo.png" Description="CommercialRecordSystem" ForegroundText="light" BackgroundColor="#d74f2a">
         <m2:DefaultTile ShortName="Ticari Kayıt Sistemi">
           <m2:ShowNameOnTiles>
             <m2:ShowOn Tile="square150x150Logo" />

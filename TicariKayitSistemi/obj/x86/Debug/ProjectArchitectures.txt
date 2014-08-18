@@ -1,1 +1,1 @@
-C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\TicariKayitSistemi.csproj;x86
+C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\CommercialRecordSystem.csproj;x86

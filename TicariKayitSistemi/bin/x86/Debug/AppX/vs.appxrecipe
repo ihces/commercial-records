@@ -8,7 +8,7 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>1d02fe12-04c5-4fc8-8d34-efeaa98fd400</PackageIdentityName>
     <IntermediateOutputPath>C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\obj\x86\Debug\</IntermediateOutputPath>
-    <RegisteredManifestChecksum>7EAF9E61B02EE6F9E13BB232FFC3220F37B11BE462831FB4B05DB70B50337551</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>A2810AE9C81A1A03C906E160299999E663BDC231C682876F7ECEAC7BAB285100</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>1d02fe12-04c5-4fc8-8d34-efeaa98fd400_1.0.0.0_x86__r2c2x92mwpwpj</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>1d02fe12-04c5-4fc8-8d34-efeaa98fd400_r2c2x92mwpwpj!App</RegisteredUserModeAppID>
     <RegisteredPackageID>1d02fe12-04c5-4fc8-8d34-efeaa98fd400</RegisteredPackageID>
@@ -20,13 +20,13 @@
     <AppXManifest Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2014-08-17T20:14:54.856</Modified>
+      <Modified>2014-08-18T19:57:35.516</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\TicariKayitSistemi.exe">
       <PackagePath>TicariKayitSistemi.exe</PackagePath>
-      <Modified>2014-08-17T20:14:54.073</Modified>
+      <Modified>2014-08-18T19:57:33.551</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization.dll">
       <PackagePath>WinRTXamlToolkit.Controls.DataVisualization.dll</PackagePath>
@@ -90,55 +90,55 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.761</Modified>
+      <Modified>2014-08-18T19:57:33.045</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\Views\FirmInfo.xbf">
       <PackagePath>Views\FirmInfo.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.763</Modified>
+      <Modified>2014-08-18T19:57:33.081</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\Views\GoodInfo.xbf">
       <PackagePath>Views\GoodInfo.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.766</Modified>
+      <Modified>2014-08-18T19:57:33.084</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\Views\SaleTypeSelector.xbf">
       <PackagePath>Views\SaleTypeSelector.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.769</Modified>
+      <Modified>2014-08-18T19:57:33.087</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\Views\Payments.xbf">
       <PackagePath>Views\Payments.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.772</Modified>
+      <Modified>2014-08-18T19:57:33.099</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\Views\CustomerInfo.xbf">
       <PackagePath>Views\CustomerInfo.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.774</Modified>
+      <Modified>2014-08-18T19:57:33.101</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\Views\Sales.xbf">
       <PackagePath>Views\Sales.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.777</Modified>
+      <Modified>2014-08-18T19:57:33.104</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\Views\CustomerAccount.xbf">
       <PackagePath>Views\CustomerAccount.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.780</Modified>
+      <Modified>2014-08-18T19:57:33.106</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\Views\Goods.xbf">
       <PackagePath>Views\Goods.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.782</Modified>
+      <Modified>2014-08-18T19:57:33.109</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\ResourceDictionary.xbf">
       <PackagePath>ResourceDictionary.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.783</Modified>
+      <Modified>2014-08-18T19:57:33.111</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\Views\Customers.xbf">
       <PackagePath>Views\Customers.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.786</Modified>
+      <Modified>2014-08-18T19:57:33.113</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
-      <Modified>2014-08-17T20:14:53.788</Modified>
+      <Modified>2014-08-18T19:57:33.117</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\TicariKayitSistemi.xr.xml">
       <PackagePath>TicariKayitSistemi.xr.xml</PackagePath>
-      <Modified>2014-08-17T20:14:13.662</Modified>
+      <Modified>2014-08-18T19:57:32.757</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\AnimatingContainer.xaml">
       <PackagePath>WinRTXamlToolkit\Controls\AnimatingContainer.xaml</PackagePath>
@@ -326,7 +326,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\TicariKayitSistemi\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2014-08-17T20:14:54.422</Modified>
+      <Modified>2014-08-18T19:57:34.268</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

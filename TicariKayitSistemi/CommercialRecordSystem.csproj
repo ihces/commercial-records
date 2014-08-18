@@ -116,7 +116,7 @@
     <Compile Include="ViewModels\CustomerVM.cs" />
     <Compile Include="ViewModels\FirmVM.cs" />
     <Compile Include="ViewModels\GoodVM.cs" />
-    <Compile Include="ViewModels\Payment.cs" />
+    <Compile Include="ViewModels\PaymentVM.cs" />
     <Compile Include="ViewModels\SaleVM.cs" />
     <Compile Include="ViewModels\VMBase.cs" />
     <Compile Include="Views\CustomerAccount.xaml.cs">
@@ -161,7 +161,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="packages.config" />
-    <None Include="TicariKayitSistemi_TemporaryKey.pfx" />
+    <None Include="CommercialRecordSystem_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\barcode.png" />

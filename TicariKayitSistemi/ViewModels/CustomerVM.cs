@@ -1,26 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class CustomerVM
+    class CustomerVM : VMBase
     {
         #region Properties
-        private int id { get; set; }
-        private string name { get; set; }
-        private string surname { get; set; }
-        private int sincerity { get; set; }
-        private string address { get; set; }
-        private string phoneNumber { get; set; }
-        private string mobileNumber { get; set; }
-        private string profilePhotoFileName { get; set; }
-        private DateTime lastTransactDate { get; set; }
-        private double accountCost { get; set; }
-        private DateTime createdDate { get; set; }
-        private DateTime modifiedDate { get; set; }
+        private int id;
+        private string name;
+        private string surname;
+        private int sincerity;
+        private string address;
+        private string phoneNumber;
+        private string mobileNumber;
+        private string profilePhotoFileName;
+        private DateTime lastTransactDate;
+        private double accountCost;
+        private DateTime createdDate;
+        private DateTime modifiedDate;
 
         public int Id
         {
@@ -30,9 +26,14 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                id = value;
+                if (id != value)
+                {
+                    id = value;
+                    RaisePropertyChanged("Id");
+                }
             }
         }
+
         public string Name
         {
             get
@@ -41,9 +42,14 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                name = value;
+                if (name != value)
+                {
+                    name = value;
+                    RaisePropertyChanged("Name");
+                }
             }
         }
+
         public string Surname
         {
             get
@@ -52,9 +58,14 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                surname = value;
+                if (surname != value)
+                {
+                    surname = value;
+                    RaisePropertyChanged("Surname");
+                }
             }
         }
+
         public int Sincerity
         {
             get
@@ -63,9 +74,14 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                sincerity = value;
+                if (sincerity != value)
+                {
+                    sincerity = value;
+                    RaisePropertyChanged("Sincerity");
+                }
             }
         }
+
         public string Address
         {
             get
@@ -74,9 +90,14 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                address = value;
+                if (address != value)
+                {
+                    address = value;
+                    RaisePropertyChanged("Address");
+                }
             }
         }
+
         public string PhoneNumber
         {
             get
@@ -85,10 +106,15 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                phoneNumber = value;
+                if (phoneNumber != value)
+                {
+                    phoneNumber = value;
+                    RaisePropertyChanged("PhoneNumber");
+                }
             }
         }
-        public string MobileNumber 
+
+        public string MobileNumber
         {
             get
             {
@@ -96,9 +122,14 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                mobileNumber = value;
+                if (mobileNumber != value)
+                {
+                    mobileNumber = value;
+                    RaisePropertyChanged("MobileNumber");
+                }
             }
         }
+
         public string ProfilePhotoFileName
         {
             get
@@ -107,9 +138,14 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                profilePhotoFileName = value;
+                if (profilePhotoFileName != value)
+                {
+                    profilePhotoFileName = value;
+                    RaisePropertyChanged("ProfilePhotoFileName");
+                }
             }
         }
+
         public DateTime LastTransactDate
         {
             get
@@ -118,10 +154,15 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                lastTransactDate = value;
+                if (lastTransactDate != value)
+                {
+                    lastTransactDate = value;
+                    RaisePropertyChanged("LastTransactDate");
+                }
             }
         }
-        public double AccountCost 
+
+        public double AccountCost
         {
             get
             {
@@ -129,9 +170,14 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                accountCost = value;
+                if (accountCost != value)
+                {
+                    accountCost = value;
+                    RaisePropertyChanged("AccountCost");
+                }
             }
         }
+
         public DateTime CreatedDate
         {
             get
@@ -140,9 +186,14 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                createdDate = value;
+                if (createdDate != value)
+                {
+                    createdDate = value;
+                    RaisePropertyChanged("CreatedDate");
+                }
             }
         }
+
         public DateTime ModifiedDate
         {
             get
@@ -151,9 +202,14 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                address = modifiedDate;
+                if (modifiedDate != value)
+                {
+                    modifiedDate = value;
+                    RaisePropertyChanged("ModifiedDate");
+                }
             }
         }
+
         #endregion
 
         public CustomerVM getCustomer(int customerId) 
