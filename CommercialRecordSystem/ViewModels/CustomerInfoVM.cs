@@ -5,6 +5,13 @@ using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Popups;
+using Windows.Media.Capture;
+using Windows.Storage;
+using Windows.Foundation;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.Storage.Streams;
+using Windows.Storage.Pickers;
+using System.IO;
 
 namespace CommercialRecordSystem.ViewModels
 {
@@ -36,14 +43,12 @@ namespace CommercialRecordSystem.ViewModels
             {
                 loadingVisibility = value;
                 RaisePropertyChanged("LoadingVisibility");
-
-
             }
         }
         #endregion
 
         #region Commands
-        private readonly ICommand saveCustomerCmd;
+        private readonly ICommand saveCustomerCmd = null;
         public ICommand SaveCustomerCmd
         {
             get
@@ -52,12 +57,31 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private readonly ICommand delCustomerCmd;
+        private readonly ICommand delCustomerCmd = null;
         public ICommand DelCustomerCmd
         {
             get
             {
                 return delCustomerCmd;
+            }
+        }
+
+        private readonly ICommand capturePhotoFromCamCmd = null;
+        public ICommand CapturePhotoFromCamCmd
+        {
+            get
+            {
+                return capturePhotoFromCamCmd;
+            }
+        }
+
+        private readonly ICommand loadPhotoViaFileBrowserCmd = null;
+
+        public ICommand LoadPhotoViaFileBrowserCmd
+        { 
+            get
+            {
+                return loadPhotoViaFileBrowserCmd;
             }
         }
         #endregion
@@ -67,7 +91,6 @@ namespace CommercialRecordSystem.ViewModels
         {
             LoadingVisibility = Visibility.Visible;
             Customer newCustomer = new Customer();
-            newCustomer.Id = (new Random()).Next();
             newCustomer.Name = CurrentCustomer.Name;
             newCustomer.Surname = CurrentCustomer.Surname;
             newCustomer.Sincerity = CurrentCustomer.Sincerity;
@@ -107,22 +130,76 @@ namespace CommercialRecordSystem.ViewModels
         {
             deleteCustomer();
         }
+
+        private async void loadPhotoViaBrowserCmdHandler(object parameter)
+        {
+            FileOpenPicker filePicker = new FileOpenPicker();
+            filePicker.FileTypeFilter.Add(".jpg");
+            filePicker.ViewMode = PickerViewMode.Thumbnail;
+            filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            filePicker.SettingsIdentifier = "PicturePicker";
+            filePicker.CommitButtonText = "Seç";
+
+            StorageFile selectedFile = await filePicker.PickSingleFileAsync();
+            if (selectedFile != null)
+            {
+                copyImgToLocalFolderNShow(selectedFile);
+            }
+        }
+
+        private async void capturePhotoFromCamCmdHandler(object parameter)
+        {
+            CameraCaptureUI dialog = new CameraCaptureUI();
+            Size aspectRatio = new Size(240, 300);
+            dialog.PhotoSettings.CroppedAspectRatio = aspectRatio;
+
+            StorageFile capturedPhoto = await dialog.CaptureFileAsync(CameraCaptureUIMode.Photo);
+            if (capturedPhoto != null)
+            {
+                copyImgToLocalFolderNShow(capturedPhoto);
+            }
+        }
+
+        private async void copyImgToLocalFolderNShow(StorageFile file)
+        {
+            string fileName = "photo_" + DateTime.Now.Ticks + ".jpg";
+
+            CurrentCustomer.ProfilePhotoFileName = fileName;
+
+            await file.CopyAsync(App.ProfileImgFolder, fileName);
+            // show photo
+            CurrentCustomer.ProfileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, fileName));
+        }
         #endregion
 
         public CustomerInfoVM()
         {
             saveCustomerCmd = new ICommandImp(saveCustomerCmdHandler);
             delCustomerCmd = new ICommandImp(delCustomerCmdHandler);
+            loadPhotoViaFileBrowserCmd = new ICommandImp(loadPhotoViaBrowserCmdHandler);
+            capturePhotoFromCamCmd = new ICommandImp(capturePhotoFromCamCmdHandler);
         }
 
-        public Customer getCustomer(int customerId) 
+        public CustomerInfoVM(int customerId)
         {
-            Customer customer = new Customer();
+            CurrentCustomer = getCustomer(customerId);
+        }
+
+        protected CustomerVM getCustomer(int customerId) 
+        {
+            CustomerVM customer = new CustomerVM();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                customer = (db.Table<Customer>().Where(
+                var customerBuff = (db.Table<Customer>().Where(
                     c => c.Id == customerId)).Single();
-                
+
+                customer.Id = customerBuff.Id;
+                customer.Name = customerBuff.Name;
+                customer.Surname = customerBuff.Surname;
+                customer.Address = customerBuff.Address;
+                customer.PhoneNumber = customerBuff.PhoneNumber;
+                customer.MobileNumber = customerBuff.MobileNumber;
+                customer.ProfileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, customerBuff.ProfilePhotoFileName));
             }
             return customer;
         }

@@ -44,12 +44,15 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Width="240" VerticalAlignment="Top" Source="ms-appx:///Assets/vesika.jpg"/>
+                    <Grid Grid.Row="0" Width="240" Height="300" Background="Gray">
+                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE13D;" FontSize="200" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Image Grid.Row="0" Name="ProfilePhoto" Width="240" Height="300" VerticalAlignment="Top" Source="{Binding Path=CurrentCustomer.ProfileImgSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Grid Grid.Row="2">
-                        <Button VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0" >
+                        <Button VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0" Command="{Binding LoadPhotoViaFileBrowserCmd}" >
                             <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE188; Dosyadan.." FontSize="20" FontWeight="Light"></TextBlock>
                         </Button>
-                        <Button VerticalAlignment="Top" HorizontalAlignment="Right" BorderThickness="0" >
+                        <Button VerticalAlignment="Top" Name="CapturePhotoFromCamButton" HorizontalAlignment="Right" BorderThickness="0" Command="{Binding CapturePhotoFromCamCmd}" >
                             <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE114; Kameradan.." FontSize="20" FontWeight="Light"></TextBlock>
                         </Button>
                     </Grid>
@@ -86,8 +89,8 @@
                             <Grid Grid.Column="0" Background="#008A00">
                                 <TextBlock FontFamily="Segoe UI Symbol"   FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="&#xE13d;" TextAlignment="Center" Foreground="White"></TextBlock>
                             </Grid>
-                            <TextBox Grid.Column="1" Height="60" FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=CurrentCustomer.Name, Mode=TwoWay}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#008A00"  BorderThickness="3"></TextBox>
-                            <TextBox Grid.Column="3" Height="60" FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#008A00"  BorderThickness="3"></TextBox>
+                            <TextBox Grid.Column="1" Height="60" FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=CurrentCustomer.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#008A00"  BorderThickness="3"></TextBox>
+                            <TextBox Grid.Column="3" Height="60" FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#008A00"  BorderThickness="3"></TextBox>
                         </Grid>
                         <Grid Grid.Row="4">
                             <Grid.ColumnDefinitions>
@@ -97,7 +100,7 @@
                             <Grid Grid.Column="0" Background="#008A00">
                                 <TextBlock FontFamily="Segoe UI Symbol"   FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="&#xE141;" TextAlignment="Center" Foreground="White"></TextBlock>
                             </Grid>
-                            <RichEditBox Grid.Column="1" Height="120" FontSize="18" VerticalAlignment="Stretch" DataContext="{Binding Path=CurrentCustomer.Address, Mode=TwoWay}" HorizontalAlignment="Stretch" TextAlignment="Center" Foreground="White" Background="#28ffffff" BorderBrush="#008A00" BorderThickness="3" />
+                            <RichEditBox Grid.Column="1" Height="120" FontSize="18" VerticalAlignment="Stretch" DataContext="{Binding Path=CurrentCustomer.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" TextAlignment="Center" Foreground="White" Background="#28ffffff" BorderBrush="#008A00" BorderThickness="3" />
                         </Grid>
                         <Grid Grid.Row="6">
                             <Grid.ColumnDefinitions>
@@ -107,7 +110,7 @@
                             <Grid Grid.Column="0" Background="#008A00">
                                 <TextBlock FontFamily="Segoe UI Symbol" FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="&#xE13A;" TextAlignment="Center" Foreground="White"></TextBlock>
                             </Grid>
-                            <TextBox Grid.Column="1" Height="60" FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#008A00"  BorderThickness="3"></TextBox>
+                            <TextBox Grid.Column="1" Height="60" FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#008A00"  BorderThickness="3"></TextBox>
                         </Grid>
                         <Grid Grid.Row="8">
                             <Grid.ColumnDefinitions>
@@ -117,7 +120,7 @@
                             <Grid Grid.Column="0" Background="#008A00">
                                 <TextBlock FontFamily="Segoe UI Symbol"   FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="&#xE1c9;" TextAlignment="Center" Foreground="White"></TextBlock>
                             </Grid>
-                            <TextBox Grid.Column="1" Height="60" FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#008A00"  BorderThickness="3"></TextBox>
+                            <TextBox Grid.Column="1" Height="60" FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#008A00"  BorderThickness="3"></TextBox>
                         </Grid>
                         <Grid Grid.Row="10">
                             <Button Grid.Column="0" Width="150" Background="#AD103C" VerticalAlignment="Stretch" Command="{Binding DelCustomerCmd}">
@@ -132,7 +135,7 @@
             </Grid>
         </Grid>
         
-        <Grid Background="#88000000" Visibility="{Binding Path=LoadingVisibility, Mode=OneWay}">
+        <Grid Background="#88000000" Visibility="Collapsed">
             <Grid Width="400" Height="100" Background="Azure">
                 <ProgressRing Width="50" Height="50" Foreground="Black" HorizontalAlignment="Left" Margin="15" />
                 <TextBlock Text="Lütfen Bekleyin..." FontSize="30" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" />

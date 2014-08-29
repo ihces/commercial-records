@@ -2,7 +2,7 @@
 
 namespace CommercialRecordSystem.ViewModels
 {
-    public class VMBase
+    public class VMBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

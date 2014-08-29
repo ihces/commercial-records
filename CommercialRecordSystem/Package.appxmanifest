@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
   <Identity Name="1d02fe12-04c5-4fc8-8d34-efeaa98fd400" Publisher="CN=İbrahim" Version="1.0.0.0" />
   <Properties>
-    <DisplayName>CommercialRecordSystem</DisplayName>
+    <DisplayName>Commercial Record System</DisplayName>
     <PublisherDisplayName>İbrahim</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -27,5 +27,6 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <DeviceCapability Name="webcam" />
   </Capabilities>
 </Package>

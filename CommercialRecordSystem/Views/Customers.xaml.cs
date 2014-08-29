@@ -42,17 +42,22 @@ namespace CommercialRecordSystem
 
         private void editCustButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(CustomerInfo));
+            if (null != CustomerListView.SelectedItem)
+            {
+                CustomersVM dataContextBuff = (CustomersVM)this.DataContext;
+                int selectedCustomerId = dataContextBuff.SelectedCustomer.Id;
+                this.Frame.Navigate(typeof(CustomerInfo), selectedCustomerId);
+            }
         }
 
-        private void SearchBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        private void CustomerListView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ((CustomersVM)this.DataContext).FindCustomersCmd.Execute(args.QueryText);
-        }
-
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            this.Frame.Navigate(typeof(CustomerAccount));
+            if ( null != CustomerListView.SelectedItem)
+            {
+                CustomersVM dataContextBuff = (CustomersVM)this.DataContext;
+                int selectedCustomerId = dataContextBuff.SelectedCustomer.Id;
+                this.Frame.Navigate(typeof(CustomerAccount), selectedCustomerId);
+            }
         }
     }
 }

@@ -61,5 +61,10 @@ namespace CommercialRecordSystem
         {
             this.Frame.Navigate(typeof(Sales));
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            int customerId = (int)e.Parameter;
+        }
     }
 }

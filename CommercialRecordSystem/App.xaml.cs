@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using CommercialRecordSystem.Models;
 using SQLite;
+using Windows.Storage;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
 namespace CommercialRecordSystem
@@ -26,6 +27,7 @@ namespace CommercialRecordSystem
     sealed partial class App : Application
     {
         public static string DBPath = string.Empty;
+        public static StorageFolder ProfileImgFolder = null;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -35,6 +37,12 @@ namespace CommercialRecordSystem
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            initAsyncs();
+        }
+
+        private async void initAsyncs()
+        {
+            ProfileImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync("ProfilePhotos", CreationCollisionOption.OpenIfExists);
         }
 
         /// <summary>

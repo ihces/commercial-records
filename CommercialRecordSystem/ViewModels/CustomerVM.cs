@@ -1,4 +1,6 @@
 ﻿using System;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 namespace CommercialRecordSystem.ViewModels
 {
     class CustomerVM : VMBase
@@ -102,7 +104,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private string profilePhotoFileName = "Assets/vesika.jpg";
+        private string profilePhotoFileName = string.Empty;
         public string ProfilePhotoFileName
         {
             get
@@ -116,7 +118,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private DateTime lastTransactDate = DateTime.Today;
+        private DateTime lastTransactDate = DateTime.Now;
         public DateTime LastTransactDate
         {
             get
@@ -144,7 +146,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private DateTime createdDate = DateTime.Today;
+        private DateTime createdDate = DateTime.Now;
         public DateTime CreatedDate
         {
             get
@@ -158,7 +160,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private DateTime modifiedDate = DateTime.Today;
+        private DateTime modifiedDate = DateTime.Now;
         public DateTime ModifiedDate
         {
             get
@@ -169,6 +171,20 @@ namespace CommercialRecordSystem.ViewModels
             {
                 modifiedDate = value;
                 RaisePropertyChanged("ModifiedDate");
+            }
+        }
+
+        private Uri profileImgSource;
+        public Uri ProfileImgSource
+        {
+            get
+            {
+                return profileImgSource;
+            }
+            set
+            {
+                profileImgSource = value;
+                RaisePropertyChanged("ProfileImgSource");
             }
         }
         #endregion

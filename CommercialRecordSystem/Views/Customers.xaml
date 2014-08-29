@@ -54,7 +54,8 @@
                     <RowDefinition Height="60" />
                     <RowDefinition Height="52" />
                 </Grid.RowDefinitions>
-                <ListView  Grid.Row="0" ItemsSource="{Binding Customers, Mode=TwoWay}" ItemClick="ListView_ItemClick">
+                <TextBlock Grid.Row="0" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">Kayıtlı Müşteri Bulunamadı</TextBlock>
+                <ListView Name="CustomerListView"  Grid.Row="0" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionMode="Single" Tapped="CustomerListView_Tapped">
                     <ListView.Header>
                         <Grid Style="{StaticResource CustomerListRow}" Height="60" HorizontalAlignment="Left" Background="#008A00">
                             <Grid.ColumnDefinitions>
@@ -82,7 +83,7 @@
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Width="64" Height="60" Grid.Column="0" HorizontalAlignment="Left" Source="{Binding ProfilePhotoFileName, Mode=OneWay}"></Image>
+                                <Image Width="50" Height="60" Grid.Column="0" HorizontalAlignment="Left" Source="{Binding ProfileImgSource, Mode=OneWay}"></Image>
                                 <TextBlock Grid.Column="2" Text="{Binding Name, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
                                 <TextBlock Grid.Column="3" Text="{Binding Surname, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
                                 <TextBlock Grid.Column="4" Text="{Binding LastTransactDate, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
@@ -90,13 +91,6 @@
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Instructions}"
-                                                      TextWrapping="Wrap" Width="200"/>
-                        <TextBlock Text="{Binding Distances}"
-                                                      Margin="10,0,0,0" />
-                        <TextBlock Text="km"/>
-                    </StackPanel>
                 </ListView>
                 <Border Grid.Row="2" BorderBrush="#008A00" BorderThickness="3">
                     <Grid>

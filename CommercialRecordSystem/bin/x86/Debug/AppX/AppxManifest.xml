@@ -9,7 +9,7 @@
   -->
   <Identity Name="1d02fe12-04c5-4fc8-8d34-efeaa98fd400" Publisher="CN=İbrahim" Version="1.0.0.0" ProcessorArchitecture="x86" />
   <Properties>
-    <DisplayName>CommercialRecordSystem</DisplayName>
+    <DisplayName>Commercial Record System</DisplayName>
     <PublisherDisplayName>İbrahim</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -34,6 +34,7 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <DeviceCapability Name="webcam" />
   </Capabilities>
   <Dependencies>
     <PackageDependency Name="Microsoft.VCLibs.120.00.Debug" MinVersion="12.0.21005.1" />
