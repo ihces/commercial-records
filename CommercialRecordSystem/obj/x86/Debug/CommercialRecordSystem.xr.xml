@@ -135,6 +135,9 @@
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="Height" />
+      <RootProperty Name="MaxHeight" />
+      <RootProperty Name="TextWrapping" />
+      <RootProperty Name="AcceptsReturn" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RichEditBox">
       <RootProperty Name="FontSize" />
@@ -145,8 +148,6 @@
       <RootProperty Name="Background" />
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="DataContext" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Width" />
@@ -198,7 +199,6 @@
       <RootProperty Name="ElementName" />
       <RootProperty Name="Path" />
       <RootProperty Name="Mode" />
-      <RootProperty Name="UpdateSourceTrigger" />
     </RootType>
     <RootType FullName="CommercialRecordSystem.SaleTypeSelector" />
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">

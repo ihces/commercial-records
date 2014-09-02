@@ -91,10 +91,15 @@ namespace CommercialRecordSystem.ViewModels
         {
             LoadingVisibility = Visibility.Visible;
             Customer newCustomer = new Customer();
-            newCustomer.Name = CurrentCustomer.Name;
-            newCustomer.Surname = CurrentCustomer.Surname;
+            //for updating customer with
+            if (CurrentCustomer.Id > 0)
+            {
+                newCustomer.Id = CurrentCustomer.Id;
+            }
+            newCustomer.Name = CurrentCustomer.Name.ToUpper();
+            newCustomer.Surname = CurrentCustomer.Surname.ToUpper();
             newCustomer.Sincerity = CurrentCustomer.Sincerity;
-            newCustomer.Address = CurrentCustomer.Address;
+            newCustomer.Address = CurrentCustomer.Address.ToUpper();
             newCustomer.PhoneNumber = CurrentCustomer.PhoneNumber;
             newCustomer.MobileNumber = CurrentCustomer.MobileNumber;
             newCustomer.ProfilePhotoFileName = CurrentCustomer.ProfilePhotoFileName;
@@ -103,7 +108,7 @@ namespace CommercialRecordSystem.ViewModels
             newCustomer.CreatedDate = CurrentCustomer.CreatedDate;
             newCustomer.ModifiedDate = CurrentCustomer.ModifiedDate;
 
-            saveCustomer(newCustomer);
+            CustomerVM.saveCustomer(newCustomer);
 
             //LoadingVisibility = Visibility.Collapsed;
         }
@@ -128,7 +133,7 @@ namespace CommercialRecordSystem.ViewModels
 
         private void CommandInvokedHandler(IUICommand command)
         {
-            deleteCustomer();
+            CustomerVM.deleteCustomer(CurrentCustomer.Id);
         }
 
         private async void loadPhotoViaBrowserCmdHandler(object parameter)
@@ -182,78 +187,11 @@ namespace CommercialRecordSystem.ViewModels
 
         public CustomerInfoVM(int customerId)
         {
-            CurrentCustomer = getCustomer(customerId);
-        }
-
-        protected CustomerVM getCustomer(int customerId) 
-        {
-            CustomerVM customer = new CustomerVM();
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                var customerBuff = (db.Table<Customer>().Where(
-                    c => c.Id == customerId)).Single();
-
-                customer.Id = customerBuff.Id;
-                customer.Name = customerBuff.Name;
-                customer.Surname = customerBuff.Surname;
-                customer.Address = customerBuff.Address;
-                customer.PhoneNumber = customerBuff.PhoneNumber;
-                customer.MobileNumber = customerBuff.MobileNumber;
-                customer.ProfileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, customerBuff.ProfilePhotoFileName));
-            }
-            return customer;
-        }
-
-        public string saveCustomer(Customer customer)
-        {
-            string result = string.Empty;
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                try
-                {
-                    Customer existingCustomer = (db.Table<Customer>().Where(
-                        c => c.Id == customer.Id)).SingleOrDefault();
-
-                    if (existingCustomer != null)
-                    {
-
-                        int success = db.Update(customer);
-                    }
-                    else
-                    {
-                        int success = db.Insert(customer);
-                        result = "Success"; 
-                    }
-                }
-                catch
-                {
-                    result = "This customer was not saved.";
-                }
-            }
-            return result;
-        }
-
-        public string deleteCustomer()
-        {
-            LoadingVisibility = Visibility.Visible;
-
-            string result = string.Empty;
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                var existingCustomer = (db.Table<Customer>().Where(
-                    c => c.Id == CurrentCustomer.Id)).Single();
-
-                if (db.Delete(existingCustomer) > 0)
-                {
-                    result = "Success";
-                }
-                else
-                {
-                    result = "This project was not removed";
-                }
-            }
-            LoadingVisibility = Visibility.Collapsed;
-            return result;
+            CurrentCustomer = CustomerVM.getCustomer(customerId);
+            saveCustomerCmd = new ICommandImp(saveCustomerCmdHandler);
+            delCustomerCmd = new ICommandImp(delCustomerCmdHandler);
+            loadPhotoViaFileBrowserCmd = new ICommandImp(loadPhotoViaBrowserCmdHandler);
+            capturePhotoFromCamCmd = new ICommandImp(capturePhotoFromCamCmdHandler);
         }
     }
 }

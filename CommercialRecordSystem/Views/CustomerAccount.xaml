@@ -30,7 +30,7 @@
 				AutomationProperties.Name="Back"
 				AutomationProperties.AutomationId="BackButton"
 				AutomationProperties.ItemType="Navigation Button" Click="backButton_Clicked"/>
-            <TextBlock x:Name="pageTitle" Text="Mehmet Emir GÖĞTAŞ" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+            <TextBlock x:Name="pageTitle" Text="{Binding Path=CurrentCustomer.Name}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
         <Grid Grid.Row="1">
@@ -53,7 +53,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Background="#18ffffff">
-                    <Image Height="240" Width="240" VerticalAlignment="Top" Source="Assets/vesika.jpg"/>
+                    <Image Height="250" Width="200" VerticalAlignment="Top" Source="{Binding Path=CurrentCustomer.ProfileImgSource}"/>
                     <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="28">
 						    <Run FontFamily="Segoe UI Symbol" Text="&#xE00A;    &#xE00A;    &#xE00A;    &#xE00A;    &#xE00A;"/>
                     </TextBlock>
@@ -68,9 +68,7 @@
 						    <Run FontFamily="Segoe UI Symbol" Text="&#xE13A;"/>
                         </TextBlock>
                     </Grid>
-                    <TextBlock Grid.Column="1" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center">
-						    <Run FontFamily="Segoe UI Symbol" Text="0442 631 42 17"/>
-                    </TextBlock>
+                    <TextBlock Grid.Column="1" FontSize="28" FontFamily="Segoe UI Symbol" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=CurrentCustomer.PhoneNumber}" />
                 </Grid>
                 <Grid Grid.Row="4" Background="#18ffffff">
                     <Grid.ColumnDefinitions>
@@ -82,9 +80,7 @@
 						    <Run FontFamily="Segoe UI Symbol" Text="&#xE1c9;"/>
                         </TextBlock>
                     </Grid>
-                    <TextBlock Grid.Column="1" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center">
-						<Run FontFamily="Segoe UI Symbol" Text="0534 896 10 22"/>
-                    </TextBlock>
+                    <TextBlock Grid.Column="1" FontSize="28" HorizontalAlignment="Center" FontFamily="Segoe UI Symbol" VerticalAlignment="Center" Text="{Binding Path=CurrentCustomer.MobileNumber}" />
                 </Grid>
                 <Grid Grid.Row="6" Background="#18ffffff">
                     <Grid.ColumnDefinitions>
@@ -96,9 +92,7 @@
 						    <Run FontFamily="Segoe UI Symbol" Text="&#xE141;"/>
                         </TextBlock>
                     </Grid>
-                    <TextBlock Grid.Column="1" FontSize="22" Width="290" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" >
-						<Run FontFamily="Segoe UI Symbol" Text="Ilıca Mahallesi Necip Fazıl Kısakürek Sokak. Numara 15 Aziziye/Erzurum"/>
-                    </TextBlock>
+                    <TextBlock Grid.Column="1" FontSize="22" Width="290" FontFamily="Segoe UI Symbol" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=CurrentCustomer.Address}"/>
                 </Grid>
             </Grid>
             <Grid Grid.Column="3">

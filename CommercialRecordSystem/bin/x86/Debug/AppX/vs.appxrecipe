@@ -20,13 +20,13 @@
     <AppXManifest Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2014-08-29T05:10:42.613</Modified>
+      <Modified>2014-09-02T20:45:55.629</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\CommercialRecordSystem.exe">
       <PackagePath>CommercialRecordSystem.exe</PackagePath>
-      <Modified>2014-08-29T05:08:11.175</Modified>
+      <Modified>2014-09-02T20:45:55.030</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\BehaviorsXamlSDKManaged\12.0\References\CommonConfiguration\Neutral\Microsoft.Xaml.Interactions.dll">
       <PackagePath>Microsoft.Xaml.Interactions.dll</PackagePath>
@@ -98,55 +98,55 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2014-08-26T20:16:09.315</Modified>
+      <Modified>2014-09-02T18:10:25.982</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\Views\FirmInfo.xbf">
       <PackagePath>Views\FirmInfo.xbf</PackagePath>
-      <Modified>2014-08-26T20:16:09.318</Modified>
+      <Modified>2014-09-02T18:10:25.998</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\Views\GoodInfo.xbf">
       <PackagePath>Views\GoodInfo.xbf</PackagePath>
-      <Modified>2014-08-26T20:16:09.320</Modified>
+      <Modified>2014-09-02T18:10:25.998</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\Views\SaleTypeSelector.xbf">
       <PackagePath>Views\SaleTypeSelector.xbf</PackagePath>
-      <Modified>2014-08-26T20:16:09.324</Modified>
+      <Modified>2014-09-02T18:10:25.998</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\Views\Payments.xbf">
       <PackagePath>Views\Payments.xbf</PackagePath>
-      <Modified>2014-08-26T20:16:09.327</Modified>
+      <Modified>2014-09-02T18:10:25.998</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\Views\CustomerInfo.xbf">
       <PackagePath>Views\CustomerInfo.xbf</PackagePath>
-      <Modified>2014-08-29T05:08:10.802</Modified>
+      <Modified>2014-09-02T18:52:57.640</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\Views\Sales.xbf">
       <PackagePath>Views\Sales.xbf</PackagePath>
-      <Modified>2014-08-26T20:16:09.333</Modified>
+      <Modified>2014-09-02T18:10:25.998</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\Views\CustomerAccount.xbf">
       <PackagePath>Views\CustomerAccount.xbf</PackagePath>
-      <Modified>2014-08-26T20:16:09.335</Modified>
+      <Modified>2014-09-02T20:21:01.156</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\Views\Goods.xbf">
       <PackagePath>Views\Goods.xbf</PackagePath>
-      <Modified>2014-08-26T20:16:09.339</Modified>
+      <Modified>2014-09-02T18:10:26.013</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\ResourceDictionary.xbf">
       <PackagePath>ResourceDictionary.xbf</PackagePath>
-      <Modified>2014-08-26T20:16:09.340</Modified>
+      <Modified>2014-09-02T18:10:26.013</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\Views\Customers.xbf">
       <PackagePath>Views\Customers.xbf</PackagePath>
-      <Modified>2014-08-29T05:08:10.804</Modified>
+      <Modified>2014-09-02T18:10:26.013</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
-      <Modified>2014-08-26T20:16:09.345</Modified>
+      <Modified>2014-09-02T18:10:26.013</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\CommercialRecordSystem.xr.xml">
       <PackagePath>CommercialRecordSystem.xr.xml</PackagePath>
-      <Modified>2014-08-29T04:55:28.925</Modified>
+      <Modified>2014-09-02T20:21:00.952</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit\Controls\AnimatingContainer.xaml">
       <PackagePath>WinRTXamlToolkit\Controls\AnimatingContainer.xaml</PackagePath>
@@ -334,7 +334,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2014-08-29T05:08:11.450</Modified>
+      <Modified>2014-09-02T20:45:55.356</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

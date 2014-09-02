@@ -1,6 +1,8 @@
 ﻿using System;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
+using System.Linq;
+using CommercialRecordSystem.Models;
+using System.IO;
+
 namespace CommercialRecordSystem.ViewModels
 {
     class CustomerVM : VMBase
@@ -186,6 +188,61 @@ namespace CommercialRecordSystem.ViewModels
                 profileImgSource = value;
                 RaisePropertyChanged("ProfileImgSource");
             }
+        }
+        #endregion
+
+        #region Database Transactions
+        public static CustomerVM getCustomer(int customerId)
+        {
+            CustomerVM customer = new CustomerVM();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var customerBuff = (db.Table<Customer>().Where(
+                    c => c.Id == customerId)).Single();
+
+                customer.Id = customerBuff.Id;
+                customer.Name = customerBuff.Name;
+                customer.Surname = customerBuff.Surname;
+                customer.Address = customerBuff.Address;
+                customer.PhoneNumber = customerBuff.PhoneNumber;
+                customer.MobileNumber = customerBuff.MobileNumber;
+                customer.ProfilePhotoFileName = customerBuff.ProfilePhotoFileName;
+                customer.ProfileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, customerBuff.ProfilePhotoFileName));
+            }
+            return customer;
+        }
+
+        public static string saveCustomer(Customer customer)
+        {
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                Customer existingCustomer = (db.Table<Customer>().Where(
+                        c => c.Id == customer.Id)).SingleOrDefault();
+
+                if (existingCustomer != null)
+                {
+                    db.Update(customer);
+                }
+                else
+                {
+                    db.Insert(customer);
+                }
+            }
+            return "success";
+        }
+
+        public static string deleteCustomer(int customerId)
+        {
+            string result = string.Empty;
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var existingCustomer = (db.Table<Customer>().Where(
+                    c => c.Id == customerId)).Single();
+
+                db.Delete(existingCustomer);
+            }
+
+            return "success";
         }
         #endregion
     }

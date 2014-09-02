@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommercialRecordSystem.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -65,6 +66,7 @@ namespace CommercialRecordSystem
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             int customerId = (int)e.Parameter;
+            this.DataContext = new CustomerAccountVM(customerId);
         }
     }
 }
