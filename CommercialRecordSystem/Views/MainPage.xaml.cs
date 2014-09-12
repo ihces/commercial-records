@@ -30,7 +30,7 @@ namespace CommercialRecordSystem
 
         private void CostumersGrid_tabbed(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Costumers));
+            this.Frame.Navigate(typeof(Customers));
         }
 
         private void GoodsGrid_tabbed(object sender, TappedRoutedEventArgs e)
@@ -40,7 +40,7 @@ namespace CommercialRecordSystem
 
         private void SalesGrid_tabbed(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(SaleTypeSelector));
+            this.Frame.Navigate(typeof(TransactTypeSelector));
             
         }
 

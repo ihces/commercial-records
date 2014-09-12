@@ -18,17 +18,20 @@
     <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
   </Prerequisites>
   <Resources>
-    <Resource Language="EN-US" />
+    <Resource Language="TR-TR" />
   </Resources>
   <Applications>
     <Application Id="App" Executable="CommercialRecordSystem.exe" EntryPoint="CommercialRecordSystem.App">
-      <m2:VisualElements DisplayName="CommercialRecordSystem" Square150x150Logo="Assets\SplashScreen.scale-180.png" Square30x30Logo="Assets\SmallLogo.png" Description="CommercialRecordSystem" ForegroundText="light" BackgroundColor="#d74f2a">
-        <m2:DefaultTile ShortName="Ticari Kayıt Sistemi">
+      <m2:VisualElements DisplayName="CommercialRecordSystem" Square150x150Logo="Assets\SplashScreen.scale-180.png" Square30x30Logo="Assets\SmallLogo.png" Description="CommercialRecordSystem" ForegroundText="dark" BackgroundColor="#d74f2a">
+        <m2:DefaultTile ShortName="Ticari Kayıt Sistemi" DefaultSize="square150x150Logo">
           <m2:ShowNameOnTiles>
             <m2:ShowOn Tile="square150x150Logo" />
           </m2:ShowNameOnTiles>
         </m2:DefaultTile>
         <m2:SplashScreen Image="Assets\SplashScreen.png" />
+        <m2:InitialRotationPreference>
+          <m2:Rotation Preference="landscape" />
+        </m2:InitialRotationPreference>
       </m2:VisualElements>
     </Application>
   </Applications>

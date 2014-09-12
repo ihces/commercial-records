@@ -1,0 +1,645 @@
+﻿<Page
+    x:Class="CommercialRecordSystem.Goods"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CommercialRecordSystem"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Style="{StaticResource PageLayout}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
+            <Button x:ConnectionId='7' x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button"                           />
+            <TextBlock x:Name="pageTitle" Text="Ürünler" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+            <SearchBox Grid.Column="2" HorizontalAlignment="Right" FontSize="18"  Width="350" VerticalAlignment="Bottom" Margin="0,0,25,40" />
+        </Grid>
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
+            <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="345"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel x:ConnectionId='5' Grid.Column="1"                         >
+                        <Border Grid.Column="0" BorderThickness="4" Margin="0,12,0,18" BorderBrush="#ac008299">
+                            <Grid>
+                                <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" Text="Marshall Boya Sanayi A.Ş." VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                            </Grid>
+                        </Border>
+                        <Image Source="ms-appx:///Assets/marshall.jpg" VerticalAlignment="Top" Height="240"></Image>
+                        <Grid Margin="0,0,0,10">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#x1f3e2;</TextBlock>
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="Şart İnşaat San. Petrol Kimya Ltd. Şti." Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                        </Grid>
+                    </StackPanel>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="545" />
+                            <RowDefinition Height="60" />
+                        </Grid.RowDefinitions>
+                        <ListView Grid.Row="0" >
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </ListView>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5,0,0">
+                            <Button x:ConnectionId='6' Background="#008299" VerticalAlignment="Stretch"                     >
+                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE109;" FontSize="23" ></TextBlock>
+                            </Button>
+                            <Button Background="#AD103C" VerticalAlignment="Stretch">
+                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="23" ></TextBlock>
+                            </Button>
+                            <Button Background="#444444" VerticalAlignment="Stretch">
+                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE104;" FontSize="23" ></TextBlock>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="345"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel x:ConnectionId='3' Grid.Column="1"                         >
+                        <Border Grid.Column="0" BorderThickness="4" Margin="0,12,0,18" BorderBrush="#ac008299">
+                            <Grid>
+                                <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" Text="Marshall Boya Sanayi A.Ş." VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                            </Grid>
+                        </Border>
+                        <Image Source="ms-appx:///Assets/marshall.jpg" VerticalAlignment="Top" Height="240"></Image>
+                        <Grid Margin="0,0,0,10">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#x1f3e2;</TextBlock>
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="Şart İnşaat San. Petrol Kimya Ltd. Şti." Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                        </Grid>
+                    </StackPanel>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="545" />
+                            <RowDefinition Height="60" />
+                        </Grid.RowDefinitions>
+                        <ListView Grid.Row="0" >
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </ListView>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5,0,0">
+                            <Button x:ConnectionId='4' Background="#008299" VerticalAlignment="Stretch"                     >
+                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE109;" FontSize="23" ></TextBlock>
+                            </Button>
+                            <Button Background="#AD103C" VerticalAlignment="Stretch">
+                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="23" ></TextBlock>
+                            </Button>
+                            <Button Background="#444444" VerticalAlignment="Stretch">
+                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE104;" FontSize="23" ></TextBlock>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="345"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel x:ConnectionId='1' Grid.Column="1"                         >
+                        <Border Grid.Column="0" BorderThickness="4" Margin="0,12,0,18" BorderBrush="#ac008299">
+                            <Grid>
+                                <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" Text="Marshall Boya Sanayi A.Ş." VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                            </Grid>
+                        </Border>
+                        <Image Source="ms-appx:///Assets/marshall.jpg" VerticalAlignment="Top" Height="240"></Image>
+                        <Grid Margin="0,0,0,10">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#x1f3e2;</TextBlock>
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="Şart İnşaat San. Petrol Kimya Ltd. Şti." Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                        </Grid>
+                    </StackPanel>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="545" />
+                            <RowDefinition Height="60" />
+                        </Grid.RowDefinitions>
+                        <ListView Grid.Row="0" >
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Height="100" Width="320">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="#480097aa">
+                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,8,0,0"></Image>
+                                </Grid>
+                                <Grid Grid.Column="1" Background="#480097aa">
+                                    <StackPanel Margin="8,4,8,0">
+                                        <TextBlock Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" />
+                                        <TextBlock Text="555555 Galon" FontSize="20" />
+                                        <Grid Margin="0,4,0,0" Background="#28ffffff">
+                                            <TextBlock Text="999.999,00₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </ListView>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5,0,0">
+                            <Button x:ConnectionId='2' Background="#008299" VerticalAlignment="Stretch"                     >
+                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE109;" FontSize="23" ></TextBlock>
+                            </Button>
+                            <Button Background="#AD103C" VerticalAlignment="Stretch">
+                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="23" ></TextBlock>
+                            </Button>
+                            <Button Background="#444444" VerticalAlignment="Stretch">
+                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE104;" FontSize="23" ></TextBlock>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
+

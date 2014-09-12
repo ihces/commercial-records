@@ -1,0 +1,35 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:CSRControls="using:CommercialRecordSystem.Controls">
+
+    <Style TargetType="CSRControls:CRSTextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CSRControls:CRSTextBox">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Background="Red">
+                            <TextBlock FontFamily="Segoe UI Symbol"  FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{TemplateBinding IconHex}" TextAlignment="Center" Foreground="White"></TextBlock>
+                        </Grid>
+                        <TextBox Grid.Column="1" Height="60" 
+                                 FontSize="36" 
+                                 FontWeight="SemiBold" 
+                                 VerticalAlignment="Center" 
+                                 HorizontalAlignment="Stretch" 
+                                 TextAlignment="Center" 
+                                 Foreground="White" 
+                                 Background="#28ffffff"  
+                                 BorderBrush="Red"  
+                                 BorderThickness="3"
+                                 Text="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
+

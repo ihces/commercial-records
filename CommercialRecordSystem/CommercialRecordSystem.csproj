@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CommercialRecordSystem</RootNamespace>
     <AssemblyName>CommercialRecordSystem</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>tr-TR</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -106,54 +106,60 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ICommandImp.cs" />
-    <Compile Include="Models\CurrentAccount.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\Firm.cs" />
-    <Compile Include="Models\Good.cs" />
-    <Compile Include="Models\Payment.cs" />
-    <Compile Include="Models\Sale.cs" />
-    <Compile Include="ViewModels\CustomerAccountVM.cs" />
-    <Compile Include="ViewModels\CustomerInfoVM.cs" />
-    <Compile Include="ViewModels\CustomersVM.cs" />
-    <Compile Include="ViewModels\CustomerVM.cs" />
-    <Compile Include="ViewModels\FirmVM.cs" />
-    <Compile Include="ViewModels\GoodVM.cs" />
-    <Compile Include="ViewModels\PaymentVM.cs" />
-    <Compile Include="ViewModels\SaleVM.cs" />
+    <Compile Include="Controls\CRSTextBox.cs" />
+    <Compile Include="Converters\AmountConverter.cs" />
+    <Compile Include="Models\Customers\Customer.cs" />
+    <Compile Include="Models\Goods\Firm.cs" />
+    <Compile Include="Models\Goods\Good.cs" />
+    <Compile Include="Models\Transacts\Payment\Payment.cs" />
+    <Compile Include="Models\Transacts\Sale\Sale.cs" />
+    <Compile Include="Models\Transacts\Sale\SaleEntry.cs" />
+    <Compile Include="Models\Transacts\Transact.cs" />
+    <Compile Include="ViewModels\Customers\CustomerAccountVM.cs" />
+    <Compile Include="ViewModels\Customers\CustomerInfoVM.cs" />
+    <Compile Include="ViewModels\Customers\CustomersVM.cs" />
+    <Compile Include="ViewModels\Customers\CustomerVM.cs" />
+    <Compile Include="ViewModels\Goods\FirmVM.cs" />
+    <Compile Include="ViewModels\Goods\GoodVM.cs" />
+    <Compile Include="ViewModels\Transacts\Payment\PaymentVM.cs" />
+    <Compile Include="ViewModels\Transacts\Sale\SaleVM.cs" />
+    <Compile Include="ViewModels\Transacts\Sale\SaleEntryVM.cs" />
+    <Compile Include="ViewModels\Transacts\TransactTypeVM.cs" />
+    <Compile Include="ViewModels\Transacts\TransactVM.cs" />
     <Compile Include="ViewModels\VMBase.cs" />
-    <Compile Include="Views\CustomerAccount.xaml.cs">
+    <Compile Include="Views\Customers\CustomerAccount.xaml.cs">
       <DependentUpon>CustomerAccount.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CustomerInfo.xaml.cs">
+    <Compile Include="Views\Customers\CustomerInfo.xaml.cs">
       <DependentUpon>CustomerInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Customers.xaml.cs">
+    <Compile Include="Views\Customers\Customers.xaml.cs">
       <DependentUpon>Customers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FirmInfo.xaml.cs">
+    <Compile Include="Views\Goods\FirmInfo.xaml.cs">
       <DependentUpon>FirmInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GoodInfo.xaml.cs">
+    <Compile Include="Views\Goods\GoodInfo.xaml.cs">
       <DependentUpon>GoodInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Goods.xaml.cs">
+    <Compile Include="Views\Goods\Goods.xaml.cs">
       <DependentUpon>Goods.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Payments.xaml.cs">
+    <Compile Include="Views\Transacts\Payments.xaml.cs">
       <DependentUpon>Payments.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Sales.xaml.cs">
+    <Compile Include="Views\Transacts\Sales.xaml.cs">
       <DependentUpon>Sales.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SaleTypeSelector.xaml.cs">
-      <DependentUpon>SaleTypeSelector.xaml</DependentUpon>
+    <Compile Include="Views\Transacts\TransactTypeSelector.xaml.cs">
+      <DependentUpon>TransactTypeSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\SQLite.cs" />
     <Compile Include="DataLayer\SQLiteAsync.cs" />
@@ -171,31 +177,35 @@
     <Content Include="Assets\musluk.jpg" />
     <Content Include="Assets\SplashScreen.scale-180.png" />
     <Content Include="Assets\ymjtryu.jpg" />
-    <Page Include="Views\FirmInfo.xaml">
+    <Page Include="Themes\CRSTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Goods\FirmInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GoodInfo.xaml">
+    <Page Include="Views\Goods\GoodInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SaleTypeSelector.xaml">
+    <Page Include="Views\Transacts\TransactTypeSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Payments.xaml">
+    <Page Include="Views\Transacts\Payments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CustomerInfo.xaml">
+    <Page Include="Views\Customers\CustomerInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Sales.xaml">
+    <Page Include="Views\Transacts\Sales.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CustomerAccount.xaml">
+    <Page Include="Views\Customers\CustomerAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -205,7 +215,7 @@
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
     <Content Include="Assets\vesika.jpg" />
-    <Page Include="Views\Goods.xaml">
+    <Page Include="Views\Goods\Goods.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,7 +224,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Customers.xaml">
+    <Page Include="Views\Customers\Customers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

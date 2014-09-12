@@ -104,12 +104,9 @@ namespace CommercialRecordSystem
             // Create the tables if they don't exist
             using (var db = new SQLite.SQLiteConnection(DBPath)) 
             { 
-                db.CreateTable<CurrentAccount>();
                 db.CreateTable<Customer>();
-                db.CreateTable<Firm>();
-                db.CreateTable<Good>();
-                db.CreateTable<Payment>();
-                db.CreateTable<Sale>();
+                db.CreateTable<Transact>();
+                db.CreateTable<SaleEntry>();
             }
         }
 
