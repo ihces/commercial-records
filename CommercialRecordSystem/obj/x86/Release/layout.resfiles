@@ -13,6 +13,7 @@ App.xbf
 CommercialRecordSystem.xr.xml
 ResourceDictionary.xbf
 Themes\CRSTextBox.xbf
+Themes\CSRPanel.xbf
 Views\Customers\CustomerAccount.xbf
 Views\Customers\CustomerInfo.xbf
 Views\Customers\Customers.xbf

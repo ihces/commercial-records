@@ -63,60 +63,23 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="52" />
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="60" />
-                            <RowDefinition Height="10" />
-                            <RowDefinition Height="60" />
-                            <RowDefinition Height="10" />
-                            <RowDefinition Height="120" />
-                            <RowDefinition Height="10" />
-                            <RowDefinition Height="60" />
-                            <RowDefinition Height="10" />
-                            <RowDefinition Height="60" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="60" />
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="#008A00">
+                    <StackPanel Grid.Row="0" >
+                        <Grid  Background="#008A00" Height="50">
                             <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left">Müşteri Bilgileri</TextBlock>
                         </Grid>
-                        <Grid Grid.Row="2">
+                        <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" Background="#008A00">
-                                <TextBlock FontFamily="Segoe UI Symbol"   FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="&#xE13d;" TextAlignment="Center" Foreground="White"></TextBlock>
-                            </Grid>
-                            <TextBox Grid.Column="1" Height="60" FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=CurrentCustomer.Name, Mode=TwoWay}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#008A00"  BorderThickness="3" InputScope="AlphanumericFullWidth" />
-                            <TextBox Grid.Column="3" Height="60" FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#008A00"  BorderThickness="3" InputScope="AlphanumericFullWidth" />
+                            <CSRControls:CRSTextBox Grid.Column="0" Height="70" BorderBrush="#008A00" IconHex="&#x1f466;" IconVisibility="Visible" Text="{Binding Path=CurrentCustomer.Name, Mode=TwoWay}" EmptyMessage="İsim" Required="True"  />
+                            <CSRControls:CRSTextBox Grid.Column="2" Height="70" BorderBrush="#008A00" IconHex="&#xE141;" Text="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay}" EmptyMessage="Soyisim" />
                         </Grid>
-                        <Grid Grid.Row="4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" Background="#008A00">
-                                <TextBlock FontFamily="Segoe UI Symbol"   FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="&#xE141;" TextAlignment="Center" Foreground="White"></TextBlock>
-                            </Grid>
-                            <TextBox Grid.Column="1" Height="120" FontSize="30" VerticalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=CurrentCustomer.Address, Mode=TwoWay}" HorizontalAlignment="Stretch" TextAlignment="Center" Foreground="White" Background="#28ffffff" BorderBrush="#008A00" BorderThickness="3" />
-                        </Grid>
+                        <CSRControls:CRSTextBox Grid.Row="2" Height="130" BorderBrush="#008A00" IconHex="&#xE141;" Text="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay}" Multiline="true" IconVisibility="Visible"  EmptyMessage="Adres" />
+                        <CSRControls:CRSTextBox Grid.Row="3" Height="70" BorderBrush="#008A00" IconHex="&#xE13A;" Text="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay}" IconVisibility="Visible" EmptyMessage="Telefon" />
+                        <CSRControls:CRSTextBox Grid.Row="4" Height="70" BorderBrush="#008A00" IconHex="&#xE1c9;" Text="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" IconVisibility="Visible" EmptyMessage="Cep Telefonu" />    
                         <Grid Grid.Row="6">
-                            <CSRControls:CRSTextBox Text="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" />
-                        </Grid>
-                        <Grid Grid.Row="8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" Background="#008A00">
-                                <TextBlock FontFamily="Segoe UI Symbol"   FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="&#xE1c9;" TextAlignment="Center" Foreground="White"></TextBlock>
-                            </Grid>
-                            <TextBox Grid.Column="1" Height="60" FontSize="36" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#008A00"  BorderThickness="3" InputScope="TelephoneNumber" />
-                        </Grid>
-                        <Grid Grid.Row="10">
                             <Button Grid.Column="0" Width="150" Background="#AD103C" VerticalAlignment="Stretch" Command="{Binding DelCustomerCmd}">
                                 <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE106; Sil" FontSize="20"></TextBlock>
                             </Button>
@@ -124,7 +87,7 @@
                                 <TextBlock FontFamily="Segoe UI Symbol" Text="Kaydet &#xE105;" FontSize="20"></TextBlock>
                             </Button>
                         </Grid>
-                    </Grid>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Grid>

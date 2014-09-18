@@ -14,7 +14,6 @@
     <RootPropertyPathName Name="NavigationHelper" />
     <RootPropertyPathName Name="GoBackCommand" />
     <RootPropertyPathName Name="SaveCustomerCmd" />
-    <RootPropertyPathName Name="DelCustomerCmd" />
     <RootPropertyPathName Name="CurrentCustomer" />
     <RootPropertyPathName Name="CapturePhotoFromCamCmd" />
     <RootPropertyPathName Name="LoadPhotoViaFileBrowserCmd" />
@@ -47,13 +46,13 @@
       <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Children" />
       <RootProperty Name="Background" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="Width" />
       <RootProperty Name="Style" />
       <RootProperty Name="ChildrenTransitions" />
       <RootProperty Name="RowDefinitions" />
-      <RootProperty Name="Width" />
       <RootProperty Name="Height" />
       <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Visibility" />
       <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
       <RootEvent Name="Tapped" />
@@ -97,9 +96,12 @@
     </RootType>
     <RootType FullName="CommercialRecordSystem.Controls.CRSTextBox">
       <RootProperty Name="Height" />
+      <RootProperty Name="Text" />
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="IconHex" />
-      <RootProperty Name="Text" />
+      <RootProperty Name="IconVisibility" />
+      <RootProperty Name="EmptyMessage" />
+      <RootProperty Name="Required" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
       <RootProperty Name="Template" />
@@ -108,11 +110,19 @@
       <RootProperty Name="TargetType" />
       <RootProperty Name="Template" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Border">
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="Child" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.TemplateBindingExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
       <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
-      <RootProperty Name="Header" />
+      <RootProperty Name="Height" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="FontWeight" />
       <RootProperty Name="VerticalAlignment" />
@@ -120,15 +130,14 @@
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Background" />
-      <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
+      <RootProperty Name="IsReadOnly" />
       <RootProperty Name="Text" />
-      <RootProperty Name="Height" />
+      <RootProperty Name="BorderBrush" />
       <RootProperty Name="InputScope" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="AcceptsReturn" />
     </RootType>
-    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.TemplateBindingExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="FontFamily" />
       <RootProperty Name="FontSize" />
@@ -199,13 +208,6 @@
       <RootMethod Name="SetItemType" />
     </RootType>
     <RootType FullName="CommercialRecordSystem.Views.FirmInfo" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Border">
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="BorderThickness" />
-      <RootProperty Name="Child" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Margin" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
       <RootProperty Name="SelectedIndex" />
       <RootProperty Name="BorderThickness" />
@@ -262,6 +264,15 @@
       <RootProperty Name="Foreground" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="CommercialRecordSystem.Controls.CRSPanel">
+      <RootProperty Name="Children" />
+    </RootType>
+    <RootType FullName="CommercialRecordSystem.Controls.CSRButton">
+      <RootProperty Name="Height" />
+      <RootProperty Name="Command" />
+      <RootProperty Name="Validation" />
+      <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="CommercialRecordSystem.CustomerInfo" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">

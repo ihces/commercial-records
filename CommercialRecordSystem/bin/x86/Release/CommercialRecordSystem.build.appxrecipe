@@ -77,6 +77,9 @@
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Release\Themes\CRSTextBox.xbf">
       <PackagePath>Themes\CRSTextBox.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Release\Themes\CSRPanel.xbf">
+      <PackagePath>Themes\CSRPanel.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\İbrahim\Documents\Projeler\ticarikayitsistemi\CommercialRecordSystem\bin\x86\Release\Views\Goods\FirmInfo.xbf">
       <PackagePath>Views\Goods\FirmInfo.xbf</PackagePath>
     </AppxPackagedFile>

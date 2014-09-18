@@ -107,7 +107,9 @@
   <ItemGroup>
     <Compile Include="Common\ICommandImp.cs" />
     <Compile Include="Controls\CRSTextBox.cs" />
+    <Compile Include="Controls\CSRButton.cs" />
     <Compile Include="Converters\AmountConverter.cs" />
+    <Compile Include="Controls\CRSPanel.cs" />
     <Compile Include="Models\Customers\Customer.cs" />
     <Compile Include="Models\Goods\Firm.cs" />
     <Compile Include="Models\Goods\Good.cs" />

@@ -6,32 +6,42 @@
     <Style TargetType="CSRControls:CRSTextBox">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="CSRControls:CRSTextBox">
-                    <Grid>
-                        
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Background="{TemplateBinding BorderBrush}">
-                            <TextBlock FontFamily="Segoe UI Symbol"  FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{TemplateBinding IconHex}" TextAlignment="Center" Foreground="White"></TextBlock>
+                <ControlTemplate TargetType="CSRControls:CRSTextBox" >
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid
+                                Grid.Column="0"
+                                Background="{TemplateBinding BorderBrush}" 
+                                Visibility="{TemplateBinding IconVisibility}"
+                                Width="60">
+                                <TextBlock FontFamily="Segoe UI Symbol"  
+                                           FontSize="32" 
+                                           FontWeight="SemiBold" 
+                                           VerticalAlignment="Center" 
+                                           HorizontalAlignment="Stretch" 
+                                           Text="{TemplateBinding IconHex}" 
+                                           TextAlignment="Center" 
+                                           Foreground="White" />
+                            </Grid>
+                            <TextBox
+                                Grid.Column="1"
+                                x:Name="textbox" 
+                                Height="{TemplateBinding Height}"
+                                FontSize="{TemplateBinding FontSize}" 
+                                FontWeight="{TemplateBinding FontWeight}" 
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Stretch" 
+                                TextAlignment="Center" 
+                                Foreground="White" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                IsReadOnly="{TemplateBinding ReadOnly}"/>
                         </Grid>
-                        <TextBox x:Name="PART_TEXT" 
-                            Grid.Column="1"
-                                 Height="{TemplateBinding Height}"
-                                 FontSize="36" 
-                                 FontWeight="SemiBold" 
-                                 VerticalAlignment="Center" 
-                                 HorizontalAlignment="Stretch" 
-                                 TextAlignment="Center" 
-                                 Foreground="White" 
-                                 Background="#28ffffff"  
-                                 BorderBrush="{TemplateBinding BorderBrush}"  
-                                 BorderThickness="3">
-                                 
-                        </TextBox>
-                    </Grid>
-                    
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

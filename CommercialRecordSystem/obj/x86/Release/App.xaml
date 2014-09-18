@@ -46,6 +46,10 @@
                 <Setter Property="Width" Value="1260"></Setter>
                 <Setter Property="Height" Value="64"></Setter>
             </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/CRSTextBox.xaml" />
+                <ResourceDictionary Source="/Themes/CSRPanel.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

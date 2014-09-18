@@ -7,6 +7,7 @@ namespace CommercialRecordSystem.Common
     {
         private readonly Action<object> _execute = null;
         private readonly Predicate<object> _canExecute = null;
+        private bool canExecute = true;
         public event EventHandler CanExecuteChanged;
 
         #region Constructors
@@ -24,7 +25,16 @@ namespace CommercialRecordSystem.Common
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute != null ? _canExecute(parameter) : true;
+            if (_canExecute != null)
+            {
+                return _canExecute(parameter);
+            }
+            else if (parameter != null && 
+                     parameter.GetType().Equals(typeof(bool)))
+            {
+                canExecute = (bool)parameter;
+            }
+            return canExecute;
         }
 
         public void Execute(object parameter)
