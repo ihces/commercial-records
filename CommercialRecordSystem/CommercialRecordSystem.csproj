@@ -121,6 +121,7 @@
     <Compile Include="ViewModels\Customers\CustomerInfoVM.cs" />
     <Compile Include="ViewModels\Customers\CustomersVM.cs" />
     <Compile Include="ViewModels\Customers\CustomerVM.cs" />
+    <Compile Include="ViewModels\FrameVMBase.cs" />
     <Compile Include="ViewModels\Goods\FirmVM.cs" />
     <Compile Include="ViewModels\Goods\GoodVM.cs" />
     <Compile Include="ViewModels\Transacts\Payment\PaymentVM.cs" />

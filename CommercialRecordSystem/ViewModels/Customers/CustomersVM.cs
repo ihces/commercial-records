@@ -6,11 +6,12 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class CustomersVM : VMBase
+    class CustomersVM : FrameVMBase
     {
         #region Properties
         private readonly ICommand findCustomersCmd;
@@ -65,7 +66,7 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion "Properties"
 
-        public CustomersVM()
+        public CustomersVM(Frame frame) : base(frame)
         {
             findCustomersCmd = new ICommandImp(findCustomers_execute);
             setCustomers();

@@ -72,15 +72,16 @@
                                 <ColumnDefinition Width="4*" />
                                 <ColumnDefinition Width="3*" />
                             </Grid.ColumnDefinitions>
-                            <CSRControls:CRSTextBox  Height="60" Grid.Column="0" Text="{Binding Path=CurrentCustomer.Name, Mode=TwoWay}" BorderBrush="#008A00" IconHex="&#x1f466;" IconVisibility="Visible" EmptyMessage="İsim" Required="True" />
-                            <CSRControls:CRSTextBox  Height="60" Grid.Column="1" Text="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay}" BorderBrush="#008A00" EmptyMessage="Soyisim" Required="True" />
+                            <CSRControls:CRSTextBox  Height="60" Grid.Column="0" Text="{Binding Path=CurrentCustomer.Name, Mode=TwoWay}" BorderBrush="#008A00" IconHex="&#x1f466;" IconVisibility="Visible" EmptyMessage="İsim" Required="True"  />
+                            <CSRControls:CRSTextBox  Height="60" Grid.Column="1" Text="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay}" BorderBrush="#008A00" EmptyMessage="Soyisim" Required="True"  />
                         </Grid>
-                        <CSRControls:CRSTextBox Grid.Column="0" Height="120" Text="{Binding Path=CurrentCustomer.Address, Mode=TwoWay}" BorderBrush="#008A00" IconHex="&#xE141;" IconVisibility="Visible" EmptyMessage="Adres" />
-                        <CSRControls:CRSTextBox Grid.Column="0" Text="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay}" BorderBrush="#008A00" IconHex="&#xE13A;" IconVisibility="Visible" EmptyMessage="Telefon" Required="True" />
-                        <CSRControls:CRSTextBox Grid.Column="0" Text="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" BorderBrush="#008A00" IconHex="&#xE1c9;" IconVisibility="Visible" EmptyMessage="Cep Telefonu" />
-                        <CSRControls:CSRButton Height="60" Command="{Binding SaveCustomerCmd}" Validation="True" >
-                            <TextBlock>sss</TextBlock>
-                        </CSRControls:CSRButton>
+                        <CSRControls:CRSTextBox Grid.Column="0" Height="120" Text="{Binding Path=CurrentCustomer.Address, Mode=TwoWay}" BorderBrush="#008A00" IconHex="&#xE141;" IconVisibility="Visible" EmptyMessage="Adres"  Multiline="True" />
+                        <CSRControls:CRSTextBox Grid.Column="0" Text="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay}" BorderBrush="#008A00" IconHex="&#xE13A;" IconVisibility="Visible" EmptyMessage="Telefon" Required="True"  />
+                        <CSRControls:CRSTextBox Grid.Column="0" Text="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" BorderBrush="#008A00" IconHex="&#xE1c9;" IconVisibility="Visible" EmptyMessage="Cep Telefonu"  />
+                        <Grid Height="170">
+                            <CSRControls:CSRButton Height="60" Width="120" Command="{Binding DelCustomerCmd}" Content="Sil"  FontSize="18" Background="#AD103C" Margin="-3" HorizontalAlignment="left" IsEnabled="{Binding Path=DelButtonCanEnable}" />
+                            <CSRControls:CSRButton Height="60" Width="120" Command="{Binding SaveCustomerCmd}" Validation="True" Content="Kaydet"  FontSize="18" Background="#008A00" Margin="-3" HorizontalAlignment="Right" IsEnabled="{Binding Path=CurrentCustomer.Dirty}" />
+                        </Grid>
                     </CSRControls:CRSPanel>
                 </Grid>
             </Grid>

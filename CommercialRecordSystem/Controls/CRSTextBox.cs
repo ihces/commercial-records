@@ -31,7 +31,7 @@ namespace CommercialRecordSystem.Controls
                 "ReadOnly",
                 typeof(bool),
                 typeof(CRSTextBox),
-                new PropertyMetadata(false)
+                new PropertyMetadata(false, ReadOnlyChangedHandler)
             );
         #endregion
         #region Required
@@ -187,12 +187,20 @@ namespace CommercialRecordSystem.Controls
         private TextBox textBox;
         #endregion
 
+        private static void ReadOnlyChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            CRSTextBox csrTextBox = (CRSTextBox)obj;
+            if ((bool)e.NewValue)
+                csrTextBox.BorderThickness = new Thickness(0);
+            else
+                csrTextBox.BorderThickness = new Thickness(3);
+        }
+
         public CRSTextBox()
         {
             this.BorderThickness = new Thickness(3);
             FontSize = 32;
             FontWeight = FontWeights.SemiBold;
-            isEmpty = true;
             
             this.DefaultStyleKey = typeof(CRSTextBox);
         }
@@ -202,10 +210,24 @@ namespace CommercialRecordSystem.Controls
             this.Background = new SolidColorBrush(Color.FromArgb(0x28, 0xff, 0xff, 0xff));
             if (this.ReadOnly)
                 this.BorderThickness = new Thickness(0);
+            
             textBox = GetTemplateChild("textbox") as TextBox;
-            textBox.Text = EmptyMessage;
-            textBox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0xb0, 0xb0, 0xb0));
-            textBox.FontStyle = Windows.UI.Text.FontStyle.Italic;
+            if (string.IsNullOrEmpty(this.Text))
+            {
+                isEmpty = true;
+                textBox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
+                textBox.FontStyle = Windows.UI.Text.FontStyle.Italic;
+                textBox.Text = EmptyMessage;
+            }
+            else
+            {
+                isEmpty = false;
+                IsValid = true;
+                textBox.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+                textBox.FontStyle = Windows.UI.Text.FontStyle.Normal;
+                textBox.Text = this.Text;
+            }
+            
             textBox.GotFocus += new RoutedEventHandler(gotFocusHandler);
             textBox.LostFocus += new RoutedEventHandler(LostFocusHandler);
             
@@ -253,7 +275,7 @@ namespace CommercialRecordSystem.Controls
                     {
                         this.Background = new SolidColorBrush(Color.FromArgb(0x88, 0xad, 0x10, 0x3c));
                     }
-                    textBox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0xb0, 0xb0, 0xb0));
+                    textBox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
                     textBox.FontStyle = Windows.UI.Text.FontStyle.Italic;
                 }
                 else

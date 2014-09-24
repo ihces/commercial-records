@@ -44,12 +44,12 @@ namespace CommercialRecordSystem
             CustomerInfoVM VModel = null;
             if (null == e.Parameter)
             {
-                VModel = new CustomerInfoVM();
+                VModel = new CustomerInfoVM(this.Frame);
             }  
             else
             {
                 int customerId = (int)e.Parameter;
-                VModel = new CustomerInfoVM(customerId);
+                VModel = new CustomerInfoVM(this.Frame, customerId);
             }
             this.DataContext = VModel;
         }

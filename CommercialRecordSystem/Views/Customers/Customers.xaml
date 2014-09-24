@@ -96,19 +96,17 @@
                     <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="3" />
-                        <ColumnDefinition Width="487" />
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="487" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                         <Button x:Name="addCustomerButton" Grid.Column="0" Height="60" Margin="-3,-3,0,0" VerticalAlignment="Stretch" Background="#008A00" HorizontalAlignment="Stretch" Click="addCustomerButton_Click" >
                             <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE1e2;" FontSize="23" ></TextBlock>
                         </Button>
-                        <Button x:Name="editCustButton" Grid.Column="2" Height="60" Margin="-3,-3,0,0" VerticalAlignment="Stretch" Background="#444444" HorizontalAlignment="Stretch"  Click="editCustButton_Click">
+                        <Button x:Name="editCustButton" Grid.Column="1" Height="60" Margin="-3,-3,0,0" VerticalAlignment="Stretch" Background="#444444" HorizontalAlignment="Stretch"  Click="editCustButton_Click">
                         <TextBlock FontFamily="Segoe UI Symbol" Text="&#xe136;" FontSize="23"/>
                     </Button>
-                    <Grid Grid.Column="5" Background="#008A00">
+                    <Grid Grid.Column="4" Background="#008A00">
                         <TextBlock  FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0">200 Kişi</TextBlock>
                         <TextBlock  FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Padding="0,0,24,0" VerticalAlignment="Center">2000,00₺</TextBlock>
                     </Grid>

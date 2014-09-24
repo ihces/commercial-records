@@ -1,9 +1,10 @@
 ﻿using System;
 using CommercialRecordSystem.Models;
+using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class CustomerAccountVM : VMBase
+    class CustomerAccountVM : FrameVMBase
     {
         #region Properties
         private CustomerVM currentCustomer = null;
@@ -22,7 +23,7 @@ namespace CommercialRecordSystem.ViewModels
 
         #endregion
 
-        public CustomerAccountVM(int customerId)
+        public CustomerAccountVM(Frame frame, int customerId) : base(frame)
         {
             CurrentCustomer = CustomerVM.get(customerId);
             CurrentCustomer.Name += " " + CurrentCustomer.Surname;

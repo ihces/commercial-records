@@ -192,6 +192,7 @@ namespace CommercialRecordSystem.ViewModels
                 RaisePropertyChanged("ProfileImgSource");
             }
         }
+
         #endregion
 
         public CustomerVM()
@@ -199,14 +200,14 @@ namespace CommercialRecordSystem.ViewModels
 
         public CustomerVM(Customer model)
         {
-            Id = model.Id;
-            Name = model.Name;
-            Surname = model.Surname;
-            Address = model.Address;
-            PhoneNumber = model.PhoneNumber;
-            MobileNumber = model.MobileNumber;
-            ProfilePhotoFileName = model.ProfilePhotoFileName;
-            ProfileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, model.ProfilePhotoFileName));
+            id = model.Id;
+            name = model.Name;
+            surname = model.Surname;
+            address = model.Address;
+            phoneNumber = model.PhoneNumber;
+            mobileNumber = model.MobileNumber;
+            profilePhotoFileName = model.ProfilePhotoFileName;
+            profileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, model.ProfilePhotoFileName));
         }
 
         #region Database Transactions
@@ -250,13 +251,15 @@ namespace CommercialRecordSystem.ViewModels
             return CustomerList;
         }
 
-        public static string save(CustomerVM customer)
+        public static int save(CustomerVM customer)
         {
+            int custId = 0;
             Customer custModel = new Customer();
             //for updating customer via id
             if (customer.Id > 0)
             {
                 custModel.Id = customer.Id;
+                custId = customer.Id;
             }
             custModel.Name = customer.Name;
             custModel.Surname = customer.Surname;
@@ -281,10 +284,10 @@ namespace CommercialRecordSystem.ViewModels
                 }
                 else
                 {
-                    db.Insert(custModel);
+                    custId = db.Insert(custModel);
                 }
             }
-            return "success";
+            return custId;
         }
 
         public static string delete(int customerId)

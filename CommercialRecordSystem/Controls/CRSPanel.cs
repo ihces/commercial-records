@@ -54,11 +54,11 @@ namespace CommercialRecordSystem.Controls
             {
                 CSRButton buttonBuff = element as CSRButton;
                 if (buttonBuff.Validation)
-                    buttonBuff.Click += new RoutedEventHandler(OnClickHandler);
+                    buttonBuff.Click += new RoutedEventHandler(Button_OnClickHandler);
             }
         }
 
-        private void OnClickHandler(object sender, RoutedEventArgs e)
+        private void Button_OnClickHandler(object sender, RoutedEventArgs e)
         { 
             bool validated = true;
             foreach (CRSTextBox element in inputElements)

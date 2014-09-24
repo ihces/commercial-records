@@ -12,12 +12,14 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
 using Windows.Storage.Pickers;
 using System.IO;
+using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class CustomerInfoVM : VMBase
+    class CustomerInfoVM : FrameVMBase
     {
         #region Properties
+
         private CustomerVM currentCustomer = new CustomerVM();
         public CustomerVM CurrentCustomer
         {
@@ -31,7 +33,21 @@ namespace CommercialRecordSystem.ViewModels
                 RaisePropertyChanged("CurrentCustomer");
             }
         }
-        
+
+        private bool delButtonCanEnable = false;
+        public bool DelButtonCanEnable
+        {
+            get
+            {
+                return delButtonCanEnable;
+            }
+            set
+            {
+                delButtonCanEnable = value;
+                RaisePropertyChanged("DelButtonCanEnable");
+            }
+        }
+
         private Visibility loadingVisibility = Visibility.Collapsed;
         public Visibility LoadingVisibility
         {
@@ -92,8 +108,34 @@ namespace CommercialRecordSystem.ViewModels
             LoadingVisibility = Visibility.Visible;
             
 
-            CustomerVM.save(CurrentCustomer);
+            int result = CustomerVM.save(CurrentCustomer);
+            string message = null;
+            if (result > 0)
+            {
+                if (0 == CurrentCustomer.Id) // new customer
+                {
+                    DelButtonCanEnable = true;
+                    CurrentCustomer.Id = result;
+                }
+                CurrentCustomer.Dirty = false;
+                message = "Müşteri Bilgileri Başarı ile Kaydedildi.";
+            }
+            else
+                message = "Müşteri Bilgileri kaydedilemedi.";
 
+            var messageDialog = new MessageDialog(message, "Müşteri Bilgilerini Kaydetme");
+
+            // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
+            messageDialog.Commands.Add(new UICommand("Tamam", null));
+
+            // Set the command that will be invoked by default
+            messageDialog.DefaultCommandIndex = 1;
+
+            // Set the command to be invoked when escape is pressed
+            messageDialog.CancelCommandIndex = 0;
+
+            // Show the message dialog
+            messageDialog.ShowAsync();
             //LoadingVisibility = Visibility.Collapsed;
         }
 
@@ -103,7 +145,7 @@ namespace CommercialRecordSystem.ViewModels
 
             // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
             messageDialog.Commands.Add(new UICommand("Hayır", null));
-            messageDialog.Commands.Add(new UICommand("Evet", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+            messageDialog.Commands.Add(new UICommand("Evet", new UICommandInvokedHandler(this.DelCustCommandInvokedHandler)));
 
             // Set the command that will be invoked by default
             messageDialog.DefaultCommandIndex = 1;
@@ -115,9 +157,10 @@ namespace CommercialRecordSystem.ViewModels
             messageDialog.ShowAsync();
         }
 
-        private void CommandInvokedHandler(IUICommand command)
+        private void DelCustCommandInvokedHandler(IUICommand command)
         {
             CustomerVM.delete(CurrentCustomer.Id);
+            this.GoBackFrame();
         }
 
         private async void loadPhotoViaBrowserCmdHandler(object parameter)
@@ -161,7 +204,7 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        public CustomerInfoVM()
+        public CustomerInfoVM(Frame frame): base(frame)
         {
             saveCustomerCmd = new ICommandImp(saveCustomerCmdHandler);
             delCustomerCmd = new ICommandImp(delCustomerCmdHandler);
@@ -169,8 +212,9 @@ namespace CommercialRecordSystem.ViewModels
             capturePhotoFromCamCmd = new ICommandImp(capturePhotoFromCamCmdHandler);
         }
 
-        public CustomerInfoVM(int customerId)
+        public CustomerInfoVM(Frame frame, int customerId) : base(frame)
         {
+            DelButtonCanEnable = true;
             CurrentCustomer = CustomerVM.get(customerId);
             saveCustomerCmd = new ICommandImp(saveCustomerCmdHandler);
             delCustomerCmd = new ICommandImp(delCustomerCmdHandler);

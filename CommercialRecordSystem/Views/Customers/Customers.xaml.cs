@@ -30,7 +30,7 @@ namespace CommercialRecordSystem
         public Customers()
         {
             this.InitializeComponent();
-            this.DataContext = new CustomersVM();
+            this.DataContext = new CustomersVM(this.Frame);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

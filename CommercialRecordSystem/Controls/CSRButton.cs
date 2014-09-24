@@ -27,8 +27,34 @@ namespace CommercialRecordSystem.Controls
                 new PropertyMetadata(false)
             );
         #endregion
+
+        #region Disabled
+        public bool Disabled
+        {
+            get
+            {
+                return (bool)GetValue(DisabledProperty);
+            }
+            set
+            {
+                SetValue(DisabledProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty DisabledProperty =
+            DependencyProperty.Register(
+                "Disabled",
+                typeof(bool),
+                typeof(CSRButton),
+                new PropertyMetadata(false, DisabledChangedHandler)
+            );
+        #endregion
         #endregion
 
-        
+        private static void DisabledChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            Button button = (Button)obj;
+            button.IsEnabled = !(bool)e.NewValue;
+        }
     }
 }
