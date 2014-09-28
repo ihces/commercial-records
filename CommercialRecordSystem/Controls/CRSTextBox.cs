@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
@@ -12,7 +13,75 @@ namespace CommercialRecordSystem.Controls
 {
     public sealed class CRSTextBox : Control
     {
+        public enum INPUTTYPES {ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER} 
+
+        delegate object ConvertFromDelegate(string str);
+        private struct InputTypeInfo 
+        {
+            public string Pattern;
+            public string StringFormat;
+            public ConvertFromDelegate ConvertFrom;
+
+            public InputTypeInfo(string pattern, string stringFormat, ConvertFromDelegate convertFrom)
+            {
+                Pattern = pattern;
+                StringFormat = stringFormat;
+                ConvertFrom = convertFrom;
+            }
+        }
+
+        private static readonly Dictionary<INPUTTYPES, InputTypeInfo> InputTypeDic = new Dictionary<INPUTTYPES, InputTypeInfo>() { 
+            {INPUTTYPES.ALL, new InputTypeInfo(".*", "", delegate(string value){ return value;})},
+            {INPUTTYPES.NAME, new InputTypeInfo(@"^[a-zA-Z]*[\s]*[a-zA-Z|]*$", "", delegate(string value){ return value;})},
+            {INPUTTYPES.NUMBER, new InputTypeInfo(@"^\d+$", "", delegate(string value){ int returnVal = 0; int.TryParse(value, out returnVal); return returnVal;})},
+            {INPUTTYPES.DOUBLE, new InputTypeInfo(@"^-?\d*\.?\d+$", "", delegate(string value){ double returnVal = 0; double.TryParse(value, out returnVal); return returnVal;})},
+            {INPUTTYPES.MONEY, new InputTypeInfo(@"^\d+([.,]\d{1,2})?$", "", delegate(string value){ double returnVal = 0; double.TryParse(value, out returnVal); return returnVal;})},
+            {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^((\+?\d)?\d)?\s?(\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", "", delegate(string value){return value;})}
+        };
+
         #region Properties
+        #region InputType
+        public INPUTTYPES InputType
+        {
+            get
+            {
+                return (INPUTTYPES)GetValue(InputTypeProperty);
+            }
+            set
+            {
+                SetValue(InputTypeProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty InputTypeProperty =
+            DependencyProperty.Register(
+                "InputType",
+                typeof(INPUTTYPES),
+                typeof(CRSTextBox),
+                new PropertyMetadata(INPUTTYPES.ALL, null)
+            );
+        #endregion
+        #region MaxSize
+        public int MaxSize
+        {
+            get
+            {
+                return (int)GetValue(MaxSizeProperty);
+            }
+            set
+            {
+                SetValue(MaxSizeProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty MaxSizeProperty =
+            DependencyProperty.Register(
+                "MaxSize",
+                typeof(int),
+                typeof(CRSTextBox),
+                new PropertyMetadata(32, null)
+            );
+        #endregion
         #region ReadOnly
         public bool ReadOnly
         {
@@ -139,25 +208,25 @@ namespace CommercialRecordSystem.Controls
                 new PropertyMetadata(Visibility.Collapsed)
             );
         #endregion
-        #region Text
-        public string Text
+        #region Input
+        public object Input
         {
             get
             {
-                return (string)GetValue(TextProperty);
+                return (object)GetValue(InputProperty);
             }
             set
             {
-                SetValue(TextProperty, value);
+                SetValue(InputProperty, value);
             }
         }
 
-        public static readonly DependencyProperty TextProperty =
+        public static readonly DependencyProperty InputProperty =
             DependencyProperty.Register(
-                "Text",
-                typeof(string),
+                "Input",
+                typeof(object),
                 typeof(CRSTextBox),
-                new PropertyMetadata("")
+                new PropertyMetadata(new object())
             );
         #endregion
         #region EmptyMessage
@@ -212,7 +281,8 @@ namespace CommercialRecordSystem.Controls
                 this.BorderThickness = new Thickness(0);
             
             textBox = GetTemplateChild("textbox") as TextBox;
-            if (string.IsNullOrEmpty(this.Text))
+            
+            if (string.IsNullOrEmpty((string)this.Input))
             {
                 isEmpty = true;
                 textBox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
@@ -225,7 +295,7 @@ namespace CommercialRecordSystem.Controls
                 IsValid = true;
                 textBox.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
                 textBox.FontStyle = Windows.UI.Text.FontStyle.Normal;
-                textBox.Text = this.Text;
+                textBox.Text = string.Format(InputTypeDic[InputType].StringFormat, this.Input);
             }
             
             textBox.GotFocus += new RoutedEventHandler(gotFocusHandler);
@@ -247,14 +317,13 @@ namespace CommercialRecordSystem.Controls
                 if (isEmpty)
                 {
                     textBox.Text = string.Empty;
-                    if (Required)
-                        this.Background = new SolidColorBrush(Color.FromArgb(0x28, 0xff, 0xff, 0xff));
+                    textBox.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+                    textBox.FontStyle = Windows.UI.Text.FontStyle.Normal;
+                    isEmpty = false;
                 }
-                textBox.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
-                textBox.FontStyle = Windows.UI.Text.FontStyle.Normal;
 
-                isEmpty = false;
-                IsValid = true;
+                if (!IsValid)
+                    this.Background = new SolidColorBrush(Color.FromArgb(0x28, 0xff, 0xff, 0xff));
             }
         }
 
@@ -263,13 +332,11 @@ namespace CommercialRecordSystem.Controls
             if (!ReadOnly)
             {
                 if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
                     isEmpty = true;
-                    IsValid = false;
-                }
 
                 if (isEmpty)
                 {
+                    IsValid = false;
                     textBox.Text = EmptyMessage;
                     if (Required)
                     {
@@ -280,10 +347,18 @@ namespace CommercialRecordSystem.Controls
                 }
                 else
                 {
-                    this.Text = textBox.Text;
-                    if (Required)
+                    textBox.Text = textBox.Text.Trim();
+                    string text = textBox.Text;
+                    if (Regex.IsMatch(text, InputTypeDic[InputType].Pattern))
                     {
+                        IsValid = true;
+                        this.Input = InputTypeDic[InputType].ConvertFrom(textBox.Text);
                         this.Background = new SolidColorBrush(Color.FromArgb(0x28, 0xff, 0xff, 0xff));
+                    }
+                    else
+                    {
+                        IsValid = false;
+                        this.Background = new SolidColorBrush(Color.FromArgb(0x88, 0xad, 0x10, 0x3c));
                     }
                 }
             }
