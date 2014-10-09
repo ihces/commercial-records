@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Windows.UI;
@@ -31,12 +32,20 @@ namespace CommercialRecordSystem.Controls
         }
 
         private static readonly Dictionary<INPUTTYPES, InputTypeInfo> InputTypeDic = new Dictionary<INPUTTYPES, InputTypeInfo>() { 
-            {INPUTTYPES.ALL, new InputTypeInfo(".*", "", delegate(string value){ return value;})},
-            {INPUTTYPES.NAME, new InputTypeInfo(@"^[a-zA-Z]*[\s]*[a-zA-Z|]*$", "", delegate(string value){ return value;})},
-            {INPUTTYPES.NUMBER, new InputTypeInfo(@"^\d+$", "", delegate(string value){ int returnVal = 0; int.TryParse(value, out returnVal); return returnVal;})},
-            {INPUTTYPES.DOUBLE, new InputTypeInfo(@"^-?\d*\.?\d+$", "", delegate(string value){ double returnVal = 0; double.TryParse(value, out returnVal); return returnVal;})},
-            {INPUTTYPES.MONEY, new InputTypeInfo(@"^\d+([.,]\d{1,2})?$", "", delegate(string value){ double returnVal = 0; double.TryParse(value, out returnVal); return returnVal;})},
-            {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^((\+?\d)?\d)?\s?(\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", "", delegate(string value){return value;})}
+            {INPUTTYPES.ALL, new InputTypeInfo(".*", "{0:g}", delegate(string value){ return value;})},
+            {INPUTTYPES.NAME, new InputTypeInfo(@"^[a-zA-Z]*[\s]*[a-zA-Z|]*$", "{0:g}", delegate(string value){ return value;})},
+            {INPUTTYPES.NUMBER, new InputTypeInfo(@"^\d+$", "{0:#}", delegate(string value){ int returnVal = 0; int.TryParse(value, out returnVal); return returnVal;})},
+            {INPUTTYPES.DOUBLE, new InputTypeInfo(@"^-?\d*\.?\d+$", "{0:#,#.#}", delegate(string value){ double returnVal = 0; double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); return returnVal;})},
+            {INPUTTYPES.MONEY, new InputTypeInfo(@"^\d+([.,]\d{1,2})?$", "{0:c}", delegate(string value){ double returnVal = 0; double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); return returnVal;})},
+            {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^((\+?\d)?\d)?\s?(\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", "{0:g}", 
+                delegate(string value){
+                    string numberBuff = value.Replace(" ", String.Empty);
+                    string part1 = numberBuff.Length >= 4 ? numberBuff.Substring(numberBuff.Length - 4, 4) : "";
+                    string part2 = numberBuff.Length >= 7 ? numberBuff.Substring(numberBuff.Length - 7, 3) + " ": "";
+                    string part3 = numberBuff.Length >= 10 ? numberBuff.Substring(numberBuff.Length - 10, 3) + " ": "";
+                    string part4 = numberBuff.Length >= 13 ? numberBuff.Substring(numberBuff.Length - 13, 3) + " " : "";
+                    return part4 + part3 + part2 + part1;
+                })}
         };
 
         #region Properties
