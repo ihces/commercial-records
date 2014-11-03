@@ -106,10 +106,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ICommandImp.cs" />
+    <Compile Include="Constants\ColorConsts.cs" />
     <Compile Include="Controls\CRSTextBox.cs" />
     <Compile Include="Controls\CSRButton.cs" />
-    <Compile Include="Converters\AmountConverter.cs" />
-    <Compile Include="Controls\CRSPanel.cs" />
+    <Compile Include="Converters\InvertBooleanConverter.cs" />
+    <Compile Include="Panels\CRSPanel.cs" />
     <Compile Include="Models\Customers\Customer.cs" />
     <Compile Include="Models\Goods\Firm.cs" />
     <Compile Include="Models\Goods\Good.cs" />
@@ -117,6 +118,8 @@
     <Compile Include="Models\Transacts\Sale\Sale.cs" />
     <Compile Include="Models\Transacts\Sale\SaleEntry.cs" />
     <Compile Include="Models\Transacts\Transact.cs" />
+    <Compile Include="Panels\CRSFormPanel.cs" />
+    <Compile Include="Panels\CRSRadioButtonPanel.cs" />
     <Compile Include="ViewModels\Customers\CustomerAccountVM.cs" />
     <Compile Include="ViewModels\Customers\CustomerInfoVM.cs" />
     <Compile Include="ViewModels\Customers\CustomersVM.cs" />
@@ -180,6 +183,11 @@
     <Content Include="Assets\musluk.jpg" />
     <Content Include="Assets\SplashScreen.scale-180.png" />
     <Content Include="Assets\ymjtryu.jpg" />
+    <Page Include="Themes\CRSRadioButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Themes\CRSTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

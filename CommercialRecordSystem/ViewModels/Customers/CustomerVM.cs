@@ -208,20 +208,36 @@ namespace CommercialRecordSystem.ViewModels
             mobileNumber = model.MobileNumber;
             profilePhotoFileName = model.ProfilePhotoFileName;
             profileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, model.ProfilePhotoFileName));
+            Dirty = false;
+        }
+
+        public void CopyTo(CustomerVM dest)
+        {
+            dest.Id = Id;
+            dest.Name = Name;
+            dest.Surname = Surname;
+            dest.Address = Address;
+            dest.PhoneNumber = PhoneNumber;
+            dest.MobileNumber = MobileNumber;
+            dest.ProfilePhotoFileName = ProfilePhotoFileName;
+            dest.ProfileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, ProfilePhotoFileName));
         }
 
         #region Database Transactions
         public static CustomerVM get(int customerId)
         {
             CustomerVM customer = null;
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            if (customerId > 0)
             {
-                var customerBuff = (db.Table<Customer>().Where(
-                    c => c.Id == customerId)).Single();
-
-                if (null != customerBuff)
+                using (var db = new SQLite.SQLiteConnection(App.DBPath))
                 {
-                    customer = new CustomerVM(customerBuff);
+                    var customerBuff = (db.Table<Customer>().Where(
+                        c => c.Id == customerId)).Single();
+
+                    if (null != customerBuff)
+                    {
+                        customer = new CustomerVM(customerBuff);
+                    }
                 }
             }
             return customer;

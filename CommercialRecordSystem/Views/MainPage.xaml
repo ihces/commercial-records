@@ -72,7 +72,7 @@
                     </Grid>
                 </Border>
                 <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
-                    <TextBlock Text="Satış" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="60" Margin="15,0,15,0"/>
+                    <TextBlock Text="Cari İşlemler" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="60" Margin="15,0,15,0"/>
                 </Grid>
             </Grid>
             <Grid Style="{StaticResource PortraitTile}" Tapped="In_Out_Come_tab">

@@ -1,24 +1,17 @@
-﻿using CommercialRecordSystem.Common;
+﻿using CommercialRecordSystem.Controls;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Windows.Foundation;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Markup;
-using Windows.UI.Xaml.Media;
 
-namespace CommercialRecordSystem.Controls
+namespace CommercialRecordSystem.Panels
 {
-    public class CRSPanel : Panel
+    class CRSFormPanel : CRSPanel
     {
-
         #region Properties
         private List<CRSTextBox> inputElements = null;
         #endregion
-        public CRSPanel()
+        public CRSFormPanel()
         {
             this.Loaded += new RoutedEventHandler(OnLoad);
         }
@@ -54,11 +47,11 @@ namespace CommercialRecordSystem.Controls
             {
                 CSRButton buttonBuff = element as CSRButton;
                 if (buttonBuff.Validation)
-                    buttonBuff.Click += new RoutedEventHandler(Button_OnClickHandler);
+                    buttonBuff.Click += new RoutedEventHandler(assignButtonCanExecute);
             }
         }
 
-        private void Button_OnClickHandler(object sender, RoutedEventArgs e)
+        private void assignButtonCanExecute(object sender, RoutedEventArgs e)
         { 
             bool validated = true;
             foreach (CRSTextBox element in inputElements)
@@ -74,33 +67,6 @@ namespace CommercialRecordSystem.Controls
             }
 
             (sender as CSRButton).Command.CanExecute(validated);
-        }
-
-
-        protected override Size MeasureOverride(Size availableSize)
-        {
-            foreach (UIElement element in this.Children)
-            {
-                element.Measure(availableSize);
-            }
-            return availableSize;
-        }
-
-        protected override Size ArrangeOverride(Size finalSize)
-        {
-            if (this.Children.Count > 0)
-            {
-                double x = 0.0f;
-                double y = 0.0f;
-
-                foreach (UIElement element in this.Children)
-                {
-                    element.Arrange(new Rect(x, y, finalSize.Width, element.DesiredSize.Height));
-                    y += element.DesiredSize.Height + 10.0f;
-                }
-            }
-
-            return finalSize;
         }
     }
 }

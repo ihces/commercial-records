@@ -7,7 +7,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CSRControls:CRSTextBox" >
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" >
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -18,14 +18,26 @@
                                 Background="{TemplateBinding BorderBrush}" 
                                 Visibility="{TemplateBinding IconVisibility}"
                                 Width="60">
-                                <TextBlock FontFamily="Segoe UI Symbol"  
-                                           FontSize="32" 
-                                           FontWeight="SemiBold" 
-                                           VerticalAlignment="Center" 
-                                           HorizontalAlignment="Stretch" 
-                                           Text="{TemplateBinding IconHex}" 
-                                           TextAlignment="Center" 
-                                           Foreground="White" />
+                                <TextBlock 
+                                    FontFamily="Segoe UI Symbol"  
+                                    FontSize="32" 
+                                    FontWeight="SemiBold" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Stretch" 
+                                    Text="{TemplateBinding IconHex}" 
+                                    TextAlignment="Center" 
+                                    Foreground="White" />
+                                <TextBlock 
+                                    FontFamily="Segoe UI Symbol"  
+                                    FontSize="32" 
+                                    FontWeight="SemiBold" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Left" 
+                                    Text="*"
+                                    TextAlignment="Center"
+                                    Margin="3,0,0,0"
+                                    Foreground="Wheat"
+                                    Visibility="{TemplateBinding RequiredSignVisibility}" />
                             </Grid>
                             <TextBox
                                 Grid.Column="1"

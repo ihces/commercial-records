@@ -1,20 +1,18 @@
 ﻿using System;
+using System.Globalization;
 using Windows.UI.Xaml.Data;
-
 namespace CommercialRecordSystem.Converters
 {
-    class AmountConverter : IValueConverter
+    class InvertBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-
-            return String.Format("{0:#,#.###}", (double)value);
+            return !(bool)value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-
-            return 1;
+            return !(bool)value;
         }
     }
 }

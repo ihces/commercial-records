@@ -78,7 +78,11 @@ namespace CommercialRecordSystem.ViewModels
             addEntryToListCmd = new ICommandImp(addEntryToListCmdHandler);
             saleDateStr = transactDateStr;
             selectedCustomer = CustomerVM.get(customerId);
-            selectedCustomer.Name += " " + selectedCustomer.Surname;
+
+            if (null == selectedCustomer)
+                selectedCustomer = new CustomerVM();
+            else
+                selectedCustomer.Name += " " + selectedCustomer.Surname;
 
         }
 

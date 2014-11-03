@@ -33,11 +33,11 @@ namespace CommercialRecordSystem
             if (null != e.Parameter)
             {
                 int selectedCustomerId = (int)e.Parameter;
-                this.DataContext = new TransactTypeVM(selectedCustomerId);
+                this.DataContext = new TransactTypeVM(this.Frame, selectedCustomerId);
             }
             else
             {
-                this.DataContext = new TransactTypeVM();
+                this.DataContext = new TransactTypeVM(this.Frame);
             }
         }
 
@@ -46,10 +46,7 @@ namespace CommercialRecordSystem
             this.Frame.Navigate(typeof(MainPage));
         }
 
-        private void SelectRecordedCustButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(Customers), Customers.OPEN_PURPOSE.ADD_TRANSACTION);
-        }
+        
 
         private void StartTransactionButton_Click(object sender, RoutedEventArgs e)
         {

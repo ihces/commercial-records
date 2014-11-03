@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommercialRecordSystem.Constants;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -33,11 +34,11 @@ namespace CommercialRecordSystem.Controls
 
         private static readonly Dictionary<INPUTTYPES, InputTypeInfo> InputTypeDic = new Dictionary<INPUTTYPES, InputTypeInfo>() { 
             {INPUTTYPES.ALL, new InputTypeInfo(".*", "{0:g}", delegate(string value){ return value;})},
-            {INPUTTYPES.NAME, new InputTypeInfo(@"^[a-zA-Z]*[\s]*[a-zA-Z|]*$", "{0:g}", delegate(string value){ return value;})},
+            {INPUTTYPES.NAME, new InputTypeInfo(@"^[a-zA-ZçÇıİüÜöÖşŞğĞ]*[\s]*[a-zA-ZçÇıİüÜöÖşŞğĞ|]*$", "{0:g}", delegate(string value){ return value;})},
             {INPUTTYPES.NUMBER, new InputTypeInfo(@"^\d+$", "{0:#}", delegate(string value){ int returnVal = 0; int.TryParse(value, out returnVal); return returnVal;})},
             {INPUTTYPES.DOUBLE, new InputTypeInfo(@"^-?\d*\.?\d+$", "{0:#,#.#}", delegate(string value){ double returnVal = 0; double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); return returnVal;})},
             {INPUTTYPES.MONEY, new InputTypeInfo(@"^\d+([.,]\d{1,2})?$", "{0:c}", delegate(string value){ double returnVal = 0; double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); return returnVal;})},
-            {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^((\+?\d)?\d)?\s?(\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", "{0:g}", 
+            {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^(((\+?\d)?\d)?\s?\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", "{0:g}", 
                 delegate(string value){
                     string numberBuff = value.Replace(" ", String.Empty);
                     string part1 = numberBuff.Length >= 4 ? numberBuff.Substring(numberBuff.Length - 4, 4) : "";
@@ -133,6 +134,27 @@ namespace CommercialRecordSystem.Controls
                 new PropertyMetadata(false)
             );
         #endregion
+        #region RequiredSignVisibility
+        public Visibility RequiredSignVisibility
+        {
+            get
+            {
+                return (Visibility)GetValue(RequiredSignVisibilityProperty);
+            }
+            set
+            {
+                SetValue(RequiredSignVisibilityProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty RequiredSignVisibilityProperty =
+            DependencyProperty.Register(
+                "RequiredSignVisibility",
+                typeof(Visibility),
+                typeof(CRSTextBox),
+                new PropertyMetadata(false)
+            );
+        #endregion
         #region IsValid
         public bool IsValid
         {
@@ -151,7 +173,7 @@ namespace CommercialRecordSystem.Controls
                 "IsValid",
                 typeof(bool),
                 typeof(CRSTextBox),
-                new PropertyMetadata(false)
+                new PropertyMetadata(null)
             );
         #endregion
         #region Multiline
@@ -235,7 +257,7 @@ namespace CommercialRecordSystem.Controls
                 "Input",
                 typeof(object),
                 typeof(CRSTextBox),
-                new PropertyMetadata(new object())
+                new PropertyMetadata(null, InputChangedHandler)
             );
         #endregion
         #region EmptyMessage
@@ -259,63 +281,132 @@ namespace CommercialRecordSystem.Controls
                 new PropertyMetadata("Bu alanı doldurunuz")
             );
         #endregion
-
-        private bool isEmpty;
-
-        private TextBox textBox;
-        #endregion
-
-        private static void ReadOnlyChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        #region ThemeBrush
+        public Brush ThemeBrush
         {
-            CRSTextBox csrTextBox = (CRSTextBox)obj;
-            if ((bool)e.NewValue)
-                csrTextBox.BorderThickness = new Thickness(0);
-            else
-                csrTextBox.BorderThickness = new Thickness(3);
+            get
+            {
+                return (Brush)GetValue(ThemeBrushProperty);
+            }
+            set
+            {
+                SetValue(ThemeBrushProperty, value);
+            }
         }
+
+        public static readonly DependencyProperty ThemeBrushProperty =
+            DependencyProperty.Register(
+                "ThemeBrush",
+                typeof(Brush),
+                typeof(CRSTextBox),
+                new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90)))
+            );
+        #endregion
+        private bool isEmpty;
+        private TextBox textBox;
+        private bool updateInput = false;
+
+        #endregion
 
         public CRSTextBox()
         {
-            this.BorderThickness = new Thickness(3);
             FontSize = 32;
+            BorderThickness = new Thickness(3);
             FontWeight = FontWeights.SemiBold;
-            
+            Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
             this.DefaultStyleKey = typeof(CRSTextBox);
+            RequiredSignVisibility = Windows.UI.Xaml.Visibility.Collapsed;
+        }
+
+        public void Validate(bool fromInputChangeHandler = false)
+        {
+            if (ReadOnly)
+            {
+                IsValid = true;
+                textBox.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+            }
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                    isEmpty = true;
+
+                if (isEmpty)
+                {
+                    setAsEmpty();
+                    if (Required)
+                    {
+                        IsValid = false;
+                        this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                    }
+
+                    if (!fromInputChangeHandler)
+                        this.Input = null;
+                }
+                else
+                {
+                    textBox.Text = textBox.Text.Trim();
+                    string text = textBox.Text;
+                    if (Regex.IsMatch(text, InputTypeDic[InputType].Pattern))
+                    {
+                        IsValid = true;
+                        if (!fromInputChangeHandler)
+                            justUpdateInput();
+
+                        this.Input = InputTypeDic[InputType].ConvertFrom(textBox.Text);
+
+                        this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+                    }
+                    else
+                    {
+                        IsValid = false;
+                        this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+
+                        if (!fromInputChangeHandler)
+                            justUpdateInput();
+
+                        Input = null;
+                    }
+                }
+            }
+        }
+
+        private void justUpdateInput()
+        {
+            updateInput = true;
         }
 
         protected override void OnApplyTemplate()
         {
-            this.Background = new SolidColorBrush(Color.FromArgb(0x28, 0xff, 0xff, 0xff));
-            if (this.ReadOnly)
-                this.BorderThickness = new Thickness(0);
-            
             textBox = GetTemplateChild("textbox") as TextBox;
-            
-            if (string.IsNullOrEmpty((string)this.Input))
+
+            BorderBrush = ThemeBrush;
+            if (this.ReadOnly)
+                this.BorderBrush = new SolidColorBrush(Color.FromArgb(0x90, 0x90, 0x90, 0x90));
+            else
+            if (this.Required && !this.ReadOnly)
+                RequiredSignVisibility = Visibility.Visible;
+
+            string newValueStr = string.Format(InputTypeDic[InputType].StringFormat, Input);
+            if (string.IsNullOrWhiteSpace(newValueStr))
             {
-                isEmpty = true;
-                textBox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
-                textBox.FontStyle = Windows.UI.Text.FontStyle.Italic;
-                textBox.Text = EmptyMessage;
+                Input = null; // calls changed handler and set textbox as empty
             }
             else
             {
-                isEmpty = false;
-                IsValid = true;
-                textBox.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
-                textBox.FontStyle = Windows.UI.Text.FontStyle.Normal;
-                textBox.Text = string.Format(InputTypeDic[InputType].StringFormat, this.Input);
+                textBox.Text = newValueStr;
+                setAsNotEmpty();
             }
-            
-            textBox.GotFocus += new RoutedEventHandler(gotFocusHandler);
-            textBox.LostFocus += new RoutedEventHandler(LostFocusHandler);
-            
+
             if (Multiline)
             {
                 textBox.TextWrapping = TextWrapping.Wrap;
                 textBox.AcceptsReturn = true;
             }
-            
+            textBox.GotFocus += new RoutedEventHandler(gotFocusHandler);
+            textBox.LostFocus += new RoutedEventHandler(LostFocusHandler);
+
+            IsValid = true;
+            this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+
             base.OnApplyTemplate();
         }
 
@@ -326,49 +417,13 @@ namespace CommercialRecordSystem.Controls
                 if (isEmpty)
                 {
                     textBox.Text = string.Empty;
-                    textBox.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
-                    textBox.FontStyle = Windows.UI.Text.FontStyle.Normal;
-                    isEmpty = false;
+                    setAsNotEmpty();
                 }
 
                 if (!IsValid)
-                    this.Background = new SolidColorBrush(Color.FromArgb(0x28, 0xff, 0xff, 0xff));
-            }
-        }
-
-        public void Validate()
-        {
-            if (!ReadOnly)
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                    isEmpty = true;
-
-                if (isEmpty)
                 {
-                    IsValid = false;
-                    textBox.Text = EmptyMessage;
-                    if (Required)
-                    {
-                        this.Background = new SolidColorBrush(Color.FromArgb(0x88, 0xad, 0x10, 0x3c));
-                    }
-                    textBox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
-                    textBox.FontStyle = Windows.UI.Text.FontStyle.Italic;
-                }
-                else
-                {
-                    textBox.Text = textBox.Text.Trim();
-                    string text = textBox.Text;
-                    if (Regex.IsMatch(text, InputTypeDic[InputType].Pattern))
-                    {
-                        IsValid = true;
-                        this.Input = InputTypeDic[InputType].ConvertFrom(textBox.Text);
-                        this.Background = new SolidColorBrush(Color.FromArgb(0x28, 0xff, 0xff, 0xff));
-                    }
-                    else
-                    {
-                        IsValid = false;
-                        this.Background = new SolidColorBrush(Color.FromArgb(0x88, 0xad, 0x10, 0x3c));
-                    }
+                    IsValid = true;
+                    this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
                 }
             }
         }
@@ -376,6 +431,68 @@ namespace CommercialRecordSystem.Controls
         private void LostFocusHandler(object sender, RoutedEventArgs e)
         {
             Validate();
+        }
+
+        private static void ReadOnlyChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            CRSTextBox csrTextBox = (CRSTextBox)obj;
+            if ((bool)e.NewValue)
+            {
+                if (csrTextBox.Required)
+                {
+                    csrTextBox.RequiredSignVisibility = Visibility.Collapsed;
+                }
+                if (!csrTextBox.IsValid)
+                {
+                    csrTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+                }
+                csrTextBox.BorderBrush = new SolidColorBrush(Color.FromArgb(0x90, 0x90, 0x90, 0x90));
+            }
+            else
+            {
+                if (csrTextBox.Required)
+                {
+                    csrTextBox.RequiredSignVisibility = Visibility.Visible;
+                    if (!csrTextBox.IsValid)
+                        csrTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                }
+                csrTextBox.BorderBrush = csrTextBox.ThemeBrush;
+            }
+        }
+
+        private static void InputChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            CRSTextBox csrTextBox = (CRSTextBox)obj;
+
+            if (null != csrTextBox.textBox)
+            {
+                if (csrTextBox.updateInput)
+                {
+                    csrTextBox.updateInput = false;
+                }
+                else
+                {
+                    string newValueStr = string.Format(InputTypeDic[csrTextBox.InputType].StringFormat, e.NewValue);
+                    csrTextBox.textBox.Text = newValueStr;
+                }
+                csrTextBox.setAsNotEmpty();
+                csrTextBox.Validate(true);
+            }
+        }
+
+        private void setAsEmpty()
+        {
+            isEmpty = true;
+            textBox.Text = EmptyMessage;
+            textBox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
+            textBox.FontStyle = Windows.UI.Text.FontStyle.Italic;
+        }
+
+        private void setAsNotEmpty()
+        {
+            isEmpty = false;
+            textBox.Foreground = ColorConsts.TEXTBOX_NOT_EMPTY_FOREGROUND;
+            textBox.FontStyle = Windows.UI.Text.FontStyle.Normal;
         }
     }
 }

@@ -36,7 +36,7 @@ namespace CommercialRecordSystem
                 DateTime transactDateBuff =  transactBuff.SelectedDate;
                 string transactDateStr = transactDateBuff.ToString("dd.MM.yyyy");
 
-                this.DataContext = new SaleVM(transactDateStr, transactBuff.SelectedCustomer.Id);
+                this.DataContext = new SaleVM(transactDateStr, transactBuff.CurrentCustomer.Id);
             }
         }
 
