@@ -305,6 +305,7 @@ namespace CommercialRecordSystem.Controls
         private bool isEmpty;
         private TextBox textBox;
         private bool updateInput = false;
+        private bool anyClickHandled = false;
 
         #endregion
 
@@ -335,7 +336,8 @@ namespace CommercialRecordSystem.Controls
                     if (Required)
                     {
                         IsValid = false;
-                        this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                        if (anyClickHandled)
+                            this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
                     }
 
                     if (!fromInputChangeHandler)
@@ -425,6 +427,8 @@ namespace CommercialRecordSystem.Controls
                     IsValid = true;
                     this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
                 }
+
+                anyClickHandled = true;
             }
         }
 

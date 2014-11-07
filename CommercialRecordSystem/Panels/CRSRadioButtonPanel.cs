@@ -29,7 +29,7 @@ namespace CommercialRecordSystem.Panels
                 "CheckedIndex",
                 typeof(int),
                 typeof(CRSPanel),
-                new PropertyMetadata(0, CheckedIndexHandler)
+                new PropertyMetadata(-1, CheckedIndexHandler)
             );
         #endregion
         #endregion
@@ -63,10 +63,16 @@ namespace CommercialRecordSystem.Panels
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
+            int count = 0;
             foreach (RadioButton item in this.Children)
             {
                 itemList.Add(item.Name); 
                 item.Checked += radioButtonChecked;
+                
+                if ((bool)item.IsChecked)
+                    CheckedIndex = count;
+
+                count++;
             }
         }
 

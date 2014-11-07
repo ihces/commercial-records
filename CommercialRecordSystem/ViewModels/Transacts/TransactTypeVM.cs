@@ -114,7 +114,7 @@ namespace CommercialRecordSystem.ViewModels
 
             if (0 != selectedCustId)
             {
-                CustomerVM.get(selectedCustId).CopyTo(CurrentCustomer);
+                CustomerVM.get(selectedCustId).CopyTo(recordedCustomer);
                 IsRecordedCustomer = true;
             }
         }
