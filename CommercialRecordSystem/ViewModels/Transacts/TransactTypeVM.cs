@@ -105,6 +105,10 @@ namespace CommercialRecordSystem.ViewModels
         
         #endregion
 
+        public const int SALE_TRANSACT = 0; 
+        public const int ORDER_TRANSACT = 1;
+        public const int PAYMENT_TRANSACT = 2;
+
         public TransactTypeVM(Frame frame, int selectedCustId = 0):base(frame)
         {
             //transactTypeSelectCmd = new ICommandImp(transactTypeSelect_execute);
@@ -116,19 +120,6 @@ namespace CommercialRecordSystem.ViewModels
             {
                 CustomerVM.get(selectedCustId).CopyTo(recordedCustomer);
                 IsRecordedCustomer = true;
-            }
-        }
-
-        private void transactTypeSelect_execute(object parameter)
-        {
-            switch((string)parameter)
-            {
-                case "sale":
-                    break;
-                case "order":
-                    break;
-                case "payment":
-                    break;
             }
         }
 
@@ -156,7 +147,7 @@ namespace CommercialRecordSystem.ViewModels
 
         private void startTransaction_execute(object parameter)
         {
-            if (SelectedTransactTypeIndex == 2)
+            if (SelectedTransactTypeIndex.Equals(PAYMENT_TRANSACT))
                 this.Navigate(typeof(Payments), this);
             else
                 this.Navigate(typeof(Sales), this);

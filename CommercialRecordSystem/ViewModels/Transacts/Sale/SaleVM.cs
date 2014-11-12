@@ -4,12 +4,23 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class SaleVM : VMBase
+    class SaleVM : FrameVMBase
     {
         #region Properties
+
+        private readonly string header = "Satış";
+        public string Header
+        {
+            get
+            {
+                return header;
+            }
+        }
+
         private readonly string saleDateStr = string.Empty;
         public string SaleDateStr
         {
@@ -57,6 +68,7 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
+        #region Commands
         private readonly ICommand addEntryToListCmd;
         public ICommand AddEntryToListCmd
         {
@@ -66,6 +78,38 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private readonly ICommand goNextCmd;
+        public ICommand GoNextCmd
+        {
+            get
+            {
+                return goNextCmd;
+            }
+        }
+        #endregion
+
+        public SaleVM(Frame frame, TransactTypeVM transactObj)
+            : base(frame)
+        {
+            addEntryToListCmd = new ICommandImp(addEntryToListCmdHandler);
+            goNextCmd = new ICommandImp(goNextCmdHandler);
+
+            System.DateTime transactDateBuff =  transactObj.SelectedDate;
+            saleDateStr = transactDateBuff.ToString("dd.MM.yyyy");
+            selectedCustomer = CustomerVM.get(transactObj.CurrentCustomer.Id);
+
+            if (null == selectedCustomer)
+            {
+                selectedCustomer = transactObj.CurrentCustomer;
+            }
+
+            selectedCustomer.Name = UpperCaseFirst(selectedCustomer.Name) + " " + selectedCustomer.Surname.ToUpper();
+
+            if (transactObj.SelectedTransactTypeIndex.Equals(TransactTypeVM.ORDER_TRANSACT))
+                header = "Sipariş";
+        }
+
+        #region Command Handlers
         private void addEntryToListCmdHandler(object parameter)
         {
             SaleEntryVM.save(EntryBuff);
@@ -73,18 +117,11 @@ namespace CommercialRecordSystem.ViewModels
             EntryBuff = new SaleEntryVM();
         }
 
-        public SaleVM(string transactDateStr, int customerId, int transactId = 0)
+        private void goNextCmdHandler(object parameter)
         {
-            addEntryToListCmd = new ICommandImp(addEntryToListCmdHandler);
-            saleDateStr = transactDateStr;
-            selectedCustomer = CustomerVM.get(customerId);
-
-            if (null == selectedCustomer)
-                selectedCustomer = new CustomerVM();
-            else
-                selectedCustomer.Name += " " + selectedCustomer.Surname;
-
+            this.Navigate(typeof(Payments));
         }
+        #endregion
 
         private async Task setEntries()
         {

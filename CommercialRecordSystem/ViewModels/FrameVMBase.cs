@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommercialRecordSystem.Common;
+using System;
+using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecordSystem.ViewModels
@@ -7,9 +9,28 @@ namespace CommercialRecordSystem.ViewModels
     {
         private readonly Frame pageFrame;
 
+        #region Commands
+        private readonly ICommand goBackCmd = null;
+        public ICommand GoBackCmd
+        {
+            get
+            {
+                return goBackCmd;
+            }
+        }
+        #endregion
+
+        #region Command Handlers
+        private void goBackCmdHandler(object parameter)
+        {
+            GoBackFrame();
+        }
+        #endregion
+
         public FrameVMBase(Frame frame) 
         {
             pageFrame = frame;
+            goBackCmd = new ICommandImp(goBackCmdHandler);
         }
 
         public void GoBackFrame()

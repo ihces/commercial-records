@@ -23,13 +23,13 @@
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+            <Button x:Name="backButton" Margin="39,59,39,0"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button" Click="backButton_Clicked"/>
-            <TextBlock x:Name="pageTitle" Text="Satış" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        AutomationProperties.ItemType="Navigation Button" Command="{Binding GoBackCmd}"/>
+            <TextBlock x:Name="pageTitle" Text="{Binding Header}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
         <Grid Grid.Row="1">
@@ -132,7 +132,7 @@
                 </Grid.RowDefinitions>
                 <ListView Grid.Row="0" ItemsSource="{Binding Entries}">
                     <ListView.Header>
-                        <Grid Height="60" HorizontalAlignment="Left" Background="#d74f2a">
+                        <Grid Style="{StaticResource SaleListRow}" Height="60" HorizontalAlignment="Left" Background="#d74f2a">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="125"></ColumnDefinition>
                                 <ColumnDefinition Width="410"></ColumnDefinition>
@@ -147,7 +147,7 @@
                     </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid   Height="32">
+                            <Grid Style="{StaticResource SaleListRow}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="120"></ColumnDefinition>
                                     <ColumnDefinition Width="405"></ColumnDefinition>
@@ -155,8 +155,8 @@
                                     <ColumnDefinition Width="120"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Amount, Mode=OneWay}" />
-                                <TextBlock Grid.Column="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Detail, Mode=OneWay}" />
-                                <TextBlock Grid.Column="3" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding UnitCost, Mode=OneWay}" />
+                                <TextBlock Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Detail, Mode=OneWay}" />
+                                <TextBlock Grid.Column="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding UnitCost, Mode=OneWay}" />
                                 <TextBlock Grid.Column="3" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Cost, Mode=OneWay}" />
                             </Grid>
                         </DataTemplate>
@@ -182,7 +182,7 @@
                         <TextBlock FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">99.999,99₺</TextBlock>
                     </Grid>
                     <Grid Grid.Column="5">
-                        <Button Width="70" Background="#444444" VerticalAlignment="Stretch" Click="saveButton_Click">
+                        <Button Width="70" Background="#444444" VerticalAlignment="Stretch" Command="{Binding GoNextCmd}">
                             <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE0ae;" FontSize="20"></TextBlock>
                         </Button>
                     </Grid>

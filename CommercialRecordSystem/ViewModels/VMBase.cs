@@ -35,5 +35,14 @@ namespace CommercialRecordSystem.ViewModels
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public string UpperCaseFirst(string str)
+        {
+            string [] tokens = str.Split();
+            string resultStr = string.Empty;
+            foreach (string token in tokens)
+                resultStr += char.ToUpper(token[0]) + token.Substring(1) + " ";
+            return resultStr.Trim();
+        }
     }
 }

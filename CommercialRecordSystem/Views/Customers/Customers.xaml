@@ -30,7 +30,7 @@
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button" Click="backButton_Clicked"/>
+                        AutomationProperties.ItemType="Navigation Button" Command="{Binding GoBackCmd}"/>
             <TextBlock x:Name="pageTitle" Text="Müşteriler" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
             <SearchBox Grid.Column="2" HorizontalAlignment="Right" QueryText="{Binding QueryText, Mode=TwoWay}"  FontSize="18"  Width="350" VerticalAlignment="Bottom" Margin="0,0,45,40">
