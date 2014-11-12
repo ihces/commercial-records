@@ -1,5 +1,6 @@
 بِسْمِ اللهِ الرَّحْمنِ الرَّحِيمِِ
 
-![BQD_i6ICUAAxjRU.jpg large.jpg](https://bitbucket.org/repo/ro96zy/images/2772605276-BQD_i6ICUAAxjRU.jpg%20large.jpg)
+وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ ۚ عَلَيْهِ تَوَكَّلْتُ وَإِلَيْهِ أُنِيبُ
 
-''Muvaffakiyetim de ancak Allah'ın yardımı iledir'' Hud-88
+“…Başarım ancak Allah’tandır, O’na güvendim; O’na yöneliyorum.”
+Hûd suresi /88
