@@ -3,6 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CommercialRecordSystem"
+    xmlns:CSRControls="using:CommercialRecordSystem.Controls"
+    xmlns:CSRPanels="using:CommercialRecordSystem.Panels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -22,13 +24,13 @@
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+            <Button x:Name="backButton" Margin="39,59,39,0"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button" Click="backButton_Click"/>
-            <TextBlock x:Name="pageTitle" Text="Satış Tipi" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        AutomationProperties.ItemType="Navigation Button" Command="{Binding GoBackCmd}" />
+            <TextBlock x:Name="pageTitle" Text="Cari İşlemler" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
         <Grid Grid.Row="1">
@@ -38,115 +40,71 @@
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="780"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1" Width="Auto">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="60"></RowDefinition>
-                    <RowDefinition Height="10"></RowDefinition>
-                    <RowDefinition Height="60"></RowDefinition>
-                    <RowDefinition Height="10"></RowDefinition>
-                    <RowDefinition Height="60"></RowDefinition>
-                    <RowDefinition Height="20"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Background="#d74f2a">
-                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right">Genel Satış &#xE017;</TextBlock>
-                </Grid>
-                <Border Grid.Row="2" BorderBrush="#d74f2a" BorderThickness="3">
-                    <Grid Background="#28ffffff">
-                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" Foreground="#aaaaaa" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right">Ön Spariş &#xE017;</TextBlock>
+            <CSRPanels:CRSRadioButtonPanel Grid.Column="1" GapSize="10" CheckedIndex="{Binding SelectedTransactTypeIndex, Mode=TwoWay}">
+                <RadioButton Name="sale" GroupName="TransactTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <Grid Width="330">
+                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left">Satış</TextBlock>
+                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right">&#xE017;</TextBlock>
                     </Grid>
-                </Border>
-                <Border Grid.Row="4" BorderBrush="#d74f2a" BorderThickness="3">
-                    <Grid Background="#28ffffff">
-                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" Foreground="#aaaaaa" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right">Ödeme &#xE017;</TextBlock>
+                    
+                </RadioButton>
+                <RadioButton Name="order" GroupName="TransactTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <Grid Width="330">
+                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left">Sipariş</TextBlock>
+                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right">&#xE017;</TextBlock>
                     </Grid>
-                </Border>
-            </Grid>
+                </RadioButton>
+                <RadioButton Name="payment" GroupName="TransactTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <Grid Width="330">
+                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left">Ödeme</TextBlock>
+                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right">&#xE017;</TextBlock>
+                    </Grid>
+                </RadioButton>
+            </CSRPanels:CRSRadioButtonPanel>
             <Grid Grid.Column="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="52" />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60" />
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="60" />
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="120" />
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="60" />
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="60" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="60" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
+                <CSRPanels:CRSFormPanel Grid.Row="0" GapSize="10">
+                    
+                    <CSRPanels:CRSRadioButtonPanel Orientation="Horizontal" CheckedCommand="{Binding CustomerTypeSelectCmd}" Height="60">
+                        <RadioButton Name="normal" GroupName="CustomerTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="{Binding IsRecordedCustomer, Converter={StaticResource InvertBooleanConverter}}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold">Normal Müşteri</TextBlock>
+                        </RadioButton>
+                        <RadioButton Name="recorded" GroupName="CustomerTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="{Binding IsRecordedCustomer}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold">Kayıtlı Müşteri</TextBlock>
+                        </RadioButton>
+                    </CSRPanels:CRSRadioButtonPanel>
+                    <Grid Height="60">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Background="#d74f2a">
-                            <TextBlock   FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontFamily="Segoe UI Symbol" Text="&#xe184;" TextAlignment="Center" Foreground="White"></TextBlock>
+                            <TextBlock FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontFamily="Segoe UI Symbol" Text="&#xe184;" TextAlignment="Center" Foreground="White"></TextBlock>
                         </Grid>
                         <Border Grid.Column="1" Background="#28ffffff" BorderBrush="#d74f2a"  BorderThickness="3" >
-                            <DatePicker  FontSize="32" FontWeight="SemiBold" MonthFormat="{}{month.integer(2)}" VerticalAlignment="Center" HorizontalAlignment="Center" Date="{Binding Path=SelectedDate, Mode=TwoWay}">
-                            </DatePicker>
+                            <DatePicker FontSize="32" FontWeight="SemiBold" MonthFormat="{}{month.integer(2)}" VerticalAlignment="Center" HorizontalAlignment="Center" Date="{Binding Path=SelectedDate, Mode=TwoWay}" />
                         </Border>
                     </Grid>
-                    <Grid Grid.Row="2">
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="366"/>
-                            <ColumnDefinition Width="10"/>
-                            <ColumnDefinition Width="274"/>
-                            <ColumnDefinition Width="10"/>
-                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="60" />
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Background="#d74f2a">
-                            <TextBlock FontFamily="Segoe UI Symbol"   FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="&#xE13d;" TextAlignment="Center" Foreground="White"></TextBlock>
-                        </Grid>
-                        <TextBox Grid.Column="1"  FontSize="36" Height="60" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=SelectedCustomer.Name, Mode=TwoWay}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#d74f2a"  BorderThickness="3"></TextBox>
-                        <TextBox Grid.Column="3"  FontSize="36" Height="60" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=SelectedCustomer.Surname, Mode=TwoWay}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#d74f2a"  BorderThickness="3"></TextBox>
-                        <Button Name="SelectRecordedCustButton" Grid.Column="5" Width="66" Background="#d74f2a" VerticalAlignment="Stretch" Margin="-3" Click="SelectRecordedCustButton_Click" >
-                            <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE11A;" FontSize="23"></TextBlock>
-                        </Button>
+                        <CSRControls:CRSTextBox  Height="60" Grid.Column="0" Input="{Binding Path=CurrentCustomer.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#x1f466;" EmptyMessage="İsim" Required="True" InputType="NAME" ReadOnly="{Binding IsRecordedCustomer}" />
+                        <CSRControls:CRSTextBox  Height="60" Grid.Column="2" Input="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay}" ThemeBrush="#d74f2a" IconVisibility="Collapsed" EmptyMessage="Soyisim" Required="True" InputType="NAME" ReadOnly="{Binding IsRecordedCustomer}" />
+                        <Button Grid.Column="4" Height="66" Width="66" FontFamily="Segoe UI Symbol" FontSize="23" Margin="-3" Padding="0" Content="&#xE11A;" Background="#d74f2a" Command="{Binding SelectRecordedCustomerCmd}" IsEnabled="{Binding IsRecordedCustomer}" />
                     </Grid>
-                    <Grid Grid.Row="4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Background="#d74f2a">
-                            <TextBlock FontFamily="Segoe UI Symbol"   FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="&#xE141;" TextAlignment="Center" Foreground="White"></TextBlock>
-                        </Grid>
-                        <TextBox Grid.Column="1" Height="120" FontSize="18" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" Text="{Binding Path=SelectedCustomer.Address, Mode=TwoWay}" Foreground="White" Background="#28ffffff" BorderBrush="#d74f2a" BorderThickness="3" />
-                    </Grid>
-                    <Grid Grid.Row="6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Background="#d74f2a">
-                            <TextBlock FontFamily="Segoe UI Symbol"   FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="&#xE13A;" TextAlignment="Center" Foreground="White"></TextBlock>
-                        </Grid>
-                        <TextBox Grid.Column="1"  FontSize="36" Height="60" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=SelectedCustomer.PhoneNumber, Mode=TwoWay}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#d74f2a"  BorderThickness="3" InputScope="TelephoneNumber" />
-                    </Grid>
-                    <Grid Grid.Row="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Background="#d74f2a">
-                            <TextBlock FontFamily="Segoe UI Symbol"   FontSize="40" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="&#xE1c9;" TextAlignment="Center" Foreground="White"></TextBlock>
-                        </Grid>
-                        <TextBox Grid.Column="1"  FontSize="36" Height="60" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=SelectedCustomer.MobileNumber, Mode=TwoWay}" TextAlignment="Center" Foreground="White" Background="#28ffffff"  BorderBrush="#d74f2a"  BorderThickness="3" InputScope="TelephoneNumber" />
-                    </Grid>
-                    <Grid Grid.Row="10">
-                        <Button Name="StartTransactionButton" Width="73" Background="#d74f2a" VerticalAlignment="Stretch" HorizontalAlignment="Right" Margin="-3" Click="StartTransactionButton_Click">
-                            <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE0ae;" FontSize="20"></TextBlock>
-                        </Button>
-                    </Grid>
-                </Grid>
+                    <CSRControls:CRSTextBox  Height="120" Input="{Binding Path=CurrentCustomer.Address, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#xE141;" EmptyMessage="Adres"  Multiline="True" InputType="ALL" ReadOnly="{Binding IsRecordedCustomer}" />
+                    <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#xE13A;" EmptyMessage="Telefon" InputType="PHONENUMBER" ReadOnly="{Binding IsRecordedCustomer}" />
+                    <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#xE1c9;" EmptyMessage="Cep Telefonu" InputType="PHONENUMBER" ReadOnly="{Binding IsRecordedCustomer}" />
+                    <CSRControls:CSRButton Height="66" Width="66" Command="{Binding StartTransactionCmd}" Validation="True" Content="&#xE0ae;" FontFamily="Segoe UI Symbol" FontSize="18" Background="#d74f2a" Margin="-3" HorizontalAlignment="Right" />
+                </CSRPanels:CRSFormPanel>
             </Grid>
         </Grid>
     </Grid>
