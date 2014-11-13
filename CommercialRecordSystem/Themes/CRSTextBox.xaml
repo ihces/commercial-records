@@ -9,15 +9,11 @@
                 <ControlTemplate TargetType="CSRControls:CRSTextBox" >
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" >
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
                             <Grid
-                                Grid.Column="0"
-                                Background="{TemplateBinding BorderBrush}" 
-                                Visibility="{TemplateBinding IconVisibility}"
-                                Width="60">
+                                Name="icon"
+                                Background="{TemplateBinding BorderBrush}"
+                                Width="60"
+                                Visibility="Visible">
                                 <TextBlock 
                                     FontFamily="Segoe UI Symbol"  
                                     FontSize="32" 
@@ -40,8 +36,8 @@
                                     Visibility="{TemplateBinding RequiredSignVisibility}" />
                             </Grid>
                             <TextBox
-                                Grid.Column="1"
-                                x:Name="textbox" 
+                                Name="textbox" 
+                                Width="Auto"
                                 Height="{TemplateBinding Height}"
                                 FontSize="{TemplateBinding FontSize}" 
                                 FontWeight="{TemplateBinding FontWeight}" 
@@ -51,7 +47,8 @@
                                 Foreground="White" 
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="0"
-                                IsReadOnly="{TemplateBinding ReadOnly}"/>
+                                IsReadOnly="{TemplateBinding ReadOnly}"
+                                MaxLength="{TemplateBinding InputMaxLength}"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>

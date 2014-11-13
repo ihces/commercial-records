@@ -37,6 +37,27 @@ namespace CommercialRecordSystem.Controls
                 new PropertyMetadata(INPUTTYPES.ALL, null)
             );
         #endregion
+        #region InputMaxLength
+        public int InputMaxLength
+        {
+            get
+            {
+                return (int)GetValue(InputMaxLengthProperty);
+            }
+            set
+            {
+                SetValue(InputMaxLengthProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty InputMaxLengthProperty =
+            DependencyProperty.Register(
+                "InputMaxLength",
+                typeof(int),
+                typeof(CRSTextBox),
+                new PropertyMetadata(32, null)
+            );
+        #endregion
         #region MaxSize
         public int MaxSize
         {
@@ -206,11 +227,12 @@ namespace CommercialRecordSystem.Controls
             );
         #endregion
         #region IconVisibility
-        public Visibility IconVisibility
+        public enum IconVisibilities { at_Right, at_Left, Collapsed };
+        public IconVisibilities IconVisibility
         {
             get
             {
-                return (Visibility)GetValue(IconVisibilityProperty);
+                return (IconVisibilities)GetValue(IconVisibilityProperty);
             }
             set
             {
@@ -223,7 +245,7 @@ namespace CommercialRecordSystem.Controls
                 "IconVisibility",
                 typeof(Visibility),
                 typeof(CRSTextBox),
-                new PropertyMetadata(Visibility.Collapsed)
+                new PropertyMetadata(IconVisibilities.at_Left)
             );
         #endregion
         #region Input
@@ -314,7 +336,7 @@ namespace CommercialRecordSystem.Controls
             {INPUTTYPES.NAME, new InputTypeInfo(@"^[a-zA-ZçÇıİüÜöÖşŞğĞ]*[\s]*[a-zA-ZçÇıİüÜöÖşŞğĞ|]*$", "{0:g}", delegate(string value){ return value;})},
             {INPUTTYPES.NUMBER, new InputTypeInfo(@"^\d+$", "{0:#}", delegate(string value){ int returnVal = 0; int.TryParse(value, out returnVal); return returnVal;})},
             {INPUTTYPES.DOUBLE, new InputTypeInfo(@"^-?\d*\.?\d+$", "{0:#,#.#}", delegate(string value){ double returnVal = 0; double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); return returnVal;})},
-            {INPUTTYPES.MONEY, new InputTypeInfo(@"^\d+([.,]\d{1,2})?$", "{0:c}", delegate(string value){ double returnVal = 0; double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); return returnVal;})},
+            {INPUTTYPES.MONEY, new InputTypeInfo(@"^\d+([.,]\d{1,2})?$", "{0:#,#.#}", delegate(string value){ double returnVal = 0; double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); return returnVal;})},
             {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^(((\+?\d)?\d)?\s?\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", "{0:g}", 
                 delegate(string value){
                     string numberBuff = value.Replace(" ", String.Empty);
@@ -332,6 +354,7 @@ namespace CommercialRecordSystem.Controls
         public static readonly string SUBMIT_BUTTON = "submit_button";
         private bool isEmpty;
         private TextBox textBox;
+        private Grid icon;
         private bool updateInput = false;
         private bool anyClickHandled = false;
         #endregion
@@ -406,6 +429,7 @@ namespace CommercialRecordSystem.Controls
         protected override void OnApplyTemplate()
         {
             textBox = GetTemplateChild("textbox") as TextBox;
+            icon = GetTemplateChild("icon") as Grid;
 
             BorderBrush = ThemeBrush;
             if (this.ReadOnly)
@@ -435,6 +459,22 @@ namespace CommercialRecordSystem.Controls
 
             IsValid = true;
             this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+
+            
+            switch(IconVisibility)
+            {
+                case IconVisibilities.at_Left:
+                    textBox.Margin = new Thickness(60,0,0,0);
+                    icon.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
+                    break;
+                case IconVisibilities.at_Right:
+                    textBox.Margin = new Thickness(0,0,60,0);
+                    icon.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Right;
+                    break;
+                default:
+                    icon.Visibility = Visibility.Collapsed;
+                    break;
+            }
 
             base.OnApplyTemplate();
         }

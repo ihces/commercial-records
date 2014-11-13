@@ -74,12 +74,12 @@
                                 <ColumnDefinition Width="10" />
                                 <ColumnDefinition Width="3*" />
                             </Grid.ColumnDefinitions>
-                            <CSRControls:CRSTextBox  Height="60" Grid.Column="0" Input="{Binding Path=CurrentCustomer.Name, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#x1f466;" IconVisibility="Visible" EmptyMessage="İsim" Required="True" InputType="NAME" />
-                            <CSRControls:CRSTextBox  Height="60" Grid.Column="2" Input="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay}" ThemeBrush="#008A00" EmptyMessage="Soyisim" Required="True" InputType="NAME" />
+                            <CSRControls:CRSTextBox  Height="60" Grid.Column="0" Input="{Binding Path=CurrentCustomer.Name, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#x1f466;" EmptyMessage="İsim" Required="True" InputType="NAME" />
+                            <CSRControls:CRSTextBox  Height="60" Grid.Column="2" Input="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay}" IconVisibility="Collapsed" ThemeBrush="#008A00" EmptyMessage="Soyisim" Required="True" InputType="NAME" />
                         </Grid>
-                        <CSRControls:CRSTextBox Height="120" Input="{Binding Path=CurrentCustomer.Address, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE141;" IconVisibility="Visible" EmptyMessage="Adres"  Multiline="True" InputType="ALL" />
-                        <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE13A;" IconVisibility="Visible" EmptyMessage="Telefon" Required="True" InputType="PHONENUMBER"  />
-                        <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE1c9;" IconVisibility="Visible" EmptyMessage="Cep Telefonu" InputType="PHONENUMBER" />
+                        <CSRControls:CRSTextBox Height="120" Input="{Binding Path=CurrentCustomer.Address, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE141;" EmptyMessage="Adres"  Multiline="True" InputType="ALL" />
+                        <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE13A;" EmptyMessage="Telefon" Required="True" InputType="PHONENUMBER"  />
+                        <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE1c9;" EmptyMessage="Cep Telefonu" InputType="PHONENUMBER" />
                         <Grid Height="170">
                             <CSRControls:CSRButton Height="60" Width="120" Command="{Binding DelCustomerCmd}" Content="Sil"  FontSize="18" Background="#AD103C" Margin="-3" HorizontalAlignment="left" IsEnabled="{Binding Path=DelButtonCanEnable}" />
                             <CSRControls:CSRButton Height="60" Width="120" Command="{Binding SaveCustomerCmd}" Validation="True" Content="Kaydet"  FontSize="18" Background="#008A00" Margin="-3" HorizontalAlignment="Right" IsEnabled="{Binding Path=CurrentCustomer.Dirty}" />
