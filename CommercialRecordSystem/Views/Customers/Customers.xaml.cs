@@ -3,6 +3,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using CommercialRecordSystem.ViewModels;
+using System.Collections;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -18,14 +19,40 @@ namespace CommercialRecordSystem
 
         public Customers()
         {
+
             this.InitializeComponent();
+            setTotalCustomerCount();
+            setTotalCustomerBalance();
+        }
+
+        private void setTotalCustomerCount()
+        {
+            int totalCount = CustomerListView != null ? CustomerListView.Items.Count : 0;
+            DisplayTextWhenListEmpty.Text = totalCount == 0 ? "Kayıtlı Müşteri Bulunamadı" : "";
+            totalCustomerCount.Text = totalCount.ToString() + " Kişi";
+
+        }
+        private void setTotalCustomerBalance()
+        {
+
+            int totalCount = CustomerListView != null ? CustomerListView.Items.Count : 0;
+            double balance = 0;
+
+            IEnumerable items = this.CustomerListView.Items;
+            foreach (CustomerVM customer in items)
+            {
+                balance = balance + customer.AccountCost;
+            }
+
+            totalCustomerBalance.Text = balance.ToString() + "₺";
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (null != e.Parameter)
             {
-                openPurpose = (OPEN_PURPOSE) e.Parameter;
+                openPurpose = (OPEN_PURPOSE)e.Parameter;
             }
 
             this.DataContext = new CustomersVM(this.Frame);
@@ -47,7 +74,7 @@ namespace CommercialRecordSystem
 
         private void CustomerListView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if ( null != CustomerListView.SelectedItem)
+            if (null != CustomerListView.SelectedItem)
             {
                 CustomersVM dataContextBuff = (CustomersVM)this.DataContext;
 
@@ -62,5 +89,13 @@ namespace CommercialRecordSystem
                 }
             }
         }
+
+        private void CustomerListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+            setTotalCustomerCount();
+            setTotalCustomerBalance();
+        }
+
+
     }
 }

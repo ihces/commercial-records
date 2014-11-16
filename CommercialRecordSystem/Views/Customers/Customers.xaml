@@ -54,8 +54,8 @@
                     <RowDefinition Height="60" />
                     <RowDefinition Height="52" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">Kayıtlı Müşteri Bulunamadı</TextBlock>
-                <ListView Name="CustomerListView"  Grid.Row="0" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionMode="Single" Tapped="CustomerListView_Tapped">
+                <TextBlock Name="DisplayTextWhenListEmpty" Grid.Row="0" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">Kayıtlı Müşteri Bulunamadı</TextBlock>
+                <ListView Name="CustomerListView"  Grid.Row="0" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionMode="Single" Tapped="CustomerListView_Tapped" ContainerContentChanging="CustomerListView_ContainerContentChanging">
                     <ListView.Header>
                         <Grid Style="{StaticResource CustomerListRow}" Height="60" HorizontalAlignment="Left" Background="#008A00">
                             <Grid.ColumnDefinitions>
@@ -107,8 +107,8 @@
                         <TextBlock FontFamily="Segoe UI Symbol" Text="&#xe136;" FontSize="23"/>
                     </Button>
                     <Grid Grid.Column="4" Background="#008A00">
-                        <TextBlock  FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0">200 Kişi</TextBlock>
-                        <TextBlock  FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Padding="0,0,24,0" VerticalAlignment="Center">2000,00₺</TextBlock>
+                        <TextBlock Name="totalCustomerCount"  FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0" >200 Kişi</TextBlock>
+                        <TextBlock Name="totalCustomerBalance" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Padding="0,0,24,0" VerticalAlignment="Center">2000,00₺</TextBlock>
                     </Grid>
                     </Grid>
                 </Border>
