@@ -85,7 +85,7 @@
                             <TextBlock FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontFamily="Segoe UI Symbol" Text="&#xe184;" TextAlignment="Center" Foreground="White"></TextBlock>
                         </Grid>
                         <Border Grid.Column="1" Background="#28ffffff" BorderBrush="#d74f2a"  BorderThickness="3" >
-                            <DatePicker FontSize="32" FontWeight="SemiBold" MonthFormat="{}{month.integer(2)}" VerticalAlignment="Center" HorizontalAlignment="Center" Date="{Binding Path=SelectedDate, Mode=TwoWay}" />
+                            <DatePicker FontSize="32" FontWeight="SemiBold"   VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Border>
                     </Grid>
                     <Grid>
