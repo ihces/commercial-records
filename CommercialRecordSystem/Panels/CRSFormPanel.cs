@@ -1,6 +1,7 @@
 ﻿using CommercialRecordSystem.Controls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -19,15 +20,22 @@ namespace CommercialRecordSystem.Panels
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             inputElements = new List<CRSTextBox>();
-            foreach (UIElement element in this.Children)
+            determineInputElements(this.Children);
+        }
+
+        private void determineInputElements(ICollection<UIElement> elements)
+        {
+            foreach (UIElement element in elements)
             {
                 if (element is Panel)
                 {
-                    Panel panel = (Panel)element;
-                    foreach (UIElement panelElement in panel.Children)
-                    {
-                        addInputElements(panelElement);
-                    }
+                    determineInputElements(((Panel)element).Children);
+                }
+                else if (element is Border)
+                {
+                    ICollection<UIElement> elementCollBuff = new Collection<UIElement>();
+                    elementCollBuff.Add(((Border)element).Child);
+                    determineInputElements(elementCollBuff);
                 }
                 else
                 {
