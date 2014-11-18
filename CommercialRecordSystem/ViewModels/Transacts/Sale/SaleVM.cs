@@ -112,9 +112,11 @@ namespace CommercialRecordSystem.ViewModels
         #region Command Handlers
         private void addEntryToListCmdHandler(object parameter)
         {
+            EntryBuff.Cost = EntryBuff.Amount * EntryBuff.UnitCost;
             SaleEntryVM.save(EntryBuff);
             Entries.Add(EntryBuff);
             EntryBuff = new SaleEntryVM();
+            EntryBuff.Refresh();
         }
 
         private void goNextCmdHandler(object parameter)

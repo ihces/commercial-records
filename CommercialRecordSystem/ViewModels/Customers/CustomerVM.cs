@@ -211,16 +211,16 @@ namespace CommercialRecordSystem.ViewModels
             Dirty = false;
         }
 
-        public void CopyTo(CustomerVM dest)
+        public void Refresh()
         {
-            dest.Id = Id;
-            dest.Name = Name;
-            dest.Surname = Surname;
-            dest.Address = Address;
-            dest.PhoneNumber = PhoneNumber;
-            dest.MobileNumber = MobileNumber;
-            dest.ProfilePhotoFileName = ProfilePhotoFileName;
-            dest.ProfileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, ProfilePhotoFileName));
+            RaisePropertyChanged("Id");
+            RaisePropertyChanged("Name");
+            RaisePropertyChanged("Surname");
+            RaisePropertyChanged("Address");
+            RaisePropertyChanged("PhoneNumber");
+            RaisePropertyChanged("MobileNumber");
+            RaisePropertyChanged("ProfilePhotoFileName");
+            RaisePropertyChanged("ProfileImgSource");
         }
 
         #region Database Transactions

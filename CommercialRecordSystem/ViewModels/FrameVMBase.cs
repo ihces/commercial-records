@@ -21,7 +21,7 @@ namespace CommercialRecordSystem.ViewModels
         #endregion
 
         #region Command Handlers
-        private void goBackCmdHandler(object parameter)
+        protected void goBackCmdHandler(object parameter)
         {
             GoBackFrame();
         }

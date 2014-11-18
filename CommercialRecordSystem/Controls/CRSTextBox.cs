@@ -352,11 +352,12 @@ namespace CommercialRecordSystem.Controls
         #region Fields
         public static readonly string INPUT_CHANGE_HANDLER = "input_change_handler";
         public static readonly string SUBMIT_BUTTON = "submit_button";
+        public bool AnyClickHandled = false;
         private bool isEmpty;
         private TextBox textBox;
         private Grid icon;
         private bool updateInput = false;
-        private bool anyClickHandled = false;
+        
         #endregion
 
         public CRSTextBox()
@@ -386,7 +387,7 @@ namespace CommercialRecordSystem.Controls
                     if (Required)
                     {
                         IsValid = false;
-                        if (anyClickHandled || callFrom.Equals(SUBMIT_BUTTON))
+                        if (AnyClickHandled || callFrom.Equals(SUBMIT_BUTTON))
                             this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
                     }
 
@@ -495,7 +496,7 @@ namespace CommercialRecordSystem.Controls
                     this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
                 }
 
-                anyClickHandled = true;
+                AnyClickHandled = true;
             }
         }
 

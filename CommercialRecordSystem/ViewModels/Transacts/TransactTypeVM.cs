@@ -34,7 +34,7 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                value.CopyTo(currentCustomer);
+                currentCustomer = value;
                 RaisePropertyChanged("CurrentCustomer");
             }
         }
@@ -118,7 +118,8 @@ namespace CommercialRecordSystem.ViewModels
 
             if (0 != selectedCustId)
             {
-                CustomerVM.get(selectedCustId).CopyTo(recordedCustomer);
+                recordedCustomer = CustomerVM.get(selectedCustId);
+                recordedCustomer.Refresh();
                 IsRecordedCustomer = true;
             }
         }
@@ -129,12 +130,14 @@ namespace CommercialRecordSystem.ViewModels
             {
                 case "normal":
                     IsRecordedCustomer = false;
-                    CurrentCustomer.CopyTo(recordedCustomer);
-                    normalCustomer.CopyTo(CurrentCustomer);
+                    recordedCustomer = CurrentCustomer;
+                    CurrentCustomer = normalCustomer;
+                    CurrentCustomer.Refresh();
                     break;
                 case "recorded":
-                    CurrentCustomer.CopyTo(normalCustomer);
-                    recordedCustomer.CopyTo(CurrentCustomer);
+                    normalCustomer = CurrentCustomer;
+                    CurrentCustomer = recordedCustomer;
+                    CurrentCustomer.Refresh();
                     IsRecordedCustomer = true;
                     break;
             }

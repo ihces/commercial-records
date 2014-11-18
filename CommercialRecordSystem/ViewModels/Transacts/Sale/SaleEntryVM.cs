@@ -138,8 +138,20 @@ namespace CommercialRecordSystem.ViewModels
         #endregion
 
         public SaleEntryVM()
-        { 
-        
+        {
+        }
+
+        public void Refresh()
+        {
+            RaisePropertyChanged("Id"); 
+            RaisePropertyChanged("CustomerId");
+            RaisePropertyChanged("TransactId");
+            RaisePropertyChanged("Date");
+            RaisePropertyChanged("Amount");
+            RaisePropertyChanged("Measure");
+            RaisePropertyChanged("Detail");
+            RaisePropertyChanged("UnitCost");
+            RaisePropertyChanged("Cost");
         }
 
         public SaleEntryVM(SaleEntry model)

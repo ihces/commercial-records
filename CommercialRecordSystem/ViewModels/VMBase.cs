@@ -44,5 +44,8 @@ namespace CommercialRecordSystem.ViewModels
                 resultStr += char.ToUpper(token[0]) + token.Substring(1) + " ";
             return resultStr.Trim();
         }
+
+        public void Refresh()
+        { }
     }
 }

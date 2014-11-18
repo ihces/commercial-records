@@ -74,6 +74,14 @@ namespace CommercialRecordSystem.Panels
                 }
             }
 
+            if (validated)
+            {
+                foreach (CRSTextBox element in inputElements)
+                {
+                    element.AnyClickHandled = false;
+                }
+            }
+
             (sender as CSRButton).Command.CanExecute(validated);
         }
     }
