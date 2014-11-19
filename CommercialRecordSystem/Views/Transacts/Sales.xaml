@@ -48,9 +48,9 @@
                     <RowDefinition Height="75"></RowDefinition>
                     <RowDefinition Height="40"></RowDefinition>
                     <RowDefinition Height="40"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="256"></RowDefinition>
+                    <RowDefinition Height="52"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Background="#d74f2a">
                     <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="left" Text="&#xe184;" />
@@ -88,9 +88,8 @@
                             </ComboBox>
                         </Grid>
                     </Border>
-                    <CSRControls:CRSTextBox Height="80" Input="{Binding Path=EntryBuff.Detail, Mode=TwoWay}" FontSize="18" ThemeBrush="#d74f2a" IconHex="&#xe206;" IconVisibility="at_Right" Multiline="True" InputType="ALL" EmptyMessage="Açıklama" Required="True" />
+                    <CSRControls:CRSTextBox Height="80" Input="{Binding Path=EntryBuff.Detail, Mode=TwoWay}" FontSize="18" ThemeBrush="#d74f2a" IconHex="&#xe206;" IconVisibility="at_Right" Multiline="True" InputType="ALL" EmptyMessage="Açıklama" Required="True" InputMaxLength="50" />
                     <CSRControls:CRSTextBox Height="60" Input="{Binding Path=EntryBuff.UnitCost, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="₺" IconVisibility="at_Right" InputType="MONEY" EmptyMessage="Birim Fiyat" InputMaxLength="16" Required="True" />
-                    <Grid Height="10"></Grid>
                     <CSRControls:CSRButton Width="190" Height="66" VerticalAlignment="Stretch" Background="#d74f2a" HorizontalAlignment="Right" Margin="-3" Command="{Binding AddEntryToListCmd}" Validation="True">
                         <TextBlock FontFamily="Segoe UI Symbol" Text="Ekle &#xE017;&#xE017;&#xE017;" FontSize="18"></TextBlock>
                     </CSRControls:CSRButton>
@@ -99,38 +98,49 @@
             <Grid Grid.Column="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="10"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="52"/>
                 </Grid.RowDefinitions>
                 <ListView Grid.Row="0" ItemsSource="{Binding Entries}">
                     <ListView.Header>
-                        <Grid Style="{StaticResource SaleListRow}" Height="60" HorizontalAlignment="Left" Background="#d74f2a">
+                        <Grid Style="{StaticResource SaleListHeader}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="125"></ColumnDefinition>
-                                <ColumnDefinition Width="410"></ColumnDefinition>
-                                <ColumnDefinition Width="120"></ColumnDefinition>
-                                <ColumnDefinition Width="125"></ColumnDefinition>
+                                <ColumnDefinition Width="32"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                <ColumnDefinition Width="200"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Miktar</TextBlock>
-                            <TextBlock Grid.Column="1" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Açıklama</TextBlock>
-                            <TextBlock Grid.Column="2" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Birim Tutar</TextBlock>
-                            <TextBlock Grid.Column="3" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Tutar</TextBlock>
+                            <CheckBox Grid.Column="0" Margin="3,0,0,0"></CheckBox>
+                            <TextBlock Grid.Column="1" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Miktar</TextBlock>
+                            <TextBlock Grid.Column="2" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Açıklama</TextBlock>
+                            <TextBlock Grid.Column="3" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Birim Tutar</TextBlock>
+                            <TextBlock Grid.Column="4" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Tutar</TextBlock>
                         </Grid>
                     </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Style="{StaticResource SaleListRow}">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"></ColumnDefinition>
-                                    <ColumnDefinition Width="405"></ColumnDefinition>
-                                    <ColumnDefinition Width="120"></ColumnDefinition>
-                                    <ColumnDefinition Width="120"></ColumnDefinition>
+                                    <ColumnDefinition Width="32"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Amount, Mode=OneWay}" />
-                                <TextBlock Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Detail, Mode=OneWay}" />
-                                <TextBlock Grid.Column="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding UnitCost, Mode=OneWay}" />
-                                <TextBlock Grid.Column="3" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Cost, Mode=OneWay}" />
+                                <CheckBox Grid.Column="0" HorizontalAlignment="Left"></CheckBox>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Amount, Mode=OneWay}" />
+                                    <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Measure, Mode=OneWay, Converter={StaticResource Int2MeasureConverter}}" />
+                                </Grid>
+                                <TextBlock Grid.Column="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Detail, Mode=OneWay}" TextWrapping="Wrap" />
+                                <TextBlock Grid.Column="3" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding UnitCost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
+                                <TextBlock Grid.Column="4" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Cost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -138,24 +148,39 @@
                 
                 <Grid Grid.Row="2" HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="350"></ColumnDefinition>
-                        <ColumnDefinition Width="10"></ColumnDefinition>
-                        <ColumnDefinition Width="190"></ColumnDefinition>
-                        <ColumnDefinition Width="10"></ColumnDefinition>
-                        <ColumnDefinition Width="70"></ColumnDefinition>
+                        <ColumnDefinition Width="60"></ColumnDefinition>
+                        <ColumnDefinition Width="4"></ColumnDefinition>
+                        <ColumnDefinition Width="60"></ColumnDefinition>
+                        <ColumnDefinition Width="8"></ColumnDefinition>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="8"></ColumnDefinition>
+                        <ColumnDefinition Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="8"></ColumnDefinition>
+                        <ColumnDefinition Width="76"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Background="#d74f2a">
-                        <TextBlock Grid.Column="0" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">888 Kalem</TextBlock>
+                    <Button Width="66" Margin="-3" Grid.Column="0" Background="#444444" VerticalAlignment="Stretch">
+                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE104;" FontSize="20"></TextBlock>
+                    </Button>
+                    <Button Width="66" Margin="-3" Grid.Column="2" Background="#AD103C" VerticalAlignment="Stretch">
+                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="20"></TextBlock>
+                    </Button>
+                    <Grid Grid.Column="4" Background="#d74f2a">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">888</TextBlock>
+                        <TextBlock Grid.Row="1" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">Kalem</TextBlock>
                     </Grid>
-                    <Grid Grid.Column="1" Background="#d74f2a">
+                    <Grid Grid.Column="5" Background="#d74f2a">
                         <TextBlock Grid.Column="1" FontSize="17" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center">Yalnız; Doksan Dokuz Bin Dokuz Yüz Doksan Dokuz Lira Doksan Dokuz Kuruş</TextBlock>
                     </Grid>
-                    <Grid Grid.Column="3" Background="#d74f2a">
-                        <TextBlock FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">99.999,99₺</TextBlock>
+                    <Grid Grid.Column="7" Background="#d74f2a">
+                        <TextBlock FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">9.999.999,99₺</TextBlock>
                     </Grid>
-                    <Grid Grid.Column="5">
-                        <Button Width="70" Background="#444444" VerticalAlignment="Stretch" Command="{Binding GoNextCmd}">
+                    <Grid Grid.Column="9">
+                        <Button Width="82" Height="66" Margin="-3" HorizontalAlignment="Right" Background="#444444" VerticalAlignment="Stretch" Command="{Binding GoNextCmd}">
                             <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE0ae;" FontSize="20"></TextBlock>
                         </Button>
                     </Grid>

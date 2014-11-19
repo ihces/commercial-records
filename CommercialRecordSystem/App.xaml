@@ -7,6 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <converter:InvertBooleanConverter x:Key="InvertBooleanConverter" />
+            <converter:Double2MoneyConverter x:Key="Double2MoneyConverter" />
+            <converter:Int2MeasureConverter x:Key="Int2MeasureConverter" />
             <Style x:Key="PortraitTile" TargetType="Grid">
                 <Setter Property="HorizontalAlignment" Value="Left"></Setter>
                 <Setter Property="Width" Value="200"></Setter>
@@ -45,9 +47,15 @@
                 <Setter Property="Width" Value="1180"></Setter>
                 <Setter Property="Height" Value="60"></Setter>
             </Style>
-            <Style x:Key="SaleListRow" TargetType="Grid">
+            <Style x:Key="SaleListHeader" TargetType="Grid">
                 <Setter Property="Width" Value="780"></Setter>
-                <Setter Property="Height" Value="32"></Setter>
+                <Setter Property="Height" Value="60"></Setter>
+                <Setter Property="Background" Value="#d74f2a"></Setter>
+            </Style>
+            <Style x:Key="SaleListRow" TargetType="Grid">
+                <Setter Property="Width" Value="755"></Setter>
+                <Setter Property="Height" Value="60"></Setter>
+                <Setter Property="Background" Value="#18ffffff"></Setter>
             </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Themes/CRSTextBox.xaml" />

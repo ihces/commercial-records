@@ -1,17 +1,21 @@
 ﻿using System;
+using System.Globalization;
 using Windows.UI.Xaml.Data;
+
 namespace CommercialRecordSystem.Converters
 {
-    class InvertBooleanConverter : IValueConverter
+    class Double2MoneyConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return !(bool)value;
+            return string.Format("{0:c}", (double)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return !(bool)value;
+            double returnVal = 0; 
+            double.TryParse((string)value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); 
+            return returnVal;
         }
     }
 }

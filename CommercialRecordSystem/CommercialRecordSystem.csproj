@@ -111,6 +111,8 @@
     <Compile Include="Constants\ColorConsts.cs" />
     <Compile Include="Controls\CRSTextBox.cs" />
     <Compile Include="Controls\CSRButton.cs" />
+    <Compile Include="Converters\Double2MoneyConverter.cs" />
+    <Compile Include="Converters\Int2MeasureConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Panels\CRSPanel.cs" />
     <Compile Include="Models\Customers\Customer.cs" />
