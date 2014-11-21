@@ -1,4 +1,5 @@
-﻿using CommercialRecordSystem.Controls;
+﻿using CommercialRecordSystem.Constants;
+using CommercialRecordSystem.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -64,13 +65,11 @@ namespace CommercialRecordSystem.Panels
             bool validated = true;
             foreach (CRSTextBox element in inputElements)
             {
-                if (element.Required || element.Validate)
+                if (!element.IsValid)
                 {
-                    element.CheckIsValid(CRSTextBox.SUBMIT_BUTTON);
-                    if (!element.IsValid)
-                    {
-                        validated = false;
-                    }
+                    if (!element.AnyClickHandled)
+                        element.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                    validated = false;
                 }
             }
 

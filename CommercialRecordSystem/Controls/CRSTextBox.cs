@@ -55,7 +55,7 @@ namespace CommercialRecordSystem.Controls
                 "InputMaxLength",
                 typeof(int),
                 typeof(CRSTextBox),
-                new PropertyMetadata(32, null)
+                new PropertyMetadata(64, null)
             );
         #endregion
         #region MaxSize
@@ -116,27 +116,6 @@ namespace CommercialRecordSystem.Controls
         public static readonly DependencyProperty RequiredProperty =
             DependencyProperty.Register(
                 "Required",
-                typeof(bool),
-                typeof(CRSTextBox),
-                new PropertyMetadata(false)
-            );
-        #endregion
-        #region Validate
-        public bool Validate
-        {
-            get
-            {
-                return (bool)GetValue(ValidateProperty);
-            }
-            set
-            {
-                SetValue(ValidateProperty, value);
-            }
-        }
-
-        public static readonly DependencyProperty ValidateProperty =
-            DependencyProperty.Register(
-                "Validate",
                 typeof(bool),
                 typeof(CRSTextBox),
                 new PropertyMetadata(false)
@@ -350,8 +329,7 @@ namespace CommercialRecordSystem.Controls
         #endregion
 
         #region Fields
-        public static readonly string INPUT_CHANGE_HANDLER = "input_change_handler";
-        public static readonly string SUBMIT_BUTTON = "submit_button";
+        protected static readonly string INPUT_CHANGE_HANDLER = "input_change_handler";
         public bool AnyClickHandled = false;
         private bool isEmpty;
         private TextBox textBox;
@@ -387,7 +365,7 @@ namespace CommercialRecordSystem.Controls
                     if (Required)
                     {
                         IsValid = false;
-                        if (AnyClickHandled || callFrom.Equals(SUBMIT_BUTTON))
+                        if (AnyClickHandled)
                             this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
                     }
 
@@ -458,7 +436,11 @@ namespace CommercialRecordSystem.Controls
             textBox.GotFocus += new RoutedEventHandler(gotFocusHandler);
             textBox.LostFocus += new RoutedEventHandler(LostFocusHandler);
 
-            IsValid = true;
+            if (Required)
+                IsValid = false;
+            else
+                IsValid = true;
+
             this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
 
             
