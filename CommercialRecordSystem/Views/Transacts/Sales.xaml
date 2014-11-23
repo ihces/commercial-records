@@ -109,7 +109,7 @@
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="52"/>
                 </Grid.RowDefinitions>
-                <ListView Grid.Row="0" ItemsSource="{Binding Entries}">
+                <ListView Grid.Row="0" ItemsSource="{Binding Entries}" Grid.RowSpan="2">
                     <ListView.Header>
                         <Grid Style="{StaticResource SaleListHeader}">
                             <Grid.ColumnDefinitions>
@@ -119,7 +119,7 @@
                                 <ColumnDefinition Width="150"></ColumnDefinition>
                                 <ColumnDefinition Width="200"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <CheckBox Grid.Column="0" Margin="3,0,0,0"></CheckBox>
+                            <CheckBox Grid.Column="0" Margin="3,0,0,0" IsChecked="{Binding IsAllChecked, Mode=TwoWay}"></CheckBox>
                             <TextBlock Grid.Column="1" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Miktar</TextBlock>
                             <TextBlock Grid.Column="2" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Açıklama</TextBlock>
                             <TextBlock Grid.Column="3" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Birim Tutar</TextBlock>
@@ -136,7 +136,7 @@
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="200"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <CheckBox Grid.Column="0" HorizontalAlignment="Left"></CheckBox>
+                                <CheckBox Grid.Column="0" HorizontalAlignment="Left" IsChecked="{Binding IsChecked, Mode=TwoWay}"></CheckBox>
                                 <Grid Grid.Column="1">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30" />
@@ -156,18 +156,13 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60"></ColumnDefinition>
                         <ColumnDefinition Width="5"></ColumnDefinition>
-                        <ColumnDefinition Width="60"></ColumnDefinition>
-                        <ColumnDefinition Width="5"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Width="66" Margin="-3" Grid.Column="0" Background="#444444" VerticalAlignment="Stretch">
-                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE104;" FontSize="20"></TextBlock>
-                    </Button>
-                    <Button Width="66" Margin="-3" Grid.Column="2" Background="#AD103C" VerticalAlignment="Stretch">
+                    <Button Width="66" Margin="-3" Grid.Column="0" Background="#AD103C" VerticalAlignment="Stretch" Command="{Binding DeleteEntryCmd}">
                         <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="20"></TextBlock>
                     </Button>
 
-                    <Grid Grid.Column="4" Background="#d74f2a">
+                    <Grid Grid.Column="2" Background="#d74f2a">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100" />
                             <ColumnDefinition Width="100" />

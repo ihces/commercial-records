@@ -135,6 +135,20 @@ namespace CommercialRecordSystem.ViewModels
                 RaisePropertyChanged("Cost");
             }
         }
+
+        private bool isChecked = false;
+        public bool IsChecked
+        {
+            get
+            {
+                return isChecked;
+            }
+            set
+            {
+                isChecked = value;
+                RaisePropertyChanged("IsChecked");
+            }
+        }
         #endregion
 
         public SaleEntryVM()
@@ -152,6 +166,7 @@ namespace CommercialRecordSystem.ViewModels
             RaisePropertyChanged("Detail");
             RaisePropertyChanged("UnitCost");
             RaisePropertyChanged("Cost");
+            RaisePropertyChanged("IsChecked");
         }
 
         public SaleEntryVM(SaleEntry model)
@@ -165,6 +180,7 @@ namespace CommercialRecordSystem.ViewModels
             Detail = model.Detail;
             UnitCost = model.UnitCost;
             Cost = model.Cost;
+            IsChecked = false;
         }
         
         #region Database Transactions
