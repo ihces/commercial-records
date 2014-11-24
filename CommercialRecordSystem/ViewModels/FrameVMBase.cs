@@ -33,12 +33,12 @@ namespace CommercialRecordSystem.ViewModels
             goBackCmd = new ICommandImp(goBackCmdHandler);
         }
 
-        public void GoBackFrame()
+        public virtual void GoBackFrame()
         {
             pageFrame.GoBack();
         }
 
-        public void GoForward()
+        public virtual void GoForward()
         {
             pageFrame.GoForward();
         }

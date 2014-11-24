@@ -5,8 +5,11 @@ namespace CommercialRecordSystem.Models
 {
     class Customer
     {
+        public enum TYPE { REGISTERED, UNREGISTERED };
+
         [PrimaryKey, AutoIncrement]
         public int    Id { get; set; }
+        public TYPE Type { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public int Sincerity { get; set; }

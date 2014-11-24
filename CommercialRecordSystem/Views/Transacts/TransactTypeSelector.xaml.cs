@@ -19,14 +19,22 @@ namespace CommercialRecordSystem
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            TransactVM transact = new TransactVM();
             if (null != e.Parameter)
             {
-                int selectedCustomerId = (int)e.Parameter;
-                this.DataContext = new TransactTypeVM(this.Frame, selectedCustomerId);
+                if (e.Parameter is TransactVM)
+                { 
+                    transact = (TransactVM)e.Parameter;
+                }
+                else if (e.Parameter is int)
+                { 
+                    transact.CustomerId=(int)e.Parameter;
+                }
+                this.DataContext = new TransactTypeVM(this.Frame,transact);
             }
             else
             {
-                this.DataContext = new TransactTypeVM(this.Frame);
+                this.DataContext = new TransactTypeVM(this.Frame, transact);
             }
         }
         

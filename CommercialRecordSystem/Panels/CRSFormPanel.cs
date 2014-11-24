@@ -65,6 +65,7 @@ namespace CommercialRecordSystem.Panels
             bool validated = true;
             foreach (CRSTextBox element in inputElements)
             {
+                element.CheckIsValid();
                 if (!element.IsValid)
                 {
                     if (!element.AnyClickHandled)

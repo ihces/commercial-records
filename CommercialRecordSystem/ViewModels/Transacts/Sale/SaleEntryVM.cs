@@ -24,20 +24,6 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private int customerId = 0;
-        public int CustomerId
-        {
-            get
-            {
-                return customerId;
-            }
-            set
-            {
-                customerId = value;
-                RaisePropertyChanged("CustomerId");
-            }
-        }
-
         private int transactId = 0;
         public int TransactId
         {
@@ -49,20 +35,6 @@ namespace CommercialRecordSystem.ViewModels
             {
                 transactId = value;
                 RaisePropertyChanged("TransactId");
-            }
-        }
-
-        private DateTime date = DateTime.Now;
-        public DateTime Date
-        {
-            get
-            {
-                return date;
-            }
-            set
-            {
-                date = value;
-                RaisePropertyChanged("Date");
             }
         }
 
@@ -158,9 +130,7 @@ namespace CommercialRecordSystem.ViewModels
         public void Refresh()
         {
             RaisePropertyChanged("Id"); 
-            RaisePropertyChanged("CustomerId");
             RaisePropertyChanged("TransactId");
-            RaisePropertyChanged("Date");
             RaisePropertyChanged("Amount");
             RaisePropertyChanged("Measure");
             RaisePropertyChanged("Detail");
@@ -172,9 +142,7 @@ namespace CommercialRecordSystem.ViewModels
         public SaleEntryVM(SaleEntry model)
         {
             Id = model.Id;
-            CustomerId = model.CustomerId;
             TransactId = model.TransactId;
-            Date = model.Date;
             Amount = model.Amount;
             Measure = model.Measure;
             Detail = model.Detail;
@@ -207,7 +175,6 @@ namespace CommercialRecordSystem.ViewModels
                 entryBuff.Id = entry.Id;
             entryBuff.Amount = entry.Amount;
             entryBuff.Measure = entry.Measure;
-            entryBuff.Date = entry.Date;
             entryBuff.Detail = entry.Detail;
             entryBuff.UnitCost = entry.UnitCost;
             entryBuff.Cost = entry.UnitCost * entry.Amount;
@@ -248,7 +215,7 @@ namespace CommercialRecordSystem.ViewModels
             ObservableCollection<SaleEntryVM> Entries = new ObservableCollection<SaleEntryVM>();
             var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
             var saleEntryList = await db.Table<SaleEntry>()
-                                .Where(e => customerId == e.CustomerId && transactId == e.TransactId)
+                                .Where(e => transactId == e.TransactId)
                                 .OrderBy(e => e.Id).ToListAsync();
             
             foreach (SaleEntry entry in saleEntryList)

@@ -32,6 +32,8 @@ namespace CommercialRecordSystem.Panels
                 new PropertyMetadata(-1, CheckedIndexHandler)
             );
         #endregion
+
+        private bool checkedIndexChangedExternally = true;
         #endregion
 
         #region CheckedCommand
@@ -78,14 +80,30 @@ namespace CommercialRecordSystem.Panels
 
         void radioButtonChecked(object sender, RoutedEventArgs e)
         {
+            checkedIndexChangedExternally = false;
             CheckedIndex = itemList.IndexOf(((RadioButton)sender).Name);
         }
 
         private static void CheckedIndexHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             CRSRadioButtonPanel panel = (CRSRadioButtonPanel)obj;
+
+            if (panel.checkedIndexChangedExternally)
+            { 
+                if (0 > panel.CheckedIndex)
+                    panel.CheckedIndex = 0;
+                if (panel.Children.Count < panel.CheckedIndex)
+                    panel.CheckedIndex = panel.Children.Count - 1;
+
+                if (0 < panel.Children.Count)
+                    ((RadioButton)panel.Children[panel.CheckedIndex]).IsChecked = true;
+            }
+
             if (null != panel.CheckedCommand && -1 < panel.CheckedIndex)
                 panel.CheckedCommand.Execute(panel.itemList[panel.CheckedIndex]);
+
+            //reset
+            panel.checkedIndexChangedExternally = true;
         }
     }
 }

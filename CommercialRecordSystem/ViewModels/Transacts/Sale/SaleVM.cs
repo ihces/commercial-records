@@ -84,6 +84,8 @@ namespace CommercialRecordSystem.ViewModels
                 RaisePropertyChanged("IsAllChecked");
             }
         }
+
+        private TransactVM transactInfo = new TransactVM();
         #endregion
 
         #region Commands
@@ -115,6 +117,11 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
         #region Command Handlers
+        public override void GoBackFrame()
+        {
+            Navigate(typeof(TransactTypeSelector), transactInfo);
+        }
+
         private void addEntryToListCmdHandler(object parameter)
         {
             EntryBuff.Cost = EntryBuff.Amount * EntryBuff.UnitCost;
@@ -127,7 +134,7 @@ namespace CommercialRecordSystem.ViewModels
 
         private void goNextCmdHandler(object parameter)
         {
-            this.Navigate(typeof(Payments), this);
+            this.Navigate(typeof(Payments), transactInfo);
         }
 
         private void deleteEntryCmdHandler(object parameter)
@@ -176,25 +183,22 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        public SaleVM(Frame frame, TransactTypeVM transactObj)
+        public SaleVM(Frame frame, TransactVM transactObj)
             : base(frame)
         {
+            transactInfo = transactObj;
+
             addEntryToListCmd = new ICommandImp(addEntryToListCmdHandler);
             goNextCmd = new ICommandImp(goNextCmdHandler);
             deleteEntryCmd = new ICommandImp(deleteEntryCmdHandler);
 
-            System.DateTime transactDateBuff =  transactObj.SelectedDate;
+            System.DateTime transactDateBuff =  transactObj.Date;
             saleDateStr = transactDateBuff.ToString("dd.MM.yyyy");
-            selectedCustomer = CustomerVM.get(transactObj.CurrentCustomer.Id);
-
-            if (null == selectedCustomer)
-            {
-                selectedCustomer = transactObj.CurrentCustomer;
-            }
+            selectedCustomer = CustomerVM.get(transactObj.CustomerId);
 
             selectedCustomer.Name = UpperCaseFirst(selectedCustomer.Name) + " " + selectedCustomer.Surname.ToUpper();
 
-            if (transactObj.SelectedTransactTypeIndex.Equals(TransactTypeVM.ORDER_TRANSACT))
+            if (transactObj.Type.Equals(Transact.TYPE.ORDER))
                 header = "Sipariş";
         }
 

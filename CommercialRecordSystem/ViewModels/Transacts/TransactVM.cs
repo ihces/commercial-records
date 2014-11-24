@@ -38,8 +38,8 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private Transact.TRANSACT_TYPE type = Transact.TRANSACT_TYPE.SALE;
-        public Transact.TRANSACT_TYPE Type
+        private Transact.TYPE type = Transact.TYPE.SALE;
+        public Transact.TYPE Type
         {
             get
             {
@@ -79,6 +79,20 @@ namespace CommercialRecordSystem.ViewModels
                 RaisePropertyChanged("Cost");
             }
         }
+
+        private double paid = 0.0f;
+        public double Paid
+        {
+            get
+            {
+                return paid;
+            }
+            set
+            {
+                paid = value;
+                RaisePropertyChanged("Paid");
+            }
+        }
         #endregion
 
         #region Database Transactions
@@ -92,14 +106,15 @@ namespace CommercialRecordSystem.ViewModels
 
                 if (null != entryBuff)
                 {
-                    transact = new TransactVM();
+                    transact = new TransactVM(entryBuff);
                 }
             }
             return transact;
         }
 
-        public static string save(Transact transact)
+        public static int save(Transact transact)
         {
+            int id = transact.Id;
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
                 SaleEntry existingTransact = (db.Table<SaleEntry>().Where(
@@ -111,10 +126,10 @@ namespace CommercialRecordSystem.ViewModels
                 }
                 else
                 {
-                    db.Insert(transact);
+                    id = db.Insert(transact);
                 }
             }
-            return "success";
+            return id;
         }
 
         public static string delete(int transactId)
@@ -140,5 +155,20 @@ namespace CommercialRecordSystem.ViewModels
             return await transactList;
         }
         #endregion
+
+        public TransactVM(Transact transact)
+        {
+            Id = transact.Id;
+            Type = transact.Type;
+            CustomerId = transact.CustomerId;
+            Date = transact.Date;
+            Cost = transact.Cost;
+            Paid = transact.Paid;
+        }
+
+        public TransactVM()
+        {
+
+        }
     }
 }

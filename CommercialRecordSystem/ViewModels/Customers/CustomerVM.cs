@@ -25,6 +25,20 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private Customer.TYPE type = Customer.TYPE.REGISTERED;
+        public Customer.TYPE Type 
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
+                RaisePropertyChanged("Type");
+            }
+        }
+
         private string name = string.Empty;
         public string Name
         {
@@ -201,6 +215,7 @@ namespace CommercialRecordSystem.ViewModels
         public CustomerVM(Customer model)
         {
             id = model.Id;
+            type = model.Type;
             name = model.Name;
             surname = model.Surname;
             address = model.Address;
@@ -214,6 +229,7 @@ namespace CommercialRecordSystem.ViewModels
         public void Refresh()
         {
             RaisePropertyChanged("Id");
+            RaisePropertyChanged("Type");
             RaisePropertyChanged("Name");
             RaisePropertyChanged("Surname");
             RaisePropertyChanged("Address");
@@ -250,13 +266,13 @@ namespace CommercialRecordSystem.ViewModels
             if (0 == keyword.Trim().Length) 
             {
                 var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-                customerModelList = await db.Table<Customer>().OrderBy(c => c.Name).OrderBy(c => c.Surname).ToListAsync();
+                customerModelList = await db.Table<Customer>().Where(c => c.Type == Customer.TYPE.REGISTERED).OrderBy(c => c.Name).OrderBy(c => c.Surname).ToListAsync();
             }
             else
             {
                 keyword = "%" + keyword + "%";
                 var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-                customerModelList = await db.Table<Customer>().Where(c => c.Name.Contains(keyword) || c.Surname.Contains(keyword)).ToListAsync();
+                customerModelList = await db.Table<Customer>().Where(c => c.Type == Customer.TYPE.REGISTERED && ( c.Name.Contains(keyword) || c.Surname.Contains(keyword))).ToListAsync();
             }
 
             foreach (Customer customer in customerModelList)
@@ -277,6 +293,7 @@ namespace CommercialRecordSystem.ViewModels
                 custModel.Id = customer.Id;
                 custId = customer.Id;
             }
+            custModel.Type = customer.Type;
             custModel.Name = customer.Name;
             custModel.Surname = customer.Surname;
             custModel.Sincerity = customer.Sincerity;

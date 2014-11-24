@@ -421,6 +421,7 @@ namespace CommercialRecordSystem.Controls
             if (string.IsNullOrWhiteSpace(newValueStr))
             {
                 Input = null; // calls changed handler and set textbox as empty
+                setAsEmpty();
             }
             else
             {
@@ -507,7 +508,7 @@ namespace CommercialRecordSystem.Controls
                 if (csrTextBox.Required)
                 {
                     csrTextBox.RequiredSignVisibility = Visibility.Visible;
-                    if (!csrTextBox.IsValid)
+                    if (csrTextBox.isEmpty && !csrTextBox.IsValid)
                         csrTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
                 }
                 csrTextBox.BorderBrush = csrTextBox.ThemeBrush;

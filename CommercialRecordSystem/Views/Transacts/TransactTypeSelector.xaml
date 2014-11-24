@@ -69,10 +69,10 @@
                 <CSRPanels:CRSFormPanel Grid.Row="0" GapSize="10">
                     
                     <CSRPanels:CRSRadioButtonPanel Orientation="Horizontal" CheckedCommand="{Binding CustomerTypeSelectCmd}" Height="60">
-                        <RadioButton Name="normal" GroupName="CustomerTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="{Binding IsRecordedCustomer, Converter={StaticResource InvertBooleanConverter}}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <RadioButton Name="unregistered" GroupName="CustomerTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="{Binding IsRegisteredCustomer, Converter={StaticResource InvertBooleanConverter}}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                             <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold">Normal Müşteri</TextBlock>
                         </RadioButton>
-                        <RadioButton Name="recorded" GroupName="CustomerTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="{Binding IsRecordedCustomer}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <RadioButton Name="registered" GroupName="CustomerTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="{Binding IsRegisteredCustomer}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                             <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold">Kayıtlı Müşteri</TextBlock>
                         </RadioButton>
                     </CSRPanels:CRSRadioButtonPanel>
@@ -96,13 +96,13 @@
                             <ColumnDefinition Width="10" />
                             <ColumnDefinition Width="60" />
                         </Grid.ColumnDefinitions>
-                        <CSRControls:CRSTextBox  Height="60" Grid.Column="0" Input="{Binding Path=CurrentCustomer.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#x1f466;" EmptyMessage="İsim" Required="True" InputType="NAME" ReadOnly="{Binding IsRecordedCustomer}" />
-                        <CSRControls:CRSTextBox  Height="60" Grid.Column="2" Input="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay}" ThemeBrush="#d74f2a" IconVisibility="Collapsed" EmptyMessage="Soyisim" Required="True" InputType="NAME" ReadOnly="{Binding IsRecordedCustomer}" />
-                        <Button Grid.Column="4" Height="66" Width="66" FontFamily="Segoe UI Symbol" FontSize="23" Margin="-3" Padding="0" Content="&#xE11A;" Background="#d74f2a" Command="{Binding SelectRecordedCustomerCmd}" IsEnabled="{Binding IsRecordedCustomer}" />
+                        <CSRControls:CRSTextBox  Height="60" Grid.Column="0" Input="{Binding Path=CurrentCustomer.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#x1f466;" EmptyMessage="İsim" Required="True" InputType="NAME" ReadOnly="{Binding IsRegisteredCustomer}" />
+                        <CSRControls:CRSTextBox  Height="60" Grid.Column="2" Input="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay}" ThemeBrush="#d74f2a" IconVisibility="Collapsed" EmptyMessage="Soyisim" Required="True" InputType="NAME" ReadOnly="{Binding IsRegisteredCustomer}" />
+                        <Button Grid.Column="4" Height="66" Width="66" FontFamily="Segoe UI Symbol" FontSize="23" Margin="-3" Padding="0" Content="&#xE11A;" Background="#d74f2a" Command="{Binding SelectRecordedCustomerCmd}" IsEnabled="{Binding IsRegisteredCustomer}" />
                     </Grid>
-                    <CSRControls:CRSTextBox  Height="120" Input="{Binding Path=CurrentCustomer.Address, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#xE141;" EmptyMessage="Adres"  Multiline="True" InputType="ALL" ReadOnly="{Binding IsRecordedCustomer}" />
-                    <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#xE13A;" EmptyMessage="Telefon" InputType="PHONENUMBER" ReadOnly="{Binding IsRecordedCustomer}" />
-                    <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#xE1c9;" EmptyMessage="Cep Telefonu" InputType="PHONENUMBER" ReadOnly="{Binding IsRecordedCustomer}" />
+                    <CSRControls:CRSTextBox  Height="120" Input="{Binding Path=CurrentCustomer.Address, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#xE141;" EmptyMessage="Adres"  Multiline="True" InputType="ALL" ReadOnly="{Binding IsRegisteredCustomer}" />
+                    <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#xE13A;" EmptyMessage="Telefon" InputType="PHONENUMBER" ReadOnly="{Binding IsRegisteredCustomer}" />
+                    <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="&#xE1c9;" EmptyMessage="Cep Telefonu" InputType="PHONENUMBER" ReadOnly="{Binding IsRegisteredCustomer}" />
                     <CSRControls:CSRButton Height="66" Width="66" Command="{Binding StartTransactionCmd}" Validation="True" Content="&#xE0ae;" FontFamily="Segoe UI Symbol" FontSize="18" Background="#d74f2a" Margin="-3" HorizontalAlignment="Right" />
                 </CSRPanels:CRSFormPanel>
             </Grid>

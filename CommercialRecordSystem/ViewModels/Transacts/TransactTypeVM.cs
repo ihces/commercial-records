@@ -2,14 +2,20 @@
 using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
 using CommercialRecordSystem.Common;
+using CommercialRecordSystem.Models;
 
 namespace CommercialRecordSystem.ViewModels
 {
     class TransactTypeVM : FrameVMBase
     {
         #region Properties
-        private CustomerVM normalCustomer = new CustomerVM();
-        private CustomerVM recordedCustomer = new CustomerVM();
+        private CustomerVM unregisteredCustomer = new CustomerVM() { Type=Customer.TYPE.UNREGISTERED};
+        private CustomerVM registeredCustomer = new CustomerVM() { Type = Customer.TYPE.REGISTERED };
+        private TransactVM transactInfo = new TransactVM();
+
+        public const int SALE_TRANSACT = 0;
+        public const int ORDER_TRANSACT = 1;
+        public const int PAYMENT_TRANSACT = 2;
 
         private int selectedTransactTypeIndex = 0;
         public int SelectedTransactTypeIndex
@@ -53,29 +59,21 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private bool isRecordedCustomer = false;
-        public bool IsRecordedCustomer
+        private bool isRegisteredCustomer = false;
+        public bool IsRegisteredCustomer
         {
             get
             {
-                return isRecordedCustomer;
+                return isRegisteredCustomer;
             }
             set
             {
-                isRecordedCustomer = value;
-                RaisePropertyChanged("IsRecordedCustomer");
+                isRegisteredCustomer = value;
+                RaisePropertyChanged("IsRegisteredCustomer");
             }
         }
-
-        /*private readonly ICommand transactTypeSelectCmd;
-        public ICommand TransactTypeSelectCmd
-        {
-            get
-            {
-                return transactTypeSelectCmd;
-            }
-        }*/
-
+        #endregion
+        #region Commands
         private readonly ICommand customerTypeSelectCmd;
         public ICommand CustomerTypeSelectCmd
         {
@@ -104,56 +102,87 @@ namespace CommercialRecordSystem.ViewModels
         }
         
         #endregion
-
-        public const int SALE_TRANSACT = 0; 
-        public const int ORDER_TRANSACT = 1;
-        public const int PAYMENT_TRANSACT = 2;
-
-        public TransactTypeVM(Frame frame, int selectedCustId = 0):base(frame)
+        #region Command Handlers
+        private void customerTypeSelectCmdHandler(object parameter)
         {
-            //transactTypeSelectCmd = new ICommandImp(transactTypeSelect_execute);
-            customerTypeSelectCmd = new ICommandImp(customerTypeSelect_execute);
-            selectRecordedCustomerCmd = new ICommandImp(selectRecordedCustomer_execute);
-            startTransactionCmd = new ICommandImp(startTransaction_execute);
-
-            if (0 != selectedCustId)
+            switch ((string)parameter)
             {
-                recordedCustomer = CustomerVM.get(selectedCustId);
-                recordedCustomer.Refresh();
-                IsRecordedCustomer = true;
-            }
-        }
-
-        private void customerTypeSelect_execute(object parameter)
-        {
-            switch((string)parameter)
-            {
-                case "normal":
-                    IsRecordedCustomer = false;
-                    recordedCustomer = CurrentCustomer;
-                    CurrentCustomer = normalCustomer;
+                case "unregistered":
+                    IsRegisteredCustomer = false;
+                    if (CurrentCustomer.Type.Equals(Customer.TYPE.REGISTERED))
+                        registeredCustomer = CurrentCustomer;
+                    CurrentCustomer = unregisteredCustomer;
                     CurrentCustomer.Refresh();
                     break;
-                case "recorded":
-                    normalCustomer = CurrentCustomer;
-                    CurrentCustomer = recordedCustomer;
+                case "registered":
+                    if (CurrentCustomer.Type.Equals(Customer.TYPE.UNREGISTERED))
+                        unregisteredCustomer = CurrentCustomer;
+                    CurrentCustomer = registeredCustomer;
                     CurrentCustomer.Refresh();
-                    IsRecordedCustomer = true;
+                    IsRegisteredCustomer = true;
                     break;
             }
         }
 
-        private void selectRecordedCustomer_execute(object parameter)
+        private void selectRecordedCustomerCmdHandler(object parameter)
         {
             Navigate(typeof(Customers), Customers.OPEN_PURPOSE.ADD_TRANSACTION);
         }
 
-        private void startTransaction_execute(object parameter)
+        public override void GoBackFrame()
         {
-            if (SelectedTransactTypeIndex.Equals(PAYMENT_TRANSACT))
-                this.Navigate(typeof(Payments), this);
-            else
-                this.Navigate(typeof(Sales), this);
-        }    
+            Navigate(typeof(MainPage));
+        }
+
+        private void startTransactionCmdHandler(object parameter)
+        {
+            transactInfo.Date = selectedDate;
+            if (CurrentCustomer.Type.Equals(Customer.TYPE.UNREGISTERED) && 0 == transactInfo.CustomerId)
+            {
+                transactInfo.CustomerId = CustomerVM.save(CurrentCustomer);
+            }
+
+            switch (SelectedTransactTypeIndex)
+            { 
+                case SALE_TRANSACT:
+                    transactInfo.Type = Transact.TYPE.SALE;
+                    this.Navigate(typeof(Sales), transactInfo);
+                    break;
+                case ORDER_TRANSACT:
+                    transactInfo.Type = Transact.TYPE.ORDER;
+                    this.Navigate(typeof(Sales), transactInfo);
+                    break;
+                case PAYMENT_TRANSACT:
+                    transactInfo.Type = Transact.TYPE.PAYMENT;
+                    this.Navigate(typeof(Payments), transactInfo);
+                    break;
+            }
+        }
+        #endregion
+
+        public TransactTypeVM(Frame frame, TransactVM transact):base(frame)
+        {
+            customerTypeSelectCmd = new ICommandImp(customerTypeSelectCmdHandler);
+            selectRecordedCustomerCmd = new ICommandImp(selectRecordedCustomerCmdHandler);
+            startTransactionCmd = new ICommandImp(startTransactionCmdHandler);
+
+            this.transactInfo = transact;
+            SelectedTransactTypeIndex = (int)transactInfo.Type -1;
+            if (0 != transact.CustomerId)
+            {
+                currentCustomer = CustomerVM.get(transact.CustomerId);
+                if (currentCustomer.Type.Equals(Customer.TYPE.REGISTERED))
+                {
+                    registeredCustomer = currentCustomer;
+                    IsRegisteredCustomer = true;
+                }
+                else
+                {
+                    unregisteredCustomer = currentCustomer;
+                    isRegisteredCustomer = false;
+                }
+                CurrentCustomer.Refresh();
+            }
+        }
     }
 }
