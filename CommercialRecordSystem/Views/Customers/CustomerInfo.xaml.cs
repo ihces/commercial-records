@@ -19,15 +19,15 @@ namespace CommercialRecordSystem
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            CustomerInfoVM VModel = null;
+            CustomerInfoFrameVM VModel = null;
             if (null == e.Parameter)
             {
-                VModel = new CustomerInfoVM(this.Frame);
+                VModel = new CustomerInfoFrameVM(this.Frame);
             }  
             else
             {
                 int customerId = (int)e.Parameter;
-                VModel = new CustomerInfoVM(this.Frame, customerId);
+                VModel = new CustomerInfoFrameVM(this.Frame, customerId);
             }
             this.DataContext = VModel;
         }

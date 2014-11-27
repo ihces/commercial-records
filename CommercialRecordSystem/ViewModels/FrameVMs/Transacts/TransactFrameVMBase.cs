@@ -1,33 +1,22 @@
 ﻿using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 
-namespace CommercialRecordSystem.ViewModels
+namespace CommercialRecordSystem.ViewModels.Transacts
 {
-    class SaleVM : FrameVMBase
+    abstract class TransactFrameVMBase<E,T> : FrameVMBase where E : TransactEntryVMBase<T>, new() where T:ModelBase, new()
     {
         #region Properties
-
-        private readonly string header = "Satış";
-        public string Header
+        private readonly string dateStr = string.Empty;
+        public string DateStr
         {
             get
             {
-                return header;
-            }
-        }
-
-        private readonly string saleDateStr = string.Empty;
-        public string SaleDateStr
-        {
-            get
-            {
-                return saleDateStr;
+                return dateStr;
             }
         }
 
@@ -40,8 +29,8 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private ObservableCollection<SaleEntryVM> entries = new ObservableCollection<SaleEntryVM>();
-        public ObservableCollection<SaleEntryVM> Entries
+        private ObservableCollection<E> entries = new ObservableCollection<E>();
+        public ObservableCollection<E> Entries
         {
             get
             {
@@ -54,8 +43,8 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private SaleEntryVM entryBuff = new SaleEntryVM();
-        public SaleEntryVM EntryBuff
+        private E entryBuff = new E();
+        public E EntryBuff
         { 
             get
             {
@@ -85,9 +74,8 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private TransactVM transactInfo = new TransactVM();
+        protected TransactVM transactInfo = new TransactVM();
         #endregion
-
         #region Commands
         private readonly ICommand addEntryToListCmd;
         public ICommand AddEntryToListCmd
@@ -117,26 +105,15 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
         #region Command Handlers
-        public override void GoBackFrame()
+        protected virtual void addEntryToListCmdHandler(object parameter)
         {
-            Navigate(typeof(TransactTypeSelector), transactInfo);
-        }
-
-        private void addEntryToListCmdHandler(object parameter)
-        {
-            EntryBuff.Cost = EntryBuff.Amount * EntryBuff.UnitCost;
-            SaleEntryVM.save(EntryBuff);
+            EntryBuff.save();
             Entries.Add(EntryBuff);
-            EntryBuff = new SaleEntryVM();
+            EntryBuff = new E();
             EntryBuff.Refresh();
             IsAllChecked = false;
         }
-
-        private void goNextCmdHandler(object parameter)
-        {
-            this.Navigate(typeof(Payments), transactInfo);
-        }
-
+        protected abstract void goNextCmdHandler(object parameter);
         private void deleteEntryCmdHandler(object parameter)
         {
             int checkedEntryCnt = 0;
@@ -166,10 +143,9 @@ namespace CommercialRecordSystem.ViewModels
                 messageDialog.ShowAsync();
             }
         }
-
         private void deleteSelectedEntries(IUICommand command)
         {
-            ObservableCollection<SaleEntryVM> entriesBuff = new ObservableCollection<SaleEntryVM>();
+            ObservableCollection<E> entriesBuff = new ObservableCollection<E>();
             for (int i = 0; i < entries.Count; ++i)
             {
                 if (!entries[i].IsChecked)
@@ -183,28 +159,21 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        public SaleVM(Frame frame, TransactVM transactObj)
-            : base(frame)
+        public TransactFrameVMBase(Frame frame, TransactVM transactInfo) :base(frame)
         {
-            transactInfo = transactObj;
+            this.transactInfo = transactInfo;
 
             addEntryToListCmd = new ICommandImp(addEntryToListCmdHandler);
             goNextCmd = new ICommandImp(goNextCmdHandler);
             deleteEntryCmd = new ICommandImp(deleteEntryCmdHandler);
 
-            System.DateTime transactDateBuff =  transactObj.Date;
-            saleDateStr = transactDateBuff.ToString("dd.MM.yyyy");
-            selectedCustomer = CustomerVM.get(transactObj.CustomerId);
+            System.DateTime transactDateBuff = transactInfo.Date;
+            dateStr = transactDateBuff.ToString("dd.MM.yyyy");
+            selectedCustomer.get(transactInfo.CustomerId);
 
             selectedCustomer.Name = UpperCaseFirst(selectedCustomer.Name) + " " + selectedCustomer.Surname.ToUpper();
-
-            if (transactObj.Type.Equals(Transact.TYPE.ORDER))
-                header = "Sipariş";
         }
 
-        private async Task setEntries()
-        {
-            Entries = await SaleEntryVM.getSaleEntries(selectedCustomer.Id, 1);
-        }
+        protected abstract Task setEntries();
     }
 }

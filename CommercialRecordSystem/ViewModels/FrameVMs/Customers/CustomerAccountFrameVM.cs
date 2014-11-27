@@ -4,10 +4,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class CustomerAccountVM : FrameVMBase
+    class CustomerAccountFrameVM : FrameVMBase
     {
         #region Properties
-        private CustomerVM currentCustomer = null;
+        private CustomerVM currentCustomer = new CustomerVM();
         public CustomerVM CurrentCustomer
         { 
             get
@@ -23,9 +23,10 @@ namespace CommercialRecordSystem.ViewModels
 
         #endregion
 
-        public CustomerAccountVM(Frame frame, int customerId) : base(frame)
+        public CustomerAccountFrameVM(Frame frame, int customerId)
+            : base(frame)
         {
-            CurrentCustomer = CustomerVM.get(customerId);
+            CurrentCustomer.get(customerId);
             CurrentCustomer.Name += " " + CurrentCustomer.Surname;
         }
     }

@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class CustomerInfoVM : FrameVMBase
+    class CustomerInfoFrameVM : FrameVMBase
     {
         #region Properties
 
@@ -106,9 +106,9 @@ namespace CommercialRecordSystem.ViewModels
         private void saveCustomerCmdHandler(object parameter)
         {
             LoadingVisibility = Visibility.Visible;
-            
 
-            int result = CustomerVM.save(CurrentCustomer);
+
+            int result = CurrentCustomer.save();
             string message = null;
             if (result > 0)
             {
@@ -159,7 +159,7 @@ namespace CommercialRecordSystem.ViewModels
 
         private void DelCustCommandInvokedHandler(IUICommand command)
         {
-            CustomerVM.delete(CurrentCustomer.Id);
+            CurrentCustomer.delete();
             this.GoBackFrame();
         }
 
@@ -204,7 +204,8 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        public CustomerInfoVM(Frame frame): base(frame)
+        public CustomerInfoFrameVM(Frame frame)
+            : base(frame)
         {
             saveCustomerCmd = new ICommandImp(saveCustomerCmdHandler);
             delCustomerCmd = new ICommandImp(delCustomerCmdHandler);
@@ -212,10 +213,10 @@ namespace CommercialRecordSystem.ViewModels
             capturePhotoFromCamCmd = new ICommandImp(capturePhotoFromCamCmdHandler);
         }
 
-        public CustomerInfoVM(Frame frame, int customerId) : base(frame)
+        public CustomerInfoFrameVM(Frame frame, int customerId) : base(frame)
         {
             DelButtonCanEnable = true;
-            CurrentCustomer = CustomerVM.get(customerId);
+            CurrentCustomer.get(customerId);
             saveCustomerCmd = new ICommandImp(saveCustomerCmdHandler);
             delCustomerCmd = new ICommandImp(delCustomerCmdHandler);
             loadPhotoViaFileBrowserCmd = new ICommandImp(loadPhotoViaBrowserCmdHandler);

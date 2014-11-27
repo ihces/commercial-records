@@ -22,7 +22,7 @@ namespace CommercialRecordSystem
         {
             if (null != e.Parameter)
             {
-                this.DataContext = new SaleVM(this.Frame, (TransactVM)e.Parameter);
+                this.DataContext = new SaleFrameVM(this.Frame, (TransactVM)e.Parameter);
             }
         }
     }

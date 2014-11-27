@@ -9,6 +9,8 @@
             <converter:InvertBooleanConverter x:Key="InvertBooleanConverter" />
             <converter:Double2MoneyConverter x:Key="Double2MoneyConverter" />
             <converter:Int2MeasureConverter x:Key="Int2MeasureConverter" />
+            <converter:PaymentType2StringConverter x:Key="PaymentType2StringConverter" />
+            <converter:String2VisibilityConverter x:Key="String2VisibilityConverter" />
             <Style x:Key="PortraitTile" TargetType="Grid">
                 <Setter Property="HorizontalAlignment" Value="Left"></Setter>
                 <Setter Property="Width" Value="200"></Setter>

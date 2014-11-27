@@ -3,10 +3,8 @@ using SQLite;
 
 namespace CommercialRecordSystem.Models
 {
-    class SaleEntry
+    class SaleEntry : ModelBase
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id{ get; set; }
         public int TransactId { get; set; }
         public double Amount{ get; set; }
         public int Measure{ get; set; }

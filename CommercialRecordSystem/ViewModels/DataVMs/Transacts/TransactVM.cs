@@ -163,7 +163,6 @@ namespace CommercialRecordSystem.ViewModels
             CustomerId = transact.CustomerId;
             Date = transact.Date;
             Cost = transact.Cost;
-            Paid = transact.Paid;
         }
 
         public TransactVM()

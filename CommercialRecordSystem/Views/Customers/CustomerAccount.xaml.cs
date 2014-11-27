@@ -53,7 +53,7 @@ namespace CommercialRecordSystem
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             int customerId = (int)e.Parameter;
-            this.DataContext = new CustomerAccountVM(this.Frame, customerId);
+            this.DataContext = new CustomerAccountFrameVM(this.Frame, customerId);
         }
     }
 }

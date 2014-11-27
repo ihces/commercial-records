@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using CommercialRecordSystem.ViewModels;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -16,14 +17,12 @@ namespace CommercialRecordSystem
             this.InitializeComponent();
         }
 
-        private void backButton_Clicked(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.Frame.GoBack();
-        }
-
-        private async void printButtonClicked(object sender, RoutedEventArgs e)
-        {
-            //await Windows.Graphics.Printing.PrintManager.ShowPrintUIAsync();
+            if (null != e.Parameter)
+            {
+                this.DataContext = new PaymentFrameVM(this.Frame, (TransactVM)e.Parameter);
+            }
         }
     }
 }

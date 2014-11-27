@@ -55,7 +55,7 @@ namespace CommercialRecordSystem
                 openPurpose = (OPEN_PURPOSE)e.Parameter;
             }
 
-            this.DataContext = new CustomersVM(this.Frame);
+            this.DataContext = new CustomersFrameVM(this.Frame);
         }
 
         private void addCustomerButton_Click(object sender, RoutedEventArgs e)
@@ -67,7 +67,7 @@ namespace CommercialRecordSystem
         {
             if (null != CustomerListView.SelectedItem)
             {
-                CustomersVM dataContextBuff = (CustomersVM)this.DataContext;
+                CustomersFrameVM dataContextBuff = (CustomersFrameVM)this.DataContext;
                 this.Frame.Navigate(typeof(CustomerInfo), dataContextBuff.SelectedCustomer.Id);
             }
         }
@@ -76,7 +76,7 @@ namespace CommercialRecordSystem
         {
             if (null != CustomerListView.SelectedItem)
             {
-                CustomersVM dataContextBuff = (CustomersVM)this.DataContext;
+                CustomersFrameVM dataContextBuff = (CustomersFrameVM)this.DataContext;
 
                 switch (openPurpose)
                 {

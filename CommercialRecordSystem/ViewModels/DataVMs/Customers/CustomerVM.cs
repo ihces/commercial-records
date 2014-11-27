@@ -5,26 +5,13 @@ using System.IO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using CommercialRecordSystem.ViewModels.DataVMs;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class CustomerVM : VMBase
+    class CustomerVM : DataVMBase<Customer>
     {
         #region Properties
-        private int id = 0;
-        public int Id
-        {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                id = value;
-                RaisePropertyChanged("Id");
-            }
-        }
-
         private Customer.TYPE type = Customer.TYPE.REGISTERED;
         public Customer.TYPE Type 
         {
@@ -212,21 +199,12 @@ namespace CommercialRecordSystem.ViewModels
         public CustomerVM()
         { }
 
-        public CustomerVM(Customer model)
+        public CustomerVM(Customer customer)
         {
-            id = model.Id;
-            type = model.Type;
-            name = model.Name;
-            surname = model.Surname;
-            address = model.Address;
-            phoneNumber = model.PhoneNumber;
-            mobileNumber = model.MobileNumber;
-            profilePhotoFileName = model.ProfilePhotoFileName;
-            profileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, model.ProfilePhotoFileName));
-            Dirty = false;
+            initWithModel(customer);
         }
 
-        public void Refresh()
+        public override void Refresh()
         {
             RaisePropertyChanged("Id");
             RaisePropertyChanged("Type");
@@ -240,30 +218,11 @@ namespace CommercialRecordSystem.ViewModels
         }
 
         #region Database Transactions
-        public static CustomerVM get(int customerId)
-        {
-            CustomerVM customer = null;
-            if (customerId > 0)
-            {
-                using (var db = new SQLite.SQLiteConnection(App.DBPath))
-                {
-                    var customerBuff = (db.Table<Customer>().Where(
-                        c => c.Id == customerId)).Single();
-
-                    if (null != customerBuff)
-                    {
-                        customer = new CustomerVM(customerBuff);
-                    }
-                }
-            }
-            return customer;
-        }
-
         public async static Task<ObservableCollection<CustomerVM>> getCustomers(string keyword)
         {
             ObservableCollection<CustomerVM> CustomerList = new ObservableCollection<CustomerVM>();
             List<Customer> customerModelList = null;
-            if (0 == keyword.Trim().Length) 
+            if (0 == keyword.Trim().Length)
             {
                 var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
                 customerModelList = await db.Table<Customer>().Where(c => c.Type == Customer.TYPE.REGISTERED).OrderBy(c => c.Name).OrderBy(c => c.Surname).ToListAsync();
@@ -272,7 +231,7 @@ namespace CommercialRecordSystem.ViewModels
             {
                 keyword = "%" + keyword + "%";
                 var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-                customerModelList = await db.Table<Customer>().Where(c => c.Type == Customer.TYPE.REGISTERED && ( c.Name.Contains(keyword) || c.Surname.Contains(keyword))).ToListAsync();
+                customerModelList = await db.Table<Customer>().Where(c => c.Type == Customer.TYPE.REGISTERED && (c.Name.Contains(keyword) || c.Surname.Contains(keyword))).ToListAsync();
             }
 
             foreach (Customer customer in customerModelList)
@@ -282,60 +241,36 @@ namespace CommercialRecordSystem.ViewModels
             }
             return CustomerList;
         }
-
-        public static int save(CustomerVM customer)
-        {
-            int custId = 0;
-            Customer custModel = new Customer();
-            //for updating customer via id
-            if (customer.Id > 0)
-            {
-                custModel.Id = customer.Id;
-                custId = customer.Id;
-            }
-            custModel.Type = customer.Type;
-            custModel.Name = customer.Name;
-            custModel.Surname = customer.Surname;
-            custModel.Sincerity = customer.Sincerity;
-            custModel.Address = customer.Address;
-            custModel.PhoneNumber = customer.PhoneNumber;
-            custModel.MobileNumber = customer.MobileNumber;
-            custModel.ProfilePhotoFileName = customer.ProfilePhotoFileName;
-            custModel.LastTransactDate = customer.LastTransactDate;
-            custModel.AccountCost = customer.AccountCost;
-            custModel.CreatedDate = customer.CreatedDate;
-            custModel.ModifiedDate = customer.ModifiedDate;
-
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                Customer existingCustomer = (db.Table<Customer>().Where(
-                        c => c.Id == customer.Id)).SingleOrDefault();
-
-                if (existingCustomer != null)
-                {
-                    db.Update(custModel);
-                }
-                else
-                {
-                    custId = db.Insert(custModel);
-                }
-            }
-            return custId;
-        }
-
-        public static string delete(int customerId)
-        {
-            string result = string.Empty;
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                var existingCustomer = (db.Table<Customer>().Where(
-                    c => c.Id == customerId)).Single();
-
-                db.Delete(existingCustomer);
-            }
-
-            return "success";
-        }
         #endregion
+
+
+        public override void initWithModel(Customer model)
+        {
+            Id = model.Id;
+            Type = model.Type;
+            Name = model.Name;
+            Surname = model.Surname;
+            Address = model.Address;
+            PhoneNumber = model.PhoneNumber;
+            MobileNumber = model.MobileNumber;
+            ProfilePhotoFileName = model.ProfilePhotoFileName;
+            ProfileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, model.ProfilePhotoFileName));
+            Dirty = false;
+        }
+
+        public override Customer convert2Model()
+        {
+            Customer customer = new Customer();
+            customer.Id = Id;
+            customer.Type = Type;
+            customer.Name = Name;
+            customer.Surname = Surname;
+            customer.Address = Address;
+            customer.PhoneNumber = PhoneNumber;
+            customer.MobileNumber = MobileNumber;
+            customer.ProfilePhotoFileName = ProfilePhotoFileName;
+
+            return customer;
+        }
     }
 }

@@ -13,6 +13,5 @@ namespace CommercialRecordSystem.Models
         public int CustomerId { get; set; }
         public DateTime Date { get; set; }
         public double Cost { get; set; }
-        public double Paid { get; set; }
     }
 }

@@ -107,6 +107,7 @@ namespace CommercialRecordSystem
                 db.CreateTable<Customer>();
                 db.CreateTable<Transact>();
                 db.CreateTable<SaleEntry>();
+                db.CreateTable<PaymentEntry>();
             }
         }
 

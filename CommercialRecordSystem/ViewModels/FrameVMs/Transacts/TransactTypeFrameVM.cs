@@ -6,7 +6,7 @@ using CommercialRecordSystem.Models;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class TransactTypeVM : FrameVMBase
+    class TransactTypeFrameVM : FrameVMBase
     {
         #region Properties
         private CustomerVM unregisteredCustomer = new CustomerVM() { Type=Customer.TYPE.UNREGISTERED};
@@ -139,7 +139,7 @@ namespace CommercialRecordSystem.ViewModels
             transactInfo.Date = selectedDate;
             if (CurrentCustomer.Type.Equals(Customer.TYPE.UNREGISTERED) && 0 == transactInfo.CustomerId)
             {
-                transactInfo.CustomerId = CustomerVM.save(CurrentCustomer);
+                transactInfo.CustomerId = CurrentCustomer.save();
             }
 
             switch (SelectedTransactTypeIndex)
@@ -160,7 +160,8 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        public TransactTypeVM(Frame frame, TransactVM transact):base(frame)
+        public TransactTypeFrameVM(Frame frame, TransactVM transact)
+            : base(frame)
         {
             customerTypeSelectCmd = new ICommandImp(customerTypeSelectCmdHandler);
             selectRecordedCustomerCmd = new ICommandImp(selectRecordedCustomerCmdHandler);
@@ -170,7 +171,7 @@ namespace CommercialRecordSystem.ViewModels
             SelectedTransactTypeIndex = (int)transactInfo.Type -1;
             if (0 != transact.CustomerId)
             {
-                currentCustomer = CustomerVM.get(transact.CustomerId);
+                currentCustomer.get(transact.CustomerId);
                 if (currentCustomer.Type.Equals(Customer.TYPE.REGISTERED))
                 {
                     registeredCustomer = currentCustomer;
