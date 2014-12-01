@@ -1,18 +1,15 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
+﻿using CommercialRecordSystem.Views;
 using CommercialRecordSystem.ViewModels;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace CommercialRecordSystem
+namespace CommercialRecordSystem.Views.Transacts
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class TransactTypeSelector : Page
+    public sealed partial class TransactTypeSelector : ViewBase
     {
-        public TransactTypeSelector()
+        public TransactTypeSelector() : base(typeof(TransactTypeFrameVM))
+        {
+            this.InitializeComponent();
+        }
+        /*public TransactTypeSelector()
         {
             this.InitializeComponent();
         }
@@ -42,6 +39,6 @@ namespace CommercialRecordSystem
         {
             TransactTypeFrameVM dataContextBuff = (TransactTypeFrameVM)this.DataContext;
             this.Frame.Navigate(typeof(Sales), dataContextBuff);
-        }
+        }*/
     }
 }

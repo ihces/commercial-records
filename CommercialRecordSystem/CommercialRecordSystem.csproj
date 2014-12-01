@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ICommandImp.cs" />
+    <Compile Include="Common\FrameNavigation.cs" />
     <Compile Include="Constants\ColorConsts.cs" />
     <Compile Include="Controls\CRSTextBox.cs" />
     <Compile Include="Controls\CSRButton.cs" />
@@ -130,7 +131,7 @@
     <Compile Include="ViewModels\DataVMs\Transacts\TransactEntryVMBase.cs" />
     <Compile Include="ViewModels\FrameVMs\Customers\CustomerAccountFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Customers\CustomerInfoFrameVM.cs" />
-    <Compile Include="ViewModels\FrameVMs\Customers\CustomersFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\Customers\CustomerListFrameVM.cs" />
     <Compile Include="ViewModels\DataVMs\Customers\CustomerVM.cs" />
     <Compile Include="ViewModels\FrameVMs\FrameVMBase.cs" />
     <Compile Include="ViewModels\DataVMs\Goods\FirmVM.cs" />
@@ -153,8 +154,8 @@
     <Compile Include="Views\Customers\CustomerInfo.xaml.cs">
       <DependentUpon>CustomerInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Customers\Customers.xaml.cs">
-      <DependentUpon>Customers.xaml</DependentUpon>
+    <Compile Include="Views\Customers\CustomerList.xaml.cs">
+      <DependentUpon>CustomerList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Goods\FirmInfo.xaml.cs">
       <DependentUpon>FirmInfo.xaml</DependentUpon>
@@ -180,6 +181,7 @@
     </Compile>
     <Compile Include="DataLayer\SQLite.cs" />
     <Compile Include="DataLayer\SQLiteAsync.cs" />
+    <Compile Include="Views\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -246,7 +248,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Customers\Customers.xaml">
+    <Page Include="Views\Customers\CustomerList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

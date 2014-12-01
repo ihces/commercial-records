@@ -3,12 +3,10 @@ using System;
 
 namespace CommercialRecordSystem.Models
 {
-    class Transact
+    class Transact : ModelBase
     {
         public enum TYPE {SALE, PAYMENT, ORDER}
-
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public int ParentId { get; set; }
         public TYPE Type { get; set; }
         public int CustomerId { get; set; }
         public DateTime Date { get; set; }

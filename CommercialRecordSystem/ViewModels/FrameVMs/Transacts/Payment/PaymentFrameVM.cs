@@ -2,6 +2,7 @@
 using CommercialRecordSystem.Models;
 using CommercialRecordSystem.ViewModels.Transacts;
 using CommercialRecordSystem.ViewModels.Transacts.Payment;
+using CommercialRecordSystem.Views.Transacts;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -13,19 +14,14 @@ namespace CommercialRecordSystem.ViewModels
     class PaymentFrameVM : TransactFrameVMBase<PaymentEntryVM, PaymentEntry>
     {
         #region Command Handlers
-        public override void GoBackFrame()
-        {
-            Navigate(typeof(Sales), transactInfo);
-        }
-
         protected override void goNextCmdHandler(object parameter)
         {
-            this.Navigate(typeof(TransactTypeSelector), transactInfo);
+            Navigation.Navigate(typeof(TransactTypeSelector), transactInfo);
         }
         #endregion
 
-        public PaymentFrameVM(Frame frame, TransactVM transactObj)
-            : base(frame,transactObj)
+        public PaymentFrameVM(Frame frame, FrameNavigation navigation)
+            : base(frame, navigation)
         {
         }
 

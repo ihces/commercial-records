@@ -1,5 +1,6 @@
-﻿<Page
-    x:Class="CommercialRecordSystem.CustomerInfo"
+﻿<Views:ViewBase
+    xmlns:Views="using:CommercialRecordSystem.Views"
+    x:Class="CommercialRecordSystem.Views.Customers.CustomerInfo"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CommercialRecordSystem"
@@ -97,4 +98,4 @@
             </Grid>
         </Grid>
     </Grid>
-</Page>
+</Views:ViewBase>

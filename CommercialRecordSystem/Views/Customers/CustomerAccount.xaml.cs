@@ -1,20 +1,16 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
+﻿using CommercialRecordSystem.Views;
 using CommercialRecordSystem.ViewModels;
+using Windows.UI.Xaml;
 using WinRTXamlToolkit.Controls.DataVisualization.Charting;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace CommercialRecordSystem
+namespace CommercialRecordSystem.Views.Customers
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CustomerAccount : Page
+    public sealed partial class CustomerAccount : ViewBase
     {
-        public CustomerAccount()
+        public CustomerAccount() : base(typeof(CustomerAccountFrameVM))
         {
             this.InitializeComponent();
             this.Loaded += MainPage_Loaded;
@@ -44,16 +40,16 @@ namespace CommercialRecordSystem
             (ColumnChart.Series[1] as ColumnSeries).ItemsSource = financialStuffList;
             (ColumnChart.Series[2] as LineSeries).ItemsSource = financialStuffList;
         }
-
-        private void actionList_Tabbed(object sender, TappedRoutedEventArgs e)
+        
+        private void actionList_Tabbed(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Sales));
+            this.Frame.Navigate(typeof(CommercialRecordSystem.Views.Transacts.Sales));
         }
-
+        /*
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             int customerId = (int)e.Parameter;
             this.DataContext = new CustomerAccountFrameVM(this.Frame, customerId);
-        }
+        }*/
     }
 }

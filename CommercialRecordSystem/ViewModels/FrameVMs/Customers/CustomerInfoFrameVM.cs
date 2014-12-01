@@ -160,7 +160,7 @@ namespace CommercialRecordSystem.ViewModels
         private void DelCustCommandInvokedHandler(IUICommand command)
         {
             CurrentCustomer.delete();
-            this.GoBackFrame();
+            Navigation.GoBack();
         }
 
         private async void loadPhotoViaBrowserCmdHandler(object parameter)
@@ -204,8 +204,8 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        public CustomerInfoFrameVM(Frame frame)
-            : base(frame)
+        public CustomerInfoFrameVM(Frame frame, FrameNavigation navigation)
+            : base(frame, navigation)
         {
             saveCustomerCmd = new ICommandImp(saveCustomerCmdHandler);
             delCustomerCmd = new ICommandImp(delCustomerCmdHandler);
@@ -213,7 +213,7 @@ namespace CommercialRecordSystem.ViewModels
             capturePhotoFromCamCmd = new ICommandImp(capturePhotoFromCamCmdHandler);
         }
 
-        public CustomerInfoFrameVM(Frame frame, int customerId) : base(frame)
+        /*public CustomerInfoFrameVM(Frame frame, int customerId) : base(frame)
         {
             DelButtonCanEnable = true;
             CurrentCustomer.get(customerId);
@@ -221,6 +221,6 @@ namespace CommercialRecordSystem.ViewModels
             delCustomerCmd = new ICommandImp(delCustomerCmdHandler);
             loadPhotoViaFileBrowserCmd = new ICommandImp(loadPhotoViaBrowserCmdHandler);
             capturePhotoFromCamCmd = new ICommandImp(capturePhotoFromCamCmdHandler);
-        }
+        }*/
     }
 }

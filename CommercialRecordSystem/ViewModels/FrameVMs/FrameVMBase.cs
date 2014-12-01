@@ -7,7 +7,16 @@ namespace CommercialRecordSystem.ViewModels
 {
     abstract class FrameVMBase : VMBase
     {
-        private readonly Frame pageFrame;
+        #region Properties
+        private FrameNavigation navigation;
+        public FrameNavigation Navigation
+        {
+            get
+            {
+                return navigation;
+            }
+        }
+        #endregion
 
         #region Commands
         private readonly ICommand goBackCmd = null;
@@ -21,38 +30,16 @@ namespace CommercialRecordSystem.ViewModels
         #endregion
 
         #region Command Handlers
-        protected void goBackCmdHandler(object parameter)
+        protected virtual void goBackCmdHandler(object parameter)
         {
-            GoBackFrame();
+            Navigation.GoBack();
         }
         #endregion
 
-        public FrameVMBase(Frame frame) 
+        public FrameVMBase(Frame frame, FrameNavigation navigation)
         {
-            pageFrame = frame;
+            this.navigation = navigation;
             goBackCmd = new ICommandImp(goBackCmdHandler);
-        }
-
-        public virtual void GoBackFrame()
-        {
-            pageFrame.GoBack();
-        }
-
-        public virtual void GoForward()
-        {
-            pageFrame.GoForward();
-        }
-
-        public bool Navigate<T>(object parameter = null)
-        {
-            var type = typeof(T);
-
-            return Navigate(type, parameter);
-        }
-
-        public bool Navigate(Type source, object parameter = null)
-        {
-            return pageFrame.Navigate(source, parameter);
         }
     }
 }

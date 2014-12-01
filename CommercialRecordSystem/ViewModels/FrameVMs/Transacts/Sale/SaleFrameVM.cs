@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using CommercialRecordSystem.ViewModels.Transacts;
+using CommercialRecordSystem.Views.Transacts;
 
 namespace CommercialRecordSystem.ViewModels
 {
@@ -24,22 +25,19 @@ namespace CommercialRecordSystem.ViewModels
         #endregion
 
         #region Command Handlers
-        public override void GoBackFrame()
-        {
-            Navigate(typeof(TransactTypeSelector), transactInfo);
-        }
-
         protected override void goNextCmdHandler(object parameter)
         {
-            this.Navigate(typeof(Payments), transactInfo);
+            Navigation.Navigate(typeof(Payments), transactInfo);
         }
         #endregion
 
-        public SaleFrameVM(Frame frame, TransactVM transactObj)
-            : base(frame, transactObj)
+        public SaleFrameVM(Frame frame, FrameNavigation navigation)
+            : base(frame, navigation)
         {
-            if (transactObj.Type.Equals(Transact.TYPE.ORDER))
+            if (transactInfo != null && transactInfo.Type.Equals(Transact.TYPE.ORDER))
+            {
                 header = "Sipariş";
+            }
         }
 
         protected override void addEntryToListCmdHandler(object parameter)

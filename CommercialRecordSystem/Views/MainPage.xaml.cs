@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CommercialRecordSystem.Common;
+using CommercialRecordSystem.Views.Customers;
+using CommercialRecordSystem.Views.Transacts;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,18 +33,26 @@ namespace CommercialRecordSystem
 
         private void CostumersGrid_tabbed(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Customers));
+            GoTo<CustomerList>();
         }
 
         private void GoodsGrid_tabbed(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Goods));
+            GoTo<Goods>();
         }
 
         private void SalesGrid_tabbed(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(TransactTypeSelector));
+            GoTo<TransactTypeSelector>();
             
+        }
+
+        private void GoTo<Destination>()
+        {
+            Type destinationPageType = typeof(Destination);
+            FrameNavigation navigation = new FrameNavigation(destinationPageType);
+            navigation.Back = new FrameNavigation(this.GetType());
+            this.Frame.Navigate(destinationPageType, navigation);
         }
 
         private void In_Out_Come_tab(object sender, TappedRoutedEventArgs e)

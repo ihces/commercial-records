@@ -1,6 +1,7 @@
 ﻿using System;
 using CommercialRecordSystem.Models;
 using Windows.UI.Xaml.Controls;
+using CommercialRecordSystem.Common;
 
 namespace CommercialRecordSystem.ViewModels
 {
@@ -23,11 +24,11 @@ namespace CommercialRecordSystem.ViewModels
 
         #endregion
 
-        public CustomerAccountFrameVM(Frame frame, int customerId)
-            : base(frame)
+        public CustomerAccountFrameVM(Frame frame, FrameNavigation navigation)
+            : base(frame, navigation)
         {
-            CurrentCustomer.get(customerId);
-            CurrentCustomer.Name += " " + CurrentCustomer.Surname;
+            //CurrentCustomer.get(customerId);
+            //CurrentCustomer.Name += " " + CurrentCustomer.Surname;
         }
     }
 }

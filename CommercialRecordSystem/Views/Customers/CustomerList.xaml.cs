@@ -1,22 +1,22 @@
-﻿using Windows.UI.Xaml;
+﻿using CommercialRecordSystem.Views;
+using CommercialRecordSystem.ViewModels;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using CommercialRecordSystem.ViewModels;
 using System.Collections;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace CommercialRecordSystem
+namespace CommercialRecordSystem.Views.Customers
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class Customers : Page
+    public sealed partial class CustomerList : ViewBase
     {
-        public enum OPEN_PURPOSE { BASE, ADD_TRANSACTION }
-        private OPEN_PURPOSE openPurpose = OPEN_PURPOSE.BASE;
-
+        public CustomerList() : base(typeof(CustomerListFrameVM)) 
+        {
+            this.InitializeComponent();
+        }
+        
+       // public enum OPEN_PURPOSE { BASE, ADD_TRANSACTION }
+        //private OPEN_PURPOSE openPurpose = OPEN_PURPOSE.BASE;
+        /*
         public Customers()
         {
 
@@ -24,7 +24,7 @@ namespace CommercialRecordSystem
             setTotalCustomerCount();
             setTotalCustomerBalance();
         }
-
+        */
         private void setTotalCustomerCount()
         {
             int totalCount = CustomerListView != null ? CustomerListView.Items.Count : 0;
@@ -48,7 +48,7 @@ namespace CommercialRecordSystem
 
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        /*protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (null != e.Parameter)
             {
@@ -57,7 +57,7 @@ namespace CommercialRecordSystem
 
             this.DataContext = new CustomersFrameVM(this.Frame);
         }
-
+        */
         private void addCustomerButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(CustomerInfo));
@@ -67,14 +67,14 @@ namespace CommercialRecordSystem
         {
             if (null != CustomerListView.SelectedItem)
             {
-                CustomersFrameVM dataContextBuff = (CustomersFrameVM)this.DataContext;
+                CustomerListFrameVM dataContextBuff = (CustomerListFrameVM)this.DataContext;
                 this.Frame.Navigate(typeof(CustomerInfo), dataContextBuff.SelectedCustomer.Id);
             }
         }
 
         private void CustomerListView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (null != CustomerListView.SelectedItem)
+           /* if (null != CustomerListView.SelectedItem)
             {
                 CustomersFrameVM dataContextBuff = (CustomersFrameVM)this.DataContext;
 
@@ -87,7 +87,7 @@ namespace CommercialRecordSystem
                         this.Frame.Navigate(typeof(TransactTypeSelector), dataContextBuff.SelectedCustomer.Id);
                         break;
                 }
-            }
+            }*/
         }
 
         private void CustomerListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
@@ -95,6 +95,7 @@ namespace CommercialRecordSystem
             setTotalCustomerCount();
             setTotalCustomerBalance();
         }
+        
 
 
     }

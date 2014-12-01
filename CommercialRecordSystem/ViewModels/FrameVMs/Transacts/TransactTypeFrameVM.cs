@@ -3,6 +3,8 @@ using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
 using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models;
+using CommercialRecordSystem.Views.Customers;
+using CommercialRecordSystem.Views.Transacts;
 
 namespace CommercialRecordSystem.ViewModels
 {
@@ -126,18 +128,18 @@ namespace CommercialRecordSystem.ViewModels
 
         private void selectRecordedCustomerCmdHandler(object parameter)
         {
-            Navigate(typeof(Customers), Customers.OPEN_PURPOSE.ADD_TRANSACTION);
+            Navigation.Navigate(typeof(CustomerList), "Customers.OPEN_PURPOSE.ADD_TRANSACTION");
         }
 
-        public override void GoBackFrame()
+        protected void GoBack()
         {
-            Navigate(typeof(MainPage));
+            Navigation.Navigate(typeof(MainPage));
         }
 
         private void startTransactionCmdHandler(object parameter)
         {
             transactInfo.Date = selectedDate;
-            if (CurrentCustomer.Type.Equals(Customer.TYPE.UNREGISTERED) && 0 == transactInfo.CustomerId)
+            if (CurrentCustomer.Type.Equals(Customer.TYPE.UNREGISTERED))
             {
                 transactInfo.CustomerId = CurrentCustomer.save();
             }
@@ -146,44 +148,55 @@ namespace CommercialRecordSystem.ViewModels
             { 
                 case SALE_TRANSACT:
                     transactInfo.Type = Transact.TYPE.SALE;
-                    this.Navigate(typeof(Sales), transactInfo);
+                    transactInfo.save();
+                    Navigation.Navigate(typeof(Sales), transactInfo);
                     break;
                 case ORDER_TRANSACT:
                     transactInfo.Type = Transact.TYPE.ORDER;
-                    this.Navigate(typeof(Sales), transactInfo);
+                    transactInfo.save();
+                    Navigation.Navigate(typeof(Sales), transactInfo);
                     break;
                 case PAYMENT_TRANSACT:
                     transactInfo.Type = Transact.TYPE.PAYMENT;
-                    this.Navigate(typeof(Payments), transactInfo);
+                    transactInfo.save();
+                    Navigation.Navigate(typeof(Payments), transactInfo);
                     break;
             }
         }
         #endregion
 
-        public TransactTypeFrameVM(Frame frame, TransactVM transact)
-            : base(frame)
+        public TransactTypeFrameVM(Frame frame, FrameNavigation navigation)
+            : base(frame, navigation)
         {
             customerTypeSelectCmd = new ICommandImp(customerTypeSelectCmdHandler);
             selectRecordedCustomerCmd = new ICommandImp(selectRecordedCustomerCmdHandler);
             startTransactionCmd = new ICommandImp(startTransactionCmdHandler);
 
-            this.transactInfo = transact;
-            SelectedTransactTypeIndex = (int)transactInfo.Type -1;
-            if (0 != transact.CustomerId)
+            if (navigation.CanGoForward && (navigation.Forward.Is<Sales>() ||
+                navigation.Forward.Is<Payments>()))
             {
-                currentCustomer.get(transact.CustomerId);
-                if (currentCustomer.Type.Equals(Customer.TYPE.REGISTERED))
+                this.transactInfo = (TransactVM)navigation.Message;
+                if (this.transactInfo != null)
                 {
-                    registeredCustomer = currentCustomer;
-                    IsRegisteredCustomer = true;
+                    SelectedTransactTypeIndex = (int)transactInfo.Type - 1;
+                    if (0 != transactInfo.CustomerId)
+                    {
+                        currentCustomer.get(transactInfo.CustomerId);
+                        if (currentCustomer.Type.Equals(Customer.TYPE.REGISTERED))
+                        {
+                            registeredCustomer = currentCustomer;
+                            IsRegisteredCustomer = true;
+                        }
+                        else
+                        {
+                            unregisteredCustomer = currentCustomer;
+                            isRegisteredCustomer = false;
+                        }
+                        CurrentCustomer.Refresh();
+                    }
                 }
-                else
-                {
-                    unregisteredCustomer = currentCustomer;
-                    isRegisteredCustomer = false;
-                }
-                CurrentCustomer.Refresh();
             }
+            transactInfo = new TransactVM();
         }
     }
 }

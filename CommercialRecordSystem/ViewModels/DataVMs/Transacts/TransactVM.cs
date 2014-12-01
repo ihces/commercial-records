@@ -1,26 +1,25 @@
-﻿using System;
-using System.Linq;
-using SQLite;
-using CommercialRecordSystem.Models;
-using System.Threading.Tasks;
+﻿using CommercialRecordSystem.Models;
+using CommercialRecordSystem.ViewModels.DataVMs;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class TransactVM : VMBase
+    class TransactVM : DataVMBase<Transact>
     {
         #region Properties
-        private int id = 0;
-        public int Id
-        { 
+        private int parentId = 0;
+        public int ParentId
+        {
             get
             {
-                return id;
+                return parentId;
             }
             set
             {
-                id = value;
-                RaisePropertyChanged("Id");
+                parentId = value;
+                RaisePropertyChanged("ParentId");
             }
         }
 
@@ -79,72 +78,9 @@ namespace CommercialRecordSystem.ViewModels
                 RaisePropertyChanged("Cost");
             }
         }
-
-        private double paid = 0.0f;
-        public double Paid
-        {
-            get
-            {
-                return paid;
-            }
-            set
-            {
-                paid = value;
-                RaisePropertyChanged("Paid");
-            }
-        }
         #endregion
 
         #region Database Transactions
-        public static TransactVM get(int transactId)
-        {
-            TransactVM transact = null;
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                var entryBuff = (db.Table<Transact>().Where(
-                    c => c.Id == transactId)).Single();
-
-                if (null != entryBuff)
-                {
-                    transact = new TransactVM(entryBuff);
-                }
-            }
-            return transact;
-        }
-
-        public static int save(Transact transact)
-        {
-            int id = transact.Id;
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                SaleEntry existingTransact = (db.Table<SaleEntry>().Where(
-                        c => c.Id == transact.Id)).SingleOrDefault();
-
-                if (existingTransact != null)
-                {
-                    db.Update(transact);
-                }
-                else
-                {
-                    id = db.Insert(transact);
-                }
-            }
-            return id;
-        }
-
-        public static string delete(int transactId)
-        {
-            string result = string.Empty;
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                var existingTransact = (db.Table<Transact>().Where(
-                    c => c.Id == transactId)).Single();
-
-                db.Delete(existingTransact);
-            }
-
-            return "success";
-        }
 
         public async Task<List<Transact>> getTransacts(int customerId)
         {
@@ -156,18 +92,43 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
+        public TransactVM()
+        { }
+        
         public TransactVM(Transact transact)
         {
-            Id = transact.Id;
-            Type = transact.Type;
-            CustomerId = transact.CustomerId;
-            Date = transact.Date;
-            Cost = transact.Cost;
+            initWithModel(transact);
         }
 
-        public TransactVM()
+        public override void Refresh()
         {
+            RaisePropertyChanged("Id");
+            RaisePropertyChanged("ParentId");
+            RaisePropertyChanged("CustomerId");
+            RaisePropertyChanged("Date");
+            RaisePropertyChanged("Cost");
+        }
 
+        public override void initWithModel(Transact model)
+        {
+            Id = model.Id;
+            ParentId = model.ParentId;
+            CustomerId = model.CustomerId;
+            Date = model.Date;
+            Cost = model.Cost;
+            Dirty = false;
+        }
+
+        public override Transact convert2Model()
+        {
+            Transact transact = new Transact();
+            transact.Id = Id;
+            transact.ParentId = ParentId;
+            transact.CustomerId = CustomerId;
+            transact.Date = Date;
+            transact.Cost = Cost;
+
+            return transact;
         }
     }
 }

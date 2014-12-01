@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class CustomersFrameVM : FrameVMBase
+    class CustomerListFrameVM : FrameVMBase
     {
         #region Properties
         private readonly ICommand findCustomersCmd;
@@ -66,8 +66,8 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion "Properties"
 
-        public CustomersFrameVM(Frame frame)
-            : base(frame)
+        public CustomerListFrameVM(Frame frame, FrameNavigation navigation)
+            : base(frame, navigation)
         {
             findCustomersCmd = new ICommandImp(findCustomers_execute);
             setCustomers();

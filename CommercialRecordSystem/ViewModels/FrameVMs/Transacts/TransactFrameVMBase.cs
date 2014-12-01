@@ -159,19 +159,23 @@ namespace CommercialRecordSystem.ViewModels.Transacts
         }
         #endregion
 
-        public TransactFrameVMBase(Frame frame, TransactVM transactInfo) :base(frame)
+        public TransactFrameVMBase(Frame frame, FrameNavigation navigation)
+            : base(frame, navigation)
         {
-            this.transactInfo = transactInfo;
-
             addEntryToListCmd = new ICommandImp(addEntryToListCmdHandler);
             goNextCmd = new ICommandImp(goNextCmdHandler);
-            deleteEntryCmd = new ICommandImp(deleteEntryCmdHandler);
+            deleteEntryCmd = new ICommandImp(deleteEntryCmdHandler); 
+            
+            if (navigation.Message is TransactVM)
+            {
+                transactInfo = (TransactVM)navigation.Message;
 
-            System.DateTime transactDateBuff = transactInfo.Date;
-            dateStr = transactDateBuff.ToString("dd.MM.yyyy");
-            selectedCustomer.get(transactInfo.CustomerId);
+                System.DateTime transactDateBuff = transactInfo.Date;
+                dateStr = transactDateBuff.ToString("dd.MM.yyyy");
+                selectedCustomer.get(transactInfo.CustomerId);
 
-            selectedCustomer.Name = UpperCaseFirst(selectedCustomer.Name) + " " + selectedCustomer.Surname.ToUpper();
+                selectedCustomer.Name = UpperCaseFirst(selectedCustomer.Name) + " " + selectedCustomer.Surname.ToUpper();
+            }
         }
 
         protected abstract Task setEntries();
