@@ -1,5 +1,6 @@
 ﻿using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models;
+using CommercialRecordSystem.Models.Transacts;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -8,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecordSystem.ViewModels.Transacts
 {
-    abstract class TransactFrameVMBase<E,T> : FrameVMBase where E : TransactEntryVMBase<T>, new() where T:ModelBase, new()
+    abstract class TransactFrameVMBase<E,T> : FrameVMBase where E : TransactEntryVMBase<T>, new() where T:TransactEntry, new()
     {
         #region Properties
         private readonly string dateStr = string.Empty;
@@ -107,6 +108,7 @@ namespace CommercialRecordSystem.ViewModels.Transacts
         #region Command Handlers
         protected virtual void addEntryToListCmdHandler(object parameter)
         {
+            EntryBuff.TransactId = transactInfo.Id;
             EntryBuff.save();
             Entries.Add(EntryBuff);
             EntryBuff = new E();
@@ -114,6 +116,10 @@ namespace CommercialRecordSystem.ViewModels.Transacts
             IsAllChecked = false;
         }
         protected abstract void goNextCmdHandler(object parameter);
+        protected override void goBackCmdHandler(object parameter)
+        {
+            Navigation.GoBack(transactInfo);
+        }
         private void deleteEntryCmdHandler(object parameter)
         {
             int checkedEntryCnt = 0;
@@ -176,8 +182,23 @@ namespace CommercialRecordSystem.ViewModels.Transacts
 
                 selectedCustomer.Name = UpperCaseFirst(selectedCustomer.Name) + " " + selectedCustomer.Surname.ToUpper();
             }
+
+            setEntries();
         }
 
-        protected abstract Task setEntries();
+        protected async Task setEntries()
+        {
+            var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
+            var saleEntryList = await db.Table<T>()
+                                .Where(e => transactInfo.Id == e.TransactId)
+                                .OrderBy(e => e.Id).ToListAsync();
+
+            foreach (T entry in saleEntryList)
+            {
+                E entryBuff = new E();
+                entryBuff.initWithModel(entry);
+                Entries.Add(entryBuff);
+            }
+        }
     }
 }

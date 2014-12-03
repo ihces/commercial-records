@@ -34,7 +34,7 @@ namespace CommercialRecordSystem.ViewModels
         public SaleFrameVM(Frame frame, FrameNavigation navigation)
             : base(frame, navigation)
         {
-            if (transactInfo != null && transactInfo.Type.Equals(Transact.TYPE.ORDER))
+            if (transactInfo.Type.Equals(Transact.TYPE.ORDER))
             {
                 header = "Sipariş";
             }
@@ -44,11 +44,6 @@ namespace CommercialRecordSystem.ViewModels
         {
             EntryBuff.Cost = EntryBuff.Amount * EntryBuff.UnitCost;
             base.addEntryToListCmdHandler(parameter);
-        }
-
-        protected override async Task setEntries()
-        {
-            Entries = await SaleEntryVM.getSaleEntries(SelectedCustomer.Id, transactInfo.Id);
         }
     }
 }

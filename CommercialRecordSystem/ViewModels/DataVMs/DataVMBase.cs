@@ -44,7 +44,8 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
                 }
                 else
                 {
-                    Id = db.Insert(entryBuff);
+                    db.Insert(entryBuff);
+                    Id = entryBuff.Id;
                 }
             }
 

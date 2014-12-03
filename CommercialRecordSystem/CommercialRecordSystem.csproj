@@ -118,6 +118,7 @@
     <Compile Include="Converters\PaymentType2StringConverter.cs" />
     <Compile Include="Converters\String2VisibilityConverter.cs" />
     <Compile Include="Models\ModelBase.cs" />
+    <Compile Include="Models\Transacts\TransactEntry.cs" />
     <Compile Include="Panels\CRSPanel.cs" />
     <Compile Include="Models\Customers\Customer.cs" />
     <Compile Include="Models\Goods\Firm.cs" />

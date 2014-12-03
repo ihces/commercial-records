@@ -86,7 +86,7 @@
                             <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold">Kredi Kartı</TextBlock>
                         </RadioButton>
                         <RadioButton Name="other" GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold">Kredi Kartı</TextBlock>
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold">Diğer</TextBlock>
                         </RadioButton>
                     </CSRPanels:CRSRadioButtonPanel>
                     <CSRControls:CRSTextBox Height="60" Input="{Binding Path=EntryBuff.Detail, Mode=TwoWay}" FontSize="18" ThemeBrush="#d74f2a" IconHex="&#xe206;" IconVisibility="at_Right" Multiline="True" InputType="ALL" EmptyMessage="Açıklama" Required="True" />

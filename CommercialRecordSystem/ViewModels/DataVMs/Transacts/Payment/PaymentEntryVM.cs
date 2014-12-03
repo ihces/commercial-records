@@ -46,26 +46,6 @@ namespace CommercialRecordSystem.ViewModels.Transacts.Payment
             IsChecked = false;
         }
         
-        #region Database Transactions
-        public async static Task<ObservableCollection<PaymentEntryVM>> getSaleEntries(int customerId, int transactId)
-        {
-            ObservableCollection<PaymentEntryVM> Entries = new ObservableCollection<PaymentEntryVM>();
-            var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-            var PaymentEntryList = await db.Table<PaymentEntry>()
-                                .Where(e => transactId == e.TransactId)
-                                .OrderBy(e => e.Id).ToListAsync();
-            
-            foreach (PaymentEntry entry in PaymentEntryList)
-            {
-                PaymentEntryVM entryBuff = new PaymentEntryVM(entry);
-                Entries.Add(entryBuff);
-            }
-
-            return Entries;
-        }
-        #endregion
-
-
         public override void initWithModel(PaymentEntry model)
         {
             Id = model.Id;
@@ -78,8 +58,7 @@ namespace CommercialRecordSystem.ViewModels.Transacts.Payment
         public override PaymentEntry convert2Model()
         {
             PaymentEntry model = new PaymentEntry();
-            if (Id > 0)
-                model.Id = Id;
+            model.Id = Id;
             model.TransactId = TransactId;
             model.Type = Type;
             model.Detail = Detail;

@@ -1,12 +1,10 @@
-﻿
-
-using CommercialRecordSystem.Models;
+﻿using CommercialRecordSystem.Models.Transacts;
 using CommercialRecordSystem.ViewModels.DataVMs;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 namespace CommercialRecordSystem.ViewModels.Transacts
 {
-    abstract class TransactEntryVMBase<E> : DataVMBase<E> where E: ModelBase, new()
+    abstract class TransactEntryVMBase<E> : DataVMBase<E> where E : TransactEntry, new()
     {
         #region Properties
         private int transactId = 0;
@@ -68,6 +66,24 @@ namespace CommercialRecordSystem.ViewModels.Transacts
 
         public TransactEntryVMBase()
         {
+        }
+
+        public static async Task<ObservableCollection<T>> getEntries<T>(int transactId) where T : TransactEntryVMBase<E>, new()
+        {
+            ObservableCollection<T> Entries = new ObservableCollection<T>();
+            var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
+            var saleEntryList = await db.Table<E>()
+                                .Where(e => transactId == e.TransactId)
+                                .OrderBy(e => e.Id).ToListAsync();
+
+            foreach (E entry in saleEntryList)
+            {
+                T entryBuff = new T();
+                entryBuff.initWithModel(entry);
+                Entries.Add(entryBuff);
+            }
+
+            return Entries;
         }
     }
 }

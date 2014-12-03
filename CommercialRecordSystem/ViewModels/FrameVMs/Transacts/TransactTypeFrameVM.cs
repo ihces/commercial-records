@@ -138,11 +138,13 @@ namespace CommercialRecordSystem.ViewModels
 
         private void startTransactionCmdHandler(object parameter)
         {
-            transactInfo.Date = selectedDate;
             if (CurrentCustomer.Type.Equals(Customer.TYPE.UNREGISTERED))
             {
-                transactInfo.CustomerId = CurrentCustomer.save();
+                CurrentCustomer.save();
             }
+
+            transactInfo.Date = selectedDate;
+            transactInfo.CustomerId = CurrentCustomer.Id;
 
             switch (SelectedTransactTypeIndex)
             { 
@@ -196,7 +198,8 @@ namespace CommercialRecordSystem.ViewModels
                     }
                 }
             }
-            transactInfo = new TransactVM();
+            else
+                transactInfo = new TransactVM();
         }
     }
 }

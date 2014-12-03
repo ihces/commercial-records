@@ -89,20 +89,22 @@ namespace CommercialRecordSystem.Common
             this.pageType = pageType;
         }
 
-        public virtual void GoBack()
+        public virtual void GoBack(object message = null)
         {
             if (CanGoBack)
             {
                 back.forward = this;
+                back.message = message;
                 pageFrame.Navigate(back.pageType, back);
             }
         }
 
-        public virtual void GoForward()
+        public virtual void GoForward(object message = null)
         {
             if (CanGoForward)
             {
                 forward.back = this;
+                forward.message = message;
                 pageFrame.Navigate(forward.pageType, forward);
             }
         }

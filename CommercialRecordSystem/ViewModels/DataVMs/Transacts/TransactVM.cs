@@ -9,19 +9,6 @@ namespace CommercialRecordSystem.ViewModels
     class TransactVM : DataVMBase<Transact>
     {
         #region Properties
-        private int parentId = 0;
-        public int ParentId
-        {
-            get
-            {
-                return parentId;
-            }
-            set
-            {
-                parentId = value;
-                RaisePropertyChanged("ParentId");
-            }
-        }
 
         private int customerId = 0;
         public int CustomerId
@@ -78,6 +65,20 @@ namespace CommercialRecordSystem.ViewModels
                 RaisePropertyChanged("Cost");
             }
         }
+
+        private double paid = 0.0f;
+        public double Paid
+        {
+            get
+            {
+                return paid;
+            }
+            set
+            {
+                paid = value;
+                RaisePropertyChanged("Paid");
+            }
+        }
         #endregion
 
         #region Database Transactions
@@ -103,19 +104,20 @@ namespace CommercialRecordSystem.ViewModels
         public override void Refresh()
         {
             RaisePropertyChanged("Id");
-            RaisePropertyChanged("ParentId");
+            RaisePropertyChanged("Type");
             RaisePropertyChanged("CustomerId");
             RaisePropertyChanged("Date");
             RaisePropertyChanged("Cost");
+            RaisePropertyChanged("Paid");
         }
 
         public override void initWithModel(Transact model)
         {
             Id = model.Id;
-            ParentId = model.ParentId;
             CustomerId = model.CustomerId;
             Date = model.Date;
             Cost = model.Cost;
+            Paid = model.Paid;
             Dirty = false;
         }
 
@@ -123,10 +125,11 @@ namespace CommercialRecordSystem.ViewModels
         {
             Transact transact = new Transact();
             transact.Id = Id;
-            transact.ParentId = ParentId;
+            transact.Type = Type;
             transact.CustomerId = CustomerId;
             transact.Date = Date;
             transact.Cost = Cost;
+            transact.Paid = Paid;
 
             return transact;
         }

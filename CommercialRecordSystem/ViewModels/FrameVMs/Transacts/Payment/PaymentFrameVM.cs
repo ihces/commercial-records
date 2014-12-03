@@ -24,10 +24,5 @@ namespace CommercialRecordSystem.ViewModels
             : base(frame, navigation)
         {
         }
-
-        protected override async Task setEntries()
-        {
-            Entries = await PaymentEntryVM.getSaleEntries(SelectedCustomer.Id, transactInfo.Id);
-        }
     }
 }

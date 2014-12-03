@@ -62,23 +62,6 @@ namespace CommercialRecordSystem.ViewModels
 
         }
 
-        public async static Task<ObservableCollection<SaleEntryVM>> getSaleEntries(int customerId, int transactId)
-        {
-            ObservableCollection<SaleEntryVM> Entries = new ObservableCollection<SaleEntryVM>();
-            var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-            var saleEntryList = await db.Table<SaleEntry>()
-                                .Where(e => transactId == e.TransactId)
-                                .OrderBy(e => e.Id).ToListAsync();
-            
-            foreach (SaleEntry entry in saleEntryList)
-            {
-                SaleEntryVM entryBuff = new SaleEntryVM(entry);
-                Entries.Add(entryBuff);
-            }
-
-            return Entries;
-        }
-
         public override void initWithModel(SaleEntry model)
         {
             Id = model.Id;
@@ -94,6 +77,8 @@ namespace CommercialRecordSystem.ViewModels
         public override SaleEntry convert2Model()
         {
             SaleEntry model = new SaleEntry();
+            model.Id = Id;
+            model.TransactId = TransactId;
             model.Amount = Amount;
             model.Measure = Measure;
             model.Detail = Detail;

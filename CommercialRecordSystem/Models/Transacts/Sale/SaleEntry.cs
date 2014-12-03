@@ -1,14 +1,11 @@
-﻿using System;
-using SQLite;
+﻿using CommercialRecordSystem.Models.Transacts;
 
 namespace CommercialRecordSystem.Models
 {
-    class SaleEntry : ModelBase
+    class SaleEntry : TransactEntry
     {
-        public int TransactId { get; set; }
         public double Amount{ get; set; }
         public int Measure{ get; set; }
-        public string Detail{ get; set; }
         public double UnitCost { get; set; }
         public double Cost { get; set; }
     }
