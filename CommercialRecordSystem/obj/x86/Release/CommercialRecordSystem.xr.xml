@@ -4,6 +4,9 @@
     <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
   </Roots.Interfaces>
   <Roots.PropertyPathNames>
+    <RootPropertyPathName Name="SaveCustomerCmd" />
+    <RootPropertyPathName Name="CurrentCustomer" />
+    <RootPropertyPathName Name="Dirty" />
     <RootPropertyPathName Name="SelectedCustomer" />
     <RootPropertyPathName Name="MobileNumber" />
     <RootPropertyPathName Name="PhoneNumber" />
@@ -13,12 +16,6 @@
     <RootPropertyPathName Name="SelectedDate" />
     <RootPropertyPathName Name="NavigationHelper" />
     <RootPropertyPathName Name="GoBackCommand" />
-    <RootPropertyPathName Name="SaveCustomerCmd" />
-    <RootPropertyPathName Name="DelCustomerCmd" />
-    <RootPropertyPathName Name="CurrentCustomer" />
-    <RootPropertyPathName Name="CapturePhotoFromCamCmd" />
-    <RootPropertyPathName Name="LoadPhotoViaFileBrowserCmd" />
-    <RootPropertyPathName Name="ProfileImgSource" />
     <RootPropertyPathName Name="Entries" />
     <RootPropertyPathName Name="Cost" />
     <RootPropertyPathName Name="UnitCost" />
@@ -28,6 +25,7 @@
     <RootPropertyPathName Name="EntryBuff" />
     <RootPropertyPathName Name="Measure" />
     <RootPropertyPathName Name="SaleDateStr" />
+    <RootPropertyPathName Name="ProfileImgSource" />
     <RootPropertyPathName Name="Customers" />
     <RootPropertyPathName Name="AccountCost" />
     <RootPropertyPathName Name="LastTransactDate" />
@@ -97,12 +95,13 @@
     </RootType>
     <RootType FullName="CommercialRecordSystem.Controls.CRSTextBox">
       <RootProperty Name="Height" />
+      <RootProperty Name="Input" />
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="IconHex" />
-      <RootProperty Name="Text" />
-      <RootProperty Name="Multiline" />
       <RootProperty Name="IconVisibility" />
       <RootProperty Name="EmptyMessage" />
+      <RootProperty Name="Multiline" />
+      <RootProperty Name="InputType" />
       <RootProperty Name="Required" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
@@ -115,9 +114,9 @@
     <RootType FullName="Windows.UI.Xaml.Controls.Border">
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Child" />
       <RootProperty Name="Background" />
+      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.TemplateBindingExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
@@ -158,7 +157,6 @@
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
     </RootType>
-    <RootType FullName="CommercialRecordSystem.Controls.CRSPanel" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Content" />
       <RootProperty Name="Resources" />
@@ -178,9 +176,11 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="Style" />
-      <RootProperty Name="Name" />
-      <RootProperty Name="Command" />
       <RootProperty Name="Height" />
+      <RootProperty Name="FontFamily" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Command" />
+      <RootProperty Name="Name" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RichEditBox">
@@ -197,7 +197,6 @@
       <RootProperty Name="Width" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Source" />
-      <RootProperty Name="Name" />
       <RootProperty Name="Height" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Margin" />
@@ -225,6 +224,22 @@
       <RootEvent Name="Tapped" />
     </RootType>
     <RootType FullName="CommercialRecordSystem.Views.GoodInfo" />
+    <RootType FullName="CommercialRecordSystem.Panels.CRSFormPanel">
+      <RootProperty Name="Children" />
+    </RootType>
+    <RootType FullName="CommercialRecordSystem.Controls.CSRButton">
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Command" />
+      <RootProperty Name="Validation" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="FontFamily" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="IsEnabled" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Path" />
       <RootProperty Name="Mode" />
@@ -261,14 +276,6 @@
       <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="CommercialRecordSystem.Payments" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Margin" />
-    </RootType>
-    <RootType FullName="CommercialRecordSystem.CustomerInfo" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>

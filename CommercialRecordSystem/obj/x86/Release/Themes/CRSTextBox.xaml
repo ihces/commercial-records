@@ -7,7 +7,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CSRControls:CRSTextBox" >
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="0,5,0,5">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -19,7 +19,7 @@
                                 Visibility="{TemplateBinding IconVisibility}"
                                 Width="60">
                                 <TextBlock FontFamily="Segoe UI Symbol"  
-                                           FontSize="40" 
+                                           FontSize="32" 
                                            FontWeight="SemiBold" 
                                            VerticalAlignment="Center" 
                                            HorizontalAlignment="Stretch" 

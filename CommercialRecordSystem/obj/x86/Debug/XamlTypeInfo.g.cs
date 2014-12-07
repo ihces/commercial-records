@@ -148,157 +148,169 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[74];
+            _typeNameTable = new string[80];
             _typeNameTable[0] = "CommercialRecordSystem.Converters.InvertBooleanConverter";
             _typeNameTable[1] = "Object";
-            _typeNameTable[2] = "CommercialRecordSystem.Controls.CRSTextBox";
-            _typeNameTable[3] = "Windows.UI.Xaml.Controls.Control";
-            _typeNameTable[4] = "CommercialRecordSystem.Controls.CRSTextBox.INPUTTYPES";
-            _typeNameTable[5] = "System.Enum";
-            _typeNameTable[6] = "System.ValueType";
-            _typeNameTable[7] = "Int32";
-            _typeNameTable[8] = "Boolean";
-            _typeNameTable[9] = "Windows.UI.Xaml.Visibility";
-            _typeNameTable[10] = "String";
-            _typeNameTable[11] = "Windows.UI.Xaml.Media.Brush";
-            _typeNameTable[12] = "CommercialRecordSystem.Views.FirmInfo";
-            _typeNameTable[13] = "Windows.UI.Xaml.Controls.Page";
-            _typeNameTable[14] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[15] = "CommercialRecordSystem.Views.GoodInfo";
-            _typeNameTable[16] = "CommercialRecordSystem.Panels.CRSRadioButtonPanel";
-            _typeNameTable[17] = "CommercialRecordSystem.Panels.CRSPanel";
-            _typeNameTable[18] = "Windows.UI.Xaml.Controls.Panel";
-            _typeNameTable[19] = "CommercialRecordSystem.Panels.CRSPanel.ORIENTATION";
-            _typeNameTable[20] = "System.Windows.Input.ICommand";
-            _typeNameTable[21] = "CommercialRecordSystem.Panels.CRSFormPanel";
-            _typeNameTable[22] = "CommercialRecordSystem.Controls.CSRButton";
-            _typeNameTable[23] = "Windows.UI.Xaml.Controls.Button";
-            _typeNameTable[24] = "Windows.UI.Xaml.Controls.ContentControl";
-            _typeNameTable[25] = "CommercialRecordSystem.TransactTypeSelector";
-            _typeNameTable[26] = "CommercialRecordSystem.Payments";
-            _typeNameTable[27] = "CommercialRecordSystem.CustomerInfo";
-            _typeNameTable[28] = "CommercialRecordSystem.Sales";
-            _typeNameTable[29] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart";
-            _typeNameTable[30] = "System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>";
-            _typeNameTable[31] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries";
-            _typeNameTable[32] = "System.Collections.ObjectModel.ObservableCollection`1<Object>";
-            _typeNameTable[33] = "System.Collections.ObjectModel.Collection`1<Object>";
-            _typeNameTable[34] = "System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>";
-            _typeNameTable[35] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis";
-            _typeNameTable[36] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.AxisOrientation";
-            _typeNameTable[37] = "System.Collections.ObjectModel.ObservableCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>";
-            _typeNameTable[38] = "System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>";
-            _typeNameTable[39] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener";
-            _typeNameTable[40] = "System.Collections.ObjectModel.ObservableCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>";
-            _typeNameTable[41] = "System.Collections.ObjectModel.ReadOnlyCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>";
-            _typeNameTable[42] = "Windows.UI.Xaml.Style";
-            _typeNameTable[43] = "System.Collections.ObjectModel.Collection`1<Windows.UI.Xaml.ResourceDictionary>";
-            _typeNameTable[44] = "Windows.UI.Xaml.ResourceDictionary";
-            _typeNameTable[45] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnSeries";
-            _typeNameTable[46] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>";
-            _typeNameTable[47] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSingleSeriesWithAxes";
-            _typeNameTable[48] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeriesWithAxes";
-            _typeNameTable[49] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries";
-            _typeNameTable[50] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.Series";
-            _typeNameTable[51] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis";
-            _typeNameTable[52] = "System.Nullable`1<Int32>";
-            _typeNameTable[53] = "Windows.UI.Xaml.Data.Binding";
-            _typeNameTable[54] = "System.Collections.IEnumerable";
-            _typeNameTable[55] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.AnimationSequence";
-            _typeNameTable[56] = "Windows.UI.Xaml.Media.Animation.EasingFunctionBase";
-            _typeNameTable[57] = "TimeSpan";
-            _typeNameTable[58] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeriesHost";
-            _typeNameTable[59] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries";
-            _typeNameTable[60] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>";
-            _typeNameTable[61] = "Windows.UI.Xaml.Media.PointCollection";
-            _typeNameTable[62] = "CommercialRecordSystem.CustomerAccount";
-            _typeNameTable[63] = "CommercialRecordSystem.Goods";
-            _typeNameTable[64] = "Microsoft.Xaml.Interactivity.Interaction";
-            _typeNameTable[65] = "Microsoft.Xaml.Interactivity.BehaviorCollection";
-            _typeNameTable[66] = "Windows.UI.Xaml.DependencyObjectCollection";
-            _typeNameTable[67] = "Windows.UI.Xaml.DependencyObject";
-            _typeNameTable[68] = "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior";
-            _typeNameTable[69] = "Microsoft.Xaml.Interactivity.ActionCollection";
-            _typeNameTable[70] = "Microsoft.Xaml.Interactions.Core.InvokeCommandAction";
-            _typeNameTable[71] = "Windows.UI.Xaml.Data.IValueConverter";
-            _typeNameTable[72] = "CommercialRecordSystem.Customers";
-            _typeNameTable[73] = "CommercialRecordSystem.MainPage";
+            _typeNameTable[2] = "CommercialRecordSystem.Converters.Double2MoneyConverter";
+            _typeNameTable[3] = "CommercialRecordSystem.Converters.Int2MeasureConverter";
+            _typeNameTable[4] = "CommercialRecordSystem.Converters.PaymentType2StringConverter";
+            _typeNameTable[5] = "CommercialRecordSystem.Converters.String2VisibilityConverter";
+            _typeNameTable[6] = "CommercialRecordSystem.Controls.CRSTextBox";
+            _typeNameTable[7] = "Windows.UI.Xaml.Controls.Control";
+            _typeNameTable[8] = "CommercialRecordSystem.Controls.CRSTextBox.INPUTTYPES";
+            _typeNameTable[9] = "System.Enum";
+            _typeNameTable[10] = "System.ValueType";
+            _typeNameTable[11] = "Int32";
+            _typeNameTable[12] = "Boolean";
+            _typeNameTable[13] = "Windows.UI.Xaml.Visibility";
+            _typeNameTable[14] = "String";
+            _typeNameTable[15] = "CommercialRecordSystem.Controls.CRSTextBox.IconVisibilities";
+            _typeNameTable[16] = "Windows.UI.Xaml.Media.Brush";
+            _typeNameTable[17] = "CommercialRecordSystem.Views.FirmInfo";
+            _typeNameTable[18] = "Windows.UI.Xaml.Controls.Page";
+            _typeNameTable[19] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[20] = "CommercialRecordSystem.Views.GoodInfo";
+            _typeNameTable[21] = "CommercialRecordSystem.Views.ViewBase";
+            _typeNameTable[22] = "CommercialRecordSystem.Panels.CRSRadioButtonPanel";
+            _typeNameTable[23] = "CommercialRecordSystem.Panels.CRSPanel";
+            _typeNameTable[24] = "Windows.UI.Xaml.Controls.Panel";
+            _typeNameTable[25] = "CommercialRecordSystem.Panels.CRSPanel.ORIENTATION";
+            _typeNameTable[26] = "System.Windows.Input.ICommand";
+            _typeNameTable[27] = "CommercialRecordSystem.Panels.CRSFormPanel";
+            _typeNameTable[28] = "CommercialRecordSystem.Controls.CSRButton";
+            _typeNameTable[29] = "Windows.UI.Xaml.Controls.Button";
+            _typeNameTable[30] = "Windows.UI.Xaml.Controls.ContentControl";
+            _typeNameTable[31] = "CommercialRecordSystem.Views.Transacts.TransactTypeSelector";
+            _typeNameTable[32] = "CommercialRecordSystem.Views.Transacts.Payments";
+            _typeNameTable[33] = "CommercialRecordSystem.Views.Customers.CustomerInfo";
+            _typeNameTable[34] = "CommercialRecordSystem.Views.Transacts.Sales";
+            _typeNameTable[35] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart";
+            _typeNameTable[36] = "System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>";
+            _typeNameTable[37] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries";
+            _typeNameTable[38] = "System.Collections.ObjectModel.ObservableCollection`1<Object>";
+            _typeNameTable[39] = "System.Collections.ObjectModel.Collection`1<Object>";
+            _typeNameTable[40] = "System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>";
+            _typeNameTable[41] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis";
+            _typeNameTable[42] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.AxisOrientation";
+            _typeNameTable[43] = "System.Collections.ObjectModel.ObservableCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>";
+            _typeNameTable[44] = "System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>";
+            _typeNameTable[45] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener";
+            _typeNameTable[46] = "System.Collections.ObjectModel.ObservableCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>";
+            _typeNameTable[47] = "System.Collections.ObjectModel.ReadOnlyCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>";
+            _typeNameTable[48] = "Windows.UI.Xaml.Style";
+            _typeNameTable[49] = "System.Collections.ObjectModel.Collection`1<Windows.UI.Xaml.ResourceDictionary>";
+            _typeNameTable[50] = "Windows.UI.Xaml.ResourceDictionary";
+            _typeNameTable[51] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnSeries";
+            _typeNameTable[52] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>";
+            _typeNameTable[53] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSingleSeriesWithAxes";
+            _typeNameTable[54] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeriesWithAxes";
+            _typeNameTable[55] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries";
+            _typeNameTable[56] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.Series";
+            _typeNameTable[57] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis";
+            _typeNameTable[58] = "System.Nullable`1<Int32>";
+            _typeNameTable[59] = "Windows.UI.Xaml.Data.Binding";
+            _typeNameTable[60] = "System.Collections.IEnumerable";
+            _typeNameTable[61] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.AnimationSequence";
+            _typeNameTable[62] = "Windows.UI.Xaml.Media.Animation.EasingFunctionBase";
+            _typeNameTable[63] = "TimeSpan";
+            _typeNameTable[64] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeriesHost";
+            _typeNameTable[65] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries";
+            _typeNameTable[66] = "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>";
+            _typeNameTable[67] = "Windows.UI.Xaml.Media.PointCollection";
+            _typeNameTable[68] = "CommercialRecordSystem.Views.Customers.CustomerAccount";
+            _typeNameTable[69] = "CommercialRecordSystem.Goods";
+            _typeNameTable[70] = "Microsoft.Xaml.Interactivity.Interaction";
+            _typeNameTable[71] = "Microsoft.Xaml.Interactivity.BehaviorCollection";
+            _typeNameTable[72] = "Windows.UI.Xaml.DependencyObjectCollection";
+            _typeNameTable[73] = "Windows.UI.Xaml.DependencyObject";
+            _typeNameTable[74] = "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior";
+            _typeNameTable[75] = "Microsoft.Xaml.Interactivity.ActionCollection";
+            _typeNameTable[76] = "Microsoft.Xaml.Interactions.Core.InvokeCommandAction";
+            _typeNameTable[77] = "Windows.UI.Xaml.Data.IValueConverter";
+            _typeNameTable[78] = "CommercialRecordSystem.Views.Customers.CustomerList";
+            _typeNameTable[79] = "CommercialRecordSystem.MainPage";
 
-            _typeTable = new global::System.Type[74];
+            _typeTable = new global::System.Type[80];
             _typeTable[0] = typeof(global::CommercialRecordSystem.Converters.InvertBooleanConverter);
             _typeTable[1] = typeof(global::System.Object);
-            _typeTable[2] = typeof(global::CommercialRecordSystem.Controls.CRSTextBox);
-            _typeTable[3] = typeof(global::Windows.UI.Xaml.Controls.Control);
-            _typeTable[4] = typeof(global::CommercialRecordSystem.Controls.CRSTextBox.INPUTTYPES);
-            _typeTable[5] = typeof(global::System.Enum);
-            _typeTable[6] = typeof(global::System.ValueType);
-            _typeTable[7] = typeof(global::System.Int32);
-            _typeTable[8] = typeof(global::System.Boolean);
-            _typeTable[9] = typeof(global::Windows.UI.Xaml.Visibility);
-            _typeTable[10] = typeof(global::System.String);
-            _typeTable[11] = typeof(global::Windows.UI.Xaml.Media.Brush);
-            _typeTable[12] = typeof(global::CommercialRecordSystem.Views.FirmInfo);
-            _typeTable[13] = typeof(global::Windows.UI.Xaml.Controls.Page);
-            _typeTable[14] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[15] = typeof(global::CommercialRecordSystem.Views.GoodInfo);
-            _typeTable[16] = typeof(global::CommercialRecordSystem.Panels.CRSRadioButtonPanel);
-            _typeTable[17] = typeof(global::CommercialRecordSystem.Panels.CRSPanel);
-            _typeTable[18] = typeof(global::Windows.UI.Xaml.Controls.Panel);
-            _typeTable[19] = typeof(global::CommercialRecordSystem.Panels.CRSPanel.ORIENTATION);
-            _typeTable[20] = typeof(global::System.Windows.Input.ICommand);
-            _typeTable[21] = typeof(global::CommercialRecordSystem.Panels.CRSFormPanel);
-            _typeTable[22] = typeof(global::CommercialRecordSystem.Controls.CSRButton);
-            _typeTable[23] = typeof(global::Windows.UI.Xaml.Controls.Button);
-            _typeTable[24] = typeof(global::Windows.UI.Xaml.Controls.ContentControl);
-            _typeTable[25] = typeof(global::CommercialRecordSystem.TransactTypeSelector);
-            _typeTable[26] = typeof(global::CommercialRecordSystem.Payments);
-            _typeTable[27] = typeof(global::CommercialRecordSystem.CustomerInfo);
-            _typeTable[28] = typeof(global::CommercialRecordSystem.Sales);
-            _typeTable[29] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart);
-            _typeTable[30] = typeof(global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>);
-            _typeTable[31] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries);
-            _typeTable[32] = typeof(global::System.Collections.ObjectModel.ObservableCollection<global::System.Object>);
-            _typeTable[33] = typeof(global::System.Collections.ObjectModel.Collection<global::System.Object>);
-            _typeTable[34] = typeof(global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>);
-            _typeTable[35] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis);
-            _typeTable[36] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.AxisOrientation);
-            _typeTable[37] = typeof(global::System.Collections.ObjectModel.ObservableCollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>);
-            _typeTable[38] = typeof(global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>);
-            _typeTable[39] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener);
-            _typeTable[40] = typeof(global::System.Collections.ObjectModel.ObservableCollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>);
-            _typeTable[41] = typeof(global::System.Collections.ObjectModel.ReadOnlyCollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>);
-            _typeTable[42] = typeof(global::Windows.UI.Xaml.Style);
-            _typeTable[43] = typeof(global::System.Collections.ObjectModel.Collection<global::Windows.UI.Xaml.ResourceDictionary>);
-            _typeTable[44] = typeof(global::Windows.UI.Xaml.ResourceDictionary);
-            _typeTable[45] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnSeries);
-            _typeTable[46] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>);
-            _typeTable[47] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSingleSeriesWithAxes);
-            _typeTable[48] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeriesWithAxes);
-            _typeTable[49] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries);
-            _typeTable[50] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Series);
-            _typeTable[51] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis);
-            _typeTable[52] = typeof(global::System.Nullable<global::System.Int32>);
-            _typeTable[53] = typeof(global::Windows.UI.Xaml.Data.Binding);
-            _typeTable[54] = typeof(global::System.Collections.IEnumerable);
-            _typeTable[55] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.AnimationSequence);
-            _typeTable[56] = typeof(global::Windows.UI.Xaml.Media.Animation.EasingFunctionBase);
-            _typeTable[57] = typeof(global::System.TimeSpan);
-            _typeTable[58] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeriesHost);
-            _typeTable[59] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries);
-            _typeTable[60] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>);
-            _typeTable[61] = typeof(global::Windows.UI.Xaml.Media.PointCollection);
-            _typeTable[62] = typeof(global::CommercialRecordSystem.CustomerAccount);
-            _typeTable[63] = typeof(global::CommercialRecordSystem.Goods);
-            _typeTable[64] = typeof(global::Microsoft.Xaml.Interactivity.Interaction);
-            _typeTable[65] = typeof(global::Microsoft.Xaml.Interactivity.BehaviorCollection);
-            _typeTable[66] = typeof(global::Windows.UI.Xaml.DependencyObjectCollection);
-            _typeTable[67] = typeof(global::Windows.UI.Xaml.DependencyObject);
-            _typeTable[68] = typeof(global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior);
-            _typeTable[69] = typeof(global::Microsoft.Xaml.Interactivity.ActionCollection);
-            _typeTable[70] = typeof(global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction);
-            _typeTable[71] = typeof(global::Windows.UI.Xaml.Data.IValueConverter);
-            _typeTable[72] = typeof(global::CommercialRecordSystem.Customers);
-            _typeTable[73] = typeof(global::CommercialRecordSystem.MainPage);
+            _typeTable[2] = typeof(global::CommercialRecordSystem.Converters.Double2MoneyConverter);
+            _typeTable[3] = typeof(global::CommercialRecordSystem.Converters.Int2MeasureConverter);
+            _typeTable[4] = typeof(global::CommercialRecordSystem.Converters.PaymentType2StringConverter);
+            _typeTable[5] = typeof(global::CommercialRecordSystem.Converters.String2VisibilityConverter);
+            _typeTable[6] = typeof(global::CommercialRecordSystem.Controls.CRSTextBox);
+            _typeTable[7] = typeof(global::Windows.UI.Xaml.Controls.Control);
+            _typeTable[8] = typeof(global::CommercialRecordSystem.Controls.CRSTextBox.INPUTTYPES);
+            _typeTable[9] = typeof(global::System.Enum);
+            _typeTable[10] = typeof(global::System.ValueType);
+            _typeTable[11] = typeof(global::System.Int32);
+            _typeTable[12] = typeof(global::System.Boolean);
+            _typeTable[13] = typeof(global::Windows.UI.Xaml.Visibility);
+            _typeTable[14] = typeof(global::System.String);
+            _typeTable[15] = typeof(global::CommercialRecordSystem.Controls.CRSTextBox.IconVisibilities);
+            _typeTable[16] = typeof(global::Windows.UI.Xaml.Media.Brush);
+            _typeTable[17] = typeof(global::CommercialRecordSystem.Views.FirmInfo);
+            _typeTable[18] = typeof(global::Windows.UI.Xaml.Controls.Page);
+            _typeTable[19] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[20] = typeof(global::CommercialRecordSystem.Views.GoodInfo);
+            _typeTable[21] = typeof(global::CommercialRecordSystem.Views.ViewBase);
+            _typeTable[22] = typeof(global::CommercialRecordSystem.Panels.CRSRadioButtonPanel);
+            _typeTable[23] = typeof(global::CommercialRecordSystem.Panels.CRSPanel);
+            _typeTable[24] = typeof(global::Windows.UI.Xaml.Controls.Panel);
+            _typeTable[25] = typeof(global::CommercialRecordSystem.Panels.CRSPanel.ORIENTATION);
+            _typeTable[26] = typeof(global::System.Windows.Input.ICommand);
+            _typeTable[27] = typeof(global::CommercialRecordSystem.Panels.CRSFormPanel);
+            _typeTable[28] = typeof(global::CommercialRecordSystem.Controls.CSRButton);
+            _typeTable[29] = typeof(global::Windows.UI.Xaml.Controls.Button);
+            _typeTable[30] = typeof(global::Windows.UI.Xaml.Controls.ContentControl);
+            _typeTable[31] = typeof(global::CommercialRecordSystem.Views.Transacts.TransactTypeSelector);
+            _typeTable[32] = typeof(global::CommercialRecordSystem.Views.Transacts.Payments);
+            _typeTable[33] = typeof(global::CommercialRecordSystem.Views.Customers.CustomerInfo);
+            _typeTable[34] = typeof(global::CommercialRecordSystem.Views.Transacts.Sales);
+            _typeTable[35] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart);
+            _typeTable[36] = typeof(global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>);
+            _typeTable[37] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries);
+            _typeTable[38] = typeof(global::System.Collections.ObjectModel.ObservableCollection<global::System.Object>);
+            _typeTable[39] = typeof(global::System.Collections.ObjectModel.Collection<global::System.Object>);
+            _typeTable[40] = typeof(global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>);
+            _typeTable[41] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis);
+            _typeTable[42] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.AxisOrientation);
+            _typeTable[43] = typeof(global::System.Collections.ObjectModel.ObservableCollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>);
+            _typeTable[44] = typeof(global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>);
+            _typeTable[45] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener);
+            _typeTable[46] = typeof(global::System.Collections.ObjectModel.ObservableCollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>);
+            _typeTable[47] = typeof(global::System.Collections.ObjectModel.ReadOnlyCollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>);
+            _typeTable[48] = typeof(global::Windows.UI.Xaml.Style);
+            _typeTable[49] = typeof(global::System.Collections.ObjectModel.Collection<global::Windows.UI.Xaml.ResourceDictionary>);
+            _typeTable[50] = typeof(global::Windows.UI.Xaml.ResourceDictionary);
+            _typeTable[51] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnSeries);
+            _typeTable[52] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>);
+            _typeTable[53] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSingleSeriesWithAxes);
+            _typeTable[54] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeriesWithAxes);
+            _typeTable[55] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries);
+            _typeTable[56] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Series);
+            _typeTable[57] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis);
+            _typeTable[58] = typeof(global::System.Nullable<global::System.Int32>);
+            _typeTable[59] = typeof(global::Windows.UI.Xaml.Data.Binding);
+            _typeTable[60] = typeof(global::System.Collections.IEnumerable);
+            _typeTable[61] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.AnimationSequence);
+            _typeTable[62] = typeof(global::Windows.UI.Xaml.Media.Animation.EasingFunctionBase);
+            _typeTable[63] = typeof(global::System.TimeSpan);
+            _typeTable[64] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeriesHost);
+            _typeTable[65] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries);
+            _typeTable[66] = typeof(global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>);
+            _typeTable[67] = typeof(global::Windows.UI.Xaml.Media.PointCollection);
+            _typeTable[68] = typeof(global::CommercialRecordSystem.Views.Customers.CustomerAccount);
+            _typeTable[69] = typeof(global::CommercialRecordSystem.Goods);
+            _typeTable[70] = typeof(global::Microsoft.Xaml.Interactivity.Interaction);
+            _typeTable[71] = typeof(global::Microsoft.Xaml.Interactivity.BehaviorCollection);
+            _typeTable[72] = typeof(global::Windows.UI.Xaml.DependencyObjectCollection);
+            _typeTable[73] = typeof(global::Windows.UI.Xaml.DependencyObject);
+            _typeTable[74] = typeof(global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior);
+            _typeTable[75] = typeof(global::Microsoft.Xaml.Interactivity.ActionCollection);
+            _typeTable[76] = typeof(global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction);
+            _typeTable[77] = typeof(global::Windows.UI.Xaml.Data.IValueConverter);
+            _typeTable[78] = typeof(global::CommercialRecordSystem.Views.Customers.CustomerList);
+            _typeTable[79] = typeof(global::CommercialRecordSystem.MainPage);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -334,97 +346,101 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
         }
 
         private object Activate_0_InvertBooleanConverter() { return new global::CommercialRecordSystem.Converters.InvertBooleanConverter(); }
-        private object Activate_2_CRSTextBox() { return new global::CommercialRecordSystem.Controls.CRSTextBox(); }
-        private object Activate_12_FirmInfo() { return new global::CommercialRecordSystem.Views.FirmInfo(); }
-        private object Activate_15_GoodInfo() { return new global::CommercialRecordSystem.Views.GoodInfo(); }
-        private object Activate_16_CRSRadioButtonPanel() { return new global::CommercialRecordSystem.Panels.CRSRadioButtonPanel(); }
-        private object Activate_17_CRSPanel() { return new global::CommercialRecordSystem.Panels.CRSPanel(); }
-        private object Activate_21_CRSFormPanel() { return new global::CommercialRecordSystem.Panels.CRSFormPanel(); }
-        private object Activate_22_CSRButton() { return new global::CommercialRecordSystem.Controls.CSRButton(); }
-        private object Activate_25_TransactTypeSelector() { return new global::CommercialRecordSystem.TransactTypeSelector(); }
-        private object Activate_26_Payments() { return new global::CommercialRecordSystem.Payments(); }
-        private object Activate_27_CustomerInfo() { return new global::CommercialRecordSystem.CustomerInfo(); }
-        private object Activate_28_Sales() { return new global::CommercialRecordSystem.Sales(); }
-        private object Activate_29_Chart() { return new global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart(); }
-        private object Activate_30_Collection() { return new global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>(); }
-        private object Activate_32_ObservableCollection() { return new global::System.Collections.ObjectModel.ObservableCollection<global::System.Object>(); }
-        private object Activate_33_Collection() { return new global::System.Collections.ObjectModel.Collection<global::System.Object>(); }
-        private object Activate_34_Collection() { return new global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>(); }
-        private object Activate_37_ObservableCollection() { return new global::System.Collections.ObjectModel.ObservableCollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>(); }
-        private object Activate_38_Collection() { return new global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>(); }
-        private object Activate_40_ObservableCollection() { return new global::System.Collections.ObjectModel.ObservableCollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>(); }
-        private object Activate_43_Collection() { return new global::System.Collections.ObjectModel.Collection<global::Windows.UI.Xaml.ResourceDictionary>(); }
-        private object Activate_45_ColumnSeries() { return new global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnSeries(); }
-        private object Activate_59_LineSeries() { return new global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries(); }
-        private object Activate_62_CustomerAccount() { return new global::CommercialRecordSystem.CustomerAccount(); }
-        private object Activate_63_Goods() { return new global::CommercialRecordSystem.Goods(); }
-        private object Activate_65_BehaviorCollection() { return new global::Microsoft.Xaml.Interactivity.BehaviorCollection(); }
-        private object Activate_68_EventTriggerBehavior() { return new global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior(); }
-        private object Activate_69_ActionCollection() { return new global::Microsoft.Xaml.Interactivity.ActionCollection(); }
-        private object Activate_70_InvokeCommandAction() { return new global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction(); }
-        private object Activate_72_Customers() { return new global::CommercialRecordSystem.Customers(); }
-        private object Activate_73_MainPage() { return new global::CommercialRecordSystem.MainPage(); }
-        private void VectorAdd_30_Collection(object instance, object item)
+        private object Activate_2_Double2MoneyConverter() { return new global::CommercialRecordSystem.Converters.Double2MoneyConverter(); }
+        private object Activate_3_Int2MeasureConverter() { return new global::CommercialRecordSystem.Converters.Int2MeasureConverter(); }
+        private object Activate_4_PaymentType2StringConverter() { return new global::CommercialRecordSystem.Converters.PaymentType2StringConverter(); }
+        private object Activate_5_String2VisibilityConverter() { return new global::CommercialRecordSystem.Converters.String2VisibilityConverter(); }
+        private object Activate_6_CRSTextBox() { return new global::CommercialRecordSystem.Controls.CRSTextBox(); }
+        private object Activate_17_FirmInfo() { return new global::CommercialRecordSystem.Views.FirmInfo(); }
+        private object Activate_20_GoodInfo() { return new global::CommercialRecordSystem.Views.GoodInfo(); }
+        private object Activate_22_CRSRadioButtonPanel() { return new global::CommercialRecordSystem.Panels.CRSRadioButtonPanel(); }
+        private object Activate_23_CRSPanel() { return new global::CommercialRecordSystem.Panels.CRSPanel(); }
+        private object Activate_27_CRSFormPanel() { return new global::CommercialRecordSystem.Panels.CRSFormPanel(); }
+        private object Activate_28_CSRButton() { return new global::CommercialRecordSystem.Controls.CSRButton(); }
+        private object Activate_31_TransactTypeSelector() { return new global::CommercialRecordSystem.Views.Transacts.TransactTypeSelector(); }
+        private object Activate_32_Payments() { return new global::CommercialRecordSystem.Views.Transacts.Payments(); }
+        private object Activate_33_CustomerInfo() { return new global::CommercialRecordSystem.Views.Customers.CustomerInfo(); }
+        private object Activate_34_Sales() { return new global::CommercialRecordSystem.Views.Transacts.Sales(); }
+        private object Activate_35_Chart() { return new global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart(); }
+        private object Activate_36_Collection() { return new global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>(); }
+        private object Activate_38_ObservableCollection() { return new global::System.Collections.ObjectModel.ObservableCollection<global::System.Object>(); }
+        private object Activate_39_Collection() { return new global::System.Collections.ObjectModel.Collection<global::System.Object>(); }
+        private object Activate_40_Collection() { return new global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>(); }
+        private object Activate_43_ObservableCollection() { return new global::System.Collections.ObjectModel.ObservableCollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>(); }
+        private object Activate_44_Collection() { return new global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>(); }
+        private object Activate_46_ObservableCollection() { return new global::System.Collections.ObjectModel.ObservableCollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>(); }
+        private object Activate_49_Collection() { return new global::System.Collections.ObjectModel.Collection<global::Windows.UI.Xaml.ResourceDictionary>(); }
+        private object Activate_51_ColumnSeries() { return new global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnSeries(); }
+        private object Activate_65_LineSeries() { return new global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries(); }
+        private object Activate_68_CustomerAccount() { return new global::CommercialRecordSystem.Views.Customers.CustomerAccount(); }
+        private object Activate_69_Goods() { return new global::CommercialRecordSystem.Goods(); }
+        private object Activate_71_BehaviorCollection() { return new global::Microsoft.Xaml.Interactivity.BehaviorCollection(); }
+        private object Activate_74_EventTriggerBehavior() { return new global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior(); }
+        private object Activate_75_ActionCollection() { return new global::Microsoft.Xaml.Interactivity.ActionCollection(); }
+        private object Activate_76_InvokeCommandAction() { return new global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction(); }
+        private object Activate_78_CustomerList() { return new global::CommercialRecordSystem.Views.Customers.CustomerList(); }
+        private object Activate_79_MainPage() { return new global::CommercialRecordSystem.MainPage(); }
+        private void VectorAdd_36_Collection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>)instance;
             var newItem = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_32_ObservableCollection(object instance, object item)
+        private void VectorAdd_38_ObservableCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::System.Object>)instance;
             var newItem = (global::System.Object)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_33_Collection(object instance, object item)
+        private void VectorAdd_39_Collection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::System.Object>)instance;
             var newItem = (global::System.Object)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_34_Collection(object instance, object item)
+        private void VectorAdd_40_Collection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>)instance;
             var newItem = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_37_ObservableCollection(object instance, object item)
+        private void VectorAdd_43_ObservableCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>)instance;
             var newItem = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_38_Collection(object instance, object item)
+        private void VectorAdd_44_Collection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>)instance;
             var newItem = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_40_ObservableCollection(object instance, object item)
+        private void VectorAdd_46_ObservableCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>)instance;
             var newItem = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_41_ReadOnlyCollection(object instance, object item)
+        private void VectorAdd_47_ReadOnlyCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>)instance;
             var newItem = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_43_Collection(object instance, object item)
+        private void VectorAdd_49_Collection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Windows.UI.Xaml.ResourceDictionary>)instance;
             var newItem = (global::Windows.UI.Xaml.ResourceDictionary)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_65_BehaviorCollection(object instance, object item)
+        private void VectorAdd_71_BehaviorCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Windows.UI.Xaml.DependencyObject>)instance;
             var newItem = (global::Windows.UI.Xaml.DependencyObject)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_69_ActionCollection(object instance, object item)
+        private void VectorAdd_75_ActionCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Windows.UI.Xaml.DependencyObject>)instance;
             var newItem = (global::Windows.UI.Xaml.DependencyObject)item;
@@ -452,10 +468,39 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 2:   //  CommercialRecordSystem.Controls.CRSTextBox
+            case 2:   //  CommercialRecordSystem.Converters.Double2MoneyConverter
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_2_Double2MoneyConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 3:   //  CommercialRecordSystem.Converters.Int2MeasureConverter
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_3_Int2MeasureConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 4:   //  CommercialRecordSystem.Converters.PaymentType2StringConverter
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_4_PaymentType2StringConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 5:   //  CommercialRecordSystem.Converters.String2VisibilityConverter
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_5_String2VisibilityConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 6:   //  CommercialRecordSystem.Controls.CRSTextBox
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Control"));
-                userType.Activator = Activate_2_CRSTextBox;
+                userType.Activator = Activate_6_CRSTextBox;
                 userType.AddMemberName("InputType");
+                userType.AddMemberName("InputMaxLength");
                 userType.AddMemberName("MaxSize");
                 userType.AddMemberName("ReadOnly");
                 userType.AddMemberName("Required");
@@ -471,11 +516,11 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 3:   //  Windows.UI.Xaml.Controls.Control
+            case 7:   //  Windows.UI.Xaml.Controls.Control
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 4:   //  CommercialRecordSystem.Controls.CRSTextBox.INPUTTYPES
+            case 8:   //  CommercialRecordSystem.Controls.CRSTextBox.INPUTTYPES
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
                 userType.AddEnumValue("ALL", global::CommercialRecordSystem.Controls.CRSTextBox.INPUTTYPES.ALL);
                 userType.AddEnumValue("NAME", global::CommercialRecordSystem.Controls.CRSTextBox.INPUTTYPES.NAME);
@@ -487,81 +532,96 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 5:   //  System.Enum
+            case 9:   //  System.Enum
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
                 xamlType = userType;
                 break;
 
-            case 6:   //  System.ValueType
+            case 10:   //  System.ValueType
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 xamlType = userType;
                 break;
 
-            case 7:   //  Int32
+            case 11:   //  Int32
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 8:   //  Boolean
+            case 12:   //  Boolean
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 9:   //  Windows.UI.Xaml.Visibility
+            case 13:   //  Windows.UI.Xaml.Visibility
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 10:   //  String
+            case 14:   //  String
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 11:   //  Windows.UI.Xaml.Media.Brush
-                xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 12:   //  CommercialRecordSystem.Views.FirmInfo
-                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_12_FirmInfo;
+            case 15:   //  CommercialRecordSystem.Controls.CRSTextBox.IconVisibilities
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
+                userType.AddEnumValue("at_Right", global::CommercialRecordSystem.Controls.CRSTextBox.IconVisibilities.at_Right);
+                userType.AddEnumValue("at_Left", global::CommercialRecordSystem.Controls.CRSTextBox.IconVisibilities.at_Left);
+                userType.AddEnumValue("Collapsed", global::CommercialRecordSystem.Controls.CRSTextBox.IconVisibilities.Collapsed);
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 13:   //  Windows.UI.Xaml.Controls.Page
+            case 16:   //  Windows.UI.Xaml.Media.Brush
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 14:   //  Windows.UI.Xaml.Controls.UserControl
-                xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 15:   //  CommercialRecordSystem.Views.GoodInfo
+            case 17:   //  CommercialRecordSystem.Views.FirmInfo
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_15_GoodInfo;
+                userType.Activator = Activate_17_FirmInfo;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 16:   //  CommercialRecordSystem.Panels.CRSRadioButtonPanel
+            case 18:   //  Windows.UI.Xaml.Controls.Page
+                xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 19:   //  Windows.UI.Xaml.Controls.UserControl
+                xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 20:   //  CommercialRecordSystem.Views.GoodInfo
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_20_GoodInfo;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 21:   //  CommercialRecordSystem.Views.ViewBase
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 22:   //  CommercialRecordSystem.Panels.CRSRadioButtonPanel
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CommercialRecordSystem.Panels.CRSPanel"));
-                userType.Activator = Activate_16_CRSRadioButtonPanel;
+                userType.Activator = Activate_22_CRSRadioButtonPanel;
                 userType.AddMemberName("CheckedIndex");
                 userType.AddMemberName("CheckedCommand");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 17:   //  CommercialRecordSystem.Panels.CRSPanel
+            case 23:   //  CommercialRecordSystem.Panels.CRSPanel
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Panel"));
-                userType.Activator = Activate_17_CRSPanel;
+                userType.Activator = Activate_23_CRSPanel;
                 userType.AddMemberName("GapSize");
                 userType.AddMemberName("Orientation");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 18:   //  Windows.UI.Xaml.Controls.Panel
+            case 24:   //  Windows.UI.Xaml.Controls.Panel
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 19:   //  CommercialRecordSystem.Panels.CRSPanel.ORIENTATION
+            case 25:   //  CommercialRecordSystem.Panels.CRSPanel.ORIENTATION
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
                 userType.AddEnumValue("Vertical", global::CommercialRecordSystem.Panels.CRSPanel.ORIENTATION.Vertical);
                 userType.AddEnumValue("Horizontal", global::CommercialRecordSystem.Panels.CRSPanel.ORIENTATION.Horizontal);
@@ -569,67 +629,67 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 20:   //  System.Windows.Input.ICommand
+            case 26:   //  System.Windows.Input.ICommand
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, null);
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 21:   //  CommercialRecordSystem.Panels.CRSFormPanel
+            case 27:   //  CommercialRecordSystem.Panels.CRSFormPanel
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CommercialRecordSystem.Panels.CRSPanel"));
-                userType.Activator = Activate_21_CRSFormPanel;
+                userType.Activator = Activate_27_CRSFormPanel;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 22:   //  CommercialRecordSystem.Controls.CSRButton
+            case 28:   //  CommercialRecordSystem.Controls.CSRButton
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Button"));
-                userType.Activator = Activate_22_CSRButton;
+                userType.Activator = Activate_28_CSRButton;
                 userType.AddMemberName("Validation");
                 userType.AddMemberName("Disabled");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 23:   //  Windows.UI.Xaml.Controls.Button
+            case 29:   //  Windows.UI.Xaml.Controls.Button
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 24:   //  Windows.UI.Xaml.Controls.ContentControl
+            case 30:   //  Windows.UI.Xaml.Controls.ContentControl
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 25:   //  CommercialRecordSystem.TransactTypeSelector
-                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_25_TransactTypeSelector;
+            case 31:   //  CommercialRecordSystem.Views.Transacts.TransactTypeSelector
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CommercialRecordSystem.Views.ViewBase"));
+                userType.Activator = Activate_31_TransactTypeSelector;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 26:   //  CommercialRecordSystem.Payments
-                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_26_Payments;
+            case 32:   //  CommercialRecordSystem.Views.Transacts.Payments
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CommercialRecordSystem.Views.ViewBase"));
+                userType.Activator = Activate_32_Payments;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 27:   //  CommercialRecordSystem.CustomerInfo
-                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_27_CustomerInfo;
+            case 33:   //  CommercialRecordSystem.Views.Customers.CustomerInfo
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CommercialRecordSystem.Views.ViewBase"));
+                userType.Activator = Activate_33_CustomerInfo;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 28:   //  CommercialRecordSystem.Sales
-                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_28_Sales;
+            case 34:   //  CommercialRecordSystem.Views.Transacts.Sales
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CommercialRecordSystem.Views.ViewBase"));
+                userType.Activator = Activate_34_Sales;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 29:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart
+            case 35:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Control"));
-                userType.Activator = Activate_29_Chart;
+                userType.Activator = Activate_35_Chart;
                 userType.SetContentPropertyName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.Series");
                 userType.AddMemberName("Series");
                 userType.AddMemberName("Axes");
@@ -645,41 +705,41 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 30:   //  System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>
+            case 36:   //  System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.CollectionAdd = VectorAdd_30_Collection;
+                userType.CollectionAdd = VectorAdd_36_Collection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 31:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries
+            case 37:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, null);
                 userType.AddMemberName("LegendItems");
                 xamlType = userType;
                 break;
 
-            case 32:   //  System.Collections.ObjectModel.ObservableCollection`1<Object>
+            case 38:   //  System.Collections.ObjectModel.ObservableCollection`1<Object>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Collections.ObjectModel.Collection`1<Object>"));
-                userType.CollectionAdd = VectorAdd_32_ObservableCollection;
+                userType.CollectionAdd = VectorAdd_38_ObservableCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 33:   //  System.Collections.ObjectModel.Collection`1<Object>
+            case 39:   //  System.Collections.ObjectModel.Collection`1<Object>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_33_Collection;
-                userType.CollectionAdd = VectorAdd_33_Collection;
+                userType.Activator = Activate_39_Collection;
+                userType.CollectionAdd = VectorAdd_39_Collection;
                 xamlType = userType;
                 break;
 
-            case 34:   //  System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>
+            case 40:   //  System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_34_Collection;
-                userType.CollectionAdd = VectorAdd_34_Collection;
+                userType.Activator = Activate_40_Collection;
+                userType.CollectionAdd = VectorAdd_40_Collection;
                 xamlType = userType;
                 break;
 
-            case 35:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis
+            case 41:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, null);
                 userType.AddMemberName("Orientation");
                 userType.AddMemberName("RegisteredListeners");
@@ -687,7 +747,7 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 36:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.AxisOrientation
+            case 42:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.AxisOrientation
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
                 userType.AddEnumValue("None", global::WinRTXamlToolkit.Controls.DataVisualization.Charting.AxisOrientation.None);
                 userType.AddEnumValue("X", global::WinRTXamlToolkit.Controls.DataVisualization.Charting.AxisOrientation.X);
@@ -695,61 +755,61 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 37:   //  System.Collections.ObjectModel.ObservableCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>
+            case 43:   //  System.Collections.ObjectModel.ObservableCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>"));
-                userType.CollectionAdd = VectorAdd_37_ObservableCollection;
+                userType.CollectionAdd = VectorAdd_43_ObservableCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 38:   //  System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>
+            case 44:   //  System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_38_Collection;
-                userType.CollectionAdd = VectorAdd_38_Collection;
+                userType.Activator = Activate_44_Collection;
+                userType.CollectionAdd = VectorAdd_44_Collection;
                 xamlType = userType;
                 break;
 
-            case 39:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener
+            case 45:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, null);
                 xamlType = userType;
                 break;
 
-            case 40:   //  System.Collections.ObjectModel.ObservableCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>
+            case 46:   //  System.Collections.ObjectModel.ObservableCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>"));
-                userType.CollectionAdd = VectorAdd_40_ObservableCollection;
+                userType.CollectionAdd = VectorAdd_46_ObservableCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 41:   //  System.Collections.ObjectModel.ReadOnlyCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>
+            case 47:   //  System.Collections.ObjectModel.ReadOnlyCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.CollectionAdd = VectorAdd_41_ReadOnlyCollection;
+                userType.CollectionAdd = VectorAdd_47_ReadOnlyCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 42:   //  Windows.UI.Xaml.Style
+            case 48:   //  Windows.UI.Xaml.Style
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 43:   //  System.Collections.ObjectModel.Collection`1<Windows.UI.Xaml.ResourceDictionary>
+            case 49:   //  System.Collections.ObjectModel.Collection`1<Windows.UI.Xaml.ResourceDictionary>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.CollectionAdd = VectorAdd_43_Collection;
+                userType.CollectionAdd = VectorAdd_49_Collection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 44:   //  Windows.UI.Xaml.ResourceDictionary
+            case 50:   //  Windows.UI.Xaml.ResourceDictionary
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 45:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnSeries
+            case 51:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnSeries
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>"));
-                userType.Activator = Activate_45_ColumnSeries;
+                userType.Activator = Activate_51_ColumnSeries;
                 xamlType = userType;
                 break;
 
-            case 46:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>
+            case 52:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSingleSeriesWithAxes"));
                 userType.AddMemberName("DependentRangeAxis");
                 userType.AddMemberName("IndependentAxis");
@@ -758,18 +818,18 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 47:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSingleSeriesWithAxes
+            case 53:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSingleSeriesWithAxes
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeriesWithAxes"));
                 userType.AddMemberName("GlobalSeriesIndex");
                 xamlType = userType;
                 break;
 
-            case 48:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeriesWithAxes
+            case 54:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeriesWithAxes
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries"));
                 xamlType = userType;
                 break;
 
-            case 49:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries
+            case 55:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Series"));
                 userType.AddMemberName("IndependentValuePath");
                 userType.AddMemberName("DependentValuePath");
@@ -786,7 +846,7 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 50:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.Series
+            case 56:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.Series
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Control"));
                 userType.AddMemberName("Title");
                 userType.AddMemberName("SeriesHost");
@@ -794,29 +854,29 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 51:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis
+            case 57:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, null);
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 52:   //  System.Nullable`1<Int32>
+            case 58:   //  System.Nullable`1<Int32>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 53:   //  Windows.UI.Xaml.Data.Binding
+            case 59:   //  Windows.UI.Xaml.Data.Binding
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 54:   //  System.Collections.IEnumerable
+            case 60:   //  System.Collections.IEnumerable
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, null);
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 55:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.AnimationSequence
+            case 61:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.AnimationSequence
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
                 userType.AddEnumValue("Simultaneous", global::WinRTXamlToolkit.Controls.DataVisualization.Charting.AnimationSequence.Simultaneous);
                 userType.AddEnumValue("FirstToLast", global::WinRTXamlToolkit.Controls.DataVisualization.Charting.AnimationSequence.FirstToLast);
@@ -824,31 +884,31 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 56:   //  Windows.UI.Xaml.Media.Animation.EasingFunctionBase
+            case 62:   //  Windows.UI.Xaml.Media.Animation.EasingFunctionBase
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 57:   //  TimeSpan
+            case 63:   //  TimeSpan
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 58:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeriesHost
+            case 64:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeriesHost
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, null);
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 59:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries
+            case 65:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>"));
-                userType.Activator = Activate_59_LineSeries;
+                userType.Activator = Activate_65_LineSeries;
                 userType.AddMemberName("Points");
                 userType.AddMemberName("PolylineStyle");
                 xamlType = userType;
                 break;
 
-            case 60:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>
+            case 66:   //  WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSingleSeriesWithAxes"));
                 userType.AddMemberName("DependentRangeAxis");
                 userType.AddMemberName("IndependentAxis");
@@ -857,48 +917,48 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 61:   //  Windows.UI.Xaml.Media.PointCollection
+            case 67:   //  Windows.UI.Xaml.Media.PointCollection
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 62:   //  CommercialRecordSystem.CustomerAccount
-                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_62_CustomerAccount;
+            case 68:   //  CommercialRecordSystem.Views.Customers.CustomerAccount
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CommercialRecordSystem.Views.ViewBase"));
+                userType.Activator = Activate_68_CustomerAccount;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 63:   //  CommercialRecordSystem.Goods
+            case 69:   //  CommercialRecordSystem.Goods
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_63_Goods;
+                userType.Activator = Activate_69_Goods;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 64:   //  Microsoft.Xaml.Interactivity.Interaction
+            case 70:   //  Microsoft.Xaml.Interactivity.Interaction
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.AddMemberName("Behaviors");
                 xamlType = userType;
                 break;
 
-            case 65:   //  Microsoft.Xaml.Interactivity.BehaviorCollection
+            case 71:   //  Microsoft.Xaml.Interactivity.BehaviorCollection
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObjectCollection"));
-                userType.CollectionAdd = VectorAdd_65_BehaviorCollection;
+                userType.CollectionAdd = VectorAdd_71_BehaviorCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 66:   //  Windows.UI.Xaml.DependencyObjectCollection
+            case 72:   //  Windows.UI.Xaml.DependencyObjectCollection
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 67:   //  Windows.UI.Xaml.DependencyObject
+            case 73:   //  Windows.UI.Xaml.DependencyObject
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 68:   //  Microsoft.Xaml.Interactions.Core.EventTriggerBehavior
+            case 74:   //  Microsoft.Xaml.Interactions.Core.EventTriggerBehavior
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_68_EventTriggerBehavior;
+                userType.Activator = Activate_74_EventTriggerBehavior;
                 userType.SetContentPropertyName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.Actions");
                 userType.AddMemberName("Actions");
                 userType.AddMemberName("EventName");
@@ -907,16 +967,16 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 69:   //  Microsoft.Xaml.Interactivity.ActionCollection
+            case 75:   //  Microsoft.Xaml.Interactivity.ActionCollection
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObjectCollection"));
-                userType.CollectionAdd = VectorAdd_69_ActionCollection;
+                userType.CollectionAdd = VectorAdd_75_ActionCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 70:   //  Microsoft.Xaml.Interactions.Core.InvokeCommandAction
+            case 76:   //  Microsoft.Xaml.Interactions.Core.InvokeCommandAction
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_70_InvokeCommandAction;
+                userType.Activator = Activate_76_InvokeCommandAction;
                 userType.AddMemberName("Command");
                 userType.AddMemberName("CommandParameter");
                 userType.AddMemberName("InputConverter");
@@ -925,20 +985,20 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 71:   //  Windows.UI.Xaml.Data.IValueConverter
+            case 77:   //  Windows.UI.Xaml.Data.IValueConverter
                 xamlType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 72:   //  CommercialRecordSystem.Customers
-                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_72_Customers;
+            case 78:   //  CommercialRecordSystem.Views.Customers.CustomerList
+                userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CommercialRecordSystem.Views.ViewBase"));
+                userType.Activator = Activate_78_CustomerList;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 73:   //  CommercialRecordSystem.MainPage
+            case 79:   //  CommercialRecordSystem.MainPage
                 userType = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_73_MainPage;
+                userType.Activator = Activate_79_MainPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -1012,610 +1072,620 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             that.InputType = (global::CommercialRecordSystem.Controls.CRSTextBox.INPUTTYPES)Value;
         }
-        private object get_1_CRSTextBox_MaxSize(object instance)
+        private object get_1_CRSTextBox_InputMaxLength(object instance)
+        {
+            var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
+            return that.InputMaxLength;
+        }
+        private void set_1_CRSTextBox_InputMaxLength(object instance, object Value)
+        {
+            var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
+            that.InputMaxLength = (global::System.Int32)Value;
+        }
+        private object get_2_CRSTextBox_MaxSize(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             return that.MaxSize;
         }
-        private void set_1_CRSTextBox_MaxSize(object instance, object Value)
+        private void set_2_CRSTextBox_MaxSize(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             that.MaxSize = (global::System.Int32)Value;
         }
-        private object get_2_CRSTextBox_ReadOnly(object instance)
+        private object get_3_CRSTextBox_ReadOnly(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             return that.ReadOnly;
         }
-        private void set_2_CRSTextBox_ReadOnly(object instance, object Value)
+        private void set_3_CRSTextBox_ReadOnly(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             that.ReadOnly = (global::System.Boolean)Value;
         }
-        private object get_3_CRSTextBox_Required(object instance)
+        private object get_4_CRSTextBox_Required(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             return that.Required;
         }
-        private void set_3_CRSTextBox_Required(object instance, object Value)
+        private void set_4_CRSTextBox_Required(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             that.Required = (global::System.Boolean)Value;
         }
-        private object get_4_CRSTextBox_RequiredSignVisibility(object instance)
+        private object get_5_CRSTextBox_RequiredSignVisibility(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             return that.RequiredSignVisibility;
         }
-        private void set_4_CRSTextBox_RequiredSignVisibility(object instance, object Value)
+        private void set_5_CRSTextBox_RequiredSignVisibility(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             that.RequiredSignVisibility = (global::Windows.UI.Xaml.Visibility)Value;
         }
-        private object get_5_CRSTextBox_IsValid(object instance)
+        private object get_6_CRSTextBox_IsValid(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             return that.IsValid;
         }
-        private void set_5_CRSTextBox_IsValid(object instance, object Value)
+        private void set_6_CRSTextBox_IsValid(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             that.IsValid = (global::System.Boolean)Value;
         }
-        private object get_6_CRSTextBox_Multiline(object instance)
+        private object get_7_CRSTextBox_Multiline(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             return that.Multiline;
         }
-        private void set_6_CRSTextBox_Multiline(object instance, object Value)
+        private void set_7_CRSTextBox_Multiline(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             that.Multiline = (global::System.Boolean)Value;
         }
-        private object get_7_CRSTextBox_IconHex(object instance)
+        private object get_8_CRSTextBox_IconHex(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             return that.IconHex;
         }
-        private void set_7_CRSTextBox_IconHex(object instance, object Value)
+        private void set_8_CRSTextBox_IconHex(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             that.IconHex = (global::System.String)Value;
         }
-        private object get_8_CRSTextBox_IconVisibility(object instance)
+        private object get_9_CRSTextBox_IconVisibility(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             return that.IconVisibility;
         }
-        private void set_8_CRSTextBox_IconVisibility(object instance, object Value)
+        private void set_9_CRSTextBox_IconVisibility(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
-            that.IconVisibility = (global::Windows.UI.Xaml.Visibility)Value;
+            that.IconVisibility = (global::CommercialRecordSystem.Controls.CRSTextBox.IconVisibilities)Value;
         }
-        private object get_9_CRSTextBox_Input(object instance)
+        private object get_10_CRSTextBox_Input(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             return that.Input;
         }
-        private void set_9_CRSTextBox_Input(object instance, object Value)
+        private void set_10_CRSTextBox_Input(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             that.Input = (global::System.Object)Value;
         }
-        private object get_10_CRSTextBox_EmptyMessage(object instance)
+        private object get_11_CRSTextBox_EmptyMessage(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             return that.EmptyMessage;
         }
-        private void set_10_CRSTextBox_EmptyMessage(object instance, object Value)
+        private void set_11_CRSTextBox_EmptyMessage(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             that.EmptyMessage = (global::System.String)Value;
         }
-        private object get_11_CRSTextBox_ThemeBrush(object instance)
+        private object get_12_CRSTextBox_ThemeBrush(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             return that.ThemeBrush;
         }
-        private void set_11_CRSTextBox_ThemeBrush(object instance, object Value)
+        private void set_12_CRSTextBox_ThemeBrush(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CRSTextBox)instance;
             that.ThemeBrush = (global::Windows.UI.Xaml.Media.Brush)Value;
         }
-        private object get_12_CRSPanel_GapSize(object instance)
+        private object get_13_CRSPanel_GapSize(object instance)
         {
             var that = (global::CommercialRecordSystem.Panels.CRSPanel)instance;
             return that.GapSize;
         }
-        private void set_12_CRSPanel_GapSize(object instance, object Value)
+        private void set_13_CRSPanel_GapSize(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Panels.CRSPanel)instance;
             that.GapSize = (global::System.Int32)Value;
         }
-        private object get_13_CRSRadioButtonPanel_CheckedIndex(object instance)
+        private object get_14_CRSRadioButtonPanel_CheckedIndex(object instance)
         {
             var that = (global::CommercialRecordSystem.Panels.CRSRadioButtonPanel)instance;
             return that.CheckedIndex;
         }
-        private void set_13_CRSRadioButtonPanel_CheckedIndex(object instance, object Value)
+        private void set_14_CRSRadioButtonPanel_CheckedIndex(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Panels.CRSRadioButtonPanel)instance;
             that.CheckedIndex = (global::System.Int32)Value;
         }
-        private object get_14_CRSPanel_Orientation(object instance)
+        private object get_15_CRSPanel_Orientation(object instance)
         {
             var that = (global::CommercialRecordSystem.Panels.CRSPanel)instance;
             return that.Orientation;
         }
-        private void set_14_CRSPanel_Orientation(object instance, object Value)
+        private void set_15_CRSPanel_Orientation(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Panels.CRSPanel)instance;
             that.Orientation = (global::CommercialRecordSystem.Panels.CRSPanel.ORIENTATION)Value;
         }
-        private object get_15_CRSRadioButtonPanel_CheckedCommand(object instance)
+        private object get_16_CRSRadioButtonPanel_CheckedCommand(object instance)
         {
             var that = (global::CommercialRecordSystem.Panels.CRSRadioButtonPanel)instance;
             return that.CheckedCommand;
         }
-        private void set_15_CRSRadioButtonPanel_CheckedCommand(object instance, object Value)
+        private void set_16_CRSRadioButtonPanel_CheckedCommand(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Panels.CRSRadioButtonPanel)instance;
             that.CheckedCommand = (global::System.Windows.Input.ICommand)Value;
         }
-        private object get_16_CSRButton_Validation(object instance)
+        private object get_17_CSRButton_Validation(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CSRButton)instance;
             return that.Validation;
         }
-        private void set_16_CSRButton_Validation(object instance, object Value)
+        private void set_17_CSRButton_Validation(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CSRButton)instance;
             that.Validation = (global::System.Boolean)Value;
         }
-        private object get_17_CSRButton_Disabled(object instance)
+        private object get_18_CSRButton_Disabled(object instance)
         {
             var that = (global::CommercialRecordSystem.Controls.CSRButton)instance;
             return that.Disabled;
         }
-        private void set_17_CSRButton_Disabled(object instance, object Value)
+        private void set_18_CSRButton_Disabled(object instance, object Value)
         {
             var that = (global::CommercialRecordSystem.Controls.CSRButton)instance;
             that.Disabled = (global::System.Boolean)Value;
         }
-        private object get_18_Chart_Series(object instance)
+        private object get_19_Chart_Series(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             return that.Series;
         }
-        private void set_18_Chart_Series(object instance, object Value)
+        private void set_19_Chart_Series(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             that.Series = (global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>)Value;
         }
-        private object get_19_ISeries_LegendItems(object instance)
+        private object get_20_ISeries_LegendItems(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries)instance;
             return that.LegendItems;
         }
-        private object get_20_Chart_Axes(object instance)
+        private object get_21_Chart_Axes(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             return that.Axes;
         }
-        private void set_20_Chart_Axes(object instance, object Value)
+        private void set_21_Chart_Axes(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             that.Axes = (global::System.Collections.ObjectModel.Collection<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>)Value;
         }
-        private object get_21_IAxis_Orientation(object instance)
+        private object get_22_IAxis_Orientation(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis)instance;
             return that.Orientation;
         }
-        private void set_21_IAxis_Orientation(object instance, object Value)
+        private void set_22_IAxis_Orientation(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis)instance;
             that.Orientation = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.AxisOrientation)Value;
         }
-        private object get_22_IAxis_RegisteredListeners(object instance)
+        private object get_23_IAxis_RegisteredListeners(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis)instance;
             return that.RegisteredListeners;
         }
-        private object get_23_IAxis_DependentAxes(object instance)
+        private object get_24_IAxis_DependentAxes(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis)instance;
             return that.DependentAxes;
         }
-        private object get_24_Chart_ActualAxes(object instance)
+        private object get_25_Chart_ActualAxes(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             return that.ActualAxes;
         }
-        private object get_25_Chart_ChartAreaStyle(object instance)
+        private object get_26_Chart_ChartAreaStyle(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             return that.ChartAreaStyle;
         }
-        private void set_25_Chart_ChartAreaStyle(object instance, object Value)
+        private void set_26_Chart_ChartAreaStyle(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             that.ChartAreaStyle = (global::Windows.UI.Xaml.Style)Value;
         }
-        private object get_26_Chart_LegendItems(object instance)
+        private object get_27_Chart_LegendItems(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             return that.LegendItems;
         }
-        private object get_27_Chart_LegendStyle(object instance)
+        private object get_28_Chart_LegendStyle(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             return that.LegendStyle;
         }
-        private void set_27_Chart_LegendStyle(object instance, object Value)
+        private void set_28_Chart_LegendStyle(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             that.LegendStyle = (global::Windows.UI.Xaml.Style)Value;
         }
-        private object get_28_Chart_LegendTitle(object instance)
+        private object get_29_Chart_LegendTitle(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             return that.LegendTitle;
         }
-        private void set_28_Chart_LegendTitle(object instance, object Value)
+        private void set_29_Chart_LegendTitle(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             that.LegendTitle = (global::System.Object)Value;
         }
-        private object get_29_Chart_PlotAreaStyle(object instance)
+        private object get_30_Chart_PlotAreaStyle(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             return that.PlotAreaStyle;
         }
-        private void set_29_Chart_PlotAreaStyle(object instance, object Value)
+        private void set_30_Chart_PlotAreaStyle(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             that.PlotAreaStyle = (global::Windows.UI.Xaml.Style)Value;
         }
-        private object get_30_Chart_Palette(object instance)
+        private object get_31_Chart_Palette(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             return that.Palette;
         }
-        private void set_30_Chart_Palette(object instance, object Value)
+        private void set_31_Chart_Palette(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             that.Palette = (global::System.Collections.ObjectModel.Collection<global::Windows.UI.Xaml.ResourceDictionary>)Value;
         }
-        private object get_31_Chart_Title(object instance)
+        private object get_32_Chart_Title(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             return that.Title;
         }
-        private void set_31_Chart_Title(object instance, object Value)
+        private void set_32_Chart_Title(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             that.Title = (global::System.Object)Value;
         }
-        private object get_32_Chart_TitleStyle(object instance)
+        private object get_33_Chart_TitleStyle(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             return that.TitleStyle;
         }
-        private void set_32_Chart_TitleStyle(object instance, object Value)
+        private void set_33_Chart_TitleStyle(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart)instance;
             that.TitleStyle = (global::Windows.UI.Xaml.Style)Value;
         }
-        private object get_33_Series_Title(object instance)
+        private object get_34_Series_Title(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Series)instance;
             return that.Title;
         }
-        private void set_33_Series_Title(object instance, object Value)
+        private void set_34_Series_Title(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Series)instance;
             that.Title = (global::System.Object)Value;
         }
-        private object get_34_DataPointSeries_IndependentValuePath(object instance)
+        private object get_35_DataPointSeries_IndependentValuePath(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.IndependentValuePath;
         }
-        private void set_34_DataPointSeries_IndependentValuePath(object instance, object Value)
+        private void set_35_DataPointSeries_IndependentValuePath(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.IndependentValuePath = (global::System.String)Value;
         }
-        private object get_35_DataPointSeries_DependentValuePath(object instance)
+        private object get_36_DataPointSeries_DependentValuePath(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.DependentValuePath;
         }
-        private void set_35_DataPointSeries_DependentValuePath(object instance, object Value)
+        private void set_36_DataPointSeries_DependentValuePath(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.DependentValuePath = (global::System.String)Value;
         }
-        private object get_36_DataPointSeries_IsSelectionEnabled(object instance)
+        private object get_37_DataPointSeries_IsSelectionEnabled(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.IsSelectionEnabled;
         }
-        private void set_36_DataPointSeries_IsSelectionEnabled(object instance, object Value)
+        private void set_37_DataPointSeries_IsSelectionEnabled(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.IsSelectionEnabled = (global::System.Boolean)Value;
         }
-        private object get_37_ColumnBarBaseSeries_DependentRangeAxis(object instance)
+        private object get_38_ColumnBarBaseSeries_DependentRangeAxis(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>)instance;
             return that.DependentRangeAxis;
         }
-        private void set_37_ColumnBarBaseSeries_DependentRangeAxis(object instance, object Value)
+        private void set_38_ColumnBarBaseSeries_DependentRangeAxis(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>)instance;
             that.DependentRangeAxis = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis)Value;
         }
-        private object get_38_ColumnBarBaseSeries_IndependentAxis(object instance)
+        private object get_39_ColumnBarBaseSeries_IndependentAxis(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>)instance;
             return that.IndependentAxis;
         }
-        private void set_38_ColumnBarBaseSeries_IndependentAxis(object instance, object Value)
+        private void set_39_ColumnBarBaseSeries_IndependentAxis(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>)instance;
             that.IndependentAxis = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis)Value;
         }
-        private object get_39_ColumnBarBaseSeries_ActualDependentRangeAxis(object instance)
+        private object get_40_ColumnBarBaseSeries_ActualDependentRangeAxis(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>)instance;
             return that.ActualDependentRangeAxis;
         }
-        private object get_40_ColumnBarBaseSeries_ActualIndependentAxis(object instance)
+        private object get_41_ColumnBarBaseSeries_ActualIndependentAxis(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>)instance;
             return that.ActualIndependentAxis;
         }
-        private object get_41_DataPointSingleSeriesWithAxes_GlobalSeriesIndex(object instance)
+        private object get_42_DataPointSingleSeriesWithAxes_GlobalSeriesIndex(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSingleSeriesWithAxes)instance;
             return that.GlobalSeriesIndex;
         }
-        private object get_42_DataPointSeries_DependentValueBinding(object instance)
+        private object get_43_DataPointSeries_DependentValueBinding(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.DependentValueBinding;
         }
-        private void set_42_DataPointSeries_DependentValueBinding(object instance, object Value)
+        private void set_43_DataPointSeries_DependentValueBinding(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.DependentValueBinding = (global::Windows.UI.Xaml.Data.Binding)Value;
         }
-        private object get_43_DataPointSeries_IndependentValueBinding(object instance)
+        private object get_44_DataPointSeries_IndependentValueBinding(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.IndependentValueBinding;
         }
-        private void set_43_DataPointSeries_IndependentValueBinding(object instance, object Value)
+        private void set_44_DataPointSeries_IndependentValueBinding(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.IndependentValueBinding = (global::Windows.UI.Xaml.Data.Binding)Value;
         }
-        private object get_44_DataPointSeries_ItemsSource(object instance)
+        private object get_45_DataPointSeries_ItemsSource(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.ItemsSource;
         }
-        private void set_44_DataPointSeries_ItemsSource(object instance, object Value)
+        private void set_45_DataPointSeries_ItemsSource(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.ItemsSource = (global::System.Collections.IEnumerable)Value;
         }
-        private object get_45_DataPointSeries_AnimationSequence(object instance)
+        private object get_46_DataPointSeries_AnimationSequence(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.AnimationSequence;
         }
-        private void set_45_DataPointSeries_AnimationSequence(object instance, object Value)
+        private void set_46_DataPointSeries_AnimationSequence(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.AnimationSequence = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.AnimationSequence)Value;
         }
-        private object get_46_DataPointSeries_TransitionEasingFunction(object instance)
+        private object get_47_DataPointSeries_TransitionEasingFunction(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.TransitionEasingFunction;
         }
-        private void set_46_DataPointSeries_TransitionEasingFunction(object instance, object Value)
+        private void set_47_DataPointSeries_TransitionEasingFunction(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.TransitionEasingFunction = (global::Windows.UI.Xaml.Media.Animation.EasingFunctionBase)Value;
         }
-        private object get_47_DataPointSeries_SelectedItem(object instance)
+        private object get_48_DataPointSeries_SelectedItem(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.SelectedItem;
         }
-        private void set_47_DataPointSeries_SelectedItem(object instance, object Value)
+        private void set_48_DataPointSeries_SelectedItem(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.SelectedItem = (global::System.Object)Value;
         }
-        private object get_48_DataPointSeries_DataPointStyle(object instance)
+        private object get_49_DataPointSeries_DataPointStyle(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.DataPointStyle;
         }
-        private void set_48_DataPointSeries_DataPointStyle(object instance, object Value)
+        private void set_49_DataPointSeries_DataPointStyle(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.DataPointStyle = (global::Windows.UI.Xaml.Style)Value;
         }
-        private object get_49_DataPointSeries_LegendItemStyle(object instance)
+        private object get_50_DataPointSeries_LegendItemStyle(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.LegendItemStyle;
         }
-        private void set_49_DataPointSeries_LegendItemStyle(object instance, object Value)
+        private void set_50_DataPointSeries_LegendItemStyle(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.LegendItemStyle = (global::Windows.UI.Xaml.Style)Value;
         }
-        private object get_50_DataPointSeries_TransitionDuration(object instance)
+        private object get_51_DataPointSeries_TransitionDuration(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             return that.TransitionDuration;
         }
-        private void set_50_DataPointSeries_TransitionDuration(object instance, object Value)
+        private void set_51_DataPointSeries_TransitionDuration(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries)instance;
             that.TransitionDuration = (global::System.TimeSpan)Value;
         }
-        private object get_51_Series_SeriesHost(object instance)
+        private object get_52_Series_SeriesHost(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Series)instance;
             return that.SeriesHost;
         }
-        private void set_51_Series_SeriesHost(object instance, object Value)
+        private void set_52_Series_SeriesHost(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Series)instance;
             that.SeriesHost = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeriesHost)Value;
         }
-        private object get_52_Series_LegendItems(object instance)
+        private object get_53_Series_LegendItems(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.Series)instance;
             return that.LegendItems;
         }
-        private object get_53_LineSeries_Points(object instance)
+        private object get_54_LineSeries_Points(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries)instance;
             return that.Points;
         }
-        private object get_54_LineSeries_PolylineStyle(object instance)
+        private object get_55_LineSeries_PolylineStyle(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries)instance;
             return that.PolylineStyle;
         }
-        private void set_54_LineSeries_PolylineStyle(object instance, object Value)
+        private void set_55_LineSeries_PolylineStyle(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries)instance;
             that.PolylineStyle = (global::Windows.UI.Xaml.Style)Value;
         }
-        private object get_55_LineAreaBaseSeries_DependentRangeAxis(object instance)
+        private object get_56_LineAreaBaseSeries_DependentRangeAxis(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>)instance;
             return that.DependentRangeAxis;
         }
-        private void set_55_LineAreaBaseSeries_DependentRangeAxis(object instance, object Value)
+        private void set_56_LineAreaBaseSeries_DependentRangeAxis(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>)instance;
             that.DependentRangeAxis = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis)Value;
         }
-        private object get_56_LineAreaBaseSeries_IndependentAxis(object instance)
+        private object get_57_LineAreaBaseSeries_IndependentAxis(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>)instance;
             return that.IndependentAxis;
         }
-        private void set_56_LineAreaBaseSeries_IndependentAxis(object instance, object Value)
+        private void set_57_LineAreaBaseSeries_IndependentAxis(object instance, object Value)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>)instance;
             that.IndependentAxis = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis)Value;
         }
-        private object get_57_LineAreaBaseSeries_ActualIndependentAxis(object instance)
+        private object get_58_LineAreaBaseSeries_ActualIndependentAxis(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>)instance;
             return that.ActualIndependentAxis;
         }
-        private object get_58_LineAreaBaseSeries_ActualDependentRangeAxis(object instance)
+        private object get_59_LineAreaBaseSeries_ActualDependentRangeAxis(object instance)
         {
             var that = (global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries<global::WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>)instance;
             return that.ActualDependentRangeAxis;
         }
-        private object get_59_Interaction_Behaviors(object instance)
+        private object get_60_Interaction_Behaviors(object instance)
         {
             return global::Microsoft.Xaml.Interactivity.Interaction.GetBehaviors((global::Windows.UI.Xaml.DependencyObject)instance);
         }
-        private void set_59_Interaction_Behaviors(object instance, object Value)
+        private void set_60_Interaction_Behaviors(object instance, object Value)
         {
             global::Microsoft.Xaml.Interactivity.Interaction.SetBehaviors((global::Windows.UI.Xaml.DependencyObject)instance, (global::Microsoft.Xaml.Interactivity.BehaviorCollection)Value);
         }
-        private object get_60_EventTriggerBehavior_Actions(object instance)
+        private object get_61_EventTriggerBehavior_Actions(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.Actions;
         }
-        private object get_61_EventTriggerBehavior_EventName(object instance)
+        private object get_62_EventTriggerBehavior_EventName(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.EventName;
         }
-        private void set_61_EventTriggerBehavior_EventName(object instance, object Value)
+        private void set_62_EventTriggerBehavior_EventName(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             that.EventName = (global::System.String)Value;
         }
-        private object get_62_EventTriggerBehavior_SourceObject(object instance)
+        private object get_63_EventTriggerBehavior_SourceObject(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.SourceObject;
         }
-        private void set_62_EventTriggerBehavior_SourceObject(object instance, object Value)
+        private void set_63_EventTriggerBehavior_SourceObject(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             that.SourceObject = (global::System.Object)Value;
         }
-        private object get_63_EventTriggerBehavior_AssociatedObject(object instance)
+        private object get_64_EventTriggerBehavior_AssociatedObject(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.AssociatedObject;
         }
-        private object get_64_InvokeCommandAction_Command(object instance)
+        private object get_65_InvokeCommandAction_Command(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.Command;
         }
-        private void set_64_InvokeCommandAction_Command(object instance, object Value)
+        private void set_65_InvokeCommandAction_Command(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.Command = (global::System.Windows.Input.ICommand)Value;
         }
-        private object get_65_InvokeCommandAction_CommandParameter(object instance)
+        private object get_66_InvokeCommandAction_CommandParameter(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.CommandParameter;
         }
-        private void set_65_InvokeCommandAction_CommandParameter(object instance, object Value)
+        private void set_66_InvokeCommandAction_CommandParameter(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.CommandParameter = (global::System.Object)Value;
         }
-        private object get_66_InvokeCommandAction_InputConverter(object instance)
+        private object get_67_InvokeCommandAction_InputConverter(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.InputConverter;
         }
-        private void set_66_InvokeCommandAction_InputConverter(object instance, object Value)
+        private void set_67_InvokeCommandAction_InputConverter(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.InputConverter = (global::Windows.UI.Xaml.Data.IValueConverter)Value;
         }
-        private object get_67_InvokeCommandAction_InputConverterParameter(object instance)
+        private object get_68_InvokeCommandAction_InputConverterParameter(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.InputConverterParameter;
         }
-        private void set_67_InvokeCommandAction_InputConverterParameter(object instance, object Value)
+        private void set_68_InvokeCommandAction_InputConverterParameter(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.InputConverterParameter = (global::System.Object)Value;
         }
-        private object get_68_InvokeCommandAction_InputConverterLanguage(object instance)
+        private object get_69_InvokeCommandAction_InputConverterLanguage(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.InputConverterLanguage;
         }
-        private void set_68_InvokeCommandAction_InputConverterLanguage(object instance, object Value)
+        private void set_69_InvokeCommandAction_InputConverterLanguage(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.InputConverterLanguage = (global::System.String)Value;
@@ -1635,392 +1705,399 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlMember.Getter = get_0_CRSTextBox_InputType;
                 xamlMember.Setter = set_0_CRSTextBox_InputType;
                 break;
+            case "CommercialRecordSystem.Controls.CRSTextBox.InputMaxLength":
+                userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
+                xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "InputMaxLength", "Int32");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_1_CRSTextBox_InputMaxLength;
+                xamlMember.Setter = set_1_CRSTextBox_InputMaxLength;
+                break;
             case "CommercialRecordSystem.Controls.CRSTextBox.MaxSize":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "MaxSize", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_1_CRSTextBox_MaxSize;
-                xamlMember.Setter = set_1_CRSTextBox_MaxSize;
+                xamlMember.Getter = get_2_CRSTextBox_MaxSize;
+                xamlMember.Setter = set_2_CRSTextBox_MaxSize;
                 break;
             case "CommercialRecordSystem.Controls.CRSTextBox.ReadOnly":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "ReadOnly", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_2_CRSTextBox_ReadOnly;
-                xamlMember.Setter = set_2_CRSTextBox_ReadOnly;
+                xamlMember.Getter = get_3_CRSTextBox_ReadOnly;
+                xamlMember.Setter = set_3_CRSTextBox_ReadOnly;
                 break;
             case "CommercialRecordSystem.Controls.CRSTextBox.Required":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Required", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_3_CRSTextBox_Required;
-                xamlMember.Setter = set_3_CRSTextBox_Required;
+                xamlMember.Getter = get_4_CRSTextBox_Required;
+                xamlMember.Setter = set_4_CRSTextBox_Required;
                 break;
             case "CommercialRecordSystem.Controls.CRSTextBox.RequiredSignVisibility":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "RequiredSignVisibility", "Windows.UI.Xaml.Visibility");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_4_CRSTextBox_RequiredSignVisibility;
-                xamlMember.Setter = set_4_CRSTextBox_RequiredSignVisibility;
+                xamlMember.Getter = get_5_CRSTextBox_RequiredSignVisibility;
+                xamlMember.Setter = set_5_CRSTextBox_RequiredSignVisibility;
                 break;
             case "CommercialRecordSystem.Controls.CRSTextBox.IsValid":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "IsValid", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_5_CRSTextBox_IsValid;
-                xamlMember.Setter = set_5_CRSTextBox_IsValid;
+                xamlMember.Getter = get_6_CRSTextBox_IsValid;
+                xamlMember.Setter = set_6_CRSTextBox_IsValid;
                 break;
             case "CommercialRecordSystem.Controls.CRSTextBox.Multiline":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Multiline", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_6_CRSTextBox_Multiline;
-                xamlMember.Setter = set_6_CRSTextBox_Multiline;
+                xamlMember.Getter = get_7_CRSTextBox_Multiline;
+                xamlMember.Setter = set_7_CRSTextBox_Multiline;
                 break;
             case "CommercialRecordSystem.Controls.CRSTextBox.IconHex":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "IconHex", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_7_CRSTextBox_IconHex;
-                xamlMember.Setter = set_7_CRSTextBox_IconHex;
+                xamlMember.Getter = get_8_CRSTextBox_IconHex;
+                xamlMember.Setter = set_8_CRSTextBox_IconHex;
                 break;
             case "CommercialRecordSystem.Controls.CRSTextBox.IconVisibility":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
-                xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "IconVisibility", "Windows.UI.Xaml.Visibility");
+                xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "IconVisibility", "CommercialRecordSystem.Controls.CRSTextBox.IconVisibilities");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_8_CRSTextBox_IconVisibility;
-                xamlMember.Setter = set_8_CRSTextBox_IconVisibility;
+                xamlMember.Getter = get_9_CRSTextBox_IconVisibility;
+                xamlMember.Setter = set_9_CRSTextBox_IconVisibility;
                 break;
             case "CommercialRecordSystem.Controls.CRSTextBox.Input":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Input", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_9_CRSTextBox_Input;
-                xamlMember.Setter = set_9_CRSTextBox_Input;
+                xamlMember.Getter = get_10_CRSTextBox_Input;
+                xamlMember.Setter = set_10_CRSTextBox_Input;
                 break;
             case "CommercialRecordSystem.Controls.CRSTextBox.EmptyMessage":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "EmptyMessage", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_10_CRSTextBox_EmptyMessage;
-                xamlMember.Setter = set_10_CRSTextBox_EmptyMessage;
+                xamlMember.Getter = get_11_CRSTextBox_EmptyMessage;
+                xamlMember.Setter = set_11_CRSTextBox_EmptyMessage;
                 break;
             case "CommercialRecordSystem.Controls.CRSTextBox.ThemeBrush":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CRSTextBox");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "ThemeBrush", "Windows.UI.Xaml.Media.Brush");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_11_CRSTextBox_ThemeBrush;
-                xamlMember.Setter = set_11_CRSTextBox_ThemeBrush;
+                xamlMember.Getter = get_12_CRSTextBox_ThemeBrush;
+                xamlMember.Setter = set_12_CRSTextBox_ThemeBrush;
                 break;
             case "CommercialRecordSystem.Panels.CRSPanel.GapSize":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Panels.CRSPanel");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "GapSize", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_12_CRSPanel_GapSize;
-                xamlMember.Setter = set_12_CRSPanel_GapSize;
+                xamlMember.Getter = get_13_CRSPanel_GapSize;
+                xamlMember.Setter = set_13_CRSPanel_GapSize;
                 break;
             case "CommercialRecordSystem.Panels.CRSRadioButtonPanel.CheckedIndex":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Panels.CRSRadioButtonPanel");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "CheckedIndex", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_13_CRSRadioButtonPanel_CheckedIndex;
-                xamlMember.Setter = set_13_CRSRadioButtonPanel_CheckedIndex;
+                xamlMember.Getter = get_14_CRSRadioButtonPanel_CheckedIndex;
+                xamlMember.Setter = set_14_CRSRadioButtonPanel_CheckedIndex;
                 break;
             case "CommercialRecordSystem.Panels.CRSPanel.Orientation":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Panels.CRSPanel");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Orientation", "CommercialRecordSystem.Panels.CRSPanel.ORIENTATION");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_14_CRSPanel_Orientation;
-                xamlMember.Setter = set_14_CRSPanel_Orientation;
+                xamlMember.Getter = get_15_CRSPanel_Orientation;
+                xamlMember.Setter = set_15_CRSPanel_Orientation;
                 break;
             case "CommercialRecordSystem.Panels.CRSRadioButtonPanel.CheckedCommand":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Panels.CRSRadioButtonPanel");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "CheckedCommand", "System.Windows.Input.ICommand");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_15_CRSRadioButtonPanel_CheckedCommand;
-                xamlMember.Setter = set_15_CRSRadioButtonPanel_CheckedCommand;
+                xamlMember.Getter = get_16_CRSRadioButtonPanel_CheckedCommand;
+                xamlMember.Setter = set_16_CRSRadioButtonPanel_CheckedCommand;
                 break;
             case "CommercialRecordSystem.Controls.CSRButton.Validation":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CSRButton");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Validation", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_16_CSRButton_Validation;
-                xamlMember.Setter = set_16_CSRButton_Validation;
+                xamlMember.Getter = get_17_CSRButton_Validation;
+                xamlMember.Setter = set_17_CSRButton_Validation;
                 break;
             case "CommercialRecordSystem.Controls.CSRButton.Disabled":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CommercialRecordSystem.Controls.CSRButton");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Disabled", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_17_CSRButton_Disabled;
-                xamlMember.Setter = set_17_CSRButton_Disabled;
+                xamlMember.Getter = get_18_CSRButton_Disabled;
+                xamlMember.Setter = set_18_CSRButton_Disabled;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.Series":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Series", "System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries>");
-                xamlMember.Getter = get_18_Chart_Series;
-                xamlMember.Setter = set_18_Chart_Series;
+                xamlMember.Getter = get_19_Chart_Series;
+                xamlMember.Setter = set_19_Chart_Series;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries.LegendItems":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "LegendItems", "System.Collections.ObjectModel.ObservableCollection`1<Object>");
-                xamlMember.Getter = get_19_ISeries_LegendItems;
+                xamlMember.Getter = get_20_ISeries_LegendItems;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.Axes":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Axes", "System.Collections.ObjectModel.Collection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>");
-                xamlMember.Getter = get_20_Chart_Axes;
-                xamlMember.Setter = set_20_Chart_Axes;
+                xamlMember.Getter = get_21_Chart_Axes;
+                xamlMember.Setter = set_21_Chart_Axes;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis.Orientation":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Orientation", "WinRTXamlToolkit.Controls.DataVisualization.Charting.AxisOrientation");
-                xamlMember.Getter = get_21_IAxis_Orientation;
-                xamlMember.Setter = set_21_IAxis_Orientation;
+                xamlMember.Getter = get_22_IAxis_Orientation;
+                xamlMember.Setter = set_22_IAxis_Orientation;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis.RegisteredListeners":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "RegisteredListeners", "System.Collections.ObjectModel.ObservableCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxisListener>");
-                xamlMember.Getter = get_22_IAxis_RegisteredListeners;
+                xamlMember.Getter = get_23_IAxis_RegisteredListeners;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis.DependentAxes":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "DependentAxes", "System.Collections.ObjectModel.ObservableCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>");
-                xamlMember.Getter = get_23_IAxis_DependentAxes;
+                xamlMember.Getter = get_24_IAxis_DependentAxes;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.ActualAxes":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "ActualAxes", "System.Collections.ObjectModel.ReadOnlyCollection`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis>");
-                xamlMember.Getter = get_24_Chart_ActualAxes;
+                xamlMember.Getter = get_25_Chart_ActualAxes;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.ChartAreaStyle":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "ChartAreaStyle", "Windows.UI.Xaml.Style");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_25_Chart_ChartAreaStyle;
-                xamlMember.Setter = set_25_Chart_ChartAreaStyle;
+                xamlMember.Getter = get_26_Chart_ChartAreaStyle;
+                xamlMember.Setter = set_26_Chart_ChartAreaStyle;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.LegendItems":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "LegendItems", "System.Collections.ObjectModel.Collection`1<Object>");
-                xamlMember.Getter = get_26_Chart_LegendItems;
+                xamlMember.Getter = get_27_Chart_LegendItems;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.LegendStyle":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "LegendStyle", "Windows.UI.Xaml.Style");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_27_Chart_LegendStyle;
-                xamlMember.Setter = set_27_Chart_LegendStyle;
+                xamlMember.Getter = get_28_Chart_LegendStyle;
+                xamlMember.Setter = set_28_Chart_LegendStyle;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.LegendTitle":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "LegendTitle", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_28_Chart_LegendTitle;
-                xamlMember.Setter = set_28_Chart_LegendTitle;
+                xamlMember.Getter = get_29_Chart_LegendTitle;
+                xamlMember.Setter = set_29_Chart_LegendTitle;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.PlotAreaStyle":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "PlotAreaStyle", "Windows.UI.Xaml.Style");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_29_Chart_PlotAreaStyle;
-                xamlMember.Setter = set_29_Chart_PlotAreaStyle;
+                xamlMember.Getter = get_30_Chart_PlotAreaStyle;
+                xamlMember.Setter = set_30_Chart_PlotAreaStyle;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.Palette":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Palette", "System.Collections.ObjectModel.Collection`1<Windows.UI.Xaml.ResourceDictionary>");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_30_Chart_Palette;
-                xamlMember.Setter = set_30_Chart_Palette;
+                xamlMember.Getter = get_31_Chart_Palette;
+                xamlMember.Setter = set_31_Chart_Palette;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.Title":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Title", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_31_Chart_Title;
-                xamlMember.Setter = set_31_Chart_Title;
+                xamlMember.Getter = get_32_Chart_Title;
+                xamlMember.Setter = set_32_Chart_Title;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart.TitleStyle":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Chart");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "TitleStyle", "Windows.UI.Xaml.Style");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_32_Chart_TitleStyle;
-                xamlMember.Setter = set_32_Chart_TitleStyle;
+                xamlMember.Getter = get_33_Chart_TitleStyle;
+                xamlMember.Setter = set_33_Chart_TitleStyle;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Series.Title":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Series");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Title", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_33_Series_Title;
-                xamlMember.Setter = set_33_Series_Title;
+                xamlMember.Getter = get_34_Series_Title;
+                xamlMember.Setter = set_34_Series_Title;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.IndependentValuePath":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "IndependentValuePath", "String");
-                xamlMember.Getter = get_34_DataPointSeries_IndependentValuePath;
-                xamlMember.Setter = set_34_DataPointSeries_IndependentValuePath;
+                xamlMember.Getter = get_35_DataPointSeries_IndependentValuePath;
+                xamlMember.Setter = set_35_DataPointSeries_IndependentValuePath;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.DependentValuePath":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "DependentValuePath", "String");
-                xamlMember.Getter = get_35_DataPointSeries_DependentValuePath;
-                xamlMember.Setter = set_35_DataPointSeries_DependentValuePath;
+                xamlMember.Getter = get_36_DataPointSeries_DependentValuePath;
+                xamlMember.Setter = set_36_DataPointSeries_DependentValuePath;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.IsSelectionEnabled":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "IsSelectionEnabled", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_36_DataPointSeries_IsSelectionEnabled;
-                xamlMember.Setter = set_36_DataPointSeries_IsSelectionEnabled;
+                xamlMember.Getter = get_37_DataPointSeries_IsSelectionEnabled;
+                xamlMember.Setter = set_37_DataPointSeries_IsSelectionEnabled;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>.DependentRangeAxis":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "DependentRangeAxis", "WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_37_ColumnBarBaseSeries_DependentRangeAxis;
-                xamlMember.Setter = set_37_ColumnBarBaseSeries_DependentRangeAxis;
+                xamlMember.Getter = get_38_ColumnBarBaseSeries_DependentRangeAxis;
+                xamlMember.Setter = set_38_ColumnBarBaseSeries_DependentRangeAxis;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>.IndependentAxis":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "IndependentAxis", "WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_38_ColumnBarBaseSeries_IndependentAxis;
-                xamlMember.Setter = set_38_ColumnBarBaseSeries_IndependentAxis;
+                xamlMember.Getter = get_39_ColumnBarBaseSeries_IndependentAxis;
+                xamlMember.Setter = set_39_ColumnBarBaseSeries_IndependentAxis;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>.ActualDependentRangeAxis":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "ActualDependentRangeAxis", "WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis");
-                xamlMember.Getter = get_39_ColumnBarBaseSeries_ActualDependentRangeAxis;
+                xamlMember.Getter = get_40_ColumnBarBaseSeries_ActualDependentRangeAxis;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>.ActualIndependentAxis":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnBarBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.ColumnDataPoint>");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "ActualIndependentAxis", "WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis");
-                xamlMember.Getter = get_40_ColumnBarBaseSeries_ActualIndependentAxis;
+                xamlMember.Getter = get_41_ColumnBarBaseSeries_ActualIndependentAxis;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSingleSeriesWithAxes.GlobalSeriesIndex":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSingleSeriesWithAxes");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "GlobalSeriesIndex", "System.Nullable`1<Int32>");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_41_DataPointSingleSeriesWithAxes_GlobalSeriesIndex;
+                xamlMember.Getter = get_42_DataPointSingleSeriesWithAxes_GlobalSeriesIndex;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.DependentValueBinding":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "DependentValueBinding", "Windows.UI.Xaml.Data.Binding");
-                xamlMember.Getter = get_42_DataPointSeries_DependentValueBinding;
-                xamlMember.Setter = set_42_DataPointSeries_DependentValueBinding;
+                xamlMember.Getter = get_43_DataPointSeries_DependentValueBinding;
+                xamlMember.Setter = set_43_DataPointSeries_DependentValueBinding;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.IndependentValueBinding":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "IndependentValueBinding", "Windows.UI.Xaml.Data.Binding");
-                xamlMember.Getter = get_43_DataPointSeries_IndependentValueBinding;
-                xamlMember.Setter = set_43_DataPointSeries_IndependentValueBinding;
+                xamlMember.Getter = get_44_DataPointSeries_IndependentValueBinding;
+                xamlMember.Setter = set_44_DataPointSeries_IndependentValueBinding;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.ItemsSource":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "ItemsSource", "System.Collections.IEnumerable");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_44_DataPointSeries_ItemsSource;
-                xamlMember.Setter = set_44_DataPointSeries_ItemsSource;
+                xamlMember.Getter = get_45_DataPointSeries_ItemsSource;
+                xamlMember.Setter = set_45_DataPointSeries_ItemsSource;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.AnimationSequence":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "AnimationSequence", "WinRTXamlToolkit.Controls.DataVisualization.Charting.AnimationSequence");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_45_DataPointSeries_AnimationSequence;
-                xamlMember.Setter = set_45_DataPointSeries_AnimationSequence;
+                xamlMember.Getter = get_46_DataPointSeries_AnimationSequence;
+                xamlMember.Setter = set_46_DataPointSeries_AnimationSequence;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.TransitionEasingFunction":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "TransitionEasingFunction", "Windows.UI.Xaml.Media.Animation.EasingFunctionBase");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_46_DataPointSeries_TransitionEasingFunction;
-                xamlMember.Setter = set_46_DataPointSeries_TransitionEasingFunction;
+                xamlMember.Getter = get_47_DataPointSeries_TransitionEasingFunction;
+                xamlMember.Setter = set_47_DataPointSeries_TransitionEasingFunction;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.SelectedItem":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "SelectedItem", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_47_DataPointSeries_SelectedItem;
-                xamlMember.Setter = set_47_DataPointSeries_SelectedItem;
+                xamlMember.Getter = get_48_DataPointSeries_SelectedItem;
+                xamlMember.Setter = set_48_DataPointSeries_SelectedItem;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.DataPointStyle":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "DataPointStyle", "Windows.UI.Xaml.Style");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_48_DataPointSeries_DataPointStyle;
-                xamlMember.Setter = set_48_DataPointSeries_DataPointStyle;
+                xamlMember.Getter = get_49_DataPointSeries_DataPointStyle;
+                xamlMember.Setter = set_49_DataPointSeries_DataPointStyle;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.LegendItemStyle":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "LegendItemStyle", "Windows.UI.Xaml.Style");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_49_DataPointSeries_LegendItemStyle;
-                xamlMember.Setter = set_49_DataPointSeries_LegendItemStyle;
+                xamlMember.Getter = get_50_DataPointSeries_LegendItemStyle;
+                xamlMember.Setter = set_50_DataPointSeries_LegendItemStyle;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries.TransitionDuration":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.DataPointSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "TransitionDuration", "TimeSpan");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_50_DataPointSeries_TransitionDuration;
-                xamlMember.Setter = set_50_DataPointSeries_TransitionDuration;
+                xamlMember.Getter = get_51_DataPointSeries_TransitionDuration;
+                xamlMember.Setter = set_51_DataPointSeries_TransitionDuration;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Series.SeriesHost":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Series");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "SeriesHost", "WinRTXamlToolkit.Controls.DataVisualization.Charting.ISeriesHost");
-                xamlMember.Getter = get_51_Series_SeriesHost;
-                xamlMember.Setter = set_51_Series_SeriesHost;
+                xamlMember.Getter = get_52_Series_SeriesHost;
+                xamlMember.Setter = set_52_Series_SeriesHost;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.Series.LegendItems":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.Series");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "LegendItems", "System.Collections.ObjectModel.ObservableCollection`1<Object>");
-                xamlMember.Getter = get_52_Series_LegendItems;
+                xamlMember.Getter = get_53_Series_LegendItems;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries.Points":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Points", "Windows.UI.Xaml.Media.PointCollection");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_53_LineSeries_Points;
+                xamlMember.Getter = get_54_LineSeries_Points;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries.PolylineStyle":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.LineSeries");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "PolylineStyle", "Windows.UI.Xaml.Style");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_54_LineSeries_PolylineStyle;
-                xamlMember.Setter = set_54_LineSeries_PolylineStyle;
+                xamlMember.Getter = get_55_LineSeries_PolylineStyle;
+                xamlMember.Setter = set_55_LineSeries_PolylineStyle;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>.DependentRangeAxis":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "DependentRangeAxis", "WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_55_LineAreaBaseSeries_DependentRangeAxis;
-                xamlMember.Setter = set_55_LineAreaBaseSeries_DependentRangeAxis;
+                xamlMember.Getter = get_56_LineAreaBaseSeries_DependentRangeAxis;
+                xamlMember.Setter = set_56_LineAreaBaseSeries_DependentRangeAxis;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>.IndependentAxis":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "IndependentAxis", "WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_56_LineAreaBaseSeries_IndependentAxis;
-                xamlMember.Setter = set_56_LineAreaBaseSeries_IndependentAxis;
+                xamlMember.Getter = get_57_LineAreaBaseSeries_IndependentAxis;
+                xamlMember.Setter = set_57_LineAreaBaseSeries_IndependentAxis;
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>.ActualIndependentAxis":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "ActualIndependentAxis", "WinRTXamlToolkit.Controls.DataVisualization.Charting.IAxis");
-                xamlMember.Getter = get_57_LineAreaBaseSeries_ActualIndependentAxis;
+                xamlMember.Getter = get_58_LineAreaBaseSeries_ActualIndependentAxis;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>.ActualDependentRangeAxis":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRTXamlToolkit.Controls.DataVisualization.Charting.LineAreaBaseSeries`1<WinRTXamlToolkit.Controls.DataVisualization.Charting.LineDataPoint>");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "ActualDependentRangeAxis", "WinRTXamlToolkit.Controls.DataVisualization.Charting.IRangeAxis");
-                xamlMember.Getter = get_58_LineAreaBaseSeries_ActualDependentRangeAxis;
+                xamlMember.Getter = get_59_LineAreaBaseSeries_ActualDependentRangeAxis;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.Xaml.Interactivity.Interaction.Behaviors":
@@ -2028,70 +2105,70 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Behaviors", "Microsoft.Xaml.Interactivity.BehaviorCollection");
                 xamlMember.SetTargetTypeName("Windows.UI.Xaml.DependencyObject");
                 xamlMember.SetIsAttachable();
-                xamlMember.Getter = get_59_Interaction_Behaviors;
-                xamlMember.Setter = set_59_Interaction_Behaviors;
+                xamlMember.Getter = get_60_Interaction_Behaviors;
+                xamlMember.Setter = set_60_Interaction_Behaviors;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.Actions":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Actions", "Microsoft.Xaml.Interactivity.ActionCollection");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_60_EventTriggerBehavior_Actions;
+                xamlMember.Getter = get_61_EventTriggerBehavior_Actions;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.EventName":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "EventName", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_61_EventTriggerBehavior_EventName;
-                xamlMember.Setter = set_61_EventTriggerBehavior_EventName;
+                xamlMember.Getter = get_62_EventTriggerBehavior_EventName;
+                xamlMember.Setter = set_62_EventTriggerBehavior_EventName;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.SourceObject":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "SourceObject", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_62_EventTriggerBehavior_SourceObject;
-                xamlMember.Setter = set_62_EventTriggerBehavior_SourceObject;
+                xamlMember.Getter = get_63_EventTriggerBehavior_SourceObject;
+                xamlMember.Setter = set_63_EventTriggerBehavior_SourceObject;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.AssociatedObject":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "AssociatedObject", "Windows.UI.Xaml.DependencyObject");
-                xamlMember.Getter = get_63_EventTriggerBehavior_AssociatedObject;
+                xamlMember.Getter = get_64_EventTriggerBehavior_AssociatedObject;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.Command":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "Command", "System.Windows.Input.ICommand");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_64_InvokeCommandAction_Command;
-                xamlMember.Setter = set_64_InvokeCommandAction_Command;
+                xamlMember.Getter = get_65_InvokeCommandAction_Command;
+                xamlMember.Setter = set_65_InvokeCommandAction_Command;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.CommandParameter":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "CommandParameter", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_65_InvokeCommandAction_CommandParameter;
-                xamlMember.Setter = set_65_InvokeCommandAction_CommandParameter;
+                xamlMember.Getter = get_66_InvokeCommandAction_CommandParameter;
+                xamlMember.Setter = set_66_InvokeCommandAction_CommandParameter;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.InputConverter":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "InputConverter", "Windows.UI.Xaml.Data.IValueConverter");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_66_InvokeCommandAction_InputConverter;
-                xamlMember.Setter = set_66_InvokeCommandAction_InputConverter;
+                xamlMember.Getter = get_67_InvokeCommandAction_InputConverter;
+                xamlMember.Setter = set_67_InvokeCommandAction_InputConverter;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.InputConverterParameter":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "InputConverterParameter", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_67_InvokeCommandAction_InputConverterParameter;
-                xamlMember.Setter = set_67_InvokeCommandAction_InputConverterParameter;
+                xamlMember.Getter = get_68_InvokeCommandAction_InputConverterParameter;
+                xamlMember.Setter = set_68_InvokeCommandAction_InputConverterParameter;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.InputConverterLanguage":
                 userType = (global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo.XamlMember(this, "InputConverterLanguage", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_68_InvokeCommandAction_InputConverterLanguage;
-                xamlMember.Setter = set_68_InvokeCommandAction_InputConverterLanguage;
+                xamlMember.Getter = get_69_InvokeCommandAction_InputConverterLanguage;
+                xamlMember.Setter = set_69_InvokeCommandAction_InputConverterLanguage;
                 break;
             }
             return xamlMember;
@@ -2418,5 +2495,8 @@ namespace CommercialRecordSystem.CommercialRecordSystem_XamlTypeInfo
         }
     }
 }
+
+
+
 
 

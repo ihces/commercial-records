@@ -87,7 +87,7 @@
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Path=EntryBuff.Amount, Mode=TwoWay, Converter={StaticResource AmountConverter}, UpdateSourceTrigger=Explicit}" TextAlignment="Center" Foreground="White" Background="#28ffffff" BorderThickness="0" InputScope="Number" />
+                            <TextBox Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Path=EntryBuff.Amount, Mode=TwoWay, Converter={StaticResource AmountConverter}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Foreground="White" Background="#28ffffff" BorderThickness="0" InputScope="Number" />
                             <ComboBox Grid.Column="1" BorderThickness="0" Foreground="Black" Background="Silver" SelectedIndex="{Binding Path=EntryBuff.Measure, Mode=TwoWay}">
                                 <TextBlock FontSize="26" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="Adet" TextAlignment="Center" />
                                 <TextBlock FontSize="26" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="Kg" TextAlignment="Center" />

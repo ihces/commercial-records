@@ -42,6 +42,14 @@
   <Dependencies>
     <PackageDependency Name="Microsoft.VCLibs.120.00.Debug" MinVersion="12.0.21005.1" />
   </Dependencies>
+  <Extensions>
+    <Extension Category="windows.activatableClass.inProcessServer">
+      <InProcessServer>
+        <Path>SQLiteWinRT.dll</Path>
+        <ActivatableClass ActivatableClassId="SQLiteWinRT.Database" ThreadingModel="both" />
+      </InProcessServer>
+    </Extension>
+  </Extensions>
   <build:Metadata>
     <build:Item Name="TargetFrameworkMoniker" Value=".NETCore,Version=v4.5.1" />
     <build:Item Name="VisualStudio" Version="12.0" />
@@ -50,7 +58,7 @@
     <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="12.0.30501.0" />
     <build:Item Name="Microsoft.Windows.UI.Xaml.Build.Tasks.dll" Version="12.0.30501.0" />
     <build:Item Name="BehaviorsXamlSDKManaged" Version="12.0" />
-    <build:Item Name="SQLite.WinRT81" Version="3.8.5" />
+    <build:Item Name="SQLite.WinRT81" Version="3.8.7.1" />
     <build:Item Name="MakePri.exe" Version="6.3.9600.17029 (winblue_gdr.140219-1702)" />
   </build:Metadata>
 </Package>
