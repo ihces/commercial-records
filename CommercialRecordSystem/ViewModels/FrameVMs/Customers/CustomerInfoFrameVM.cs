@@ -13,6 +13,7 @@ using Windows.Storage.Streams;
 using Windows.Storage.Pickers;
 using System.IO;
 using Windows.UI.Xaml.Controls;
+using CommercialRecordSystem.Views;
 
 namespace CommercialRecordSystem.ViewModels
 {
@@ -165,18 +166,7 @@ namespace CommercialRecordSystem.ViewModels
 
         private async void loadPhotoViaBrowserCmdHandler(object parameter)
         {
-            FileOpenPicker filePicker = new FileOpenPicker();
-            filePicker.FileTypeFilter.Add(".jpg");
-            filePicker.ViewMode = PickerViewMode.Thumbnail;
-            filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            filePicker.SettingsIdentifier = "PicturePicker";
-            filePicker.CommitButtonText = "Seç";
-
-            StorageFile selectedFile = await filePicker.PickSingleFileAsync();
-            if (selectedFile != null)
-            {
-                copyImgToLocalFolderNShow(selectedFile);
-            }
+            Navigation.Navigate<ImagePicker>();
         }
 
         private async void capturePhotoFromCamCmdHandler(object parameter)
@@ -204,23 +194,19 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        public CustomerInfoFrameVM(Frame frame, FrameNavigation navigation)
-            : base(frame, navigation)
+        public CustomerInfoFrameVM(FrameNavigation navigation)
+            : base(navigation)
         {
             saveCustomerCmd = new ICommandImp(saveCustomerCmdHandler);
             delCustomerCmd = new ICommandImp(delCustomerCmdHandler);
             loadPhotoViaFileBrowserCmd = new ICommandImp(loadPhotoViaBrowserCmdHandler);
             capturePhotoFromCamCmd = new ICommandImp(capturePhotoFromCamCmdHandler);
-        }
 
-        /*public CustomerInfoFrameVM(Frame frame, int customerId) : base(frame)
-        {
-            DelButtonCanEnable = true;
-            CurrentCustomer.get(customerId);
-            saveCustomerCmd = new ICommandImp(saveCustomerCmdHandler);
-            delCustomerCmd = new ICommandImp(delCustomerCmdHandler);
-            loadPhotoViaFileBrowserCmd = new ICommandImp(loadPhotoViaBrowserCmdHandler);
-            capturePhotoFromCamCmd = new ICommandImp(capturePhotoFromCamCmdHandler);
-        }*/
+            if (null != navigation.Message) 
+            {
+                DelButtonCanEnable = true;
+                CurrentCustomer.get((int)navigation.Message);
+            }
+        }
     }
 }

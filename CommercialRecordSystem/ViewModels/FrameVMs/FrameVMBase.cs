@@ -36,7 +36,7 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        public FrameVMBase(Frame frame, FrameNavigation navigation)
+        public FrameVMBase(FrameNavigation navigation)
         {
             this.navigation = navigation;
             goBackCmd = new ICommandImp(goBackCmdHandler);

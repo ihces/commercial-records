@@ -165,8 +165,8 @@ namespace CommercialRecordSystem.ViewModels.Transacts
         }
         #endregion
 
-        public TransactFrameVMBase(Frame frame, FrameNavigation navigation)
-            : base(frame, navigation)
+        public TransactFrameVMBase(FrameNavigation navigation)
+            : base(navigation)
         {
             addEntryToListCmd = new ICommandImp(addEntryToListCmdHandler);
             goNextCmd = new ICommandImp(goNextCmdHandler);

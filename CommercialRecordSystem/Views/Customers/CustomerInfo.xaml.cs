@@ -9,20 +9,5 @@ namespace CommercialRecordSystem.Views.Customers
         {
             this.InitializeComponent();
         }
-
-        /*protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            CustomerInfoFrameVM VModel = null;
-            if (null == e.Parameter)
-            {
-                VModel = new CustomerInfoFrameVM(this.Frame);
-            }  
-            else
-            {
-                int customerId = (int)e.Parameter;
-                VModel = new CustomerInfoFrameVM(this.Frame, customerId);
-            }
-            this.DataContext = VModel;
-        }*/
     }
 }

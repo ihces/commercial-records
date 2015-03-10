@@ -24,7 +24,7 @@ namespace CommercialRecordSystem.Views
                 navigationInfo = (FrameNavigation)e.Parameter;
 
             navigationInfo.PageFrame = this.Frame;
-            this.DataContext = (FrameVMBase)Activator.CreateInstance(viewModel, this.Frame, navigationInfo);
+            this.DataContext = (FrameVMBase)Activator.CreateInstance(viewModel, navigationInfo);
         }
     }
 }

@@ -112,6 +112,7 @@
     <Compile Include="Constants\ColorConsts.cs" />
     <Compile Include="Controls\CRSTextBox.cs" />
     <Compile Include="Controls\CSRButton.cs" />
+    <Compile Include="Converters\Boolean2VisibilityConverter.cs" />
     <Compile Include="Converters\Double2MoneyConverter.cs" />
     <Compile Include="Converters\Int2MeasureConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="ViewModels\DataVMs\Goods\FirmVM.cs" />
     <Compile Include="ViewModels\DataVMs\Goods\GoodVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\Payment\PaymentEntryVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\ImagePickerFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\Payment\PaymentFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\Sale\SaleFrameVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\Sale\SaleEntryVM.cs" />
@@ -166,6 +168,9 @@
     </Compile>
     <Compile Include="Views\Goods\Goods.xaml.cs">
       <DependentUpon>Goods.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImagePicker.xaml.cs">
+      <DependentUpon>ImagePicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -211,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Goods\GoodInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ImagePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

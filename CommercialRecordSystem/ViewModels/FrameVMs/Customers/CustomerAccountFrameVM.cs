@@ -24,8 +24,8 @@ namespace CommercialRecordSystem.ViewModels
 
         #endregion
 
-        public CustomerAccountFrameVM(Frame frame, FrameNavigation navigation)
-            : base(frame, navigation)
+        public CustomerAccountFrameVM(FrameNavigation navigation)
+            : base(navigation)
         {
             //CurrentCustomer.get(customerId);
             //CurrentCustomer.Name += " " + CurrentCustomer.Surname;

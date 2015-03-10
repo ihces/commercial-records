@@ -31,8 +31,8 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        public SaleFrameVM(Frame frame, FrameNavigation navigation)
-            : base(frame, navigation)
+        public SaleFrameVM(FrameNavigation navigation)
+            : base(navigation)
         {
             if (transactInfo.Type.Equals(Transact.TYPE.ORDER))
             {

@@ -20,8 +20,8 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        public PaymentFrameVM(Frame frame, FrameNavigation navigation)
-            : base(frame, navigation)
+        public PaymentFrameVM(FrameNavigation navigation)
+            : base(navigation)
         {
         }
     }

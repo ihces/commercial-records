@@ -128,7 +128,7 @@ namespace CommercialRecordSystem.ViewModels
 
         private void selectRecordedCustomerCmdHandler(object parameter)
         {
-            Navigation.Navigate(typeof(CustomerList), "Customers.OPEN_PURPOSE.ADD_TRANSACTION");
+            Navigation.Navigate(typeof(CustomerList));
         }
 
         protected void GoBack()
@@ -167,8 +167,8 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        public TransactTypeFrameVM(Frame frame, FrameNavigation navigation)
-            : base(frame, navigation)
+        public TransactTypeFrameVM(FrameNavigation navigation)
+            : base(navigation)
         {
             customerTypeSelectCmd = new ICommandImp(customerTypeSelectCmdHandler);
             selectRecordedCustomerCmd = new ICommandImp(selectRecordedCustomerCmdHandler);

@@ -24,7 +24,7 @@ namespace CommercialRecordSystem.Views.Customers
             setTotalCustomerCount();
             setTotalCustomerBalance();
         }
-        */
+        *//*
         private void setTotalCustomerCount()
         {
             int totalCount = CustomerListView != null ? CustomerListView.Items.Count : 0;
@@ -47,7 +47,7 @@ namespace CommercialRecordSystem.Views.Customers
             totalCustomerBalance.Text = balance.ToString() + "₺";
 
         }
-
+        */
         /*protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (null != e.Parameter)
@@ -58,19 +58,6 @@ namespace CommercialRecordSystem.Views.Customers
             this.DataContext = new CustomersFrameVM(this.Frame);
         }
         */
-        private void addCustomerButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(CustomerInfo));
-        }
-
-        private void editCustButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (null != CustomerListView.SelectedItem)
-            {
-                CustomerListFrameVM dataContextBuff = (CustomerListFrameVM)this.DataContext;
-                this.Frame.Navigate(typeof(CustomerInfo), dataContextBuff.SelectedCustomer.Id);
-            }
-        }
 
         private void CustomerListView_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -89,12 +76,12 @@ namespace CommercialRecordSystem.Views.Customers
                 }
             }*/
         }
-
+        /*
         private void CustomerListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
         {
             setTotalCustomerCount();
             setTotalCustomerBalance();
-        }
+        }*/
         
 
 

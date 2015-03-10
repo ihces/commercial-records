@@ -28,6 +28,7 @@ namespace CommercialRecordSystem
     {
         public static string DBPath = string.Empty;
         public static StorageFolder ProfileImgFolder = null;
+        public const string PROFILE_PHOTO_FOLDER = "ProfilePhotos";
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -42,7 +43,7 @@ namespace CommercialRecordSystem
 
         private async void initAsyncs()
         {
-            ProfileImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync("ProfilePhotos", CreationCollisionOption.OpenIfExists);
+            ProfileImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(PROFILE_PHOTO_FOLDER, CreationCollisionOption.OpenIfExists);
         }
 
         /// <summary>

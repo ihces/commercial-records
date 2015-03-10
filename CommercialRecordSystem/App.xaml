@@ -11,6 +11,7 @@
             <converter:Int2MeasureConverter x:Key="Int2MeasureConverter" />
             <converter:PaymentType2StringConverter x:Key="PaymentType2StringConverter" />
             <converter:String2VisibilityConverter x:Key="String2VisibilityConverter" />
+            <converter:Boolean2VisibilityConverter x:Key="Boolean2VisibilityConverter" />
             <Style x:Key="PortraitTile" TargetType="Grid">
                 <Setter Property="HorizontalAlignment" Value="Left"></Setter>
                 <Setter Property="Width" Value="200"></Setter>
@@ -46,7 +47,7 @@
                 </Setter>
             </Style>
             <Style x:Key="CustomerListRow" TargetType="Grid">
-                <Setter Property="Width" Value="1180"></Setter>
+                <Setter Property="Width" Value="1186"></Setter>
                 <Setter Property="Height" Value="60"></Setter>
             </Style>
             <Style x:Key="SaleListHeader" TargetType="Grid">
@@ -59,6 +60,18 @@
                 <Setter Property="Height" Value="60"></Setter>
                 <Setter Property="Background" Value="#18ffffff"></Setter>
             </Style>
+            <x:Double x:Key="Size">30</x:Double>
+            <x:Double x:Key="TransformSize">-15</x:Double>
+            
+            <DataTemplate x:Key="RoundCorner">
+                <Ellipse Height="{StaticResource Size}" Width="{StaticResource Size}"  
+                     Fill="White"
+                     Stroke="Black" StrokeThickness="2" >
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform TranslateX="{StaticResource TransformSize}" TranslateY="{StaticResource TransformSize}"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Themes/CRSTextBox.xaml" />
                 <ResourceDictionary Source="/Themes/CRSRadioButton.xaml" />
