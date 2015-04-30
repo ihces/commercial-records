@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
+using Windows.Storage.FileProperties;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Popups;
@@ -324,7 +325,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
 
         protected override void goBackCmdHandler(object parameter)
         {
-            System.IOFile.Delete();
+            //System.IOFile.Delete();
             Navigation.GoBack();
         }
         #endregion
@@ -346,15 +347,17 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             filePicker.FileTypeFilter.Add(".jpeg");
             filePicker.FileTypeFilter.Add(".bmp");
             filePicker.FileTypeFilter.Add(".png");
+            
             filePicker.ViewMode = PickerViewMode.Thumbnail;
             filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             filePicker.SettingsIdentifier = "PicturePicker";
             filePicker.CommitButtonText = "Seç";
 
             selectedImage = await filePicker.PickSingleFileAsync();
-            if (selectedImage != null)
+            BasicProperties selectedImgProp = await selectedImage.GetBasicPropertiesAsync();
+            if (selectedImage != null )
             {
-                tempFileName = "temp_" + DateTime.Now.Ticks + ".jpg";
+                tempFileName = "temp_" + DateTime.Now.Ticks + selectedImage.FileType;
                 await selectedImage.CopyAsync(App.ProfileImgFolder, tempFileName);
                 SelectedImageSrc = new Uri(Path.Combine(App.ProfileImgFolder.Path, tempFileName));
 
@@ -423,7 +426,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             uint height = (uint)Math.Floor(selectedRect.Height);
             uint width = (uint)Math.Floor(selectedRect.Width);
 
-            fileName = "photo_" + DateTime.Now.Ticks + ".jpg";
+            fileName = "photo_" + DateTime.Now.Ticks + selectedImage.FileType;
             StorageFile newImageFile = await (await ApplicationData.Current.LocalFolder.GetFolderAsync(App.PROFILE_PHOTO_FOLDER)).CreateFileAsync(fileName);
 
             using (IRandomAccessStream originalImgFileStream = await selectedImage.OpenReadAsync())
@@ -483,6 +486,8 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
 
                     // Flush the data to file.
                     await bmpEncoder.FlushAsync();
+
+                    Navigation.GoBack(fileName);
                 }
             }
         }

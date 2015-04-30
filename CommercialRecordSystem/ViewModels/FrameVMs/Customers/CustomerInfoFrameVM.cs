@@ -14,6 +14,7 @@ using Windows.Storage.Pickers;
 using System.IO;
 using Windows.UI.Xaml.Controls;
 using CommercialRecordSystem.Views;
+using CommercialRecordSystem.ViewModels.FrameVMs;
 
 namespace CommercialRecordSystem.ViewModels
 {
@@ -202,7 +203,14 @@ namespace CommercialRecordSystem.ViewModels
             loadPhotoViaFileBrowserCmd = new ICommandImp(loadPhotoViaBrowserCmdHandler);
             capturePhotoFromCamCmd = new ICommandImp(capturePhotoFromCamCmdHandler);
 
-            if (null != navigation.Message) 
+            if (null != navigation.Forward && navigation.Forward.Is<ImagePicker>())
+            {
+                if (null != navigation.Message)
+                {
+                    CurrentCustomer.ProfileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, (string)navigation.Message));
+                }
+            }
+            else if (null != navigation.Message) 
             {
                 DelButtonCanEnable = true;
                 CurrentCustomer.get((int)navigation.Message);
