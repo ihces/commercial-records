@@ -43,8 +43,19 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
         private double xMax; // right
         private double yMin; // top
         private double yMax; // bottom
+        private double uniformRatio;
 
         private string tempFileName;
+        private async void setTempFileName(string newFileName)
+        {
+            if (!string.IsNullOrWhiteSpace(tempFileName))
+            {
+                StorageFile tempFile = await (await ApplicationData.Current.LocalFolder.GetFolderAsync(App.PROFILE_PHOTO_FOLDER)).GetFileAsync(tempFileName);
+                if (null != tempFile)
+                    await tempFile.DeleteAsync();
+            }
+            tempFileName = newFileName;
+        }
 
         private StorageFile selectedImage;
 
@@ -161,10 +172,20 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
         #region Command Handlers
         public void changeCornerCoor(string cornerName, Point currentPosition, Point previousPosition)
         {
+            if (currentPosition.X < xMin)
+                currentPosition.X = xMin;
+            else if (currentPosition.X > xMin + xMax)
+                currentPosition.X = xMin + xMax;
+
+            if (currentPosition.Y < yMin)
+                currentPosition.Y = yMin;
+            else if (currentPosition.Y > yMin + yMax)
+                currentPosition.Y = yMin + yMax;
+
             double pointerChangeX = currentPosition.X - previousPosition.X;
             double pointerChangeY = currentPosition.Y - previousPosition.Y;
             
-            if (cornerName.Equals(TOP_LEFT_CORNER))
+                if (cornerName.Equals(TOP_LEFT_CORNER))
                 {
                     double width = SelectedRect.Width - pointerChangeX;
                     double height = SelectedRect.Height - pointerChangeY;
@@ -285,21 +306,21 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             double transX = e.Delta.Translation.X, 
                    transY = e.Delta.Translation.Y;
 
-            if ((LeftX + transX) < 0)
+            if ((LeftX + transX) < xMin)
             {
-                transX = -LeftX;
+                transX = xMin - LeftX;
             }
-            if ((RightX + transX) > Navigation.PageFrame.ActualWidth)
+            if ((RightX + transX) > xMin + xMax)
             {
-                transX = Navigation.PageFrame.ActualWidth - RightX;
+                transX = xMin + xMax - RightX;
             }
-            if ((TopY + transY) < 0)
+            if ((TopY + transY) < yMin)
             {
-                transY = -TopY;
+                transY = yMin - TopY;
             }
-            if ((BottomY + transY) > Navigation.PageFrame.ActualHeight)
+            if ((BottomY + transY) > yMin + yMax)
             {
-                transY = Navigation.PageFrame.ActualHeight - BottomY;
+                transY = yMin + yMax - BottomY;
             }
 
             LeftX += transX;
@@ -357,10 +378,9 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             BasicProperties selectedImgProp = await selectedImage.GetBasicPropertiesAsync();
             if (selectedImage != null )
             {
-                tempFileName = "temp_" + DateTime.Now.Ticks + selectedImage.FileType;
+                setTempFileName("temp_" + DateTime.Now.Ticks + selectedImage.FileType);
                 await selectedImage.CopyAsync(App.ProfileImgFolder, tempFileName);
                 SelectedImageSrc = new Uri(Path.Combine(App.ProfileImgFolder.Path, tempFileName));
-
                 // Ensure the stream is disposed once the image is loaded
                 using (IRandomAccessStream fileStream = await selectedImage.OpenAsync(Windows.Storage.FileAccessMode.Read))
                 {
@@ -372,11 +392,26 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
                     if (decoder.PixelHeight >= (uint)(AspectRatio * MinEdgeSize) &&
                         decoder.PixelWidth >= (uint)MinEdgeSize)
                     {
-                        xMin = 0;// (Navigation.PageFrame.ActualWidth - decoder.PixelWidth) / 2;
-                        xMax = xMin + decoder.PixelWidth;
-                        yMin = 0;// (Navigation.PageFrame.ActualHeight - decoder.PixelHeight) / 2;
-                        yMax = yMin + decoder.PixelHeight;
-                        OuterRect = new Rect(xMin, yMin, Navigation.PageFrame.ActualWidth, Navigation.PageFrame.ActualHeight);
+                        if (decoder.PixelWidth * (Navigation.PageFrame.ActualHeight / decoder.PixelHeight) > Navigation.PageFrame.ActualWidth)
+                        {
+                            uniformRatio = decoder.PixelWidth / Navigation.PageFrame.ActualWidth;
+
+                            xMin = 0;
+                            xMax = Navigation.PageFrame.ActualWidth;
+                            yMin = (Navigation.PageFrame.ActualHeight - decoder.PixelHeight / uniformRatio) / 2;
+                            yMax = decoder.PixelHeight / uniformRatio;
+                        }
+                        else
+                        {
+                            uniformRatio = decoder.PixelHeight / Navigation.PageFrame.ActualHeight;
+
+                            xMin = (Navigation.PageFrame.ActualWidth - decoder.PixelWidth / uniformRatio) / 2;
+                            xMax = decoder.PixelWidth / uniformRatio;
+                            yMin = 0;
+                            yMax = Navigation.PageFrame.ActualHeight; 
+                        }
+
+                        OuterRect = new Rect(xMin, yMin, xMax, yMax);
 
                         ResetCorner((Navigation.PageFrame.ActualWidth - width)/2, (Navigation.PageFrame.ActualWidth + width)/2,
                             (Navigation.PageFrame.ActualHeight - height)/2, (Navigation.PageFrame.ActualHeight + height)/2);
@@ -421,11 +456,6 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
         async public Task SaveCroppedBitmapAsync()
         {
             // Convert start point and size to integer.
-            uint startPointX = (uint)Math.Floor(selectedRect.X);
-            uint startPointY = (uint)Math.Floor(selectedRect.Y);
-            uint height = (uint)Math.Floor(selectedRect.Height);
-            uint width = (uint)Math.Floor(selectedRect.Width);
-
             fileName = "photo_" + DateTime.Now.Ticks + selectedImage.FileType;
             StorageFile newImageFile = await (await ApplicationData.Current.LocalFolder.GetFolderAsync(App.PROFILE_PHOTO_FOLDER)).CreateFileAsync(fileName);
 
@@ -435,7 +465,12 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
                 // the properties of the image.
                 BitmapDecoder decoder = await BitmapDecoder.CreateAsync(originalImgFileStream);
 
-                // Refine the start point and the size. 
+                uint startPointX = (uint)Math.Floor((selectedRect.X - xMin) * uniformRatio);
+                uint startPointY = (uint)Math.Floor((selectedRect.Y - yMin) * uniformRatio);
+                uint height = (uint)Math.Floor(selectedRect.Height * uniformRatio);
+                uint width = (uint)Math.Floor(selectedRect.Width * uniformRatio);
+
+                /* Refine the start point and the size. 
                 if (startPointX + width > decoder.PixelWidth)
                 {
                     startPointX = decoder.PixelWidth - width;
@@ -445,7 +480,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
                 {
                     startPointY = decoder.PixelHeight - height;
                 }
-
+                */
                 // Get the cropped pixels.
                 byte[] pixels = await GetPixelData(decoder, startPointX, startPointY, width, height,
                     decoder.PixelWidth, decoder.PixelHeight);
@@ -486,7 +521,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
 
                     // Flush the data to file.
                     await bmpEncoder.FlushAsync();
-
+                    setTempFileName("");//clear temp file
                     Navigation.GoBack(fileName);
                 }
             }

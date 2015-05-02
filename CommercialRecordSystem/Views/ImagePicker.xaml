@@ -11,7 +11,7 @@
     mc:Ignorable="d">
 
     <Grid Style="{StaticResource PageLayout}">
-        <Image Source="{Binding SelectedImageSrc}" Stretch="Fill" />
+        <Image Source="{Binding SelectedImageSrc}" Stretch="Uniform" />
         <Canvas x:Name="imageCanvas" Visibility="Visible" >
             <Path x:Name="nonselectRegion" Fill="Black" Opacity="0.4">
                 <Path.Data>
