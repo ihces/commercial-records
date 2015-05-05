@@ -1,5 +1,6 @@
 ﻿using CommercialRecordSystem.ViewModels;
 using System;
+using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecordSystem.Common
@@ -7,6 +8,15 @@ namespace CommercialRecordSystem.Common
     class FrameNavigation
     {
         #region Properties
+
+        public enum NAVIGATE_TYPE {NAVIGATE, GO_BACK, GO_FORWARD}
+
+        private NAVIGATE_TYPE navigateType;
+        public NAVIGATE_TYPE NavigateType
+        {
+            get { return navigateType; }
+        }
+
         private Frame pageFrame = null;
         public Frame PageFrame
         {
@@ -26,6 +36,19 @@ namespace CommercialRecordSystem.Common
             get
             {
                 return pageType;
+            }
+        }
+
+        private Dictionary<string, object> propertyData = null;
+        public Dictionary<string, object> PropertyData
+        {
+            get
+            {
+                return propertyData;
+            }
+            set
+            {
+                propertyData = value;
             }
         }
 
@@ -82,6 +105,20 @@ namespace CommercialRecordSystem.Common
                 return false;
             }
         }
+
+        public event EventHandler Navigated;
+
+        
+
+        protected virtual void OnNavigated(EventArgs e)
+        {
+            EventHandler handler = Navigated;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
         #endregion
 
         public FrameNavigation(Type pageType)
@@ -95,6 +132,10 @@ namespace CommercialRecordSystem.Common
             {
                 back.forward = this;
                 back.message = message;
+
+                back.navigateType = NAVIGATE_TYPE.GO_BACK;
+                OnNavigated(EventArgs.Empty);
+
                 pageFrame.Navigate(back.pageType, back);
             }
         }
@@ -105,6 +146,10 @@ namespace CommercialRecordSystem.Common
             {
                 forward.back = this;
                 forward.message = message;
+
+                forward.navigateType = NAVIGATE_TYPE.GO_FORWARD;
+                OnNavigated(new EventArgs());
+
                 pageFrame.Navigate(forward.pageType, forward);
             }
         }
@@ -121,6 +166,10 @@ namespace CommercialRecordSystem.Common
             FrameNavigation frameNavi = new FrameNavigation(source);
             frameNavi.message = parameter;
             frameNavi.back = this;
+
+            frameNavi.navigateType = NAVIGATE_TYPE.NAVIGATE;
+            OnNavigated(EventArgs.Empty);
+
             return pageFrame.Navigate(source, frameNavi);
         }
 

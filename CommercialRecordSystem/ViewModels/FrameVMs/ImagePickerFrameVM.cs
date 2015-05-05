@@ -375,9 +375,15 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             filePicker.CommitButtonText = "Seç";
 
             selectedImage = await filePicker.PickSingleFileAsync();
-            BasicProperties selectedImgProp = await selectedImage.GetBasicPropertiesAsync();
-            if (selectedImage != null )
+
+            if (null == selectedImage) 
             {
+                Navigation.GoBack();
+            }
+            else
+            {
+                BasicProperties selectedImgProp = await selectedImage.GetBasicPropertiesAsync();
+
                 setTempFileName("temp_" + DateTime.Now.Ticks + selectedImage.FileType);
                 await selectedImage.CopyAsync(App.ProfileImgFolder, tempFileName);
                 SelectedImageSrc = new Uri(Path.Combine(App.ProfileImgFolder.Path, tempFileName));
