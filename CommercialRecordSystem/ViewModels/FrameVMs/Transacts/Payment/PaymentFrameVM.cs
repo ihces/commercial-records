@@ -16,6 +16,11 @@ namespace CommercialRecordSystem.ViewModels
         #region Command Handlers
         protected override void goNextCmdHandler(object parameter)
         {
+
+            Frame frameBuff = navigation.PageFrame;
+            navigation = new FrameNavigation(typeof(MainPage));
+            navigation.PageFrame = frameBuff;
+           
             Navigation.Navigate(typeof(TransactTypeSelector), transactInfo);
         }
         #endregion

@@ -193,6 +193,7 @@ namespace CommercialRecordSystem.ViewModels.Transacts
                                 .Where(e => transactInfo.Id == e.TransactId)
                                 .OrderBy(e => e.Id).ToListAsync();
 
+            Entries = new ObservableCollection<E>();
             foreach (T entry in saleEntryList)
             {
                 E entryBuff = new E();

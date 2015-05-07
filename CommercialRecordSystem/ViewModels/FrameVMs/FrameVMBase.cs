@@ -10,7 +10,7 @@ namespace CommercialRecordSystem.ViewModels
     abstract class FrameVMBase : VMBase
     {
         #region Properties
-        private FrameNavigation navigation;
+        protected FrameNavigation navigation;
         public FrameNavigation Navigation
         {
             get

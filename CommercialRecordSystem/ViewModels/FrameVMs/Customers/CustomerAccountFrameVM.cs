@@ -27,8 +27,8 @@ namespace CommercialRecordSystem.ViewModels
         public CustomerAccountFrameVM(FrameNavigation navigation)
             : base(navigation)
         {
-            //CurrentCustomer.get(customerId);
-            //CurrentCustomer.Name += " " + CurrentCustomer.Surname;
+            CurrentCustomer.get((int)navigation.Message);
+            CurrentCustomer.Name += " " + CurrentCustomer.Surname;
         }
     }
 }

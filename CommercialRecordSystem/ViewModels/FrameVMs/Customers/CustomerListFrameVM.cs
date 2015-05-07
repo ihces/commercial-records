@@ -156,19 +156,23 @@ namespace CommercialRecordSystem.ViewModels
 
         private void doOper4SelectedCustomer_execute(object obj)
         {
-            if (Navigation.Back.PageType.Equals(typeof(TransactTypeSelector)))
+            if (null != SelectedCustomer)
             {
-                Navigation.Navigate<TransactTypeSelector>(SelectedCustomer.Id);
-            }
-            else
-            {
-                Navigation.Navigate<CustomerAccount>(SelectedCustomer.Id);
+                if (Navigation.Back.PageType.Equals(typeof(TransactTypeSelector)))
+                {
+                    Navigation.GoBack(SelectedCustomer.Id);
+                }
+                else
+                {
+                    Navigation.Navigate<CustomerAccount>(SelectedCustomer.Id);
+                }
             }
         }
 
         private void editCustomer_execute(object obj)
         {
-            Navigation.Navigate(typeof(CustomerInfo), SelectedCustomer.Id);
+            if (null != SelectedCustomer)
+                Navigation.Navigate(typeof(CustomerInfo), SelectedCustomer.Id);
         }
 
         private void addCustomer_execute(object obj)

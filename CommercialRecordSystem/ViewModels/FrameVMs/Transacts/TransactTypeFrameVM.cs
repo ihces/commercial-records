@@ -174,28 +174,35 @@ namespace CommercialRecordSystem.ViewModels
             selectRecordedCustomerCmd = new ICommandImp(selectRecordedCustomerCmdHandler);
             startTransactionCmd = new ICommandImp(startTransactionCmdHandler);
 
-            if (navigation.CanGoForward && (navigation.Forward.Is<Sales>() ||
-                navigation.Forward.Is<Payments>()))
+            if (navigation.CanGoForward)
             {
-                this.transactInfo = (TransactVM)navigation.Message;
-                if (this.transactInfo != null)
+                if (navigation.Forward.Is<Sales>() ||
+                    navigation.Forward.Is<Payments>())
                 {
-                    SelectedTransactTypeIndex = (int)transactInfo.Type - 1;
-                    if (0 != transactInfo.CustomerId)
+                    this.transactInfo = (TransactVM)navigation.Message;
+                    if (this.transactInfo != null)
                     {
-                        currentCustomer.get(transactInfo.CustomerId);
-                        if (currentCustomer.Type.Equals(Customer.TYPE.REGISTERED))
+                        SelectedTransactTypeIndex = (int)transactInfo.Type - 1;
+                        if (0 != transactInfo.CustomerId)
                         {
-                            registeredCustomer = currentCustomer;
-                            IsRegisteredCustomer = true;
+                            currentCustomer.get(transactInfo.CustomerId);
+                            if (currentCustomer.Type.Equals(Customer.TYPE.REGISTERED))
+                            {
+                                registeredCustomer = currentCustomer;
+                                IsRegisteredCustomer = true;
+                            }
+                            else
+                            {
+                                unregisteredCustomer = currentCustomer;
+                                isRegisteredCustomer = false;
+                            }
                         }
-                        else
-                        {
-                            unregisteredCustomer = currentCustomer;
-                            isRegisteredCustomer = false;
-                        }
-                        CurrentCustomer.Refresh();
                     }
+                }
+                else if (navigation.Forward.Is<CustomerList>())
+                {
+                    if (null != navigation.Message)
+                        registeredCustomer.get((int)navigation.Message);
                 }
             }
             else

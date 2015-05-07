@@ -207,8 +207,7 @@ namespace CommercialRecordSystem.ViewModels
             {
                 if (null != navigation.Message)
                 {
-                    //if ( is CustomerInfoFrameVM)
-                    //CurrentCustomer = 
+                    CurrentCustomer.ProfilePhotoFileName = (string)navigation.Message;
                     CurrentCustomer.ProfileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, (string)navigation.Message));
                 }
             }
