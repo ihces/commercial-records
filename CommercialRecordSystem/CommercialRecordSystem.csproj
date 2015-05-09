@@ -110,6 +110,7 @@
     <Compile Include="Common\ICommandImp.cs" />
     <Compile Include="Common\FrameNavigation.cs" />
     <Compile Include="Constants\ColorConsts.cs" />
+    <Compile Include="Controls\CRSComboBox.cs" />
     <Compile Include="Controls\CRSTextBox.cs" />
     <Compile Include="Controls\CSRButton.cs" />
     <Compile Include="Converters\Boolean2VisibilityConverter.cs" />
@@ -139,6 +140,9 @@
     <Compile Include="ViewModels\DataVMs\Goods\FirmVM.cs" />
     <Compile Include="ViewModels\DataVMs\Goods\GoodVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\Payment\PaymentEntryVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\Goods\FirmInfoFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\Goods\GoodInfoFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\Goods\GoodsFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\ImagePickerFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\Payment\PaymentFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\Sale\SaleFrameVM.cs" />

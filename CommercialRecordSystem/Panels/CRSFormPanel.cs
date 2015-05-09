@@ -82,6 +82,7 @@ namespace CommercialRecordSystem.Panels
                 }
             }
 
+            if (null != (sender as CSRButton).Command)
             (sender as CSRButton).Command.CanExecute(validated);
         }
     }

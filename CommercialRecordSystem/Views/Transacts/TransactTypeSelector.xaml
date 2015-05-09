@@ -48,7 +48,6 @@
                         <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left">Satış</TextBlock>
                         <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right">&#xE017;</TextBlock>
                     </Grid>
-                    
                 </RadioButton>
                 <RadioButton Name="order" GroupName="TransactTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                     <Grid Width="330">
@@ -69,7 +68,6 @@
                     <RowDefinition Height="52" />
                 </Grid.RowDefinitions>
                 <CSRPanels:CRSFormPanel Grid.Row="0" GapSize="10">
-                    
                     <CSRPanels:CRSRadioButtonPanel Orientation="Horizontal" CheckedCommand="{Binding CustomerTypeSelectCmd}" Height="60">
                         <RadioButton Name="unregistered" GroupName="CustomerTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="{Binding IsRegisteredCustomer, Converter={StaticResource InvertBooleanConverter}}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                             <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold">Normal Müşteri</TextBlock>

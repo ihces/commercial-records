@@ -86,7 +86,7 @@
                         <RadioButton Name="creditCard" GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                             <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold">Kredi Kartı</TextBlock>
                         </RadioButton>
-                        <RadioButton Name="other" GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <RadioButton Name="other" GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="118">
                             <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold">Diğer</TextBlock>
                         </RadioButton>
                     </CSRPanels:CRSRadioButtonPanel>
