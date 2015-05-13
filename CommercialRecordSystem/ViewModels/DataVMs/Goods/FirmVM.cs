@@ -1,35 +1,13 @@
-﻿using System;
+﻿using CommercialRecordSystem.Models;
+using CommercialRecordSystem.ViewModels.DataVMs;
+using System;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class FirmVM : VMBase
+    class FirmVM : InfoDataVMBase<Firm>
     {
         #region Properties
-        private int id;
         private string name;
-        private string authorizedReseller;
-        private string address;
-        private string phone;
-        private string mobile;
-        private string pictureFileName;
-        private DateTime createdDate;
-        private DateTime modifiedDate;
-        
-        public int Id
-        {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                if (id != value)
-                {
-                    id = value;
-                    RaisePropertyChanged("Id");
-                }
-            }
-        }
         public string Name
         {
             get
@@ -45,6 +23,8 @@ namespace CommercialRecordSystem.ViewModels
                 }
             }
         }
+
+        private string authorizedReseller;
         public string AuthorizedReseller
         {
             get
@@ -60,6 +40,8 @@ namespace CommercialRecordSystem.ViewModels
                 }
             }
         }
+
+        private string address;
         public string Address
         {
             get
@@ -75,6 +57,8 @@ namespace CommercialRecordSystem.ViewModels
                 }
             }
         }
+
+        private string phone;
         public string Phone
         {
             get
@@ -90,6 +74,8 @@ namespace CommercialRecordSystem.ViewModels
                 }
             }
         }
+
+        private string mobile;
         public string Mobile 
         {
             get
@@ -105,21 +91,8 @@ namespace CommercialRecordSystem.ViewModels
                 }
             }
         }
-        public string PictureFileName 
-        {
-            get
-            {
-                return pictureFileName;
-            }
-            set
-            {
-                if (pictureFileName != value)
-                {
-                    pictureFileName = value;
-                    RaisePropertyChanged("PictureFileName");
-                }
-            }
-        }
+
+        private DateTime createdDate;
         public DateTime CreatedDate 
         { 
             get
@@ -135,6 +108,8 @@ namespace CommercialRecordSystem.ViewModels
                 }
             }
         }
+
+        private DateTime modifiedDate;
         public DateTime ModifiedDate 
         { 
             get
@@ -149,6 +124,14 @@ namespace CommercialRecordSystem.ViewModels
                     RaisePropertyChanged("ModifiedDate");
                 }
             }
+        }
+
+        public FirmVM(): base(App.FirmImgFolder)
+        { }
+
+        public FirmVM(Firm firm)
+            : base(firm, App.FirmImgFolder)
+        {
         }
         #endregion
     }

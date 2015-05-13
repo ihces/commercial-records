@@ -50,7 +50,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
         {
             if (!string.IsNullOrWhiteSpace(tempFileName))
             {
-                StorageFile tempFile = await (await ApplicationData.Current.LocalFolder.GetFolderAsync(App.PROFILE_PHOTO_FOLDER)).GetFileAsync(tempFileName);
+                StorageFile tempFile = await imageLocation.GetFileAsync(tempFileName);
                 if (null != tempFile)
                     await tempFile.DeleteAsync();
             }
@@ -58,6 +58,8 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
         }
 
         private StorageFile selectedImage;
+
+        private StorageFolder imageLocation;
 
         private double leftX;
         public double LeftX
@@ -346,7 +348,6 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
 
         protected override void goBackCmdHandler(object parameter)
         {
-            //System.IOFile.Delete();
             Navigation.GoBack();
         }
         #endregion
@@ -356,8 +357,19 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
         {
             doneCmd = new ICommandImp(doneCmd_execute);
             selectedRegionManipulatedCmd = new ICommandImp(selectedRegionManipulatedCmd_execute);
-            AspectRatio = 1.25;
+            
             MinEdgeSize = 240;
+
+            if (null != navigation.Message)
+            {
+                imageLocation = (StorageFolder)((object[])navigation.Message)[0];
+                AspectRatio = (double)((object[])navigation.Message)[1];
+            }
+            else
+            {
+                imageLocation = App.CommonImgFolder;
+                AspectRatio = 1.25;
+            }
             pickImage();
         }
 
@@ -385,8 +397,8 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
                 BasicProperties selectedImgProp = await selectedImage.GetBasicPropertiesAsync();
 
                 setTempFileName("temp_" + DateTime.Now.Ticks + selectedImage.FileType);
-                await selectedImage.CopyAsync(App.ProfileImgFolder, tempFileName);
-                SelectedImageSrc = new Uri(Path.Combine(App.ProfileImgFolder.Path, tempFileName));
+                await selectedImage.CopyAsync(imageLocation, tempFileName);
+                SelectedImageSrc = new Uri(Path.Combine(imageLocation.Path, tempFileName));
                 // Ensure the stream is disposed once the image is loaded
                 using (IRandomAccessStream fileStream = await selectedImage.OpenAsync(Windows.Storage.FileAccessMode.Read))
                 {
@@ -463,7 +475,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
         {
             // Convert start point and size to integer.
             fileName = "photo_" + DateTime.Now.Ticks + selectedImage.FileType;
-            StorageFile newImageFile = await (await ApplicationData.Current.LocalFolder.GetFolderAsync(App.PROFILE_PHOTO_FOLDER)).CreateFileAsync(fileName);
+            StorageFile newImageFile = await imageLocation.CreateFileAsync(fileName);
 
             using (IRandomAccessStream originalImgFileStream = await selectedImage.OpenReadAsync())
             {

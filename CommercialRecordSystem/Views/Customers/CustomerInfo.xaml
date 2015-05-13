@@ -31,7 +31,7 @@
 				AutomationProperties.Name="Back"
 				AutomationProperties.AutomationId="BackButton"
 				AutomationProperties.ItemType="Navigation Button" Command="{Binding GoBackCmd}" />
-                <TextBlock x:Name="pageTitle" Text="Yeni Müşteri" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                <TextBlock x:Name="pageTitle" Text="{Binding Path=InfoTitle, Mode=OneWay}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
             </Grid>
             <Grid Grid.Row="1">
@@ -48,10 +48,10 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Width="240" Height="300" Background="Gray">
+                    <Grid Grid.Row="0" Width="240" Height="300" Background="Gray" Visibility="{Binding Path=ShowImageLogo, Converter={StaticResource Boolean2VisibilityConverter}}">
                         <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE13D;" FontSize="200" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                     </Grid>
-                    <Image Grid.Row="0" Name="ProfilePhoto" Width="240" Height="300" VerticalAlignment="Top" Source="{Binding Path=CurrentCustomer.ProfileImgSource, Mode=TwoWay}"/>
+                    <Image Grid.Row="0" Width="240" Height="300" VerticalAlignment="Top" Source="{Binding Path=CurrentInfo.ImageFileSource, Mode=TwoWay}"/>
                     <Grid Grid.Row="2">
                         <Button VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0" Command="{Binding LoadPhotoViaFileBrowserCmd}" >
                             <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE188; Dosyadan.." FontSize="20" FontWeight="Light"></TextBlock>
@@ -76,15 +76,15 @@
                                 <ColumnDefinition Width="10" />
                                 <ColumnDefinition Width="3*" />
                             </Grid.ColumnDefinitions>
-                            <CSRControls:CRSTextBox  Height="60" Grid.Column="0" Input="{Binding Path=CurrentCustomer.Name, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#x1f466;" EmptyMessage="İsim" Required="True" InputType="NAME" />
-                            <CSRControls:CRSTextBox  Height="60" Grid.Column="2" Input="{Binding Path=CurrentCustomer.Surname, Mode=TwoWay}" IconVisibility="Collapsed" ThemeBrush="#008A00" EmptyMessage="Soyisim" Required="True" InputType="NAME" />
+                            <CSRControls:CRSTextBox  Height="60" Grid.Column="0" Input="{Binding Path=CurrentInfo.Name, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#x1f466;" EmptyMessage="İsim" Required="True" InputType="NAME" />
+                            <CSRControls:CRSTextBox  Height="60" Grid.Column="2" Input="{Binding Path=CurrentInfo.Surname, Mode=TwoWay}" IconVisibility="Collapsed" ThemeBrush="#008A00" EmptyMessage="Soyisim" Required="True" InputType="NAME" />
                         </Grid>
-                        <CSRControls:CRSTextBox Height="120" Input="{Binding Path=CurrentCustomer.Address, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE141;" EmptyMessage="Adres"  Multiline="True" InputType="ALL" InputMaxLength="100" />
-                        <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.PhoneNumber, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE13A;" EmptyMessage="Telefon" Required="True" InputType="PHONENUMBER"  />
-                        <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentCustomer.MobileNumber, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE1c9;" EmptyMessage="Cep Telefonu" InputType="PHONENUMBER" />
+                        <CSRControls:CRSTextBox Height="120" Input="{Binding Path=CurrentInfo.Address, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE141;" EmptyMessage="Adres"  Multiline="True" InputType="ALL" InputMaxLength="100" />
+                        <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentInfo.PhoneNumber, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE13A;" EmptyMessage="Telefon" Required="True" InputType="PHONENUMBER"  />
+                        <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentInfo.MobileNumber, Mode=TwoWay}" ThemeBrush="#008A00" IconHex="&#xE1c9;" EmptyMessage="Cep Telefonu" InputType="PHONENUMBER" />
                         <Grid Height="170">
-                            <CSRControls:CSRButton Height="60" Width="120" Command="{Binding DelCustomerCmd}" Content="Sil"  FontSize="18" Background="#AD103C" Margin="-3" HorizontalAlignment="left" IsEnabled="{Binding Path=DelButtonCanEnable}" />
-                            <CSRControls:CSRButton Height="60" Width="120" Command="{Binding SaveCustomerCmd}" Validation="True" Content="Kaydet"  FontSize="18" Background="#008A00" Margin="-3" HorizontalAlignment="Right" IsEnabled="{Binding Path=CurrentCustomer.Dirty}" />
+                            <CSRControls:CSRButton Height="60" Width="120" Command="{Binding DelInfoCmd}" Content="Sil"  FontSize="18" Background="#AD103C" Margin="-3" HorizontalAlignment="left" IsEnabled="{Binding Path=DelButtonCanEnable}" />
+                            <CSRControls:CSRButton Height="60" Width="120" Command="{Binding SaveInfoCmd}" Validation="True" Content="Kaydet"  FontSize="18" Background="#008A00" Margin="-3" HorizontalAlignment="Right" IsEnabled="{Binding Path=CurrentInfo.Dirty}" />
                         </Grid>
                         
                     </CSRPanels:CRSFormPanel>

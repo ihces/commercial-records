@@ -66,7 +66,7 @@ namespace CommercialRecordSystem.ViewModels
 
         private void recordInputData()
         {
-            var properties = this.GetType().GetRuntimeProperties();
+            IEnumerable<PropertyInfo> properties = this.GetType().GetRuntimeProperties();
             this.navigation.PropertyData = new Dictionary<string, object>();
             foreach (PropertyInfo property in properties)
             {

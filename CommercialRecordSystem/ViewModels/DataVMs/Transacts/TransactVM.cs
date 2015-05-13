@@ -101,16 +101,6 @@ namespace CommercialRecordSystem.ViewModels
             initWithModel(transact);
         }
 
-        public override void Refresh()
-        {
-            RaisePropertyChanged("Id");
-            RaisePropertyChanged("Type");
-            RaisePropertyChanged("CustomerId");
-            RaisePropertyChanged("Date");
-            RaisePropertyChanged("Cost");
-            RaisePropertyChanged("Paid");
-        }
-
         public override void initWithModel(Transact model)
         {
             Id = model.Id;

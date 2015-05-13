@@ -68,6 +68,10 @@ namespace CommercialRecordSystem.ViewModels.Transacts
         {
         }
 
+        public TransactEntryVMBase(E model) : base(model)
+        {
+        }
+
         public static async Task<ObservableCollection<T>> getEntries<T>(int transactId) where T : TransactEntryVMBase<E>, new()
         {
             ObservableCollection<T> Entries = new ObservableCollection<T>();

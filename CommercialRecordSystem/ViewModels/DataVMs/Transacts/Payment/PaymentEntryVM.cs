@@ -27,44 +27,9 @@ namespace CommercialRecordSystem.ViewModels.Transacts.Payment
         {
         }
 
-        public override void Refresh()
+        public PaymentEntryVM(PaymentEntry model) : base(model)
         {
-            RaisePropertyChanged("Id"); 
-            RaisePropertyChanged("TransactId");
-            RaisePropertyChanged("Detail");
-            RaisePropertyChanged("Cost");
-            RaisePropertyChanged("IsChecked");
-        }
-
-        public PaymentEntryVM(PaymentEntry model)
-        {
-            Id = model.Id;
-            TransactId = model.TransactId;
-            Type = model.Type;
-            Detail = model.Detail;
-            Cost = model.Cost;
             IsChecked = false;
-        }
-        
-        public override void initWithModel(PaymentEntry model)
-        {
-            Id = model.Id;
-            TransactId = model.TransactId;
-            Type = model.Type;
-            Detail = model.Detail;
-            Cost = model.Cost;
-        }
-
-        public override PaymentEntry convert2Model()
-        {
-            PaymentEntry model = new PaymentEntry();
-            model.Id = Id;
-            model.TransactId = TransactId;
-            model.Type = Type;
-            model.Detail = Detail;
-            model.Cost = Cost;
-
-            return model;
         }
     }
 }

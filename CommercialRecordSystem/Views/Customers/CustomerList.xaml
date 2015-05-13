@@ -99,7 +99,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Image Width="50" Height="60" Grid.Column="0" HorizontalAlignment="Left" Source="{Binding ProfileImgSource, Mode=OneWay}"/>
+                                <Image Width="50" Height="60" Grid.Column="0" HorizontalAlignment="Left" Source="{Binding ImageFileSource, Mode=OneWay}"/>
                                 <TextBlock Grid.Column="2" Text="{Binding Name, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
                                 <TextBlock Grid.Column="3" Text="{Binding Surname, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
                                 <TextBlock Grid.Column="4" Text="{Binding LastTransactDate, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />

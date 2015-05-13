@@ -119,6 +119,7 @@
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Converters\PaymentType2StringConverter.cs" />
     <Compile Include="Converters\String2VisibilityConverter.cs" />
+    <Compile Include="Models\InfoModelBase.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\Transacts\TransactEntry.cs" />
     <Compile Include="Panels\CRSPanel.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Panels\CRSFormPanel.cs" />
     <Compile Include="Panels\CRSRadioButtonPanel.cs" />
     <Compile Include="ViewModels\DataVMs\DataVMBase.cs" />
+    <Compile Include="ViewModels\DataVMs\InfoDataVMBase.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\TransactEntryVMBase.cs" />
     <Compile Include="ViewModels\FrameVMs\Customers\CustomerAccountFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Customers\CustomerInfoFrameVM.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="ViewModels\DataVMs\Goods\FirmVM.cs" />
     <Compile Include="ViewModels\DataVMs\Goods\GoodVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\Payment\PaymentEntryVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\InfoFrameVMBase.cs" />
     <Compile Include="ViewModels\FrameVMs\Goods\FirmInfoFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Goods\GoodInfoFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Goods\GoodsFrameVM.cs" />

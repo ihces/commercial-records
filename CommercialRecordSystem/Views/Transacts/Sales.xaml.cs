@@ -9,13 +9,5 @@ namespace CommercialRecordSystem.Views.Transacts
         {
             this.InitializeComponent();
         }
-        /*
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            if (null != e.Parameter)
-            {
-                this.DataContext = new SaleFrameVM(this.Frame, (TransactVM)e.Parameter);
-            }
-        }*/
     }
 }

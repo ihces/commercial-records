@@ -1,9 +1,8 @@
 ﻿using System;
-using SQLite;
 
 namespace CommercialRecordSystem.Models
 {
-    class Customer : ModelBase
+    class Customer : InfoModelBase
     {
         public enum TYPE { REGISTERED, UNREGISTERED };
 
@@ -14,7 +13,6 @@ namespace CommercialRecordSystem.Models
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string MobileNumber { get; set; }
-        public string ProfilePhotoFileName { get; set; }
         public DateTime LastTransactDate { get; set; }
         public double AccountCost { get; set; }
         public DateTime CreatedDate { get; set; }

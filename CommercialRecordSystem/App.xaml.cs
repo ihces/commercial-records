@@ -27,8 +27,16 @@ namespace CommercialRecordSystem
     sealed partial class App : Application
     {
         public static string DBPath = string.Empty;
-        public static StorageFolder ProfileImgFolder = null;
-        public const string PROFILE_PHOTO_FOLDER = "ProfilePhotos";
+        public static StorageFolder 
+            ProfileImgFolder = null,
+            GoodImgFolder = null,
+            FirmImgFolder = null,
+            CommonImgFolder = null;
+        public const string 
+            PROFILE_IMG_FOLDER = "ProfilePhotos",
+            GOOD_IMG_FOLDER = "GoodPhotos",
+            FIRM_IMG_FOLDER = "FirmPhotos", 
+            COMMON_IMG_FOLDER = "CommonPhotos";
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -43,7 +51,10 @@ namespace CommercialRecordSystem
 
         private async void initAsyncs()
         {
-            ProfileImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(PROFILE_PHOTO_FOLDER, CreationCollisionOption.OpenIfExists);
+            ProfileImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(PROFILE_IMG_FOLDER, CreationCollisionOption.OpenIfExists);
+            GoodImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(GOOD_IMG_FOLDER, CreationCollisionOption.OpenIfExists);
+            FirmImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(FIRM_IMG_FOLDER, CreationCollisionOption.OpenIfExists);
+            CommonImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(COMMON_IMG_FOLDER, CreationCollisionOption.OpenIfExists);
         }
 
         /// <summary>

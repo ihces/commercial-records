@@ -1,38 +1,13 @@
-﻿using System;
+﻿using CommercialRecordSystem.Models;
+using CommercialRecordSystem.ViewModels.DataVMs;
+using System;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class GoodVM : VMBase
+    class GoodVM : InfoDataVMBase<Good>
     {
         #region Properties
-        public int id;
-        public string name;
-        public int stockAmount;
-        public int unit;
-        public string detail;
-        public double cost;
-        public double price;
-        public string pictureFileName;
-        public string barcode;
-        public DateTime createdDate;
-        public DateTime modifiedDate;
-
-        public int Id
-        {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                if (id != value)
-                {
-                    id = value;
-                    RaisePropertyChanged("Id");
-                }
-            }
-        }
-
+        private string name;
         public string Name
         {
             get
@@ -49,6 +24,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private int stockAmount;
         public int StockAmount
         {
             get
@@ -65,6 +41,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private int unit;
         public int Unit
         {
             get
@@ -81,6 +58,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private string detail;
         public string Detail
         {
             get
@@ -97,6 +75,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private double cost;
         public double Cost
         {
             get
@@ -113,6 +92,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private double price;
         public double Price
         {
             get
@@ -129,22 +109,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        public string PictureFileName
-        {
-            get
-            {
-                return pictureFileName;
-            }
-            set
-            {
-                if (pictureFileName != value)
-                {
-                    pictureFileName = value;
-                    RaisePropertyChanged("PictureFileName");
-                }
-            }
-        }
-
+        private string barcode;
         public string Barcode
         {
             get
@@ -161,6 +126,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private DateTime createdDate;
         public DateTime CreatedDate
         {
             get
@@ -177,6 +143,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private DateTime modifiedDate;
         public DateTime ModifiedDate
         {
             get
@@ -193,11 +160,13 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        #endregion
+        public GoodVM(): base(App.GoodImgFolder)
+        { }
 
-        public void Refresh()
+        public GoodVM(Good good)
+            : base(good, App.GoodImgFolder)
         {
-            throw new NotImplementedException();
         }
+        #endregion
     }
 }

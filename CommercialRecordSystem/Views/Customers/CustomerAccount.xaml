@@ -55,7 +55,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Background="#18ffffff">
-                    <Image Height="250" Width="200" VerticalAlignment="Top" Source="{Binding Path=CurrentCustomer.ProfileImgSource}"/>
+                    <Image Height="250" Width="200" VerticalAlignment="Top" Source="{Binding Path=CurrentCustomer.ImageFileSource}"/>
                     <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="28">
 						    <Run FontFamily="Segoe UI Symbol" Text="&#xE00A;    &#xE00A;    &#xE00A;    &#xE00A;    &#xE00A;"/>
                     </TextBlock>

@@ -9,7 +9,7 @@ using CommercialRecordSystem.ViewModels.DataVMs;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class CustomerVM : DataVMBase<Customer>
+    class CustomerVM : InfoDataVMBase<Customer>
     {
         #region Properties
         private Customer.TYPE type = Customer.TYPE.REGISTERED;
@@ -110,20 +110,6 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private string profilePhotoFileName = string.Empty;
-        public string ProfilePhotoFileName
-        {
-            get
-            {
-                return profilePhotoFileName;
-            }
-            set
-            {
-                profilePhotoFileName = value;
-                RaisePropertyChanged("ProfilePhotoFileName");
-            }
-        }
-
         private DateTime lastTransactDate = DateTime.Now;
         public DateTime LastTransactDate
         {
@@ -180,41 +166,14 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private Uri profileImgSource;
-        public Uri ProfileImgSource
-        {
-            get
-            {
-                return profileImgSource;
-            }
-            set
-            {
-                profileImgSource = value;
-                RaisePropertyChanged("ProfileImgSource");
-            }
-        }
-
         #endregion
 
-        public CustomerVM()
+        public CustomerVM(): base(App.ProfileImgFolder)
         { }
 
         public CustomerVM(Customer customer)
+            : base(customer, App.ProfileImgFolder)
         {
-            initWithModel(customer);
-        }
-
-        public override void Refresh()
-        {
-            RaisePropertyChanged("Id");
-            RaisePropertyChanged("Type");
-            RaisePropertyChanged("Name");
-            RaisePropertyChanged("Surname");
-            RaisePropertyChanged("Address");
-            RaisePropertyChanged("PhoneNumber");
-            RaisePropertyChanged("MobileNumber");
-            RaisePropertyChanged("ProfilePhotoFileName");
-            RaisePropertyChanged("ProfileImgSource");
         }
 
         #region Database Transactions
@@ -242,35 +201,5 @@ namespace CommercialRecordSystem.ViewModels
             return CustomerList;
         }
         #endregion
-
-
-        public override void initWithModel(Customer model)
-        {
-            Id = model.Id;
-            Type = model.Type;
-            Name = model.Name;
-            Surname = model.Surname;
-            Address = model.Address;
-            PhoneNumber = model.PhoneNumber;
-            MobileNumber = model.MobileNumber;
-            ProfilePhotoFileName = model.ProfilePhotoFileName;
-            ProfileImgSource = new Uri(Path.Combine(App.ProfileImgFolder.Path, model.ProfilePhotoFileName));
-            Dirty = false;
-        }
-
-        public override Customer convert2Model()
-        {
-            Customer customer = new Customer();
-            customer.Id = Id;
-            customer.Type = Type;
-            customer.Name = Name;
-            customer.Surname = Surname;
-            customer.Address = Address;
-            customer.PhoneNumber = PhoneNumber;
-            customer.MobileNumber = MobileNumber;
-            customer.ProfilePhotoFileName = ProfilePhotoFileName;
-
-            return customer;
-        }
     }
 }

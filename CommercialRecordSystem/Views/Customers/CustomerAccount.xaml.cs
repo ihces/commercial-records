@@ -45,11 +45,5 @@ namespace CommercialRecordSystem.Views.Customers
         {
             this.Frame.Navigate(typeof(CommercialRecordSystem.Views.Transacts.Sales));
         }
-        /*
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            int customerId = (int)e.Parameter;
-            this.DataContext = new CustomerAccountFrameVM(this.Frame, customerId);
-        }*/
     }
 }

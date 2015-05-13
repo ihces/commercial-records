@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Reflection;
 using CommercialRecordSystem.Models;
+using System.Collections.Generic;
 
 namespace CommercialRecordSystem.ViewModels.DataVMs
 {
@@ -21,11 +23,43 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
         }
         #endregion
 
-        public abstract void Refresh();
+        public void Refresh()
+        {
+            IEnumerable<PropertyInfo> properties = this.GetType().GetRuntimeProperties();
+            foreach (PropertyInfo property in properties)
+            {
+                RaisePropertyChanged(property.Name);
+            }
+        }
 
-        public abstract void initWithModel(E model);
+        public virtual void initWithModel(E model)
+        {
+            IEnumerable<PropertyInfo> modelProperties = model.GetType().GetRuntimeProperties();
+            IEnumerable<PropertyInfo> VMproperties = this.GetType().GetRuntimeProperties();
 
-        public abstract E convert2Model();
+            foreach (PropertyInfo modelProperty in modelProperties)
+            {
+                PropertyInfo property = VMproperties.Where(p => p.Name == modelProperty.Name).Single();
+                property.SetValue(this, modelProperty.GetValue(model));
+            }
+            
+            Dirty = false;
+        }
+
+        public virtual E convert2Model()
+        {
+            E model = new E();
+            IEnumerable<PropertyInfo> modelProperties = model.GetType().GetRuntimeProperties();
+            IEnumerable<PropertyInfo> VMproperties = this.GetType().GetRuntimeProperties();
+
+            foreach (PropertyInfo modelProperty in modelProperties)
+            {
+                PropertyInfo property = VMproperties.Where(p => p.Name == modelProperty.Name).Single();
+                modelProperty.SetValue(model, property.GetValue(this));
+            }
+
+            return model;
+        }
 
         public virtual int save()
         {
@@ -79,6 +113,16 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
             }
 
             return this;
+        }
+
+        public DataVMBase(E model)
+        {
+            initWithModel(model);
+        }
+
+        public DataVMBase() 
+        {
+        
         }
     }
 }

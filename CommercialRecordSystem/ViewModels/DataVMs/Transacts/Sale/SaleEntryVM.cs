@@ -56,48 +56,8 @@ namespace CommercialRecordSystem.ViewModels
         {
         }
 
-        public SaleEntryVM(SaleEntry model)
+        public SaleEntryVM(SaleEntry model) : base(model)
         {
-            initWithModel(model);
-
-        }
-
-        public override void initWithModel(SaleEntry model)
-        {
-            Id = model.Id;
-            TransactId = model.TransactId;
-            Amount = model.Amount;
-            Measure = model.Measure;
-            Detail = model.Detail;
-            UnitCost = model.UnitCost;
-            Cost = model.Cost;
-            IsChecked = false;
-        }
-
-        public override SaleEntry convert2Model()
-        {
-            SaleEntry model = new SaleEntry();
-            model.Id = Id;
-            model.TransactId = TransactId;
-            model.Amount = Amount;
-            model.Measure = Measure;
-            model.Detail = Detail;
-            model.UnitCost = UnitCost;
-            model.Cost = Cost;
-
-            return model;
-        }
-
-        public override void Refresh()
-        {
-            RaisePropertyChanged("Id"); 
-            RaisePropertyChanged("TransactId");
-            RaisePropertyChanged("Amount");
-            RaisePropertyChanged("Measure");
-            RaisePropertyChanged("Detail");
-            RaisePropertyChanged("UnitCost");
-            RaisePropertyChanged("Cost");
-            RaisePropertyChanged("IsChecked");
         }
     }
 }
