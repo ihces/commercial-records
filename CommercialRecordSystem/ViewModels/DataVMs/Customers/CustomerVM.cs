@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Linq;
 using CommercialRecordSystem.Models;
-using System.IO;
-using System.Collections.Generic;
+using CommercialRecordSystem.ViewModels.DataVMs;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using CommercialRecordSystem.ViewModels.DataVMs;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace CommercialRecordSystem.ViewModels
 {
@@ -175,31 +174,5 @@ namespace CommercialRecordSystem.ViewModels
             : base(customer, App.ProfileImgFolder)
         {
         }
-
-        #region Database Transactions
-        public async static Task<ObservableCollection<CustomerVM>> getCustomers(string keyword)
-        {
-            ObservableCollection<CustomerVM> CustomerList = new ObservableCollection<CustomerVM>();
-            List<Customer> customerModelList = null;
-            if (0 == keyword.Trim().Length)
-            {
-                var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-                customerModelList = await db.Table<Customer>().Where(c => c.Type == Customer.TYPE.REGISTERED).OrderBy(c => c.Name).OrderBy(c => c.Surname).ToListAsync();
-            }
-            else
-            {
-                keyword = "%" + keyword + "%";
-                var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-                customerModelList = await db.Table<Customer>().Where(c => c.Type == Customer.TYPE.REGISTERED && (c.Name.Contains(keyword) || c.Surname.Contains(keyword))).ToListAsync();
-            }
-
-            foreach (Customer customer in customerModelList)
-            {
-                CustomerVM customerBuff = new CustomerVM(customer);
-                CustomerList.Add(customerBuff);
-            }
-            return CustomerList;
-        }
-        #endregion
     }
 }

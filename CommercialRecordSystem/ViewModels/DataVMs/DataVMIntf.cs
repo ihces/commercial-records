@@ -1,4 +1,9 @@
-﻿namespace CommercialRecordSystem.ViewModels
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+namespace CommercialRecordSystem.ViewModels
 {
     interface DataVMIntf<E>
     {

@@ -7,6 +7,22 @@ namespace CommercialRecordSystem.ViewModels
     class GoodVM : InfoDataVMBase<Good>
     {
         #region Properties
+        public int firmId;
+        public int FirmId {
+            get
+            {
+                return firmId;
+            }
+            set
+            {
+                if (firmId != value)
+                {
+                    firmId = value;
+                    RaisePropertyChanged("FirmId");
+                }
+            }
+        }
+
         private string name;
         public string Name
         {

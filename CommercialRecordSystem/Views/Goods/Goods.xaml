@@ -34,531 +34,205 @@
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
             <SearchBox Grid.Column="2" HorizontalAlignment="Right" FontSize="18"  Width="350" VerticalAlignment="Bottom" Margin="0,0,25,40" />
         </Grid>
-        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
-            <StackPanel Orientation="Horizontal">
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140" />
+                <ColumnDefinition Width="90" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Height="90" Width="90" VerticalAlignment="Top" FontSize="18" Background="#008299" Margin="-3" Command="{Binding AddFirmCmd}">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="140"/>
-                        <ColumnDefinition Width="240"/>
-                        <ColumnDefinition Width="345"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="1">
-                        <Image Source="ms-appx:///Assets/marshall.jpg" VerticalAlignment="Top" Height="240"></Image>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#x1f3e2;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="Şark İnşaat San. Petrol Kimya Ltd. Şti." Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE141;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="14" Text="Bahçelievler Mah. Değirmen Sokak. No: 29 Ilıca/Erzurum" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE13A;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="442 631 20 62" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE1c9;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="534 896 10 22" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                    </StackPanel>
-                    <Grid Grid.Column="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="40" />
-                            <RowDefinition Height="52" />
-                        </Grid.RowDefinitions>
-                        <ListView Grid.Row="0" >
-                            <ListView.Header>
-                                <Grid Height="40" Background="#008299">
-                                    <TextBlock FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Marshall Boya Sanayi A.Ş.</TextBlock>
-                                </Grid>
-                            </ListView.Header>
-                            <Grid Height="100" Width="320" Background="#18ffffff">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Background="#28ffffff">
-                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="40"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Background="#28ffffff">
-                                        <TextBlock Grid.Row="0" Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="555555" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
-                                        <TextBlock Grid.Column="1" Text="Galon" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
-                                    </Grid>
-                                    <Grid Grid.Row="2" Background="#28ffffff">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="40"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="99.999,00" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
-                                        </Grid>
-                                        <Grid Grid.Column="1" Background="#0097aa">
-                                            <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid Height="100" Width="320" Background="#18ffffff">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Background="#28ffffff">
-                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="40"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Background="#28ffffff">
-                                        <TextBlock Grid.Row="0" Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="555555" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
-                                        <TextBlock Grid.Column="1" Text="Galon" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
-                                    </Grid>
-                                    <Grid Grid.Row="2" Background="#28ffffff">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="40"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="99.999,00" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
-                                        </Grid>
-                                        <Grid Grid.Column="1" Background="#0097aa">
-                                            <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid Height="100" Width="320" Background="#18ffffff">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Background="#28ffffff">
-                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="40"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Background="#28ffffff">
-                                        <TextBlock Grid.Row="0" Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="555555" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
-                                        <TextBlock Grid.Column="1" Text="Galon" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
-                                    </Grid>
-                                    <Grid Grid.Row="2" Background="#28ffffff">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="40"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="99.999,00" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
-                                        </Grid>
-                                        <Grid Grid.Column="1" Background="#0097aa">
-                                            <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </ListView>
-                        <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" FontFamily="Segoe UI Symbol" FontSize="24" TextAlignment="Center">&#x1f3ed;</TextBlock>
+                    <TextBlock Grid.Row="1" FontFamily="Segoe UI Symbol" FontSize="18" Text="Firma Ekle" TextWrapping="Wrap" TextAlignment="Center"/>
+                </Grid>
+            </Button>
+            <GridView Grid.Column="2" ItemsSource="{Binding Firms}">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="573">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="45"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="45"/>
-                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="240"/>
+                                <ColumnDefinition Width="345"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Background="#008299" Width="50" VerticalAlignment="Stretch" Margin="-3,-3,-3,-3" Command="{Binding AddGoodCmd}">
-                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE109;" FontSize="10" ></TextBlock>
-                            </Button>
-                            <Button Grid.Column="2" Background="#444444" Width="50" VerticalAlignment="Stretch" Margin="-3,-3,-3,-3" Command="{Binding EditGoodCmd}">
-                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE104;" FontSize="10" ></TextBlock>
-                            </Button>
-                            <Grid Grid.Column="4" Background="#008299"></Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="140"/>
-                        <ColumnDefinition Width="240"/>
-                        <ColumnDefinition Width="345"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="1">
-                        <Image Source="ms-appx:///Assets/marshall.jpg" VerticalAlignment="Top" Height="240"></Image>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#x1f3e2;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="Şark İnşaat San. Petrol Kimya Ltd. Şti." Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE141;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="14" Text="Bahçelievler Mah. Değirmen Sokak. No: 29 Ilıca/Erzurum" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE13A;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="442 631 20 62" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE1c9;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="534 896 10 22" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                    </StackPanel>
-                    <Grid Grid.Column="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="40" />
-                            <RowDefinition Height="52" />
-                        </Grid.RowDefinitions>
-                        <ListView Grid.Row="0" >
-                            <ListView.Header>
-                                <Grid Height="40" Background="#008299">
-                                    <TextBlock FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Marshall Boya Sanayi A.Ş.</TextBlock>
+                            <StackPanel Grid.Column="1">
+                                <Image Source="{Binding ImageFileSource, Mode=OneWay}" VerticalAlignment="Top" Height="240"></Image>
+                                <Grid Margin="0,0,0,10">
+                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#x1f3e2;</TextBlock>
+                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="{Binding AuthorizedReseller, Mode=OneWay}" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
                                 </Grid>
-                            </ListView.Header>
-                            <Grid Height="100" Width="320" Background="#18ffffff">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Background="#28ffffff">
-                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
+                                <Grid Margin="0,0,0,10">
+                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE141;</TextBlock>
+                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="14" Text="{Binding Address, Mode=OneWay}" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
                                 </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="40"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Background="#28ffffff">
-                                        <TextBlock Grid.Row="0" Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                                    </Grid>
-                                    <Grid Grid.Row="1">
+                                <Grid Margin="0,0,0,10">
+                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE13A;</TextBlock>
+                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="{Binding Phone, Mode=OneWay}" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                                </Grid>
+                                <Grid Margin="0,0,0,10">
+                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE1c9;</TextBlock>
+                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="{Binding Mobile, Mode=OneWay}" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                                </Grid>
+                            </StackPanel>
+                            <Grid Grid.Column="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="40" />
+                                </Grid.RowDefinitions>
+                                <ListView Grid.Row="0" ItemsSource="{Binding Goods}" >
+                                    <ListView.Header>
+                                        <Grid Height="40" Background="#008299">
+                                            <TextBlock FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name, Mode=OneWay}" />
+                                        </Grid>
+                                    </ListView.Header>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Height="100" Width="320" Background="#18ffffff">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0" Background="#28ffffff">
+                                                    <Image  Source="{Binding ImageFileSource, Mode=OneWay}" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
+                                                </Grid>
+                                                <Grid Grid.Column="1">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="30"></RowDefinition>
+                                                        <RowDefinition Height="30"></RowDefinition>
+                                                        <RowDefinition Height="40"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid Background="#28ffffff">
+                                                        <TextBlock Grid.Row="0" Text="{Binding Name, Mode=OneWay}" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                                                    </Grid>
+                                                    <Grid Grid.Row="1">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" Text="{Binding StockAmount, Mode=OneWay}" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
+                                                        <TextBlock Grid.Column="1" Text="{Binding Unit, Mode=OneWay}" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
+                                                    </Grid>
+                                                    <Grid Grid.Row="2" Background="#28ffffff">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="40"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid Grid.Column="0">
+                                                            <TextBlock Text="{Binding Price, Mode=OneWay}" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
+                                                        </Grid>
+                                                        <Grid Grid.Column="1" Background="#0097aa">
+                                                            <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                    <Grid Height="100" Width="320" Background="#18ffffff">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="100"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="555555" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
-                                        <TextBlock Grid.Column="1" Text="Galon" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
+                                        <Grid Grid.Column="0" Background="#28ffffff">
+                                            <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
+                                        </Grid>
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"></RowDefinition>
+                                                <RowDefinition Height="30"></RowDefinition>
+                                                <RowDefinition Height="40"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid Background="#28ffffff">
+                                                <TextBlock Grid.Row="0" Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                                            </Grid>
+                                            <Grid Grid.Row="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="555555" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
+                                                <TextBlock Grid.Column="1" Text="Galon" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
+                                            </Grid>
+                                            <Grid Grid.Row="2" Background="#28ffffff">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="40"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0">
+                                                    <TextBlock Text="99.999,00" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
+                                                </Grid>
+                                                <Grid Grid.Column="1" Background="#0097aa">
+                                                    <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
                                     </Grid>
-                                    <Grid Grid.Row="2" Background="#28ffffff">
+                                    <Grid Height="100" Width="320" Background="#18ffffff">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="40"></ColumnDefinition>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="99.999,00" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
+                                        <Grid Grid.Column="0" Background="#28ffffff">
+                                            <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
                                         </Grid>
-                                        <Grid Grid.Column="1" Background="#0097aa">
-                                            <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"></RowDefinition>
+                                                <RowDefinition Height="30"></RowDefinition>
+                                                <RowDefinition Height="40"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid Background="#28ffffff">
+                                                <TextBlock Grid.Row="0" Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                                            </Grid>
+                                            <Grid Grid.Row="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="555555" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
+                                                <TextBlock Grid.Column="1" Text="Galon" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
+                                            </Grid>
+                                            <Grid Grid.Row="2" Background="#28ffffff">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="40"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0">
+                                                    <TextBlock Text="99.999,00" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
+                                                </Grid>
+                                                <Grid Grid.Column="1" Background="#0097aa">
+                                                    <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
+                                                </Grid>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
+                                </ListView>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="45"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="45"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="0" Background="#008299" Width="50" VerticalAlignment="Stretch" Margin="-3,-3,-3,-3" Command="{Binding AddGoodCmd}">
+                                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE109;" FontSize="10" ></TextBlock>
+                                    </Button>
+                                    <Button Grid.Column="2" Background="#444444" Width="50" VerticalAlignment="Stretch" Margin="-3,-3,-3,-3" Command="{Binding EditGoodCmd}">
+                                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE104;" FontSize="10" ></TextBlock>
+                                    </Button>
+                                    <Grid Grid.Column="4" Background="#008299"></Grid>
                                 </Grid>
                             </Grid>
-                            <Grid Height="100" Width="320" Background="#18ffffff">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Background="#28ffffff">
-                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="40"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Background="#28ffffff">
-                                        <TextBlock Grid.Row="0" Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="555555" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
-                                        <TextBlock Grid.Column="1" Text="Galon" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
-                                    </Grid>
-                                    <Grid Grid.Row="2" Background="#28ffffff">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="40"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="99.999,00" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
-                                        </Grid>
-                                        <Grid Grid.Column="1" Background="#0097aa">
-                                            <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid Height="100" Width="320" Background="#18ffffff">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Background="#28ffffff">
-                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="40"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Background="#28ffffff">
-                                        <TextBlock Grid.Row="0" Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="555555" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
-                                        <TextBlock Grid.Column="1" Text="Galon" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
-                                    </Grid>
-                                    <Grid Grid.Row="2" Background="#28ffffff">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="40"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="99.999,00" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
-                                        </Grid>
-                                        <Grid Grid.Column="1" Background="#0097aa">
-                                            <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </ListView>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="45"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="45"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Background="#008299" Width="50" VerticalAlignment="Stretch" Margin="-3,-3,-3,-3">
-                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE109;" FontSize="10" ></TextBlock>
-                            </Button>
-                            <Button Grid.Column="2" Background="#444444" Width="50" VerticalAlignment="Stretch" Margin="-3,-3,-3,-3">
-                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE104;" FontSize="10" ></TextBlock>
-                            </Button>
-                            <Grid Grid.Column="4" Background="#008299"></Grid>
                         </Grid>
-                    </Grid>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="140"/>
-                        <ColumnDefinition Width="240"/>
-                        <ColumnDefinition Width="345"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="1">
-                        <Image Source="ms-appx:///Assets/marshall.jpg" VerticalAlignment="Top" Height="240"></Image>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#x1f3e2;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="Şark İnşaat San. Petrol Kimya Ltd. Şti." Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE141;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="14" Text="Bahçelievler Mah. Değirmen Sokak. No: 29 Ilıca/Erzurum" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE13A;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="442 631 20 62" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                        <Grid Margin="0,0,0,10">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE1c9;</TextBlock>
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="534 896 10 22" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        </Grid>
-                    </StackPanel>
-                    <Grid Grid.Column="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="40" />
-                            <RowDefinition Height="52" />
-                        </Grid.RowDefinitions>
-                        <ListView Grid.Row="0" >
-                            <ListView.Header>
-                                <Grid Height="40" Background="#008299">
-                                    <TextBlock FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Marshall Boya Sanayi A.Ş.</TextBlock>
-                                </Grid>
-                            </ListView.Header>
-                            <Grid Height="100" Width="320" Background="#18ffffff">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Background="#28ffffff">
-                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="40"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Background="#28ffffff">
-                                        <TextBlock Grid.Row="0" Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="555555" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
-                                        <TextBlock Grid.Column="1" Text="Galon" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
-                                    </Grid>
-                                    <Grid Grid.Row="2" Background="#28ffffff">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="40"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="99.999,00" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
-                                        </Grid>
-                                        <Grid Grid.Column="1" Background="#0097aa">
-                                            <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid Height="100" Width="320" Background="#18ffffff">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Background="#28ffffff">
-                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="40"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Background="#28ffffff">
-                                        <TextBlock Grid.Row="0" Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="555555" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
-                                        <TextBlock Grid.Column="1" Text="Galon" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
-                                    </Grid>
-                                    <Grid Grid.Row="2" Background="#28ffffff">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="40"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="99.999,00" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
-                                        </Grid>
-                                        <Grid Grid.Column="1" Background="#0097aa">
-                                            <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid Height="100" Width="320" Background="#18ffffff">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Background="#28ffffff">
-                                    <Image  Source="ms-appx:///Assets/musluk.jpg" Width="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="30"></RowDefinition>
-                                        <RowDefinition Height="40"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Background="#28ffffff">
-                                        <TextBlock Grid.Row="0" Text="Silikonlu Plastik Boya" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="555555" FontSize="20" HorizontalAlignment="Right" Padding="0,0,5,0" />
-                                        <TextBlock Grid.Column="1" Text="Galon" FontSize="20" HorizontalAlignment="Left" Padding="5,0,0,0" />
-                                    </Grid>
-                                    <Grid Grid.Row="2" Background="#28ffffff">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="40"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0">
-                                            <TextBlock Text="99.999,00" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
-                                        </Grid>
-                                        <Grid Grid.Column="1" Background="#0097aa">
-                                            <TextBlock Text="₺" FontSize="28" FontWeight="SemiBold" TextAlignment="Center"/>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </ListView>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="45"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="45"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Background="#008299" Width="50" VerticalAlignment="Stretch" Margin="-3,-3,-3,-3">
-                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE109;" FontSize="10" ></TextBlock>
-                            </Button>
-                            <Button Grid.Column="2" Background="#444444" Width="50" VerticalAlignment="Stretch" Margin="-3,-3,-3,-3">
-                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE104;" FontSize="10" ></TextBlock>
-                            </Button>
-                            <Grid Grid.Column="4" Background="#008299"></Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </StackPanel>
-        </ScrollViewer>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </Grid>
     </Grid>
 </Views:ViewBase>

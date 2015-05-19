@@ -2,6 +2,11 @@
 using System.Reflection;
 using CommercialRecordSystem.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Linq.Expressions;
+using System;
+using SQLite;
 
 namespace CommercialRecordSystem.ViewModels.DataVMs
 {
@@ -123,6 +128,52 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
         public DataVMBase() 
         {
         
+        }
+
+        public static async Task<ObservableCollection<T>> getList<T>(
+            Expression<Func<E, bool>> whereClause, List<Expression<Func<E, object>>> orderByClauses) where T: DataVMIntf<E>, new()
+        {
+            List<E> resultList = null;
+
+            var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
+            AsyncTableQuery<E> resultBuff = db.Table<E>();
+
+            if (null != whereClause)
+            {
+                resultBuff = resultBuff.Where(whereClause);
+            }
+
+            if (null != orderByClauses)
+            {
+                foreach (Expression<Func<E, object>> orderBy in orderByClauses)
+                {
+                    resultBuff = resultBuff.OrderBy(orderBy);
+                }
+            }
+
+            resultList = await resultBuff.ToListAsync();
+
+            /*if (0 == keyword.Trim().Length)
+            {
+                var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
+                customerModelList = await db.Table<E>().Where(c => c.Type == Customer.TYPE.REGISTERED).OrderBy(c => c.Name).OrderBy(c => c.Surname).ToListAsync();
+            }
+            else
+            {
+                keyword = "%" + keyword + "%";
+                var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
+                customerModelList = await db.Table<E>().Where(c => c.Type == Customer.TYPE.REGISTERED && (c.Name.Contains(keyword) || c.Surname.Contains(keyword))).ToListAsync();
+            }*/
+
+            ObservableCollection<T> RecordList = new ObservableCollection<T>();
+            
+            foreach (E record in resultList)
+            {
+                T recordBuff = new T();
+                recordBuff.initWithModel(record);
+                RecordList.Add(recordBuff);
+            }
+            return RecordList;
         }
     }
 }

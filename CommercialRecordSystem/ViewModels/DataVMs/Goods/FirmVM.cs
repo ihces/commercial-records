@@ -1,6 +1,10 @@
 ﻿using CommercialRecordSystem.Models;
 using CommercialRecordSystem.ViewModels.DataVMs;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace CommercialRecordSystem.ViewModels
 {
@@ -126,12 +130,34 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private ObservableCollection<GoodVM> goods;
+        public ObservableCollection<GoodVM> Goods
+        {
+            get
+            {
+                return goods;
+            }
+            set
+            {
+                goods = value;
+                RaisePropertyChanged("Goods");
+            }
+        }
+
         public FirmVM(): base(App.FirmImgFolder)
         { }
 
         public FirmVM(Firm firm)
             : base(firm, App.FirmImgFolder)
         {
+        }
+
+        public async Task loadGoods()
+        {
+            List<Expression<Func<Good, object>>> orderByClauses = new List<Expression<Func<Good, object>>>();
+            orderByClauses.Add(c => c.Name);
+            orderByClauses.Add(c => c.CreatedDate);
+            Goods = await DataVMBase<Good>.getList<GoodVM>(g => g.FirmId == Id, orderByClauses);
         }
         #endregion
     }

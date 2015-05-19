@@ -1,11 +1,13 @@
 ﻿using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models;
+using CommercialRecordSystem.ViewModels.DataVMs;
 using CommercialRecordSystem.Views.Customers;
 using CommercialRecordSystem.Views.Transacts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
@@ -183,7 +185,10 @@ namespace CommercialRecordSystem.ViewModels
 
         private async Task setCustomers()
         {
-            Customers = await CustomerVM.getCustomers(QueryText);
+            List<Expression<Func<Customer, object>>> orderByClauses = new List<Expression<Func<Customer,object>>>();
+            orderByClauses.Add(c => c.Name);
+            orderByClauses.Add(c => c.Surname);
+            Customers = await CustomerVM.getList<CustomerVM>(c => c.Type == Customer.TYPE.REGISTERED, orderByClauses);
             NoCustomerFound = true;
             if (0 < Customers.Count) 
             {
