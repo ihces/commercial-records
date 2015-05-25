@@ -23,6 +23,20 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
             }
         }
 
+        private FirmVM selectedFirm;
+        public FirmVM SelectedFirm
+        {
+            get
+            {
+                return selectedFirm;
+            }
+            set
+            {
+                selectedFirm = value;
+                RaisePropertyChanged("SelectedFirm");
+            }
+        }
+
         private readonly ICommand addFirmCmd;
         public ICommand AddFirmCmd
         {
@@ -32,21 +46,21 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
             }
         }
 
-        private readonly ICommand addGoodCmd;
-        public ICommand AddGoodCmd
+        private readonly ICommand editFirmCmd;
+        public ICommand EditFirmCmd
         {
             get
             {
-                return addGoodCmd;
+                return editFirmCmd;
             }
         }
 
-        private readonly ICommand editGoodCmd;
-        public ICommand EditGoodCmd
+        private readonly ICommand firmTappedCmd;
+        public ICommand FirmTappedCmd
         {
             get
             {
-                return editGoodCmd;
+                return firmTappedCmd;
             }
         }
         #endregion
@@ -54,34 +68,33 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
         public GoodsFrameVM(FrameNavigation navigation)
             : base(navigation)
         {
-            addGoodCmd = new ICommandImp(addGood_execute);
             addFirmCmd = new ICommandImp(addFirm_execute);
-            editGoodCmd = new ICommandImp(editGood_execute);
+            editFirmCmd = new ICommandImp(editFirm_execute);
+            firmTappedCmd = new ICommandImp(firmTapped_execute);
 
             setFirms();
         }
 
         private async Task setFirms(){
             Firms = await FirmVM.getList<FirmVM>(null, null);
-            foreach (FirmVM firm in Firms)
-            {
-                await firm.loadGoods();
-            }
         }
 
-        private void editGood_execute(object obj)
+        private async void firmTapped_execute(object obj)
         {
-            Navigation.Navigate<GoodInfo>();
-        }
-
-        private void addGood_execute(object obj)
-        {
-            Navigation.Navigate<GoodInfo>();
+            SelectedFirm.ShowGoodList = !SelectedFirm.ShowGoodList;
+            if (SelectedFirm.ShowGoodList)
+                await SelectedFirm.loadGoods();
         }
 
         private void addFirm_execute(object obj)
         {
             Navigation.Navigate<FirmInfo>();
+        }
+
+        private void editFirm_execute(object obj)
+        {
+            if (null != SelectedFirm)
+                Navigation.Navigate<FirmInfo>(SelectedFirm.Id);
         }
     }
 }

@@ -48,7 +48,7 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Width="240" Height="300" Background="Gray" Visibility="{Binding Path=ShowImageLogo, Converter={StaticResource Boolean2VisibilityConverter}}">
+                    <Grid Grid.Row="0" Width="240" Height="300" Background="Gray" Visibility="{Binding Path=CurrentInfo.ShowImageLogo, Converter={StaticResource Boolean2VisibilityConverter}}">
                         <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE13D;" FontSize="200" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                     </Grid>
                     <Image Grid.Row="0" Width="240" Height="300" VerticalAlignment="Top" Source="{Binding Path=CurrentInfo.ImageFileSource, Mode=TwoWay}"/>

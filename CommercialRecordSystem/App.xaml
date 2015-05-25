@@ -72,6 +72,21 @@
                     </Ellipse.RenderTransform>
                 </Ellipse>
             </DataTemplate>
+            <Style x:Key="GoodsGridViewItemStyle" TargetType="GridViewItem">
+            	<Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            	<Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            	<Setter Property="Background" Value="Transparent"/>
+            	<Setter Property="TabNavigation" Value="Local"/>
+            	<Setter Property="IsHoldingEnabled" Value="True"/>
+            	<Setter Property="Margin" Value="0,0,2,2"/>
+            	<Setter Property="Template">
+            		<Setter.Value>
+            			<ControlTemplate TargetType="GridViewItem">
+            				<GridViewItemPresenter ContentMargin="4" ContentTransitions="{TemplateBinding ContentTransitions}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" PointerOverBackgroundMargin="1" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" SelectionCheckMarkVisualEnabled="True" SelectedBorderThickness="{ThemeResource GridViewItemCompactSelectedBorderThemeThickness}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" IsHoldingEnabled="False" IsDoubleTapEnabled="False" IsRightTapEnabled="False" SelectedForeground="White" SelectedBackground="#48FFFFFF" SelectedPointerOverBackground="#48FFFFFF" SelectedPointerOverBorderBrush="#48FFFFFF" Margin="20,0"/>
+            			</ControlTemplate>
+            		</Setter.Value>
+            	</Setter>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Themes/CRSTextBox.xaml" />
                 <ResourceDictionary Source="/Themes/CRSRadioButton.xaml" />

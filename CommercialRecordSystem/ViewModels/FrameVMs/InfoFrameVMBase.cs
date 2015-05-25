@@ -236,24 +236,24 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             loadPhotoViaFileBrowserCmd = new ICommandImp(loadPhotoViaBrowserCmdHandler);
             capturePhotoFromCamCmd = new ICommandImp(capturePhotoFromCamCmdHandler);
 
-            if (null != navigation.Forward && navigation.Forward.Is<ImagePicker>())
+            if (null != navigation.Message)
             {
-                if (null != navigation.Message)
+                if (null != navigation.Forward && navigation.Forward.Is<ImagePicker>())
                 {
                     CurrentInfo.ImageFileName = (string)navigation.Message;
                     ShowImageLogo = false;
                     CurrentInfo.ImageFileSource = new Uri(Path.Combine(CurrentInfo.ImageSourceFolder.Path, (string)navigation.Message));
                 }
-            }
-            else if (null != navigation.Message)
-            {
-                DelButtonCanEnable = true;
+                else if (navigation.Message is int)
+                {
+                    DelButtonCanEnable = true;
 
-                this.InfoTitle = "Kayıtlı " + infoName;
-                CurrentInfo.get((int)navigation.Message);
+                    this.InfoTitle = "Kayıtlı " + infoName;
+                    CurrentInfo.get((int)navigation.Message);
 
-                if (!string.IsNullOrWhiteSpace(CurrentInfo.ImageFileName))
-                    ShowImageLogo = false;
+                    if (!string.IsNullOrWhiteSpace(CurrentInfo.ImageFileName))
+                        ShowImageLogo = false;
+                }
             }
         }
     }

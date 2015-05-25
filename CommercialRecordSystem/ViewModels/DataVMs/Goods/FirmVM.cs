@@ -1,10 +1,13 @@
-﻿using CommercialRecordSystem.Models;
-using CommercialRecordSystem.ViewModels.DataVMs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using CommercialRecordSystem.Common;
+using CommercialRecordSystem.Models;
+using CommercialRecordSystem.ViewModels.DataVMs;
+using CommercialRecordSystem.Views;
 
 namespace CommercialRecordSystem.ViewModels
 {
@@ -144,12 +147,61 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private FrameNavigation navigation = null;
+        public FrameNavigation Navigation
+        {
+            get
+            {
+                return navigation;
+            }
+            set
+            {
+                addGoodCmd = new ICommandImp(addGoodCmdHandler);
+                editGoodCmd = new ICommandImp(editGoodCmdHandler);
+
+                navigation = value;
+            }
+        }
+
+        private ICommand addGoodCmd = null;
+        public ICommand AddGoodCmd
+        {
+            get
+            {
+                return addGoodCmd;
+            }
+        }
+
+        private ICommand editGoodCmd = null;
+        public ICommand EditGoodCmd
+        {
+            get
+            {
+                return editGoodCmd;
+            }
+        }
+
+        private Boolean showGoodList = false;
+        public Boolean ShowGoodList
+        {
+            get
+            {
+                return showGoodList;
+            }
+            set
+            {
+                showGoodList = value;
+                RaisePropertyChanged("ShowGoodList");
+            }
+        }
+
         public FirmVM(): base(App.FirmImgFolder)
         { }
 
         public FirmVM(Firm firm)
             : base(firm, App.FirmImgFolder)
         {
+            
         }
 
         public async Task loadGoods()
@@ -157,7 +209,24 @@ namespace CommercialRecordSystem.ViewModels
             List<Expression<Func<Good, object>>> orderByClauses = new List<Expression<Func<Good, object>>>();
             orderByClauses.Add(c => c.Name);
             orderByClauses.Add(c => c.CreatedDate);
+
             Goods = await DataVMBase<Good>.getList<GoodVM>(g => g.FirmId == Id, orderByClauses);
+        }
+
+        private void addGoodCmdHandler(object parameter)
+        {
+            Int32 [] Ids = new Int32[2];
+            Ids[0] = Id;
+            Ids[1] = 0;
+            navigation.Navigate<GoodInfo>(Ids);
+        }
+
+        private void editGoodCmdHandler(object parameter)
+        {
+            Int32[] Ids = new Int32[2];
+            Ids[0] = Id;
+            Ids[1] = 0;
+            navigation.Navigate<GoodInfo>(Ids);
         }
         #endregion
     }

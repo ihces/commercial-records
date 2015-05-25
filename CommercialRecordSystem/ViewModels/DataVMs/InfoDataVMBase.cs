@@ -40,7 +40,23 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
             set
             {
                 imageFileSource = value;
+                if (null != imageFileSource)
+                    ShowImageLogo = false;
                 RaisePropertyChanged("ImageFileSource");
+            }
+        }
+
+        private Boolean showImageLogo = true;
+        public Boolean ShowImageLogo
+        {
+            get
+            {
+                return showImageLogo;
+            }
+            set
+            {
+                showImageLogo = value;
+                RaisePropertyChanged("ShowImageLogo");
             }
         }
 
@@ -56,7 +72,9 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
         {
             this.imageSourceFolder = imageSourceFolder;
             if (!string.IsNullOrWhiteSpace(model.ImageFileName))
+            {
                 ImageFileSource = new Uri(Path.Combine(imageSourceFolder.Path, model.ImageFileName));
+            }
         }
 
         public InfoDataVMBase(StorageFolder imageSourceFolder)
