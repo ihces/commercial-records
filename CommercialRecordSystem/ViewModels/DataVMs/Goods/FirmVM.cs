@@ -147,6 +147,8 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        
+        
         private FrameNavigation navigation = null;
         public FrameNavigation Navigation
         {
@@ -191,7 +193,22 @@ namespace CommercialRecordSystem.ViewModels
             set
             {
                 showGoodList = value;
+                FirmItemWidth = showGoodList ? 4 : 2;
                 RaisePropertyChanged("ShowGoodList");
+            }
+        }
+
+        private Double firmItemWidth = 2;
+        public Double FirmItemWidth
+        {
+            get
+            {
+                return firmItemWidth;
+            }
+            set
+            {
+                firmItemWidth = value;
+                RaisePropertyChanged("FirmItemWidth");
             }
         }
 

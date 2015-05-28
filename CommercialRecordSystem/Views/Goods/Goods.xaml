@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CommercialRecordSystem"
+    xmlns:CRSPanels="using:CommercialRecordSystem.Panels"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -69,15 +70,15 @@
                     </Grid>
                 </Button>
             </Grid>
-            <GridView Grid.Column="2" ItemsSource="{Binding Firms}" ItemContainerStyle="{StaticResource GoodsGridViewItemStyle}" SelectedItem="{Binding SelectedFirm, Mode=TwoWay}">
+            <CRSPanels:CSRGridView Grid.Column="2" ItemsSource="{Binding Firms}" SelectedItem="{Binding SelectedFirm, Mode=TwoWay}">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
                         <core:InvokeCommandAction Command="{Binding FirmTappedCmd}"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
-                <GridView.ItemTemplate>
+                <CRSPanels:CSRGridView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Height="573">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40" />
                                 <RowDefinition Height="5" />
@@ -184,8 +185,13 @@
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
+                </CRSPanels:CSRGridView.ItemTemplate>
+                <CRSPanels:CSRGridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VariableSizedWrapGrid ItemHeight="200" ItemWidth="200"/>
+                    </ItemsPanelTemplate>
+                </CRSPanels:CSRGridView.ItemsPanel>
+            </CRSPanels:CSRGridView>
         </Grid>
     </Grid>
 </Views:ViewBase>

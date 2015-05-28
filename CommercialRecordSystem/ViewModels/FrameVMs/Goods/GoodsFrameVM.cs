@@ -83,7 +83,10 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
         {
             SelectedFirm.ShowGoodList = !SelectedFirm.ShowGoodList;
             if (SelectedFirm.ShowGoodList)
+            {
+                SelectedFirm.Navigation = Navigation;
                 await SelectedFirm.loadGoods();
+            }
         }
 
         private void addFirm_execute(object obj)
