@@ -81,7 +81,6 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
 
         private async void firmTapped_execute(object obj)
         {
-            SelectedFirm.ShowGoodList = !SelectedFirm.ShowGoodList;
             if (SelectedFirm.ShowGoodList)
             {
                 SelectedFirm.Navigation = Navigation;

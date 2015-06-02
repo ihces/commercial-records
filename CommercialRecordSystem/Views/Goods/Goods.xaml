@@ -70,13 +70,13 @@
                     </Grid>
                 </Button>
             </Grid>
-            <CRSPanels:CSRGridView Grid.Column="2" ItemsSource="{Binding Firms}" SelectedItem="{Binding SelectedFirm, Mode=TwoWay}">
+            <CRSPanels:CSRFirmGridView Grid.Column="2" ItemsSource="{Binding Firms}" SelectedItem="{Binding SelectedFirm, Mode=TwoWay}" ItemContainerStyle="{StaticResource CSRFirmGridViewItemStyle}">
                 <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
+                    <core:EventTriggerBehavior EventName="DoubleTapped">
                         <core:InvokeCommandAction Command="{Binding FirmTappedCmd}"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
-                <CRSPanels:CSRGridView.ItemTemplate>
+                <CRSPanels:CSRFirmGridView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.RowDefinitions>
@@ -88,8 +88,8 @@
                                 <TextBlock FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name, Mode=OneWay}" />
                             </Grid>
                             <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                <StackPanel Grid.Column="0" Width="240">
-                                    <Grid>
+                                <StackPanel Grid.Column="0" Width="240" Height="540">
+                                    <Grid >
                                         <Grid Grid.Row="0" Height="300" Width="240" Background="#008299" Visibility="{Binding Path=ShowImageLogo, Converter={StaticResource Boolean2VisibilityConverter}}">
                                             <TextBlock FontFamily="Segoe UI Symbol" Text="&#x1f3ed;" FontSize="140" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                                         </Grid>
@@ -111,10 +111,11 @@
                                         <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Left">&#xE1c9;</TextBlock>
                                         <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" Text="{Binding Mobile, Mode=OneWay}" Padding="25, 0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"/>
                                     </Grid>
+                                    
                                 </StackPanel>
                                 <Grid Grid.Column="1" Width="345" Visibility="{Binding Path=ShowGoodList, Converter={StaticResource Boolean2VisibilityConverter}}">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="505" />
                                         <RowDefinition Height="40" />
                                     </Grid.RowDefinitions>
                                     <ListView Grid.Row="0" ItemsSource="{Binding Goods}" >
@@ -185,13 +186,13 @@
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
-                </CRSPanels:CSRGridView.ItemTemplate>
-                <CRSPanels:CSRGridView.ItemsPanel>
+                </CRSPanels:CSRFirmGridView.ItemTemplate>
+                <CRSPanels:CSRFirmGridView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <VariableSizedWrapGrid ItemHeight="200" ItemWidth="200"/>
+                        <VariableSizedWrapGrid ItemHeight="600" ItemWidth="120"/>
                     </ItemsPanelTemplate>
-                </CRSPanels:CSRGridView.ItemsPanel>
-            </CRSPanels:CSRGridView>
+                </CRSPanels:CSRFirmGridView.ItemsPanel>
+            </CRSPanels:CSRFirmGridView>
         </Grid>
     </Grid>
 </Views:ViewBase>

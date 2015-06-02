@@ -158,9 +158,6 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                addGoodCmd = new ICommandImp(addGoodCmdHandler);
-                editGoodCmd = new ICommandImp(editGoodCmdHandler);
-
                 navigation = value;
             }
         }
@@ -193,27 +190,30 @@ namespace CommercialRecordSystem.ViewModels
             set
             {
                 showGoodList = value;
-                FirmItemWidth = showGoodList ? 4 : 2;
+                ColumnSpan = showGoodList ? 5 : 2;
                 RaisePropertyChanged("ShowGoodList");
             }
         }
 
-        private Double firmItemWidth = 2;
-        public Double FirmItemWidth
+        private int columnSpan = 2;
+        public int ColumnSpan
         {
             get
             {
-                return firmItemWidth;
+                return columnSpan;
             }
             set
             {
-                firmItemWidth = value;
-                RaisePropertyChanged("FirmItemWidth");
+                columnSpan = value;
+                RaisePropertyChanged("ColumnSpan");
             }
         }
 
         public FirmVM(): base(App.FirmImgFolder)
-        { }
+        {
+            addGoodCmd = new ICommandImp(addGoodCmdHandler);
+            editGoodCmd = new ICommandImp(editGoodCmdHandler);
+        }
 
         public FirmVM(Firm firm)
             : base(firm, App.FirmImgFolder)

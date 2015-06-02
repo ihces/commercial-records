@@ -132,7 +132,7 @@
     <Compile Include="Models\Transacts\Transact.cs" />
     <Compile Include="Panels\CRSFormPanel.cs" />
     <Compile Include="Panels\CRSRadioButtonPanel.cs" />
-    <Compile Include="Panels\CSRGridView.cs" />
+    <Compile Include="Panels\CSRFirmGridView.cs" />
     <Compile Include="ViewModels\DataVMs\DataVMBase.cs" />
     <Compile Include="ViewModels\DataVMs\InfoDataVMBase.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\TransactEntryVMBase.cs" />
