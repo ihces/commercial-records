@@ -8,6 +8,8 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using CommercialRecordSystem.ViewModels.Transacts;
 using CommercialRecordSystem.Views.Transacts;
+using System;
+using System.Linq.Expressions;
 
 namespace CommercialRecordSystem.ViewModels
 {
@@ -20,6 +22,58 @@ namespace CommercialRecordSystem.ViewModels
             get
             {
                 return header;
+            }
+        }
+
+        private ObservableCollection<GoodVM> foundGoods = new ObservableCollection<GoodVM>();
+        public ObservableCollection<GoodVM> FoundGoods
+        {
+            get
+            {
+                return foundGoods;
+            }
+            set
+            {
+                foundGoods = value;
+                RaisePropertyChanged("FoundGoods");
+            }
+        }
+
+        private String queryText = "";
+        public String QueryText
+        {
+            get
+            {
+                return queryText;
+            }
+            set
+            {
+                queryText = value;
+                findGoods();
+                RaisePropertyChanged("QueryText");
+            }
+        }
+
+        private readonly ICommand closeGoodsViewCmd;
+        public ICommand CloseGoodsViewCmd
+        {
+            get
+            {
+                return closeGoodsViewCmd;
+            }
+        }
+
+        private bool showGoodsView = false;
+        public bool ShowGoodsView
+        {
+            get
+            {
+                return showGoodsView;
+            }
+            set
+            {
+                showGoodsView = value;
+                RaisePropertyChanged("ShowGoodsView");
             }
         }
         #endregion
@@ -44,6 +98,14 @@ namespace CommercialRecordSystem.ViewModels
         {
             EntryBuff.Cost = EntryBuff.Amount * EntryBuff.UnitCost;
             base.addEntryToListCmdHandler(parameter);
+        }
+
+        private async Task findGoods()
+        {
+            List<Expression<Func<Good, object>>> orderByClauses = new List<Expression<Func<Good, object>>>();
+            orderByClauses.Add(c => c.Name);
+            string findBuff = '%' + QueryText + '%';
+            FoundGoods = await GoodVM.getList<GoodVM>(c => c.Name.ToLower().Contains(findBuff.ToLower()), orderByClauses);
         }
     }
 }
