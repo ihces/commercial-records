@@ -43,7 +43,7 @@ namespace CommercialRecordSystem
 
         private void SalesGrid_tabbed(object sender, TappedRoutedEventArgs e)
         {
-            GoTo<TransactTypeSelector>();
+            GoTo<Transacts>();
             
         }
 

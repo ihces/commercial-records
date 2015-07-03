@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
 using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
@@ -36,6 +37,27 @@ namespace CommercialRecordSystem.Controls
                 typeof(CRSTextBox),
                 new PropertyMetadata(INPUTTYPES.ALL, null)
             );
+
+        public ICommand TextChanged
+        {
+            get
+            {
+                return (ICommand)GetValue(TextChangedProperty);
+            }
+            set
+            {
+                SetValue(TextChangedProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty TextChangedProperty =
+            DependencyProperty.Register(
+                "TextChanged",
+                typeof(ICommand),
+                typeof(CRSTextBox),
+                new PropertyMetadata(null, null)
+            );
+
         #endregion
         #region InputMaxLength
         public int InputMaxLength
@@ -329,7 +351,7 @@ namespace CommercialRecordSystem.Controls
         #endregion
 
         #region Fields
-        protected static readonly string INPUT_CHANGE_HANDLER = "input_change_handler";
+        //protected static readonly string INPUT_CHANGE_HANDLER = "input_change_handler";
         public bool AnyClickHandled = false;
         private bool isEmpty;
         private TextBox textBox;
@@ -348,7 +370,7 @@ namespace CommercialRecordSystem.Controls
             RequiredSignVisibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
-        public void CheckIsValid(string callFrom = "")
+        public void CheckIsValid()//string callFrom = "")
         {
             if (ReadOnly)
             {
@@ -369,7 +391,7 @@ namespace CommercialRecordSystem.Controls
                             this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
                     }
 
-                    if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
+                    //if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
                         this.Input = null;
                 }
                 else
@@ -379,8 +401,8 @@ namespace CommercialRecordSystem.Controls
                     if (Regex.IsMatch(text, InputTypeDic[InputType].Pattern))
                     {
                         IsValid = true;
-                        if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
-                            justUpdateInput();
+                        //if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
+                          //  justUpdateInput();
 
                         this.Input = InputTypeDic[InputType].ConvertFrom(textBox.Text);
 
@@ -391,8 +413,8 @@ namespace CommercialRecordSystem.Controls
                         IsValid = false;
                         this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
 
-                        if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
-                            justUpdateInput();
+                        //if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
+                          //  justUpdateInput();
 
                         Input = null;
                     }
@@ -400,10 +422,10 @@ namespace CommercialRecordSystem.Controls
             }
         }
 
-        private void justUpdateInput()
+        /*private void justUpdateInput()
         {
             updateInput = true;
-        }
+        }*/
 
         protected override void OnApplyTemplate()
         {
@@ -436,6 +458,7 @@ namespace CommercialRecordSystem.Controls
             }
             textBox.GotFocus += new RoutedEventHandler(gotFocusHandler);
             textBox.LostFocus += new RoutedEventHandler(LostFocusHandler);
+            textBox.TextChanged += new TextChangedEventHandler(TextChangedHandler);
 
             if (Required)
                 IsValid = false;
@@ -488,6 +511,12 @@ namespace CommercialRecordSystem.Controls
             CheckIsValid();
         }
 
+        private void TextChangedHandler(object sender, RoutedEventArgs e)
+        {
+            if (null != TextChanged)
+                TextChanged.Execute(isEmpty? "": textBox.Text);
+        }
+
         private static void ReadOnlyChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             CRSTextBox csrTextBox = (CRSTextBox)obj;
@@ -521,17 +550,17 @@ namespace CommercialRecordSystem.Controls
 
             if (null != csrTextBox.textBox)
             {
-                if (csrTextBox.updateInput)
+                /*if (csrTextBox.updateInput)
                 {
                     csrTextBox.updateInput = false;
                 }
                 else
-                {
+                {*/
                     string newValueStr = string.Format(InputTypeDic[csrTextBox.InputType].StringFormat, e.NewValue);
                     csrTextBox.textBox.Text = newValueStr;
-                }
+                //}
                 csrTextBox.setAsNotEmpty();
-                csrTextBox.CheckIsValid(INPUT_CHANGE_HANDLER);
+                csrTextBox.CheckIsValid();//INPUT_CHANGE_HANDLER);
             }
         }
 

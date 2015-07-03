@@ -35,45 +35,69 @@ namespace CommercialRecordSystem.ViewModels
             set
             {
                 foundGoods = value;
+                FoundGoodsVisible = 0 < foundGoods.Count ? true : false;
                 RaisePropertyChanged("FoundGoods");
             }
         }
 
-        private String queryText = "";
-        public String QueryText
+        private GoodVM selectedGood = new GoodVM();
+        public GoodVM SelectedGood
         {
             get
             {
-                return queryText;
+                return selectedGood;
             }
             set
             {
-                queryText = value;
-                findGoods();
-                RaisePropertyChanged("QueryText");
+                selectedGood = value;
+                RaisePropertyChanged("SelectedGood");
             }
         }
 
-        private readonly ICommand closeGoodsViewCmd;
-        public ICommand CloseGoodsViewCmd
+        /*private string saleEntityDetail;
+        public string SaleEntityDetail
         {
             get
             {
-                return closeGoodsViewCmd;
-            }
-        }
-
-        private bool showGoodsView = false;
-        public bool ShowGoodsView
-        {
-            get
-            {
-                return showGoodsView;
+                return saleEntityDetail;
             }
             set
             {
-                showGoodsView = value;
-                RaisePropertyChanged("ShowGoodsView");
+                saleEntityDetail = value;
+                RaisePropertyChanged("SaleEntityDetail");
+            }
+        }*/
+
+        private readonly ICommand detailTextChangedCmd;
+        public ICommand DetailTextChangedCmd
+        {
+            get
+            {
+                return detailTextChangedCmd;
+            }
+        }
+
+        private readonly ICommand selectGoodCmd;
+        public ICommand SelectGoodCmd
+        {
+            get
+            {
+                return selectGoodCmd;
+            }
+        }
+        
+        private bool foundGoodsVisible = false;
+        private bool searchGood = true;
+        public bool FoundGoodsVisible
+        {
+            get
+            {
+                return foundGoodsVisible;
+            }
+            set
+            {
+                foundGoodsVisible = value;
+                RaisePropertyChanged("FoundGoodsVisible");
             }
         }
         #endregion
@@ -82,6 +106,33 @@ namespace CommercialRecordSystem.ViewModels
         protected override void goNextCmdHandler(object parameter)
         {
             Navigation.Navigate(typeof(Payments), transactInfo);
+        }
+
+        private void detailTextChangedCmdHandler(object parameter)
+        {
+            string searchText = (string)parameter;
+            if (searchGood)
+            {
+                if (!string.IsNullOrWhiteSpace(searchText))
+                    findGoods(searchText);
+                else
+                    FoundGoods = new ObservableCollection<GoodVM>();
+            }
+            else
+            {
+                searchGood = true;
+            }
+            
+        }
+
+        private void selectGoodCmdHandler(object parameter)
+        {
+            if (null != SelectedGood) {
+                searchGood = false;
+                EntryBuff.Detail = SelectedGood.Name;
+                EntryBuff.UnitCost = SelectedGood.Price;
+                FoundGoods = new ObservableCollection<GoodVM>();
+            }
         }
         #endregion
 
@@ -92,6 +143,9 @@ namespace CommercialRecordSystem.ViewModels
             {
                 header = "Sipariş";
             }
+
+            selectGoodCmd = new ICommandImp(selectGoodCmdHandler);
+            detailTextChangedCmd = new ICommandImp(detailTextChangedCmdHandler);
         }
 
         protected override void addEntryToListCmdHandler(object parameter)
@@ -100,11 +154,11 @@ namespace CommercialRecordSystem.ViewModels
             base.addEntryToListCmdHandler(parameter);
         }
 
-        private async Task findGoods()
+        private async Task findGoods(string searchText)
         {
             List<Expression<Func<Good, object>>> orderByClauses = new List<Expression<Func<Good, object>>>();
             orderByClauses.Add(c => c.Name);
-            string findBuff = '%' + QueryText + '%';
+            string findBuff = '%' + searchText + '%';
             FoundGoods = await GoodVM.getList<GoodVM>(c => c.Name.ToLower().Contains(findBuff.ToLower()), orderByClauses);
         }
     }

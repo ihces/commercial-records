@@ -153,6 +153,7 @@
     <Compile Include="ViewModels\FrameVMs\Transacts\Sale\SaleFrameVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\Sale\SaleEntryVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\TransactFrameVMBase.cs" />
+    <Compile Include="ViewModels\FrameVMs\Transacts\TransactsFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\TransactTypeFrameVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\TransactVM.cs" />
     <Compile Include="ViewModels\VMBase.cs" />
@@ -190,6 +191,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Transacts\Sales.xaml.cs">
       <DependentUpon>Sales.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Transacts\Transacts.xaml.cs">
+      <DependentUpon>Transacts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Transacts\TransactTypeSelector.xaml.cs">
       <DependentUpon>TransactTypeSelector.xaml</DependentUpon>
@@ -229,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ImagePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Transacts\Transacts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
