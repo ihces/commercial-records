@@ -36,9 +36,9 @@ namespace CommercialRecordSystem.Views.Customers
             financialStuffList.Add(new FinancialStuff() { Name = "Kasım", Amount = rand.Next(0, 200) });
             financialStuffList.Add(new FinancialStuff() { Name = "Aralık", Amount = rand.Next(0, 200) });
             financialStuffList.Add(new FinancialStuff() { Name = "Ocak", Amount = rand.Next(0, 200) });
-            (ColumnChart.Series[0] as ColumnSeries).ItemsSource = financialStuffList;
-            (ColumnChart.Series[1] as ColumnSeries).ItemsSource = financialStuffList;
-            (ColumnChart.Series[2] as LineSeries).ItemsSource = financialStuffList;
+            (ColumnChart.Series[0] as AreaSeries).ItemsSource = financialStuffList;
+            (ColumnChart.Series[1] as AreaSeries).ItemsSource = financialStuffList;
+            (ColumnChart.Series[2] as ScatterSeries).ItemsSource = financialStuffList;
         }
         
         private void actionList_Tabbed(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)

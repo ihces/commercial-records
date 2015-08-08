@@ -208,8 +208,6 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="5" />
                         <ColumnDefinition Width="80" />
-                        <ColumnDefinition Width="5" />
-                        <ColumnDefinition Width="80" />
                     </Grid.ColumnDefinitions>
                     <Button Width="56" Margin="-3" Grid.Column="0" Background="#AD103C" VerticalAlignment="Stretch" Command="{Binding DeleteEntryCmd}">
                         <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="20"></TextBlock>
@@ -228,9 +226,6 @@
                             <TextBlock FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="0,0,8,0">9.999.999,99 ₺</TextBlock>
                         </Grid>
                     </Grid>
-                    <Button Grid.Column="4" Width="86" Height="66" Margin="-3" Background="#444444" VerticalAlignment="Stretch">
-                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#x1f4dc;" FontSize="32"></TextBlock>
-                    </Button>
                     <Button Grid.Column="6" Width="86" Height="66" Margin="-3" Background="#77B900" VerticalAlignment="Stretch" Command="{Binding GoNextCmd}">
                         <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE0ae;" FontSize="20"></TextBlock>
                     </Button>

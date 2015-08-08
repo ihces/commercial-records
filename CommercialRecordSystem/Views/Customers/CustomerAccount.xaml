@@ -98,7 +98,7 @@
                 </Grid>
             </Grid>
             <Grid Grid.Column="3">
-                <Grid Width="400">
+                <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="315" />
                         <RowDefinition Height="10"/>
@@ -108,11 +108,11 @@
                         <RowDefinition Height="10"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
+                    <Grid>
                         <Charting:Chart x:Name="ColumnChart" Background="#18ffffff" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Height="315" >
-                            <Charting:ColumnSeries Title="Ödenen" Margin="0" IndependentValuePath="Name" DependentValuePath="Amount" IsSelectionEnabled="True"/>
-                            <Charting:ColumnSeries Title="Alacak" Margin="0" IndependentValuePath="Name" DependentValuePath="Amount" IsSelectionEnabled="True"/>
-                            <Charting:LineSeries Title="Net" Margin="0" IndependentValuePath="Name" DependentValuePath="Amount" IsSelectionEnabled="True"/>
+                            <Charting:AreaSeries Title="Ödenen" Margin="0" IndependentValuePath="Name" DependentValuePath="Amount" IsSelectionEnabled="True"/>
+                            <Charting:AreaSeries Title="Alacak"    IndependentValuePath="Name" DependentValuePath="Amount" IsSelectionEnabled="True"/>
+                            <Charting:ScatterSeries Title="Net" Margin="0" IndependentValuePath="Name" DependentValuePath="Amount" IsSelectionEnabled="True"/>
                         </Charting:Chart>
                     </Grid>
                     <Grid Grid.Row="2" Background="#18ffffff" ToolTipService.ToolTip="Toplam Alacak">

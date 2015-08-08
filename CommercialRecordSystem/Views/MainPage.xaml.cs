@@ -59,5 +59,10 @@ namespace CommercialRecordSystem
         {
             
         }
+
+        private void DashboardsGrid_tabbed(object sender, TappedRoutedEventArgs e)
+        {
+           // GoTo<DashboardView>();
+        }
     }
 }

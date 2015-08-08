@@ -25,7 +25,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="350"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Margin="39,59,39,0"
 				Style="{StaticResource NavigationBackButtonNormalStyle}"
@@ -36,7 +37,12 @@
             </Button>
             <TextBlock x:Name="pageTitle" Text="Müşteriler" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-            <SearchBox Grid.Column="2" HorizontalAlignment="Right" QueryText="{Binding QueryText, Mode=TwoWay}"  FontSize="18"  Width="350" VerticalAlignment="Bottom" Margin="0,0,45,40">
+            <ComboBox Grid.Column="2" SelectedIndex="0" HorizontalAlignment="Left" FontSize="32" Foreground="White" Background="#00FFFFFF" BorderThickness="0" VerticalAlignment="Bottom" Margin="0,0,0,40" Style="{StaticResource ComboBoxStyle1}">
+                <ComboBoxItem>İsme Göre Sıralı</ComboBoxItem>
+                <ComboBoxItem>Soyisme Göre Sıralı</ComboBoxItem>
+                <ComboBoxItem>Sonişleme Göre Sıralı</ComboBoxItem>
+            </ComboBox>
+            <SearchBox Grid.Column="3" HorizontalAlignment="Right" QueryText="{Binding QueryText, Mode=TwoWay}"  FontSize="24"  Width="310" VerticalAlignment="Bottom" Margin="0,0,40,40">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="QuerySubmitted">
                         <core:InvokeCommandAction  

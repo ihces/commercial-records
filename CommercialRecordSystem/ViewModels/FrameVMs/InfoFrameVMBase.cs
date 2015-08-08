@@ -1,6 +1,4 @@
-﻿
-
-using CommercialRecordSystem.Common;
+﻿using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models;
 using CommercialRecordSystem.ViewModels.DataVMs;
 using CommercialRecordSystem.Views;
