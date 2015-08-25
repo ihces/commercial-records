@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Navigation;
 using CommercialRecordSystem.Models;
 using SQLite;
 using Windows.Storage;
+using CommercialRecordSystem.Models.Goods;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
 namespace CommercialRecordSystem
@@ -30,11 +31,13 @@ namespace CommercialRecordSystem
         public static StorageFolder 
             ProfileImgFolder = null,
             GoodImgFolder = null,
+            CategoryImgFolder = null,
             FirmImgFolder = null,
             CommonImgFolder = null;
         public const string 
             PROFILE_IMG_FOLDER = "ProfilePhotos",
             GOOD_IMG_FOLDER = "GoodPhotos",
+            CATEGORY_IMG_FOLDER = "CategoryPhotos",
             FIRM_IMG_FOLDER = "FirmPhotos", 
             COMMON_IMG_FOLDER = "CommonPhotos";
 
@@ -53,6 +56,7 @@ namespace CommercialRecordSystem
         {
             ProfileImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(PROFILE_IMG_FOLDER, CreationCollisionOption.OpenIfExists);
             GoodImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(GOOD_IMG_FOLDER, CreationCollisionOption.OpenIfExists);
+            CategoryImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(CATEGORY_IMG_FOLDER, CreationCollisionOption.OpenIfExists);
             FirmImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(FIRM_IMG_FOLDER, CreationCollisionOption.OpenIfExists);
             CommonImgFolder = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFolderAsync(COMMON_IMG_FOLDER, CreationCollisionOption.OpenIfExists);
         }
@@ -117,7 +121,8 @@ namespace CommercialRecordSystem
             using (var db = new SQLite.SQLiteConnection(DBPath)) 
             {
                 db.CreateTable<Good>();
-                db.CreateTable<Firm>(); 
+                db.CreateTable<Firm>();
+                db.CreateTable<Category>();
                 db.CreateTable<Customer>();
                 db.CreateTable<Transact>();
                 db.CreateTable<SaleEntry>();

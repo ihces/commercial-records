@@ -63,7 +63,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Transacts
             List<Expression<Func<Transact, object>>> orderByClauses = new List<Expression<Func<Transact, object>>>();
             //orderByClauses.Add(c => c.);
             //orderByClauses.Add(c => c.Surname);
-            Transacts = await TransactVM.getList<TransactVM>(null, orderByClauses);
+            //Transacts = await TransactVM.getList<TransactVM>(null, orderByClauses);
 
             double totalAccountBuff = 0.0;
             foreach (TransactVM transactBuff in Transacts)

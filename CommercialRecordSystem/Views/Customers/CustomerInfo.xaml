@@ -24,15 +24,12 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="140"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="140"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="backButton" Margin="39,59,39,0"
-				Style="{StaticResource NavigationBackButtonNormalStyle}"
-				VerticalAlignment="Top"
-				AutomationProperties.Name="Back"
-				AutomationProperties.AutomationId="BackButton"
-				AutomationProperties.ItemType="Navigation Button" Command="{Binding GoBackCmd}" />
-                <TextBlock x:Name="pageTitle" Text="{Binding Path=InfoTitle, Mode=OneWay}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                <AppBarButton Icon="Back" x:Name="backButton" Grid.Column="0" Margin="10,47,0,0" HorizontalAlignment="Left" Command="{Binding GoBackCmd}" />
+                <TextBlock x:Name="pageTitle" Text="{Binding Path=PageTitle, Mode=OneWay}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+                <AppBarButton Icon="Add" x:Name="addButton" Grid.Column="2" Margin="0,47,10,0" HorizontalAlignment="Right" Command="{Binding CreateNewOneCmd}" />
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

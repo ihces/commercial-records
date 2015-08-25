@@ -69,7 +69,7 @@ namespace CommercialRecordSystem.ViewModels
         }
 
         private ObservableCollection<CustomerVM> customers;
-        public ObservableCollection<CustomerVM> Customers 
+        public ObservableCollection<CustomerVM> Customers
         {
             get
             {
@@ -123,7 +123,7 @@ namespace CommercialRecordSystem.ViewModels
                 RaisePropertyChanged("TotalAccount");
             }
         }
-        
+
         private Boolean noCustomerFound;
         public Boolean NoCustomerFound
         {
@@ -137,7 +137,7 @@ namespace CommercialRecordSystem.ViewModels
                 RaisePropertyChanged("NoCustomerFound");
             }
         }
-        
+
         #endregion "Properties"
 
         public CustomerListFrameVM(FrameNavigation navigation)
@@ -185,12 +185,19 @@ namespace CommercialRecordSystem.ViewModels
 
         private async Task setCustomers()
         {
-            List<Expression<Func<Customer, object>>> orderByClauses = new List<Expression<Func<Customer,object>>>();
+            List<Expression<Func<Customer, object>>> orderByClauses = new List<Expression<Func<Customer, object>>>();
             orderByClauses.Add(c => c.Name);
             orderByClauses.Add(c => c.Surname);
-            Customers = await CustomerVM.getList<CustomerVM>(c => c.Type == Customer.TYPE.REGISTERED, orderByClauses);
+            Expression<Func<Customer, bool>> whereClause = null;
+
+            if (string.IsNullOrWhiteSpace(QueryText))
+                whereClause = c => c.Type == Customer.TYPE.REGISTERED;
+            else
+                whereClause = c => c.Type == Customer.TYPE.REGISTERED && (c.Name.Contains("") || c.Surname.Contains("ss"));
+
+            Customers = new ObservableCollection<CustomerVM>(await CustomerVM.getList<CustomerVM>(whereClause, orderByClauses));
             NoCustomerFound = true;
-            if (0 < Customers.Count) 
+            if (0 < Customers.Count)
             {
                 NoCustomerFound = false;
             }

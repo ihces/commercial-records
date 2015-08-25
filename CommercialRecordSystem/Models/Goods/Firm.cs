@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommercialRecordSystem.Models
+namespace CommercialRecordSystem.Models.Goods
 {
     class Firm : InfoModelBase
     {

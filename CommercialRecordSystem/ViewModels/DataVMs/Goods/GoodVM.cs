@@ -1,14 +1,15 @@
-﻿using CommercialRecordSystem.Models;
+﻿using CommercialRecordSystem.Models.Goods;
 using CommercialRecordSystem.ViewModels.DataVMs;
 using System;
 
-namespace CommercialRecordSystem.ViewModels
+namespace CommercialRecordSystem.ViewModels.DataVMs.Goods
 {
     class GoodVM : InfoDataVMBase<Good>
     {
         #region Properties
         public int firmId;
-        public int FirmId {
+        public int FirmId
+        {
             get
             {
                 return firmId;
@@ -17,9 +18,65 @@ namespace CommercialRecordSystem.ViewModels
             {
                 if (firmId != value)
                 {
-                    firmId = value;
-                    RaisePropertyChanged("FirmId");
+                    FirmVM firmBuff = new FirmVM();
+                    firmBuff.get(value);
+                    FirmName = firmBuff.Name;
                 }
+
+                firmId = value;
+                RaisePropertyChanged("FirmId");
+
+            }
+        }
+
+        public string firmName;
+        public string FirmName
+        {
+            get
+            {
+                return firmName;
+            }
+            set
+            {
+                firmName = value;
+                RaisePropertyChanged("FirmName");
+
+            }
+        }
+
+        public int categoryId = 0;
+        public int CategoryId
+        {
+            get
+            {
+                return categoryId;
+            }
+
+            set
+            {
+                if (categoryId != value)
+                {
+                    CategoryVM categoryBuff = new CategoryVM();
+                    categoryBuff.get(value);
+                    CategoryName = categoryBuff.Name;
+                }
+
+                categoryId = value;
+                RaisePropertyChanged("CategoryId");
+            }
+        }
+
+        public string categoryName;
+        public string CategoryName
+        {
+            get
+            {
+                return categoryName;
+            }
+            set
+            {
+                categoryName = value;
+                RaisePropertyChanged("CategoryName");
             }
         }
 
@@ -34,7 +91,7 @@ namespace CommercialRecordSystem.ViewModels
             {
                 if (name != value)
                 {
-                    name = value;
+                    name = UpperCaseFirst(value);
                     RaisePropertyChanged("Name");
                 }
             }
@@ -49,11 +106,8 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                if (stockAmount != value)
-                {
-                    stockAmount = value;
-                    RaisePropertyChanged("StockAmount");
-                }
+                stockAmount = value;
+                RaisePropertyChanged("StockAmount");
             }
         }
 
@@ -66,11 +120,8 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                if (unit != value)
-                {
-                    unit = value;
-                    RaisePropertyChanged("Unit");
-                }
+                unit = value;
+                RaisePropertyChanged("Unit");
             }
         }
 
@@ -83,11 +134,9 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                if (detail != value)
-                {
-                    detail = value;
-                    RaisePropertyChanged("Detail");
-                }
+                detail = value;
+                RaisePropertyChanged("Detail");
+
             }
         }
 
@@ -100,11 +149,9 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                if (cost != value)
-                {
-                    cost = value;
-                    RaisePropertyChanged("Cost");
-                }
+                cost = value;
+                RaisePropertyChanged("Cost");
+
             }
         }
 
@@ -117,11 +164,9 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                if (price != value)
-                {
-                    price = value;
-                    RaisePropertyChanged("Price");
-                }
+                price = value;
+                RaisePropertyChanged("Price");
+
             }
         }
 
@@ -134,11 +179,9 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                if (barcode != value)
-                {
-                    barcode = value;
-                    RaisePropertyChanged("Barcode");
-                }
+                barcode = value;
+                RaisePropertyChanged("Barcode");
+
             }
         }
 
@@ -151,11 +194,9 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                if (createdDate != value)
-                {
-                    createdDate = value;
-                    RaisePropertyChanged("CreatedDate");
-                }
+                createdDate = value;
+                RaisePropertyChanged("CreatedDate");
+
             }
         }
 
@@ -168,15 +209,14 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                if (modifiedDate != value)
-                {
-                    modifiedDate = value;
-                    RaisePropertyChanged("ModifiedDate");
-                }
+                modifiedDate = value;
+                RaisePropertyChanged("ModifiedDate");
+
             }
         }
 
-        public GoodVM(): base(App.GoodImgFolder)
+        public GoodVM()
+            : base(App.GoodImgFolder)
         { }
 
         public GoodVM(Good good)

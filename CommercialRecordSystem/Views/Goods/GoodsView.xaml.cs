@@ -1,11 +1,12 @@
-﻿using CommercialRecordSystem.ViewModels.FrameVMs.Goods;
-using CommercialRecordSystem.Views;
+﻿using CommercialRecordSystem.Views;
+using CommercialRecordSystem.ViewModels.FrameVMs.Goods;
 
-namespace CommercialRecordSystem
+namespace CommercialRecordSystem.Views.Goods
 {
-    public sealed partial class Goods : ViewBase
+    public sealed partial class GoodsView : ViewBase
     {
-        public Goods() : base(typeof(GoodsFrameVM))
+        public GoodsView()
+            : base(typeof(GoodsFrameVM))
         {
             this.InitializeComponent();
         }

@@ -5,11 +5,11 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CommercialRecordSystem.Common;
-using CommercialRecordSystem.Models;
+using CommercialRecordSystem.Models.Goods;
 using CommercialRecordSystem.ViewModels.DataVMs;
 using CommercialRecordSystem.Views;
 
-namespace CommercialRecordSystem.ViewModels
+namespace CommercialRecordSystem.ViewModels.DataVMs.Goods
 {
     class FirmVM : InfoDataVMBase<Firm>
     {
@@ -25,7 +25,7 @@ namespace CommercialRecordSystem.ViewModels
             {
                 if (name != value)
                 {
-                    name = value;
+                    name = UpperCaseFirst(value);
                     RaisePropertyChanged("Name");
                 }
             }
@@ -132,7 +132,7 @@ namespace CommercialRecordSystem.ViewModels
                 }
             }
         }
-
+        /*
         private ObservableCollection<GoodVM> goods;
         public ObservableCollection<GoodVM> Goods
         {
@@ -146,7 +146,7 @@ namespace CommercialRecordSystem.ViewModels
                 RaisePropertyChanged("Goods");
             }
         }
-
+        */
         
         
         private FrameNavigation navigation = null;
@@ -161,7 +161,7 @@ namespace CommercialRecordSystem.ViewModels
                 navigation = value;
             }
         }
-
+        /*
         private ICommand addGoodCmd = null;
         public ICommand AddGoodCmd
         {
@@ -207,12 +207,12 @@ namespace CommercialRecordSystem.ViewModels
                 columnSpan = value;
                 RaisePropertyChanged("ColumnSpan");
             }
-        }
+        }*/
 
         public FirmVM(): base(App.FirmImgFolder)
         {
-            addGoodCmd = new ICommandImp(addGoodCmdHandler);
-            editGoodCmd = new ICommandImp(editGoodCmdHandler);
+            /*addGoodCmd = new ICommandImp(addGoodCmdHandler);
+            editGoodCmd = new ICommandImp(editGoodCmdHandler);*/
         }
 
         public FirmVM(Firm firm)
@@ -220,7 +220,7 @@ namespace CommercialRecordSystem.ViewModels
         {
             
         }
-
+        /*
         public async Task loadGoods()
         {
             List<Expression<Func<Good, object>>> orderByClauses = new List<Expression<Func<Good, object>>>();
@@ -244,7 +244,7 @@ namespace CommercialRecordSystem.ViewModels
             Ids[0] = Id;
             Ids[1] = 0;
             navigation.Navigate<GoodInfo>(Ids);
-        }
+        }*/
         #endregion
     }
 }

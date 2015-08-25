@@ -1,5 +1,6 @@
 ﻿using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Views.Customers;
+using CommercialRecordSystem.Views.Goods;
 using CommercialRecordSystem.Views.Transacts;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace CommercialRecordSystem
 
         private void GoodsGrid_tabbed(object sender, TappedRoutedEventArgs e)
         {
-            GoTo<Goods>();
+            GoTo<GoodsView>();
         }
 
         private void SalesGrid_tabbed(object sender, TappedRoutedEventArgs e)

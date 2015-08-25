@@ -1,5 +1,6 @@
 ﻿using CommercialRecordSystem.Common;
-using CommercialRecordSystem.Models;
+using CommercialRecordSystem.Models.Goods;
+using CommercialRecordSystem.ViewModels.DataVMs.Goods;
 
 namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
 {

@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,59,39,0"
+            <Button x:Name="backButton" Margin="40,60,40,0"
 				Style="{StaticResource NavigationBackButtonNormalStyle}"
 				VerticalAlignment="Top"
 				AutomationProperties.Name="Back"

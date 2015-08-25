@@ -1,5 +1,5 @@
 ﻿using CommercialRecordSystem.Common;
-using CommercialRecordSystem.Models;
+using CommercialRecordSystem.Models.Goods;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -10,6 +10,8 @@ using CommercialRecordSystem.ViewModels.Transacts;
 using CommercialRecordSystem.Views.Transacts;
 using System;
 using System.Linq.Expressions;
+using CommercialRecordSystem.ViewModels.DataVMs.Goods;
+using CommercialRecordSystem.Models;
 
 namespace CommercialRecordSystem.ViewModels
 {
@@ -159,7 +161,7 @@ namespace CommercialRecordSystem.ViewModels
             List<Expression<Func<Good, object>>> orderByClauses = new List<Expression<Func<Good, object>>>();
             orderByClauses.Add(c => c.Name);
             string findBuff = '%' + searchText + '%';
-            FoundGoods = await GoodVM.getList<GoodVM>(c => c.Name.ToLower().Contains(findBuff.ToLower()), orderByClauses);
+            //FoundGoods = await GoodVM.getList<GoodVM>(c => c.Name.ToLower().Contains(findBuff.ToLower()), orderByClauses);
         }
     }
 }

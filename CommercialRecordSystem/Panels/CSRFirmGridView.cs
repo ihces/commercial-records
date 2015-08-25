@@ -7,9 +7,9 @@ namespace CommercialRecordSystem.Panels
     {
         public CSRFirmGridView()
         {
-            DoubleTapped += CSRFirmGridView_DoubleTapped;
+            //DoubleTapped += CSRFirmGridView_DoubleTapped;
         }
-
+        /*
         private void CSRFirmGridView_DoubleTapped(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
         {
             CSRFirmGridView obj = sender as CSRFirmGridView;
@@ -34,6 +34,6 @@ namespace CommercialRecordSystem.Panels
                 }
             }
             base.PrepareContainerForItemOverride(element, item);
-        }
+        }*/
     }
 }

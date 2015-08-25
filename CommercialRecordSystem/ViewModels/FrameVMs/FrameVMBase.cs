@@ -18,6 +18,34 @@ namespace CommercialRecordSystem.ViewModels
                 return navigation;
             }
         }
+
+        private string pageTitle;
+        public string PageTitle
+        {
+            get
+            {
+                return pageTitle;
+            }
+            set
+            {
+                pageTitle = value;
+                RaisePropertyChanged("PageTitle");
+            }
+        }
+
+        private bool showPageTitle = true;
+        public bool ShowPageTitle
+        {
+            get
+            {
+                return showPageTitle;
+            }
+            set
+            {
+                showPageTitle = value;
+                RaisePropertyChanged("ShowPageTitle");
+            }
+        }
         #endregion
 
         #region Commands

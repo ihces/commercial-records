@@ -12,23 +12,11 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 namespace CommercialRecordSystem.ViewModels.FrameVMs
 {
-    class InfoFrameVMBase<E, F>: FrameVMBase where E : InfoDataVMBase<F>, new() where F : InfoModelBase, new()
+    class InfoFrameVMBase<E, F> : FrameVMBase
+        where E : InfoDataVMBase<F>, new()
+        where F : InfoModelBase, new()
     {
         #region Properties
-
-        private string infoTitle;
-        public string InfoTitle
-        {
-            get
-            {
-                return infoTitle;
-            }
-            set
-            {
-                infoTitle = value;
-                RaisePropertyChanged("InfoTitle");
-            }
-        }
 
         private Boolean showImageLogo = true;
         public Boolean ShowImageLogo
@@ -119,12 +107,20 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
         }
 
         private readonly ICommand loadPhotoViaFileBrowserCmd = null;
-
         public ICommand LoadPhotoViaFileBrowserCmd
-        { 
+        {
             get
             {
                 return loadPhotoViaFileBrowserCmd;
+            }
+        }
+
+        private readonly ICommand createNewOneCmd = null;
+        public ICommand CreateNewOneCmd
+        {
+            get
+            {
+                return createNewOneCmd;
             }
         }
         #endregion
@@ -152,7 +148,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             var messageDialog = new MessageDialog(message, "Kaydetme İşlemi");
 
             // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
-            messageDialog.Commands.Add(new UICommand("Tamam", null));
+            messageDialog.Commands.Add(new UICommand("Tamam", new UICommandInvokedHandler(this.SaveInfoCommandInvokedHandler)));
 
             // Set the command that will be invoked by default
             messageDialog.DefaultCommandIndex = 1;
@@ -183,15 +179,26 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             messageDialog.ShowAsync();
         }
 
+        private void createNewOneCmdHandler(object parameter)
+        {
+            CurrentInfo = new E();
+            this.PageTitle = "Yeni " + infoName;
+        }
+
         private void DelInfoCommandInvokedHandler(IUICommand command)
         {
             CurrentInfo.delete();
             Navigation.GoBack();
         }
 
+        private void SaveInfoCommandInvokedHandler(IUICommand command)
+        {
+            this.PageTitle = "Kayıtlı " + infoName;
+        }
+
         private async void loadPhotoViaBrowserCmdHandler(object parameter)
         {
-            object [] imagePickData = new object[2];
+            object[] imagePickData = new object[2];
             imagePickData[0] = CurrentInfo.ImageSourceFolder;
             imagePickData[1] = aspectRatio;
             Navigation.Navigate<ImagePicker>(imagePickData);
@@ -200,7 +207,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
         private async void capturePhotoFromCamCmdHandler(object parameter)
         {
             CameraCaptureUI dialog = new CameraCaptureUI();
-            dialog.PhotoSettings.CroppedAspectRatio = new Size(240, 240*aspectRatio);
+            dialog.PhotoSettings.CroppedAspectRatio = new Size(240, 240 * aspectRatio);
 
             StorageFile capturedPhoto = await dialog.CaptureFileAsync(CameraCaptureUIMode.Photo);
             if (capturedPhoto != null)
@@ -226,11 +233,16 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             : base(navigation)
         {
             this.infoName = infoName;
-            this.InfoTitle = "Yeni " + infoName;
+            if (CurrentInfo.Id != 0)
+                this.PageTitle = "Kayıtlı " + infoName;
+            else
+                this.PageTitle = "Yeni " + infoName;
+
             this.aspectRatio = aspectRatio;
 
             saveInfoCmd = new ICommandImp(saveInfoCmdHandler);
             delInfoCmd = new ICommandImp(delInfoCmdHandler);
+            createNewOneCmd = new ICommandImp(createNewOneCmdHandler);
             loadPhotoViaFileBrowserCmd = new ICommandImp(loadPhotoViaBrowserCmdHandler);
             capturePhotoFromCamCmd = new ICommandImp(capturePhotoFromCamCmdHandler);
 
@@ -246,7 +258,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
                 {
                     DelButtonCanEnable = true;
 
-                    this.InfoTitle = "Kayıtlı " + infoName;
+                    this.PageTitle = "Kayıtlı " + infoName;
                     CurrentInfo.get((int)navigation.Message);
 
                     if (!string.IsNullOrWhiteSpace(CurrentInfo.ImageFileName))

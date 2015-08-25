@@ -68,9 +68,7 @@
                             <TextBlock Grid.Column="0" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">
 								<Run Text="İşlem"/>
                             </TextBlock>
-                            <TextBlock Grid.Column="1" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">
-								<Run Text="Tarih"/>
-                            </TextBlock>
+                            <TextBlock Grid.Column="1" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tarih" />
                             <TextBlock Grid.Column="2" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">
 								<Run Text="Müşteri Bilgisi"/>
                             </TextBlock>

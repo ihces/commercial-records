@@ -45,7 +45,8 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
             foreach (PropertyInfo modelProperty in modelProperties)
             {
                 PropertyInfo property = VMproperties.Where(p => p.Name == modelProperty.Name).Single();
-                property.SetValue(this, modelProperty.GetValue(model));
+                if (null != property)
+                    property.SetValue(this, modelProperty.GetValue(model));
             }
             
             Dirty = false;
@@ -60,7 +61,8 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
             foreach (PropertyInfo modelProperty in modelProperties)
             {
                 PropertyInfo property = VMproperties.Where(p => p.Name == modelProperty.Name).Single();
-                modelProperty.SetValue(model, property.GetValue(this));
+                if (null != property) 
+                    modelProperty.SetValue(model, property.GetValue(this));
             }
 
             return model;
@@ -96,7 +98,7 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
                 var entryBuff = (db.Table<E>().Where(
-                    c => c.Id == id)).Single();
+                    c => c.Id == id)).SingleOrDefault();
 
                 if (null != entryBuff)
                 {
@@ -130,7 +132,7 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
         
         }
 
-        public static async Task<ObservableCollection<T>> getList<T>(
+        public static async Task<List<T>> getList<T>(
             Expression<Func<E, bool>> whereClause, List<Expression<Func<E, object>>> orderByClauses) where T: DataVMIntf<E>, new()
         {
             List<E> resultList = null;
@@ -165,7 +167,7 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
                 customerModelList = await db.Table<E>().Where(c => c.Type == Customer.TYPE.REGISTERED && (c.Name.Contains(keyword) || c.Surname.Contains(keyword))).ToListAsync();
             }*/
 
-            ObservableCollection<T> RecordList = new ObservableCollection<T>();
+            List<T> RecordList = new List<T>();
             
             foreach (E record in resultList)
             {
@@ -175,5 +177,16 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
             }
             return RecordList;
         }
+
+        /*public static async Task<OrderedListVM<T,E>> getOrderedList<T>(PropertyInfo orderProperty,
+            Expression<Func<E, bool>> whereClause =null, List<Expression<Func<E, object>>> orderByClauses=null,
+            bool alphaNumericOrder = false, bool reverse = false) where T : DataVMIntf<E>, new()
+        {
+            List<T> dataList = await getList<T>(whereClause, orderByClauses);
+            OrderedListVM<T, E>  orderedList = new OrderedListVM<T, E>();
+            orderedList.FillList(dataList, orderProperty, alphaNumericOrder, reverse);
+            
+            return orderedList;
+        }*/
     }
 }
