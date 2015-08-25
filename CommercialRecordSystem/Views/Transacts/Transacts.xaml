@@ -47,54 +47,54 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="20" />
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="50" />
                     <RowDefinition Height="52" />
                 </Grid.RowDefinitions>
-                <ListView x:Name="CustomerListView"  Grid.Row="0" ItemsSource="{Binding Transacts}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionMode="Single">
+                <ListView x:Name="listview"  Grid.Row="0" ItemsSource="{Binding Transacts}" SelectedItem="{Binding SelectedTransact, Mode=TwoWay}" SelectionMode="Single">
                     <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <core:InvokeCommandAction Command="{Binding DoOper4SelectedCustomerCmd}"/>
+                        <core:EventTriggerBehavior EventName="DoubleTapped">
+                            <core:InvokeCommandAction Command="{Binding OpenTransactionCmd}"/>
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                     <ListView.Header>
-                        <Grid Style="{StaticResource CustomerListRow}" HorizontalAlignment="Left" Background="#d74f2a">
+                        <Grid HorizontalAlignment="Left" Background="#d74f2a" Width="{Binding ActualWidth, ElementName=listview}" Height="50">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="300"/>
-                                <ColumnDefinition Width="300"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Grid.Column="0" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Tarih" />
+                            <TextBlock Grid.Column="1" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left">
 								<Run Text="İşlem"/>
                             </TextBlock>
-                            <TextBlock Grid.Column="1" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tarih" />
-                            <TextBlock Grid.Column="2" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Grid.Column="2" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left">
 								<Run Text="Müşteri Bilgisi"/>
                             </TextBlock>
-                            <TextBlock Grid.Column="3" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">
-								<Run Text="Kayıt Adedi"/>
+                            <TextBlock Grid.Column="3" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left">
+								<Run Text="Ödenen"/>
                             </TextBlock>
-                            <TextBlock Grid.Column="4" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Grid.Column="4" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Right">
 								<Run Text="Tutar"/>
                             </TextBlock>
                         </Grid>
                     </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="60" Width="1161">
+                            <Grid Height="60" Width="{Binding ActualWidth, ElementName=listview, Converter={StaticResource SizeAdjustmentConverter}, ConverterParameter=-25}">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition Width="300"/>
-                                    <ColumnDefinition Width="300"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding Type, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <TextBlock Grid.Column="1" Text="{Binding Date, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <TextBlock Grid.Column="2" Text="{Binding CustomerId, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <TextBlock Grid.Column="3" Text="{Binding CustomerId, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <TextBlock Grid.Column="4" Text="{Binding Cost, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <TextBlock Grid.Column="0" Text="{Binding Type, Converter={StaticResource Int2MeasureConverter}}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                <TextBlock Grid.Column="1" Text="{Binding Date}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                <TextBlock Grid.Column="2" Text="{Binding CustomerName}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                <TextBlock Grid.Column="3" Text="{Binding Paid}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                <TextBlock Grid.Column="4" Text="{Binding Cost}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Right" />
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -117,7 +117,7 @@
                             <TextBlock Grid.Column="1" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left" Padding="0,0,24,0" VerticalAlignment="Center" Text="Kişi" />
                             <TextBlock Grid.Column="2" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0,0,0" Text="{Binding TotalAccount, Converter={StaticResource Double2MoneyConverter}, Mode=OneWay}" />
                         </Grid>
-                        <Button Grid.Column="2" Height="66" Margin="-3,-3,0,0" VerticalAlignment="Stretch" Background="#77B900" HorizontalAlignment="Stretch" Command="{Binding StartNewTransactCmd}" >
+                        <Button Grid.Column="2" Height="56" Margin="-3,-3,0,0" VerticalAlignment="Stretch" Background="#008A00" HorizontalAlignment="Stretch" Command="{Binding StartNewTransactCmd}" >
                             <TextBlock FontFamily="Segoe UI Symbol" Text="Yeni İşlem &#xE102;" FontSize="23" />
                         </Button>
                     </Grid>

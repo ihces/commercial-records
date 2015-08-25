@@ -45,7 +45,7 @@
                 <ColumnDefinition Width="223*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1">
+            <Grid x:Name="leftPanel1" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="240"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
@@ -106,7 +106,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="176"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListView Grid.Row="0" Background="#d74f2a" HorizontalAlignment="Left" ItemsSource="{Binding FoundGoods}" Width="355" SelectedItem="{Binding SelectedGood, Mode=TwoWay}" SelectionMode="Single">
+                <ListView x:Name="goodList" Grid.Row="0" Background="#d74f2a" Width="{Binding ActualWidth, ElementName=leftPanel1}" HorizontalAlignment="Left" ItemsSource="{Binding FoundGoods}" SelectedItem="{Binding SelectedGood, Mode=TwoWay}" SelectionMode="Single">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
                             <core:InvokeCommandAction Command="{Binding SelectGoodCmd}"/>
@@ -114,7 +114,7 @@
                     </interactivity:Interaction.Behaviors>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="70" Width="320" Background="#18ffffff">
+                            <Grid Height="70" Width="{Binding ActualWidth, ElementName=leftPanel1, Converter={StaticResource SizeAdjustmentConverter}, ConverterParameter=-25}" Background="#18ffffff">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="70"/>
                                     <ColumnDefinition Width="*"/>
@@ -158,9 +158,9 @@
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="52"/>
                 </Grid.RowDefinitions>
-                <ListView Grid.Row="0" ItemsSource="{Binding Entries}" Grid.RowSpan="2">
+                <ListView x:Name="listview" Grid.Row="0" ItemsSource="{Binding Entries}" Grid.RowSpan="2">
                     <ListView.Header>
-                        <Grid Style="{StaticResource SaleListHeader}">
+                        <Grid Width="{Binding ActualWidth, ElementName=listview}" Height="50" Background="#d74f2a" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"></ColumnDefinition>
                                 <ColumnDefinition Width="100"></ColumnDefinition>
@@ -177,7 +177,7 @@
                     </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Style="{StaticResource SaleListRow}">
+                            <Grid Width="{Binding ActualWidth, ElementName=listview, Converter={StaticResource SizeAdjustmentConverter}, ConverterParameter=-25}" Height="60" Background="#18ffffff">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="32"></ColumnDefinition>
                                     <ColumnDefinition Width="100"></ColumnDefinition>
@@ -226,7 +226,7 @@
                             <TextBlock FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="0,0,8,0">9.999.999,99 ₺</TextBlock>
                         </Grid>
                     </Grid>
-                    <Button Grid.Column="6" Width="86" Height="66" Margin="-3" Background="#77B900" VerticalAlignment="Stretch" Command="{Binding GoNextCmd}">
+                    <Button Grid.Column="6" Width="86" Height="66" Margin="-3" Background="#008A00" VerticalAlignment="Stretch" Command="{Binding GoNextCmd}">
                         <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE0ae;" FontSize="20"></TextBlock>
                     </Button>
                 </Grid>

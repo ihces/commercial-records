@@ -19,8 +19,28 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                customerId = value;
+                if (customerId != value)
+                {
+                    customerId = value;
+                    CustomerVM customerBuff = new CustomerVM();
+                    customerBuff.get(value);
+                    CustomerName = customerBuff.Name + " " + customerBuff.Surname;
+                }
                 RaisePropertyChanged("CustomerId");
+            }
+        }
+
+        private string customerName = string.Empty;
+        public string CustomerName
+        {
+            get
+            {
+                return customerName;
+            }
+            set
+            {
+                customerName = value;
+                RaisePropertyChanged("CustomerName");
             }
         }
 
@@ -99,29 +119,6 @@ namespace CommercialRecordSystem.ViewModels
         public TransactVM(Transact transact)
         {
             initWithModel(transact);
-        }
-
-        public override void initWithModel(Transact model)
-        {
-            Id = model.Id;
-            CustomerId = model.CustomerId;
-            Date = model.Date;
-            Cost = model.Cost;
-            Paid = model.Paid;
-            Dirty = false;
-        }
-
-        public override Transact convert2Model()
-        {
-            Transact transact = new Transact();
-            transact.Id = Id;
-            transact.Type = Type;
-            transact.CustomerId = CustomerId;
-            transact.Date = Date;
-            transact.Cost = Cost;
-            transact.Paid = Paid;
-
-            return transact;
         }
     }
 }

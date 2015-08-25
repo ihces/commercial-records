@@ -161,7 +161,9 @@ namespace CommercialRecordSystem.ViewModels
             List<Expression<Func<Good, object>>> orderByClauses = new List<Expression<Func<Good, object>>>();
             orderByClauses.Add(c => c.Name);
             string findBuff = '%' + searchText + '%';
-            //FoundGoods = await GoodVM.getList<GoodVM>(c => c.Name.ToLower().Contains(findBuff.ToLower()), orderByClauses);
+            FoundGoods = new ObservableCollection<GoodVM>(
+                await GoodVM.getList<GoodVM>(c => c.Name.ToLower().Contains(findBuff.ToLower()), 
+                orderByClauses));
         }
     }
 }

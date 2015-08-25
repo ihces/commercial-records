@@ -45,15 +45,6 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private readonly ICommand editCustomerCmd;
-        public ICommand EditCustomerCmd
-        {
-            get
-            {
-                return editCustomerCmd;
-            }
-        }
-
         private string queryText = string.Empty;
         public string QueryText
         {
@@ -146,7 +137,6 @@ namespace CommercialRecordSystem.ViewModels
             findCustomersCmd = new ICommandImp(findCustomers_execute);
             doOper4SelectedCustomerCmd = new ICommandImp(doOper4SelectedCustomer_execute);
             addCustomerCmd = new ICommandImp(addCustomer_execute);
-            editCustomerCmd = new ICommandImp(editCustomer_execute);
             setCustomers();
         }
 
@@ -169,12 +159,6 @@ namespace CommercialRecordSystem.ViewModels
                     Navigation.Navigate<CustomerAccount>(SelectedCustomer.Id);
                 }
             }
-        }
-
-        private void editCustomer_execute(object obj)
-        {
-            if (null != SelectedCustomer)
-                Navigation.Navigate(typeof(CustomerInfo), SelectedCustomer.Id);
         }
 
         private void addCustomer_execute(object obj)

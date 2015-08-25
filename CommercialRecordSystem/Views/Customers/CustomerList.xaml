@@ -67,7 +67,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="20" />
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="50" />
                     <RowDefinition Height="52" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Kayıtlı Müşteri Bulunamadı" Visibility="{Binding NoCustomerFound, Converter={StaticResource Boolean2VisibilityConverter}}"  />
@@ -78,73 +78,58 @@
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                     <ListView.Header>
-                        <Grid Style="{StaticResource CustomerListRow}" HorizontalAlignment="Left" Background="#008A00">
+                        <Grid HorizontalAlignment="Left" Background="#008A00" Width="{Binding ActualWidth, ElementName=CustomerListView}" Height="50">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70"/>
-                                <ColumnDefinition Width="300"/>
-                                <ColumnDefinition Width="300"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="1" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Text="İsim"/>
-                            <TextBlock Grid.Column="2" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Grid.Column="1" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" Text="İsim"/>
+                            <TextBlock Grid.Column="2" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left">
 								<Run Text="Soyisim"/>
                             </TextBlock>
-                            <TextBlock Grid.Column="3" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Grid.Column="3" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Right">
 								<Run Text="Son İşlem Tarihi"/>
                             </TextBlock>
-                            <TextBlock Grid.Column="4" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Grid.Column="4" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Right">
 								<Run Text="Hesap"/>
                             </TextBlock>
                         </Grid>
                     </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="60">
+                            <Grid Height="60" Width="{Binding ActualWidth, ElementName=CustomerListView, Converter={StaticResource SizeAdjustmentConverter}, ConverterParameter=-25}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="60"/>
                                     <ColumnDefinition Width="10"/>
-                                    <ColumnDefinition Width="300"/>
-                                    <ColumnDefinition Width="300"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Width="50" Height="60" Grid.Column="0" HorizontalAlignment="Left" Source="{Binding ImageFileSource, Mode=OneWay}"/>
                                 <TextBlock Grid.Column="2" Text="{Binding Name, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
                                 <TextBlock Grid.Column="3" Text="{Binding Surname, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <TextBlock Grid.Column="4" Text="{Binding LastTransactDate, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                <TextBlock Grid.Column="4" Text="{Binding LastTransactDate, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Right" />
                                 <TextBlock Grid.Column="5" Text="{Binding AccountCost, Mode=OneWay}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Right" />
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Border Grid.Row="2" BorderBrush="#008A00" BorderThickness="3">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60" />
-                            <ColumnDefinition Width="60" />
-                            <ColumnDefinition Width="487" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Height="60" Margin="-3,-3,0,0" VerticalAlignment="Stretch" Background="#008A00" HorizontalAlignment="Stretch" Command="{Binding AddCustomerCmd}" >
-                            <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE1E2;" FontSize="23" />
-                        </Button>
-                        <Button Grid.Column="1" Height="60" Margin="-3,-3,0,0" VerticalAlignment="Stretch" Background="#444444" HorizontalAlignment="Stretch" Command="{Binding EditCustomerCmd}" >
-                            <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE136;" FontSize="23"/>
-                        </Button>
-                        <Grid Grid.Column="4" Background="#008A00">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="20" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0,0,0" Text="{Binding RowCount, Mode=OneWay}" />
-                            <TextBlock Grid.Column="1" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left" Padding="0,0,24,0" VerticalAlignment="Center" Text="Kişi" />
-                            <TextBlock Grid.Column="2" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0,0,0" Text="{Binding TotalAccount, Converter={StaticResource Double2MoneyConverter}, Mode=OneWay}" />
-                        </Grid>
-                    </Grid>
-                </Border>
+                <Grid Grid.Row="2" Background="#008A00">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0,0,0" Text="{Binding RowCount, Mode=OneWay}" />
+                    <TextBlock Grid.Column="1" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left" Padding="0,0,24,0" VerticalAlignment="Center" Text="Kişi" />
+                    <TextBlock Grid.Column="2" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Padding="0,0,24,0" VerticalAlignment="Center" Text="Toplam" />
+                    <TextBlock Grid.Column="3" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0" Text="{Binding TotalAccount, Converter={StaticResource Double2MoneyConverter}, Mode=OneWay}" />
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

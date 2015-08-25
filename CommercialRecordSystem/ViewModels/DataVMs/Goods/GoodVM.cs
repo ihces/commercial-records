@@ -7,7 +7,7 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Goods
     class GoodVM : InfoDataVMBase<Good>
     {
         #region Properties
-        public int firmId;
+        public int firmId = 0;
         public int FirmId
         {
             get
