@@ -112,9 +112,14 @@
                             <TextBlock Grid.Column="1" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center">Yapılan Ödemeler</TextBlock>
                         </Grid>
                     </ListView.Header>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Width="{Binding ActualWidth, ElementName=listview}" Height="60" Background="#18ffffff">
+                            <Grid Height="60" Background="#18ffffff">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="32" />
                                     <ColumnDefinition Width="2*" />

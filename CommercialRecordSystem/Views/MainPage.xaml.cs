@@ -1,6 +1,9 @@
 ﻿using CommercialRecordSystem.Common;
+using CommercialRecordSystem.Views;
+using CommercialRecordSystem.Views.CashRegNBank;
 using CommercialRecordSystem.Views.Customers;
 using CommercialRecordSystem.Views.Goods;
+using CommercialRecordSystem.Views.Settings;
 using CommercialRecordSystem.Views.Transacts;
 using System;
 using System.Collections.Generic;
@@ -64,6 +67,21 @@ namespace CommercialRecordSystem
         private void DashboardsGrid_tabbed(object sender, TappedRoutedEventArgs e)
         {
            // GoTo<DashboardView>();
+        }
+
+        private void EnterpriseAccounts_tapped(object sender, TappedRoutedEventArgs e)
+        {
+            GoTo<EnterpriseAccounts>();
+        }
+
+        private void IncomeNExpenses_tapped(object sender, TappedRoutedEventArgs e)
+        {
+            GoTo<IncomingNExpenses>();
+        }
+
+        private void Settings_tapped(object sender, TappedRoutedEventArgs e)
+        {
+            GoTo<Settings>();
         }
     }
 }

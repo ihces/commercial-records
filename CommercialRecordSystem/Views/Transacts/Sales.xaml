@@ -12,7 +12,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
     <Grid Style="{StaticResource PageLayout}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -27,6 +27,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Margin="39,59,39,0"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
@@ -36,6 +37,8 @@
                         AutomationProperties.ItemType="Navigation Button" Command="{Binding GoBackCmd}"/>
             <TextBlock x:Name="pageTitle" Text="{Binding Header}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+            <AppBarButton Grid.Column="2" Icon="Forward"  x:Name="nextCmd" Margin="0,47,10,0" HorizontalAlignment="Right" 
+                          Command="{Binding GoNextCmd}" />
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -155,9 +158,52 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="5"/>
+                    <RowDefinition Height="115"/>
+                    <RowDefinition Height="5"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="52"/>
                 </Grid.RowDefinitions>
+                
+                <Grid Background="#28FF981D" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock VerticalAlignment="Center" FontSize="15">Sipariş Tarihi</TextBlock>
+                            <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="22/05/2015 23:59:59" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
+                            
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <TextBlock VerticalAlignment="Center" FontSize="15">Değişiklik Tarihi</TextBlock>
+                            <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="22/05/2015 23:59:59" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <TextBlock VerticalAlignment="Center" FontSize="15">Teslim Tarihi</TextBlock>
+                            <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="22/05/2015 23:59:59" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="75"/>
+                        </Grid.ColumnDefinitions>
+                        <AppBarButton Grid.Column="0" Icon="Back" VerticalAlignment="Bottom"></AppBarButton>
+                        <TextBlock Grid.Column="1" FontSize="18" TextWrapping="Wrap" Text="Ürün Tedariği Bekleniyor." VerticalAlignment="Center"></TextBlock>
+                        <AppBarButton Grid.Column="2" VerticalAlignment="Bottom" Icon="Forward" FlowDirection="RightToLeft"></AppBarButton>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <TextBox Header="Açıklama" BorderBrush="#00ffffff" BorderThickness="3"></TextBox>
+                    </Grid>
+                </Grid>
                 <ListView x:Name="listview" Grid.Row="0" ItemsSource="{Binding Entries}" Grid.RowSpan="2">
                     <ListView.Header>
                         <Grid Width="{Binding ActualWidth, ElementName=listview}" Height="50" Background="#d74f2a" >
@@ -167,68 +213,62 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="150"></ColumnDefinition>
                                 <ColumnDefinition Width="200"></ColumnDefinition>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <CheckBox Grid.Column="0" Margin="3,0,0,0" IsChecked="{Binding IsAllChecked, Mode=TwoWay}"></CheckBox>
                             <TextBlock Grid.Column="1" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Miktar</TextBlock>
                             <TextBlock Grid.Column="2" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Açıklama</TextBlock>
                             <TextBlock Grid.Column="3" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Birim Tutar</TextBlock>
                             <TextBlock Grid.Column="4" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Tutar</TextBlock>
+                            <Button Width="50" Grid.Column="5" Background="#AD103C" VerticalAlignment="Stretch" Command="{Binding DeleteEntryCmd}">
+                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="20"></TextBlock>
+                            </Button>
                         </Grid>
                     </ListView.Header>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Width="{Binding ActualWidth, ElementName=listview, Converter={StaticResource SizeAdjustmentConverter}, ConverterParameter=-25}" Height="60" Background="#18ffffff">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="32"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                    <ColumnDefinition Width="200"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <CheckBox Grid.Column="0" HorizontalAlignment="Left" IsChecked="{Binding IsChecked, Mode=TwoWay}"></CheckBox>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30" />
-                                        <RowDefinition Height="30" />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Amount, Mode=OneWay}" />
-                                    <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Measure, Mode=OneWay, Converter={StaticResource Int2MeasureConverter}}" />
-                                </Grid>
-                                <TextBlock Grid.Column="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Detail, Mode=OneWay}" TextWrapping="Wrap" />
-                                <TextBlock Grid.Column="3" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding UnitCost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
-                                <TextBlock Grid.Column="4" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Cost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50" />
-                        <ColumnDefinition Width="5" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="5" />
-                        <ColumnDefinition Width="80" />
-                    </Grid.ColumnDefinitions>
-                    <Button Width="56" Margin="-3" Grid.Column="0" Background="#AD103C" VerticalAlignment="Stretch" Command="{Binding DeleteEntryCmd}">
-                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="20"></TextBlock>
-                    </Button>
-                    <Grid Grid.Column="2" Background="#d74f2a">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <!--<ListView.ItemTemplate>
+                        <DataTemplate>-->
+                    <Grid Height="60" Background="#18ffffff">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="250" />
+                            <ColumnDefinition Width="32"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">888</TextBlock>
-                        <TextBlock Grid.Column="1" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center">Kalem</TextBlock>
-                        <TextBlock Grid.Column="2" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center">Toplam</TextBlock>
-                        <Grid Grid.Column="3" Background="#88000000" Margin="8">
-                            <TextBlock FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="0,0,8,0">9.999.999,99 ₺</TextBlock>
+                        <CheckBox Grid.Column="0" HorizontalAlignment="Left" IsChecked="{Binding IsChecked, Mode=TwoWay}"></CheckBox>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Amount, Mode=OneWay}" />
+                            <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Measure, Mode=OneWay, Converter={StaticResource Int2MeasureConverter}}" />
                         </Grid>
+                        <TextBlock Grid.Column="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Detail, Mode=OneWay}" TextWrapping="Wrap" />
+                        <TextBlock Grid.Column="3" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding UnitCost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
+                        <TextBlock Grid.Column="4" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Cost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
                     </Grid>
-                    <Button Grid.Column="6" Width="86" Height="66" Margin="-3" Background="#008A00" VerticalAlignment="Stretch" Command="{Binding GoNextCmd}">
-                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE0ae;" FontSize="20"></TextBlock>
-                    </Button>
+                    <!--</DataTemplate>
+                    </ListView.ItemTemplate>-->
+                </ListView>
+                <Grid Grid.Row="4" Background="#d74f2a">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="250" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">888</TextBlock>
+                    <TextBlock Grid.Column="1" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center">Kalem</TextBlock>
+                    <TextBlock Grid.Column="2" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center">Toplam</TextBlock>
+                    <Grid Grid.Column="3" Background="#88000000" Margin="8">
+                        <TextBlock FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="0,0,8,0">9.999.999,99 ₺</TextBlock>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

@@ -163,6 +163,12 @@
     <Compile Include="ViewModels\DataVMs\Transacts\TransactVM.cs" />
     <Compile Include="ViewModels\VMBase.cs" />
     <Compile Include="ViewModels\DataVMs\DataVMIntf.cs" />
+    <Compile Include="Views\CashRegNBank\EnterpriseAccounts.xaml.cs">
+      <DependentUpon>EnterpriseAccounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CashRegNBank\AccountInfo.xaml.cs">
+      <DependentUpon>AccountInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Customers\CustomerAccount.xaml.cs">
       <DependentUpon>CustomerAccount.xaml</DependentUpon>
     </Compile>
@@ -190,8 +196,14 @@
     <Compile Include="Views\ImagePicker.xaml.cs">
       <DependentUpon>ImagePicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IncomeNExpense\IncomingNExpenses.xaml.cs">
+      <DependentUpon>IncomingNExpenses.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Transacts\Payments.xaml.cs">
       <DependentUpon>Payments.xaml</DependentUpon>
@@ -232,6 +244,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\CashRegNBank\EnterpriseAccounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CashRegNBank\AccountInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Goods\CategoryInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -245,6 +265,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ImagePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IncomeNExpense\IncomingNExpenses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -321,6 +349,9 @@
     </SDKReference>
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
+    </SDKReference>
+    <SDKReference Include="MSAdvertisingXaml, Version=8.1">
+      <Name>MSAdvertisingXaml</Name>
     </SDKReference>
     <SDKReference Include="SQLite.WinRT81, Version=3.8.7.1">
       <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>

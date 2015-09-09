@@ -40,25 +40,25 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140" />
-                <ColumnDefinition Width="350*" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="40" />
-                <ColumnDefinition Width="400*" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="40" />
-                <ColumnDefinition Width="390*" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="40" />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="315"/>
+                    <RowDefinition Height="5*"/>
                     <RowDefinition Height="10"/>
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="10"/>
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="10"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Background="#18ffffff">
-                    <Image Height="250" Width="200" VerticalAlignment="Top" Source="{Binding Path=CurrentCustomer.ImageFileSource}"/>
+                    <Image Height="250" Width="200" VerticalAlignment="Center" Source="{Binding Path=CurrentCustomer.ImageFileSource}"/>
                     <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="28">
 						    <Run FontFamily="Segoe UI Symbol" Text="&#xE00A;    &#xE00A;    &#xE00A;    &#xE00A;    &#xE00A;"/>
                     </TextBlock>
@@ -103,16 +103,16 @@
             <Grid Grid.Column="3">
                 <Grid >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="315" />
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="5*" />
                         <RowDefinition Height="10"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
-                    <Grid>
-                        <Charting:Chart x:Name="ColumnChart" Background="#18ffffff" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Height="315" >
+                    <Grid x:Name="chartContainer" Grid.Row="0" Background="#18ffffff">
+                        <Charting:Chart x:Name="ColumnChart" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding Path=ActualWidth, ElementName=chartContainer}"  Height="{Binding Path=ActualHeight, ElementName=chartContainer}">
                             <Charting:AreaSeries Title="Ödenen" Margin="0" IndependentValuePath="Name" DependentValuePath="Amount" IsSelectionEnabled="True"/>
                             <Charting:AreaSeries Title="Alacak"    IndependentValuePath="Name" DependentValuePath="Amount" IsSelectionEnabled="True"/>
                             <Charting:ScatterSeries Title="Net" Margin="0" IndependentValuePath="Name" DependentValuePath="Amount" IsSelectionEnabled="True"/>
@@ -156,18 +156,23 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <ListView Grid.Column="5" VerticalAlignment="Top" Height="Auto" Tapped="actionList_Tabbed" >
+            <ListView x:Name="listview" Grid.Column="5" VerticalAlignment="Top" Height="Auto" Tapped="actionList_Tabbed" >
                 <ListView.Header>
-                    <Grid Height="60" Width="390" HorizontalAlignment="Left" Background="#008A00">
+                    <Grid Height="60" Width="{Binding Path=ActualWidth, ElementName=listview}" HorizontalAlignment="Left" Background="#008A00">
                         <TextBlock Grid.Column="0" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">
 								<Run Text="Cari İşlemler"/>
                         </TextBlock>
                     </Grid>
                 </ListView.Header>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <Grid Height="60" Background="#18ffffff">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                        <ColumnDefinition Width="165"></ColumnDefinition>
+                        <ColumnDefinition Width="200*"></ColumnDefinition>
+                        <ColumnDefinition Width="165*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
@@ -181,8 +186,8 @@
                 </Grid>
                 <Grid Height="60" Background="#68AD103C">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                        <ColumnDefinition Width="165"></ColumnDefinition>
+                        <ColumnDefinition Width="200*"></ColumnDefinition>
+                        <ColumnDefinition Width="165*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
@@ -191,96 +196,6 @@
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">20/06/2014</TextBlock>
                         <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">Ödeme kaydedildi</TextBlock>
-                    </Grid>
-                    <TextBlock Grid.Column="2" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">99999,50 ₺</TextBlock>
-                </Grid>
-                <Grid Height="60" Background="#18ffffff">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                        <ColumnDefinition Width="165"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">20/06/2014</TextBlock>
-                        <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">Ödeme Yapıldı</TextBlock>
-                    </Grid>
-                    <TextBlock Grid.Column="2" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">99999,50 ₺</TextBlock>
-                </Grid>
-                <Grid Height="60" Background="#18ffffff">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                        <ColumnDefinition Width="165"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">20/06/2014</TextBlock>
-                        <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">Alacak kaydedildi</TextBlock>
-                    </Grid>
-                    <TextBlock Grid.Column="2" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">99999,50 ₺</TextBlock>
-                </Grid>
-                <Grid Height="60" Background="#18ffffff">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                        <ColumnDefinition Width="165"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">20/06/2014</TextBlock>
-                        <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">Alacak kaydedildi</TextBlock>
-                    </Grid>
-                    <TextBlock Grid.Column="2" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">99999,50 ₺</TextBlock>
-                </Grid>
-                <Grid Height="60" Background="#18ffffff">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                        <ColumnDefinition Width="165"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">20/06/2014</TextBlock>
-                        <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">Alacak kaydedildi</TextBlock>
-                    </Grid>
-                    <TextBlock Grid.Column="2" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">99999,50 ₺</TextBlock>
-                </Grid>
-                <Grid Height="60" Background="#68AD103C">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                        <ColumnDefinition Width="165"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">20/06/2014</TextBlock>
-                        <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">Ödeme kaydedildi</TextBlock>
-                    </Grid>
-                    <TextBlock Grid.Column="2" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">99999,50 ₺</TextBlock>
-                </Grid>
-                <Grid Height="60" Background="#18ffffff">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                        <ColumnDefinition Width="165"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">20/06/2014</TextBlock>
-                        <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">Alacak kaydedildi</TextBlock>
                     </Grid>
                     <TextBlock Grid.Column="2" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">99999,50 ₺</TextBlock>
                 </Grid>

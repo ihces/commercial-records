@@ -98,9 +98,14 @@
                             </TextBlock>
                         </Grid>
                     </ListView.Header>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="60" Width="{Binding ActualWidth, ElementName=CustomerListView, Converter={StaticResource SizeAdjustmentConverter}, ConverterParameter=-25}">
+                            <Grid Height="60">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="60"/>
                                     <ColumnDefinition Width="10"/>
