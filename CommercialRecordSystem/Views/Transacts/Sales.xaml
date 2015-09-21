@@ -158,55 +158,12 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="5"/>
-                    <RowDefinition Height="115"/>
-                    <RowDefinition Height="5"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="52"/>
                 </Grid.RowDefinitions>
-                
-                <Grid Background="#28FF981D" Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <TextBlock VerticalAlignment="Center" FontSize="15">Sipariş Tarihi</TextBlock>
-                            <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="22/05/2015 23:59:59" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
-                            
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <TextBlock VerticalAlignment="Center" FontSize="15">Değişiklik Tarihi</TextBlock>
-                            <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="22/05/2015 23:59:59" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <TextBlock VerticalAlignment="Center" FontSize="15">Teslim Tarihi</TextBlock>
-                            <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="22/05/2015 23:59:59" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
-                        </Grid>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="75"/>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="75"/>
-                        </Grid.ColumnDefinitions>
-                        <AppBarButton Grid.Column="0" Icon="Back" VerticalAlignment="Bottom"></AppBarButton>
-                        <TextBlock Grid.Column="1" FontSize="18" TextWrapping="Wrap" Text="Ürün Tedariği Bekleniyor." VerticalAlignment="Center"></TextBlock>
-                        <AppBarButton Grid.Column="2" VerticalAlignment="Bottom" Icon="Forward" FlowDirection="RightToLeft"></AppBarButton>
-                    </Grid>
-                    <Grid Grid.Column="2">
-                        <TextBox Header="Açıklama" BorderBrush="#00ffffff" BorderThickness="3"></TextBox>
-                    </Grid>
-                </Grid>
-                <ListView x:Name="listview" Grid.Row="0" ItemsSource="{Binding Entries}" Grid.RowSpan="2">
+                <ListView x:Name="listview" Grid.Row="0" ItemsSource="{Binding Entries}" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}" Grid.RowSpan="2" Height="Auto" ItemContainerStyle="{StaticResource ListViewItemStyle1}">
                     <ListView.Header>
-                        <Grid Width="{Binding ActualWidth, ElementName=listview}" Height="50" Background="#d74f2a" >
+                        <Grid Height="50" Background="#d74f2a" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"></ColumnDefinition>
                                 <ColumnDefinition Width="100"></ColumnDefinition>
@@ -225,49 +182,87 @@
                             </Button>
                         </Grid>
                     </ListView.Header>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <!--<ListView.ItemTemplate>
-                        <DataTemplate>-->
-                    <Grid Height="60" Background="#18ffffff">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="150"></ColumnDefinition>
-                            <ColumnDefinition Width="200"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <CheckBox Grid.Column="0" HorizontalAlignment="Left" IsChecked="{Binding IsChecked, Mode=TwoWay}"></CheckBox>
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Amount, Mode=OneWay}" />
-                            <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Measure, Mode=OneWay, Converter={StaticResource Int2MeasureConverter}}" />
-                        </Grid>
-                        <TextBlock Grid.Column="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Detail, Mode=OneWay}" TextWrapping="Wrap" />
-                        <TextBlock Grid.Column="3" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding UnitCost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
-                        <TextBlock Grid.Column="4" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Cost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
-                    </Grid>
-                    <!--</DataTemplate>
-                    </ListView.ItemTemplate>-->
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Grid Height="60" Background="#18ffffff">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="32"></ColumnDefinition>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="200"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Grid.Column="0" HorizontalAlignment="Left" IsChecked="{Binding IsChecked, Mode=TwoWay}"></CheckBox>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="30" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Amount, Mode=OneWay}" />
+                                        <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Measure, Mode=OneWay, Converter={StaticResource Int2MeasureConverter}}" />
+                                    </Grid>
+                                    <TextBlock Grid.Column="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Detail, Mode=OneWay}" TextWrapping="Wrap" />
+                                    <TextBlock Grid.Column="3" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding UnitCost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
+                                    <TextBlock Grid.Column="4" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Cost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
+                                </Grid>
+                                <Grid Background="#28FF981D" Height="100" Visibility="{Binding IsSelected, Converter={StaticResource Boolean2VisibilityConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0">
+                                            <TextBlock VerticalAlignment="Center" FontSize="15">Sipariş Tarihi</TextBlock>
+                                            <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="{Binding Date, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
+
+                                        </Grid>
+                                        <Grid Grid.Row="1">
+                                            <TextBlock VerticalAlignment="Center" FontSize="15">Değişiklik Tarihi</TextBlock>
+                                            <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="{Binding ModifyDate, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <TextBlock VerticalAlignment="Center" FontSize="15">Teslim Tarihi</TextBlock>
+                                            <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="{Binding DeliveryDate, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="75"/>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="75"/>
+                                        </Grid.ColumnDefinitions>
+                                        <AppBarButton Grid.Column="0" Icon="Back" VerticalAlignment="Bottom"></AppBarButton>
+                                        <TextBlock Grid.Column="1" FontSize="18" TextWrapping="Wrap" Text="{Binding OrderState, Mode=OneWay}" VerticalAlignment="Center"></TextBlock>
+                                        <AppBarButton Grid.Column="2" VerticalAlignment="Bottom" Icon="Forward" FlowDirection="RightToLeft"></AppBarButton>
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <TextBox Header="Açıklama" BorderBrush="#00ffffff" BorderThickness="3" Text="{Binding MoreDetail, Mode=TwoWay}" />
+                                    </Grid>
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
-                <Grid Grid.Row="4" Background="#d74f2a">
+
+                <Grid Grid.Row="2" Background="#d74f2a">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="250" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">888</TextBlock>
                     <TextBlock Grid.Column="1" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center">Kalem</TextBlock>
                     <TextBlock Grid.Column="2" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center">Toplam</TextBlock>
                     <Grid Grid.Column="3" Background="#88000000" Margin="8">
-                        <TextBlock FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="0,0,8,0">9.999.999,99 ₺</TextBlock>
+                        <TextBlock FontSize="35" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="0,0,8,0">9.999.999,99 ₺</TextBlock>
                     </Grid>
                 </Grid>
             </Grid>

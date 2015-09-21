@@ -1,7 +1,10 @@
 ﻿using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models;
 using CommercialRecordSystem.Models.Transacts;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
@@ -9,7 +12,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecordSystem.ViewModels.Transacts
 {
-    abstract class TransactFrameVMBase<E,T> : FrameVMBase where E : TransactEntryVMBase<T>, new() where T:TransactEntry, new()
+    abstract class TransactFrameVMBase<E, T> : FrameVMBase
+        where E : TransactEntryVMBase<T>, new()
+        where T : TransactEntry, new()
     {
         #region Properties
         private readonly string dateStr = string.Empty;
@@ -46,7 +51,7 @@ namespace CommercialRecordSystem.ViewModels.Transacts
 
         private E entryBuff = new E();
         public E EntryBuff
-        { 
+        {
             get
             {
                 return entryBuff;
@@ -58,9 +63,29 @@ namespace CommercialRecordSystem.ViewModels.Transacts
             }
         }
 
+        private E selectedEntry;
+        public E SelectedEntry
+        {
+            get
+            {
+                return selectedEntry;
+            }
+            set
+            {
+                if (value != selectedEntry && null != selectedEntry)
+                    selectedEntry.IsSelected = false;
+
+                selectedEntry = value;
+                if (null != selectedEntry)
+                    selectedEntry.IsSelected = true;
+
+                RaisePropertyChanged("SelectedEntry");
+            }
+        }
+
         private bool isAllChecked = false;
         public bool IsAllChecked
-        { 
+        {
             get
             {
                 return isAllChecked;
@@ -123,7 +148,7 @@ namespace CommercialRecordSystem.ViewModels.Transacts
         private void deleteEntryCmdHandler(object parameter)
         {
             int checkedEntryCnt = 0;
-            for (int i=0; i<entries.Count; ++i)
+            for (int i = 0; i < entries.Count; ++i)
             {
                 if (entries[i].IsChecked)
                 {
@@ -170,8 +195,8 @@ namespace CommercialRecordSystem.ViewModels.Transacts
         {
             addEntryToListCmd = new ICommandImp(addEntryToListCmdHandler);
             goNextCmd = new ICommandImp(goNextCmdHandler);
-            deleteEntryCmd = new ICommandImp(deleteEntryCmdHandler); 
-            
+            deleteEntryCmd = new ICommandImp(deleteEntryCmdHandler);
+
             if (navigation.Message is TransactVM)
             {
                 transactInfo = (TransactVM)navigation.Message;
@@ -186,20 +211,12 @@ namespace CommercialRecordSystem.ViewModels.Transacts
             setEntries();
         }
 
-        protected async Task setEntries()
+        private async Task setEntries()
         {
-            var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-            var saleEntryList = await db.Table<T>()
-                                .Where(e => transactInfo.Id == e.TransactId)
-                                .OrderBy(e => e.Id).ToListAsync();
+            List<Expression<Func<T, object>>> orderByList = new List<Expression<Func<T, object>>>();
+            orderByList.Add(e => e.Id);
 
-            Entries = new ObservableCollection<E>();
-            foreach (T entry in saleEntryList)
-            {
-                E entryBuff = new E();
-                entryBuff.initWithModel(entry);
-                Entries.Add(entryBuff);
-            }
+            Entries = new ObservableCollection<E>(await TransactEntryVMBase<T>.getList<E>(e => transactInfo.Id == e.TransactId, orderByList));
         }
     }
 }

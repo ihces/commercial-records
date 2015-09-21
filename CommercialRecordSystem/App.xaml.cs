@@ -18,6 +18,8 @@ using CommercialRecordSystem.Models;
 using SQLite;
 using Windows.Storage;
 using CommercialRecordSystem.Models.Goods;
+using CommercialRecordSystem.Models.EnterpriseAccounts;
+using CommercialRecordSystem.Models.IncomeNExpense;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
 namespace CommercialRecordSystem
@@ -127,6 +129,8 @@ namespace CommercialRecordSystem
                 db.CreateTable<Transact>();
                 db.CreateTable<SaleEntry>();
                 db.CreateTable<PaymentEntry>();
+                db.CreateTable<EnterpriseAccount>();
+                db.CreateTable<IncomeNExpense>();
             }
         }
 

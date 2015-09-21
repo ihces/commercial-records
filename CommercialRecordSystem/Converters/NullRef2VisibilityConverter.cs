@@ -4,21 +4,21 @@ using Windows.UI.Xaml.Data;
 
 namespace CommercialRecordSystem.Converters
 {
-    class Boolean2VisibilityConverter : IValueConverter
+    class NullRef2VisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (null == value || !(Boolean)value)
+            if (null == value)
                 return Visibility.Collapsed;
-
-            return Visibility.Visible;
+            else
+                return Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            if (Visibility.Visible.Equals((Visibility)value))
-                return true;
-            return false;
+            //if (Visibility.Visible.Equals((Visibility)value))
+              //  return new object();
+            return null;
         }
     }
 }

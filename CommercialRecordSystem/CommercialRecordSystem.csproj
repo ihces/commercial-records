@@ -117,11 +117,15 @@
     <Compile Include="Converters\Boolean2VisibilityConverter.cs" />
     <Compile Include="Converters\Double2MoneyConverter.cs" />
     <Compile Include="Converters\Int2MeasureConverter.cs" />
+    <Compile Include="Converters\Int2VisibilityConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
+    <Compile Include="Converters\NullRef2VisibilityConverter.cs" />
     <Compile Include="Converters\PaymentType2StringConverter.cs" />
     <Compile Include="Converters\SizeAdjustmentConverter.cs" />
     <Compile Include="Converters\String2VisibilityConverter.cs" />
+    <Compile Include="Models\EnterpriseAccounts\EnterpriseAccount.cs" />
     <Compile Include="Models\Goods\Category.cs" />
+    <Compile Include="Models\IncomeNExpense\IncomeNExpense.cs" />
     <Compile Include="Models\InfoModelBase.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\Transacts\TransactEntry.cs" />
@@ -135,11 +139,15 @@
     <Compile Include="Panels\CRSFormPanel.cs" />
     <Compile Include="Panels\CRSRadioButtonPanel.cs" />
     <Compile Include="Panels\CSRFirmGridView.cs" />
+    <Compile Include="ViewModels\DataVMs\EnterpriseAccounts\EnterpriseAccountVM.cs" />
     <Compile Include="ViewModels\DataVMs\DataVMBase.cs" />
     <Compile Include="ViewModels\DataVMs\Goods\CategoryVM.cs" />
+    <Compile Include="ViewModels\DataVMs\IncomeNExpenses\IncomeNExpenseVM.cs" />
     <Compile Include="ViewModels\DataVMs\InfoDataVMBase.cs" />
     <Compile Include="ViewModels\DataVMs\OrderedListVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\TransactEntryVMBase.cs" />
+    <Compile Include="ViewModels\FrameVMs\EnterpriseAccounts\EnterpriseAccountInfoFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\EnterpriseAccounts\EnterpriseAccountsFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Customers\CustomerAccountFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Customers\CustomerInfoFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Customers\CustomerListFrameVM.cs" />
@@ -149,6 +157,7 @@
     <Compile Include="ViewModels\DataVMs\Goods\GoodVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\Payment\PaymentEntryVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Goods\CategoryInfoFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\IncomeNExpenses\IncomeNExpenseFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\InfoFrameVMBase.cs" />
     <Compile Include="ViewModels\FrameVMs\Goods\FirmInfoFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Goods\GoodInfoFrameVM.cs" />
@@ -163,11 +172,11 @@
     <Compile Include="ViewModels\DataVMs\Transacts\TransactVM.cs" />
     <Compile Include="ViewModels\VMBase.cs" />
     <Compile Include="ViewModels\DataVMs\DataVMIntf.cs" />
-    <Compile Include="Views\CashRegNBank\EnterpriseAccounts.xaml.cs">
+    <Compile Include="Views\EnterpriseAccounts\EnterpriseAccounts.xaml.cs">
       <DependentUpon>EnterpriseAccounts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CashRegNBank\AccountInfo.xaml.cs">
-      <DependentUpon>AccountInfo.xaml</DependentUpon>
+    <Compile Include="Views\EnterpriseAccounts\EnterpriseAccountInfo.xaml.cs">
+      <DependentUpon>EnterpriseAccountInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Customers\CustomerAccount.xaml.cs">
       <DependentUpon>CustomerAccount.xaml</DependentUpon>
@@ -244,11 +253,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\CashRegNBank\EnterpriseAccounts.xaml">
+    <Page Include="Views\EnterpriseAccounts\EnterpriseAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CashRegNBank\AccountInfo.xaml">
+    <Page Include="Views\EnterpriseAccounts\EnterpriseAccountInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

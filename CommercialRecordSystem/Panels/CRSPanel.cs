@@ -77,18 +77,27 @@ namespace CommercialRecordSystem.Panels
                 double x = 0.0f;
                 double y = 0.0f;
                 int elementNum = this.Children.Count;
-                double elementWidth = (finalSize.Width - (elementNum-1)*GapSize) / this.Children.Count;
-                foreach (UIElement element in this.Children)
+                double elementWidth = (finalSize.Width - (elementNum - 1) * GapSize) / elementNum;
+                for (int i = 0; i < this.Children.Count; ++i)
                 {
-                    if (ORIENTATION.Vertical.Equals(Orientation))
+                    if (Visibility.Visible == this.Children[i].Visibility)
                     {
-                        element.Arrange(new Rect(x, y, finalSize.Width, element.DesiredSize.Height));
-                        y += element.DesiredSize.Height + (double)GapSize;
-                    }
-                    else
-                    {
-                        element.Arrange(new Rect(x, y, elementWidth, element.DesiredSize.Height));
-                        x += elementWidth + (double)GapSize;
+                        if (ORIENTATION.Vertical.Equals(Orientation))
+                        {
+                            this.Children[i].Arrange(new Rect(x, y, finalSize.Width, this.Children[i].DesiredSize.Height));
+                            y += this.Children[i].DesiredSize.Height + (double)GapSize;
+                        }
+                        else
+                        {
+                            if (i == this.Children.Count - 1) 
+                            {
+                                x = (elementWidth + (double)GapSize - 0.2) * (elementNum - 1);
+                                elementWidth = finalSize.Width - x;
+                            }
+                                
+                            this.Children[i].Arrange(new Rect(x, y, elementWidth, this.Children[i].DesiredSize.Height));
+                            x += elementWidth + (double)GapSize;
+                        }
                     }
                     //finalSize.Height = y + element.DesiredSize.Height;
                 }

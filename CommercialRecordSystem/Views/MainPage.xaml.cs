@@ -59,11 +59,6 @@ namespace CommercialRecordSystem
             this.Frame.Navigate(destinationPageType, navigation);
         }
 
-        private void In_Out_Come_tab(object sender, TappedRoutedEventArgs e)
-        {
-            
-        }
-
         private void DashboardsGrid_tabbed(object sender, TappedRoutedEventArgs e)
         {
            // GoTo<DashboardView>();

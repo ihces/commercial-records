@@ -1,11 +1,11 @@
-﻿using CommercialRecordSystem.ViewModels.FrameVMs.Transacts;
+﻿using CommercialRecordSystem.ViewModels.FrameVMs.CashRegNBank;
 
 namespace CommercialRecordSystem.Views.CashRegNBank
 {
     public sealed partial class EnterpriseAccounts : ViewBase
     {
         public EnterpriseAccounts()
-            : base(typeof(TransactsFrameVM))
+            : base(typeof(EnterpriseAccountsFrameVM))
         {
             this.InitializeComponent();
         }

@@ -4,11 +4,11 @@ using Windows.UI.Xaml.Data;
 
 namespace CommercialRecordSystem.Converters
 {
-    class Boolean2VisibilityConverter : IValueConverter
+    class Int2VisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (null == value || !(Boolean)value)
+            if (null == value || 0 == (int)value%2)
                 return Visibility.Collapsed;
 
             return Visibility.Visible;
@@ -17,8 +17,8 @@ namespace CommercialRecordSystem.Converters
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             if (Visibility.Visible.Equals((Visibility)value))
-                return true;
-            return false;
+                return 1;
+            return 0;
         }
     }
 }

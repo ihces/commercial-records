@@ -1,5 +1,6 @@
 ﻿using CommercialRecordSystem.Models.Transacts;
 using CommercialRecordSystem.ViewModels.DataVMs;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 namespace CommercialRecordSystem.ViewModels.Transacts
@@ -18,6 +19,20 @@ namespace CommercialRecordSystem.ViewModels.Transacts
             {
                 transactId = value;
                 RaisePropertyChanged("TransactId");
+            }
+        }
+
+        public DateTime date = DateTime.Now;
+        public DateTime Date
+        {
+            get
+            {
+                return date;
+            }
+            set
+            {
+                date = value;
+                RaisePropertyChanged("Date");
             }
         }
 
@@ -60,6 +75,20 @@ namespace CommercialRecordSystem.ViewModels.Transacts
             {
                 isChecked = value;
                 RaisePropertyChanged("IsChecked");
+            }
+        }
+
+        private bool isSelected = false;
+        public bool IsSelected
+        {
+            get
+            {
+                return isSelected;
+            }
+            set
+            {
+                isSelected = value;
+                RaisePropertyChanged("IsSelected");
             }
         }
         #endregion

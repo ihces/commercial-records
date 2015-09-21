@@ -86,7 +86,7 @@
                         <RadioButton Name="creditCard" GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                             <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold">Kredi Kartı</TextBlock>
                         </RadioButton>
-                        <RadioButton Name="other" GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="118">
+                        <RadioButton Name="other" GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                             <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold">Diğer</TextBlock>
                         </RadioButton>
                     </CSRPanels:CRSRadioButtonPanel>
@@ -101,15 +101,19 @@
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="52"/>
                 </Grid.RowDefinitions>
-                <ListView x:Name="listview" Grid.Row="0" ItemsSource="{Binding Entries}">
+                <ListView x:Name="listview" Grid.Row="0" ItemsSource="{Binding Entries}" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
                     <ListView.Header>
                         <Grid Width="{Binding ActualWidth, ElementName=listview}" Background="#d74f2a" Height="50">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <CheckBox Grid.Column="0" Margin="3,0,0,0" IsChecked="{Binding IsAllChecked, Mode=TwoWay}"></CheckBox>
                             <TextBlock Grid.Column="1" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center">Yapılan Ödemeler</TextBlock>
+                            <Button Width="50" Grid.Column="2" Background="#AD103C" VerticalAlignment="Stretch" Command="{Binding DeleteEntryCmd}">
+                                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="20"></TextBlock>
+                            </Button>
                         </Grid>
                     </ListView.Header>
                     <ListView.ItemContainerStyle>
@@ -141,45 +145,42 @@
                 </ListView>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="80" />
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Width="56" Margin="-3" Background="#AD103C" VerticalAlignment="Stretch" Command="{Binding DeleteEntryCmd}">
-                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="20"></TextBlock>
-                    </Button>
-                    <Grid Grid.Column="2" Background="#d74f2a">
+                    <Grid Grid.Column="0" Background="#d74f2a">
                         <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="3*" />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">Toplam Alacak</TextBlock>
                         <Grid Grid.Row="1" Background="#88000000" Margin="3">
-                            <TextBlock FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
+                            <TextBlock FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
                         </Grid>
                     </Grid>
-                    <Grid Grid.Column="3" Background="#AD103C">
+                    <Grid Grid.Column="2" Background="#AD103C">
                         <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="3*" />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">Toplam Ödenen</TextBlock>
                         <Grid Grid.Row="1" Background="#88000000" Margin="3">
-                            <TextBlock FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
+                            <TextBlock FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
                         </Grid>
                     </Grid>
                     <Grid Grid.Column="4" Background="#d74f2a">
                         <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="3*" />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">Kalan Tutar</TextBlock>
                         <Grid Grid.Row="1" Background="#88000000" Margin="3">
-                            <TextBlock FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
+                            <TextBlock FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
                         </Grid>
                     </Grid>
                     <Button Grid.Column="6" Width="86" Height="66" Margin="-3" Background="#008A00" VerticalAlignment="Stretch" Command="{Binding GoNextCmd}">
