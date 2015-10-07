@@ -41,10 +41,10 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.IncomeNExpenses
             {
                 if (value != selectedAccount)
                 {
-                    selectedAccount = value; 
+                    selectedAccount = value;
                     setAccountRecordList();
                 }
-                    
+
                 RaisePropertyChanged("SelectedAccount");
             }
         }
@@ -154,6 +154,9 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.IncomeNExpenses
             orderByClauses.Add(c => c.Name);
 
             Accounts = new ObservableCollection<EnterpriseAccountVM>(await EnterpriseAccountVM.getList<EnterpriseAccountVM>(null, orderByClauses));
+            
+            if (Accounts.Count > 0)
+                SelectedAccount = Accounts[0];
         }
 
         private async Task setAccountRecordList()

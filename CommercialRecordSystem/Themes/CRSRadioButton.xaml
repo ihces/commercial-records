@@ -17,17 +17,13 @@
                                 <VisualState x:Name="Checked">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="background" Storyboard.TargetProperty="(Rectangle.Visibility)">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
-                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Storyboard.TargetName="background" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Unchecked">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Opacity" Duration="0" To="0.4" />
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="background" Storyboard.TargetProperty="(Rectangle.Visibility)">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
-                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Storyboard.TargetName="background" Storyboard.TargetProperty="Opacity" Duration="0" To="0" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Indeterminate"/>

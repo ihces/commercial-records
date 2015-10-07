@@ -30,7 +30,7 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button" Command="{Binding GoBackCmd}"/>
-            <TextBlock x:Name="pageTitle" Text="Ödeme" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+            <TextBlock x:Uid="payment_header" Text="Payment" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
 
@@ -74,24 +74,27 @@
                 <CSRPanels:CRSFormPanel Grid.Row="2" GapSize="5">
                     <Grid Background="#d74f2a" Height="50">
                         <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="left" Text="&#xE193;" />
-                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="left" Margin="43,0,0,0" Text="Yeni Kayıt" />
+                        <TextBlock x:Uid="transact_newrecord" FontFamily="Segoe UI Symbol" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="left" Margin="43,0,0,0" Text="New Record" />
                         <CSRControls:CSRButton Width="180" Height="48" VerticalAlignment="Stretch" Background="#88000000" HorizontalAlignment="Right" Command="{Binding AddEntryToListCmd}" Validation="True">
-                            <TextBlock FontFamily="Segoe UI Symbol" Text="Ekle &#xE017;&#xE017;&#xE017;" FontSize="24"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Uid="transact_add_button" FontFamily="Segoe UI Symbol" Text="Add " FontSize="24" />
+                                <TextBlock FontFamily="Segoe UI Symbol" Text=" &#xE017;&#xE017;&#xE017;" FontSize="24" />
+                            </StackPanel>
                         </CSRControls:CSRButton>
                     </Grid>
                     <CSRPanels:CRSRadioButtonPanel Orientation="Horizontal" CheckedIndex="{Binding Path=EntryBuff.Type, Mode=TwoWay}"  Height="50">
-                        <RadioButton Name="cash" GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsChecked="True">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold">Nakit</TextBlock>
+                        <RadioButton GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsChecked="True">
+                            <TextBlock x:Uid="payment_type_cash" FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold" Text="Cash" />
                         </RadioButton>
-                        <RadioButton Name="creditCard" GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold">Kredi Kartı</TextBlock>
+                        <RadioButton GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                            <TextBlock x:Uid="payment_type_creditcard" FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold" Text="Credit Card" />
                         </RadioButton>
-                        <RadioButton Name="other" GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold">Diğer</TextBlock>
+                        <RadioButton GroupName="PaymentTypeRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                            <TextBlock x:Uid="payment_type_other" FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiBold" Text="Other" />
                         </RadioButton>
                     </CSRPanels:CRSRadioButtonPanel>
-                    <CSRControls:CRSTextBox Height="60" Input="{Binding Path=EntryBuff.Detail, Mode=TwoWay}" FontSize="18" ThemeBrush="#d74f2a" IconHex="&#xe206;" IconVisibility="at_Right" Multiline="True" InputType="ALL" EmptyMessage="Açıklama" Required="True" />
-                    <CSRControls:CRSTextBox Height="60" Input="{Binding Path=EntryBuff.Cost, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="₺" IconVisibility="at_Right" InputType="MONEY" EmptyMessage="Ödenen Tutar" InputMaxLength="16" Required="True" />
+                    <CSRControls:CRSTextBox x:Uid="transact_definition" Height="60" Input="{Binding Path=EntryBuff.Detail, Mode=TwoWay}" FontSize="18" ThemeBrush="#d74f2a" IconHex="&#xe206;" IconVisibility="at_Right" Multiline="True" InputType="ALL" EmptyMessage="Definition" Required="True" />
+                    <CSRControls:CRSTextBox x:Uid="payment_paid_amount" Height="60" Input="{Binding Path=EntryBuff.Cost, Mode=TwoWay}" ThemeBrush="#d74f2a" IconHex="₺" IconVisibility="at_Right" InputType="MONEY" EmptyMessage="Paid Amount" InputMaxLength="16" Required="True" />
                 </CSRPanels:CRSFormPanel>
             </Grid>
             <Grid Grid.Column="3">
@@ -110,7 +113,7 @@
                                 <ColumnDefinition Width="50"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <CheckBox Grid.Column="0" Margin="3,0,0,0" IsChecked="{Binding IsAllChecked, Mode=TwoWay}"></CheckBox>
-                            <TextBlock Grid.Column="1" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center">Yapılan Ödemeler</TextBlock>
+                            <TextBlock x:Uid="payment_list_header" Grid.Column="1" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Payments" />
                             <Button Width="50" Grid.Column="2" Background="#AD103C" VerticalAlignment="Stretch" Command="{Binding DeleteEntryCmd}">
                                 <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="20"></TextBlock>
                             </Button>
@@ -135,7 +138,7 @@
                                         <RowDefinition Height="30" />
                                         <RowDefinition Height="30" />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Type, Mode=OneWay, Converter={StaticResource PaymentType2StringConverter}}" />
+                                    <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Type, Mode=OneWay, Converter={StaticResource Value2RemarkConverter}, ConverterParameter='paymentTypes'}" />
                                     <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Detail, Mode=OneWay}" />
                                 </Grid>
                                 <TextBlock Grid.Column="2" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Cost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}"  />
@@ -150,17 +153,15 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="5"/>
-                        <ColumnDefinition Width="80" />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0" Background="#d74f2a">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*" />
                             <RowDefinition Height="3*" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">Toplam Alacak</TextBlock>
+                        <TextBlock x:Uid="total_amount" Grid.Row="0" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Total Amount" />
                         <Grid Grid.Row="1" Background="#88000000" Margin="3">
-                            <TextBlock FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
+                            <TextBlock FontSize="26" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
                         </Grid>
                     </Grid>
                     <Grid Grid.Column="2" Background="#AD103C">
@@ -168,9 +169,9 @@
                             <RowDefinition Height="2*" />
                             <RowDefinition Height="3*" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">Toplam Ödenen</TextBlock>
+                        <TextBlock x:Uid="payment_total_paid_amount" Grid.Row="0" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Total Paid Amount" />
                         <Grid Grid.Row="1" Background="#88000000" Margin="3">
-                            <TextBlock FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
+                            <TextBlock FontSize="26" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
                         </Grid>
                     </Grid>
                     <Grid Grid.Column="4" Background="#d74f2a">
@@ -178,14 +179,11 @@
                             <RowDefinition Height="2*" />
                             <RowDefinition Height="3*" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">Kalan Tutar</TextBlock>
+                        <TextBlock x:Uid="payment_remaining_amount" Grid.Row="0" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Remaining Amount" />
                         <Grid Grid.Row="1" Background="#88000000" Margin="3">
-                            <TextBlock FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
+                            <TextBlock FontSize="26" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">999.999,99 ₺</TextBlock>
                         </Grid>
                     </Grid>
-                    <Button Grid.Column="6" Width="86" Height="66" Margin="-3" Background="#008A00" VerticalAlignment="Stretch" Command="{Binding GoNextCmd}">
-                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#x1f4dc;" FontSize="28"></TextBlock>
-                    </Button>
                 </Grid>
             </Grid>
         </Grid>

@@ -1,12 +1,13 @@
 ﻿using CommercialRecordSystem.Common;
+using System.Linq;
 using CommercialRecordSystem.Models.EnterpriseAccounts;
 
 namespace CommercialRecordSystem.ViewModels.DataVMs.EnterpriseAccounts
 {
     class EnterpriseAccountVM : InfoDataVMBase<EnterpriseAccount>
     {
-        public EnterpriseAccount.TYPE type;
-        public EnterpriseAccount.TYPE Type
+        private string type = App.EnglishDictionary["enterpriseAccountTypes"].Keys.LastOrDefault();
+        public string Type
         {
             get
             {
@@ -33,8 +34,8 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.EnterpriseAccounts
             }
         }
 
-        public EnterpriseAccount.DEPOSIT_TYPE depositType;
-        public EnterpriseAccount.DEPOSIT_TYPE DepositType
+        public string depositType = App.EnglishDictionary["depositTypes"].Keys.LastOrDefault();
+        public string DepositType
         {
             get
             {
@@ -47,8 +48,8 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.EnterpriseAccounts
             }
         }
 
-        public int currencyType;
-        public int CurrencyType
+        public string currencyType = App.EnglishDictionary["currencies"].Keys.LastOrDefault();
+        public string CurrencyType
         {
             get
             {

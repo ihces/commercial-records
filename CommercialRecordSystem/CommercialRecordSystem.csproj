@@ -115,20 +115,20 @@
     <Compile Include="Controls\CRSTextBox.cs" />
     <Compile Include="Controls\CSRButton.cs" />
     <Compile Include="Converters\Boolean2VisibilityConverter.cs" />
+    <Compile Include="Converters\Compare2AssignVisibilityConverter.cs" />
     <Compile Include="Converters\Double2MoneyConverter.cs" />
-    <Compile Include="Converters\Int2MeasureConverter.cs" />
-    <Compile Include="Converters\Int2VisibilityConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Converters\NullRef2VisibilityConverter.cs" />
-    <Compile Include="Converters\PaymentType2StringConverter.cs" />
     <Compile Include="Converters\SizeAdjustmentConverter.cs" />
     <Compile Include="Converters\String2VisibilityConverter.cs" />
+    <Compile Include="Converters\Value2RemarkConverter.cs" />
     <Compile Include="Models\EnterpriseAccounts\EnterpriseAccount.cs" />
     <Compile Include="Models\Goods\Category.cs" />
     <Compile Include="Models\IncomeNExpense\IncomeNExpense.cs" />
     <Compile Include="Models\InfoModelBase.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\Transacts\TransactEntry.cs" />
+    <Compile Include="Panels\CRSItemsPanel.cs" />
     <Compile Include="Panels\CRSPanel.cs" />
     <Compile Include="Models\Customers\Customer.cs" />
     <Compile Include="Models\Goods\Firm.cs" />
@@ -237,6 +237,8 @@
     </AppxManifest>
     <None Include="packages.config" />
     <None Include="CommercialRecordSystem_TemporaryKey.pfx" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Strings\tr-TR\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\barcode.png" />
@@ -244,6 +246,8 @@
     <Content Include="Assets\musluk.jpg" />
     <Content Include="Assets\SplashScreen.scale-180.png" />
     <Content Include="Assets\ymjtryu.jpg" />
+    <Content Include="Strings\en-US\en.us.dictionary.xml" />
+    <Content Include="Strings\tr-TR\tr.tr.dictionary.xml" />
     <Page Include="Themes\CRSRadioButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

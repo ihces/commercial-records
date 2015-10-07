@@ -27,8 +27,12 @@
                     <ColumnDefinition Width="140"/>
                 </Grid.ColumnDefinitions>
                 <AppBarButton Icon="Back" x:Name="backButton" Grid.Column="0" Margin="10,47,0,0" HorizontalAlignment="Left" Command="{Binding GoBackCmd}" />
-                <TextBlock x:Name="pageTitle" Text="{Binding Path=PageTitle, Mode=OneWay}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,30,40">
+                    <TextBlock x:Name="pageTitle" Text="{Binding Path=PageTitle, Mode=OneWay}" Style="{StaticResource HeaderTextBlockStyle}"
+				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
+                    <TextBlock FontFamily="Segoe UI Symbol" Text=" &#xE105;" FontSize="34" TextLineBounds="TrimToBaseline"  Foreground="#91D100" Visibility="{Binding Recorded, Converter={StaticResource Boolean2VisibilityConverter}}"
+				 VerticalAlignment="Bottom" />
+                </StackPanel>
                 <AppBarButton Icon="Add" x:Name="addButton" Grid.Column="2" Margin="0,47,10,0" HorizontalAlignment="Right" Command="{Binding CreateNewOneCmd}" />
             </Grid>
             <Grid Grid.Row="1">
@@ -83,12 +87,12 @@
                             <CSRControls:CSRButton Height="60" Width="120" Command="{Binding DelInfoCmd}" Content="Sil"  FontSize="18" Background="#AD103C" Margin="-3" HorizontalAlignment="left" IsEnabled="{Binding Path=DelButtonCanEnable}" />
                             <CSRControls:CSRButton Height="60" Width="120" Command="{Binding SaveInfoCmd}" Validation="True" Content="Kaydet"  FontSize="18" Background="#008A00" Margin="-3" HorizontalAlignment="Right" IsEnabled="{Binding Path=CurrentInfo.Dirty}" />
                         </Grid>
-                        
+
                     </CSRPanels:CRSFormPanel>
                 </Grid>
             </Grid>
         </Grid>
-        
+
         <Grid Background="#88000000" Visibility="Collapsed">
             <Grid Width="400" Height="100" Background="Azure">
                 <ProgressRing Width="50" Height="50" Foreground="Black" HorizontalAlignment="Left" Margin="15" />

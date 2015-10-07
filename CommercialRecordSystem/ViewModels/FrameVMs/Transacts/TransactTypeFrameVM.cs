@@ -11,7 +11,7 @@ namespace CommercialRecordSystem.ViewModels
     class TransactTypeFrameVM : FrameVMBase
     {
         #region Properties
-        private CustomerVM unregisteredCustomer = new CustomerVM() { Type=Customer.TYPE.UNREGISTERED};
+        private CustomerVM unregisteredCustomer = new CustomerVM() { Type = Customer.TYPE.UNREGISTERED };
         private CustomerVM registeredCustomer = new CustomerVM() { Type = Customer.TYPE.REGISTERED };
         private TransactVM transactInfo = new TransactVM();
 
@@ -30,6 +30,41 @@ namespace CommercialRecordSystem.ViewModels
             {
                 selectedTransactTypeIndex = value;
                 RaisePropertyChanged("SelectedTransactTypeIndex");
+            }
+        }
+
+        private int selectedCustomerType = 0;
+        public int SelectedCustomerType
+        {
+            get
+            {
+                return selectedCustomerType;
+            }
+            set
+            {
+                if (value != selectedCustomerType)
+                {
+                    selectedCustomerType = value;
+                    switch (value)
+                    {
+                        case 0:
+                            IsRegisteredCustomer = false;
+                            if (CurrentCustomer.Type.Equals(Customer.TYPE.REGISTERED))
+                                registeredCustomer = CurrentCustomer;
+                            CurrentCustomer = unregisteredCustomer;
+                            CurrentCustomer.Refresh();
+                            break;
+                        case 1:
+                            if (CurrentCustomer.Type.Equals(Customer.TYPE.UNREGISTERED))
+                                unregisteredCustomer = CurrentCustomer;
+                            CurrentCustomer = registeredCustomer;
+                            CurrentCustomer.Refresh();
+                            IsRegisteredCustomer = true;
+                            break;
+                    }
+                }
+
+                RaisePropertyChanged("SelectedCustomerType");
             }
         }
 
@@ -76,15 +111,6 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
         #region Commands
-        private readonly ICommand customerTypeSelectCmd;
-        public ICommand CustomerTypeSelectCmd
-        {
-            get
-            {
-                return customerTypeSelectCmd;
-            }
-        }
-
         private readonly ICommand selectRecordedCustomerCmd;
         public ICommand SelectRecordedCustomerCmd
         {
@@ -102,30 +128,9 @@ namespace CommercialRecordSystem.ViewModels
                 return startTransactionCmd;
             }
         }
-        
+
         #endregion
         #region Command Handlers
-        private void customerTypeSelectCmdHandler(object parameter)
-        {
-            switch ((string)parameter)
-            {
-                case "unregistered":
-                    IsRegisteredCustomer = false;
-                    if (CurrentCustomer.Type.Equals(Customer.TYPE.REGISTERED))
-                        registeredCustomer = CurrentCustomer;
-                    CurrentCustomer = unregisteredCustomer;
-                    CurrentCustomer.Refresh();
-                    break;
-                case "registered":
-                    if (CurrentCustomer.Type.Equals(Customer.TYPE.UNREGISTERED))
-                        unregisteredCustomer = CurrentCustomer;
-                    CurrentCustomer = registeredCustomer;
-                    CurrentCustomer.Refresh();
-                    IsRegisteredCustomer = true;
-                    break;
-            }
-        }
-
         private void selectRecordedCustomerCmdHandler(object parameter)
         {
             Navigation.Navigate(typeof(CustomerList));
@@ -147,7 +152,7 @@ namespace CommercialRecordSystem.ViewModels
             transactInfo.CustomerId = CurrentCustomer.Id;
 
             switch (SelectedTransactTypeIndex)
-            { 
+            {
                 case SALE_TRANSACT:
                     transactInfo.Type = Transact.TYPE.SALE;
                     transactInfo.save();
@@ -170,7 +175,6 @@ namespace CommercialRecordSystem.ViewModels
         public TransactTypeFrameVM(FrameNavigation navigation)
             : base(navigation)
         {
-            customerTypeSelectCmd = new ICommandImp(customerTypeSelectCmdHandler);
             selectRecordedCustomerCmd = new ICommandImp(selectRecordedCustomerCmdHandler);
             startTransactionCmd = new ICommandImp(startTransactionCmdHandler);
 
@@ -202,7 +206,11 @@ namespace CommercialRecordSystem.ViewModels
                 else if (navigation.Forward.Is<CustomerList>())
                 {
                     if (null != navigation.Message)
+                    {
                         registeredCustomer.get((int)navigation.Message);
+                        CurrentCustomer = registeredCustomer;
+                        CurrentCustomer.Refresh();
+                    }
                 }
             }
             else

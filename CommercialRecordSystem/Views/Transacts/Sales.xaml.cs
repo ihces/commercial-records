@@ -10,11 +10,6 @@ namespace CommercialRecordSystem.Views.Transacts
         public Sales() :base(typeof(SaleFrameVM))
         {
             this.InitializeComponent();
-            test();
-        }
-
-        public async Task test() {
-           // await this.popupTest.ShowAsync();
         }
     }
 }

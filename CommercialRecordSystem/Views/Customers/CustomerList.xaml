@@ -34,7 +34,7 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button" Command="{Binding GoBackCmd}"/>
-            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="Müşteriler" Style="{StaticResource HeaderTextBlockStyle}"
+            <TextBlock x:Uid="customers_page_title" Grid.Column="1" Text="Customers" Style="{StaticResource HeaderTextBlockStyle}"
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"
                        Visibility="{Binding Path=ShowPageTitle, Converter={StaticResource Boolean2VisibilityConverter}}" />
             <StackPanel Grid.Column="2">
@@ -46,12 +46,21 @@
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </SearchBox>
-                <ComboBox HorizontalAlignment="Right" FontSize="27" 
+                <ComboBox HorizontalAlignment="Right" FontSize="22" SelectedIndex="{Binding OrderByIndex, Mode=TwoWay}"
                       Foreground="White" Background="#00FFFFFF" BorderThickness="0" 
                       VerticalAlignment="Bottom" Style="{StaticResource ComboBoxStyle1}" FlowDirection="RightToLeft">
-                    <ComboBoxItem>İsme Göre Sıralı</ComboBoxItem>
-                    <ComboBoxItem>Soyisme Göre Sıralı</ComboBoxItem>
-                    <ComboBoxItem>Son İşlem Tarihine Göre Sıralı</ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock x:Uid="customers_ordered_by_name" Text="Ordered by Name" />
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock x:Uid="customers_ordered_by_surname" Text="Ordered by Surname" />
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock x:Uid="customers_ordered_by_lasttrdate" Text="Ordered by Last Transact Date" />
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock x:Uid="customers_ordered_by_account" Text="Ordered by Account" />
+                    </ComboBoxItem>
                 </ComboBox>
             </StackPanel>
             <AppBarButton Grid.Column="3" Icon="Add"  x:Name="addButton" Margin="0,47,10,0" HorizontalAlignment="Right" 
@@ -70,7 +79,6 @@
                     <RowDefinition Height="50" />
                     <RowDefinition Height="52" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Kayıtlı Müşteri Bulunamadı" Visibility="{Binding NoCustomerFound, Converter={StaticResource Boolean2VisibilityConverter}}"  />
                 <ListView x:Name="CustomerListView"  Grid.Row="0" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionMode="Single">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
@@ -86,16 +94,10 @@
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="1" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" Text="İsim"/>
-                            <TextBlock Grid.Column="2" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left">
-								<Run Text="Soyisim"/>
-                            </TextBlock>
-                            <TextBlock Grid.Column="3" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Right">
-								<Run Text="Son İşlem Tarihi"/>
-                            </TextBlock>
-                            <TextBlock Grid.Column="4" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Right">
-								<Run Text="Hesap"/>
-                            </TextBlock>
+                            <TextBlock x:Uid="customers_list_header_name" Grid.Column="1" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Name"/>
+                            <TextBlock x:Uid="customers_list_header_surname" Grid.Column="2" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Surname" />
+                            <TextBlock x:Uid="customers_list_header_lasttransactdate" Grid.Column="3" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Last Transact Date" />
+                            <TextBlock x:Uid="customers_list_header_account" Grid.Column="4" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Account" Margin="0,0,10,0" />
                         </Grid>
                     </ListView.Header>
                     <ListView.ItemContainerStyle>
@@ -131,8 +133,8 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0,0,0" Text="{Binding RowCount, Mode=OneWay}" />
-                    <TextBlock Grid.Column="1" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left" Padding="0,0,24,0" VerticalAlignment="Center" Text="Kişi" />
-                    <TextBlock Grid.Column="2" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Padding="0,0,24,0" VerticalAlignment="Center" Text="Toplam" />
+                    <TextBlock x:Uid="customers_list_footer_rec_count" Grid.Column="1" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left" Padding="0,0,24,0" VerticalAlignment="Center" Text="Records" />
+                    <TextBlock x:Uid="customers_list_footer_total_account" Grid.Column="2" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Right" Padding="0,0,24,0" VerticalAlignment="Center" Text="Total Account" />
                     <TextBlock Grid.Column="3" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0" Text="{Binding TotalAccount, Converter={StaticResource Double2MoneyConverter}, Mode=OneWay}" />
                 </Grid>
             </Grid>

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 
 namespace CommercialRecordSystem.Panels
 {
-    class CRSRadioButtonPanel : CRSPanel
+    class CRSRadioButtonPanel : CRSItemsPanel
     {
         #region Properties
-        private List<string> itemList = new List<string>();
-
         #region CheckedIndex
         public int CheckedIndex
         {
@@ -28,12 +27,34 @@ namespace CommercialRecordSystem.Panels
             DependencyProperty.Register(
                 "CheckedIndex",
                 typeof(int),
-                typeof(CRSPanel),
-                new PropertyMetadata(-1, CheckedIndexHandler)
+                typeof(CRSRadioButtonPanel),
+                new PropertyMetadata(-1, CheckedIndexChangedHandler)
             );
         #endregion
 
-        private bool checkedIndexChangedExternally = true;
+        #region CheckedItem
+        public object CheckedItem
+        {
+            get
+            {
+                return (object)GetValue(CheckedItemProperty);
+            }
+            set
+            {
+                SetValue(CheckedItemProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty CheckedItemProperty =
+            DependencyProperty.Register(
+                "CheckedItem",
+                typeof(object),
+                typeof(CRSRadioButtonPanel),
+                new PropertyMetadata(-1, CheckedItemChangedHandler)
+            );
+        #endregion
+
+        private bool checkedChangedExternally = true;
         #endregion
 
         #region CheckedCommand
@@ -65,45 +86,65 @@ namespace CommercialRecordSystem.Panels
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            int count = 0;
             foreach (RadioButton item in this.Children)
-            {
-                itemList.Add(item.Name); 
-                item.Checked += radioButtonChecked;
-                
-                if ((bool)item.IsChecked)
-                    CheckedIndex = count;
+                item.Tapped += radioButtonChecked;
 
-                count++;
-            }
+            checkedIndexChangedHandler(this);
+            if (itemSourceDefined)
+                checkedItemChangedHandler(this);
         }
 
         void radioButtonChecked(object sender, RoutedEventArgs e)
         {
-            checkedIndexChangedExternally = false;
-            CheckedIndex = itemList.IndexOf(((RadioButton)sender).Name);
+            checkedChangedExternally = false;
+            int index = this.Children.IndexOf(((RadioButton)sender));
+            if (itemSourceDefined)
+                CheckedItem = Items[index];
+            else
+                CheckedIndex = index;
         }
 
-        private static void CheckedIndexHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        private static void CheckedIndexChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            checkedIndexChangedHandler((CRSRadioButtonPanel)obj);
+        }
+
+        private static void CheckedItemChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             CRSRadioButtonPanel panel = (CRSRadioButtonPanel)obj;
+            if (panel.itemSourceDefined)
+                checkedItemChangedHandler(panel);
+        }
 
-            if (panel.checkedIndexChangedExternally)
-            { 
-                if (0 > panel.CheckedIndex)
-                    panel.CheckedIndex = 0;
-                if (panel.Children.Count < panel.CheckedIndex)
-                    panel.CheckedIndex = panel.Children.Count - 1;
+        private static void checkedItemChangedHandler(CRSRadioButtonPanel panel)
+        {
+            int checkedIndex = -1;
 
-                if (0 < panel.Children.Count)
-                    ((RadioButton)panel.Children[panel.CheckedIndex]).IsChecked = true;
+            if (panel.Children.Count > 0 && -1 < (checkedIndex = panel.Items.IndexOf(panel.CheckedItem)))
+                panel.CheckedIndex = checkedIndex;
+        }
+
+        private static void checkedIndexChangedHandler(CRSRadioButtonPanel panel)
+        {
+            if (panel.Children.Count > 0)
+            {
+                if (panel.checkedChangedExternally)
+                {
+                    if (0 > panel.CheckedIndex)
+                        panel.CheckedIndex = 0;
+                    if (panel.Children.Count < panel.CheckedIndex)
+                        panel.CheckedIndex = panel.Children.Count - 1;
+
+                    if (0 < panel.Children.Count)
+                        ((RadioButton)panel.Children[panel.CheckedIndex]).IsChecked = true;
+                }
+
+                if (null != panel.CheckedCommand && -1 < panel.CheckedIndex)
+                    panel.CheckedCommand.Execute(panel.Children[panel.CheckedIndex]);
+
+                //reset
+                panel.checkedChangedExternally = true;
             }
-
-            if (null != panel.CheckedCommand && -1 < panel.CheckedIndex)
-                panel.CheckedCommand.Execute(panel.itemList[panel.CheckedIndex]);
-
-            //reset
-            panel.checkedIndexChangedExternally = true;
         }
     }
 }

@@ -32,6 +32,20 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             }
         }
 
+        private Boolean recorded = false;
+        public Boolean Recorded
+        {
+            get
+            {
+                return recorded;
+            }
+            set
+            {
+                recorded = value;
+                RaisePropertyChanged("Recorded");
+            }
+        }
+
         private string infoName;
         private double aspectRatio;
 
@@ -182,7 +196,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
         private void createNewOneCmdHandler(object parameter)
         {
             CurrentInfo = new E();
-            this.PageTitle = "Yeni " + infoName;
+            Recorded = false;
         }
 
         private void DelInfoCommandInvokedHandler(IUICommand command)
@@ -193,7 +207,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
 
         private void SaveInfoCommandInvokedHandler(IUICommand command)
         {
-            this.PageTitle = "Kayıtlı " + infoName;
+            Recorded = true;
         }
 
         private async void loadPhotoViaBrowserCmdHandler(object parameter)
@@ -233,10 +247,9 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             : base(navigation)
         {
             this.infoName = infoName;
+            PageTitle = infoName;
             if (CurrentInfo.Id != 0)
-                this.PageTitle = "Kayıtlı " + infoName;
-            else
-                this.PageTitle = "Yeni " + infoName;
+                Recorded = true;
 
             this.aspectRatio = aspectRatio;
 
@@ -258,7 +271,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
                 {
                     DelButtonCanEnable = true;
 
-                    this.PageTitle = "Kayıtlı " + infoName;
+                    Recorded = true;
                     CurrentInfo.get((int)navigation.Message);
 
                     if (!string.IsNullOrWhiteSpace(CurrentInfo.ImageFileName))

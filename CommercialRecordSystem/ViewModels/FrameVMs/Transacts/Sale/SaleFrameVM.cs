@@ -42,6 +42,20 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private ObservableCollection<string> measures = new ObservableCollection<string>(App.EnglishDictionary["measures"].Keys);
+        public ObservableCollection<string> Measures
+        {
+            get
+            {
+                return measures;
+            }
+            set
+            {
+                measures = value;
+                RaisePropertyChanged("Measures");
+            }
+        }
+
         private GoodVM selectedGood = new GoodVM();
         public GoodVM SelectedGood
         {
@@ -87,7 +101,7 @@ namespace CommercialRecordSystem.ViewModels
                 return selectGoodCmd;
             }
         }
-        
+
         private bool foundGoodsVisible = false;
         private bool searchGood = true;
         public bool FoundGoodsVisible
@@ -124,12 +138,13 @@ namespace CommercialRecordSystem.ViewModels
             {
                 searchGood = true;
             }
-            
+
         }
 
         private void selectGoodCmdHandler(object parameter)
         {
-            if (null != SelectedGood) {
+            if (null != SelectedGood)
+            {
                 searchGood = false;
                 EntryBuff.Detail = SelectedGood.Name;
                 EntryBuff.UnitCost = SelectedGood.Price;
@@ -162,7 +177,7 @@ namespace CommercialRecordSystem.ViewModels
             orderByClauses.Add(c => c.Name);
             string findBuff = '%' + searchText + '%';
             FoundGoods = new ObservableCollection<GoodVM>(
-                await GoodVM.getList<GoodVM>(c => c.Name.ToLower().Contains(findBuff.ToLower()), 
+                await GoodVM.getList<GoodVM>(c => c.Name.ToLower().Contains(findBuff.ToLower()),
                 orderByClauses));
         }
     }

@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CommercialRecordSystem"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     x:Class="CommercialRecordSystem.Views.Customers.CustomerAccount"
@@ -156,12 +158,15 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <ListView x:Name="listview" Grid.Column="5" VerticalAlignment="Top" Height="Auto" Tapped="actionList_Tabbed" >
+            <ListView x:Name="listview" Grid.Column="5" VerticalAlignment="Top" Height="Auto" ItemsSource="{Binding Transacts}" SelectedItem="{Binding SelectedTransact, Mode=TwoWay}">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding OpemTransactionCmd}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
                 <ListView.Header>
                     <Grid Height="60" Width="{Binding Path=ActualWidth, ElementName=listview}" HorizontalAlignment="Left" Background="#008A00">
-                        <TextBlock Grid.Column="0" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">
-								<Run Text="Cari İşlemler"/>
-                        </TextBlock>
+                        <TextBlock x:Uid="customer_account_transacts" Grid.Column="0" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Current Transactions" />
                     </Grid>
                 </ListView.Header>
                 <ListView.ItemContainerStyle>
@@ -169,36 +174,25 @@
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     </Style>
                 </ListView.ItemContainerStyle>
-                <Grid Height="60" Background="#18ffffff">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200*"></ColumnDefinition>
-                        <ColumnDefinition Width="165*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">20/06/2014</TextBlock>
-                        <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">Alacak kaydedildi</TextBlock>
-                    </Grid>
-                    <TextBlock Grid.Column="2" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">99999,50 ₺</TextBlock>
-                </Grid>
-                <Grid Height="60" Background="#68AD103C">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200*"></ColumnDefinition>
-                        <ColumnDefinition Width="165*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">20/06/2014</TextBlock>
-                        <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">Ödeme kaydedildi</TextBlock>
-                    </Grid>
-                    <TextBlock Grid.Column="2" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">99999,50 ₺</TextBlock>
-                </Grid>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="60" Background="#18ffffff">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200*"></ColumnDefinition>
+                                <ColumnDefinition Width="165*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Date}" />
+                                <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Type, Converter={StaticResource Value2RemarkConverter}, ConverterParameter='transactTypes'}" />
+                            </Grid>
+                            <TextBlock Grid.Column="2" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Cost, Converter={StaticResource Double2MoneyConverter}}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </Grid>
     </Grid>

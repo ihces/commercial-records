@@ -59,6 +59,52 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private int orderByIndex = 0;
+        public int OrderByIndex
+        {
+            get
+            {
+                return orderByIndex;
+            }
+            set
+            {
+                orderByIndex = value;
+                if (value != orderByIndex)
+                {
+                    List<Expression<Func<Customer, object>>>  orderByClauses = 
+                        new List<Expression<Func<Customer, object>>>();
+                    switch (value)
+                    {
+                        case 0:
+                            orderByClauses.Add(c => c.Name);
+                            orderByClauses.Add(c => c.Surname);
+                            setCustomers(null, orderByClauses);
+                            break;
+                        case 1:
+                            orderByClauses.Add(c => c.Surname);
+                            orderByClauses.Add(c => c.Name);
+                            setCustomers(null, orderByClauses);
+                            break;
+                        case 2:
+                            orderByClauses.Add(c => c.LastTransactDate);
+                            orderByClauses.Add(c => c.Name);
+                            orderByClauses.Add(c => c.Surname);
+                            setCustomers(null, orderByClauses);
+                            break;
+                        case 3:
+                            orderByClauses.Add(c => c.AccountCost);
+                            orderByClauses.Add(c => c.Name);
+                            orderByClauses.Add(c => c.Surname);
+                            setCustomers(null, orderByClauses);
+                            break;
+                    }
+                    RaisePropertyChanged("OrderByIndex");
+                }
+            }
+        }
+
+
+
         private ObservableCollection<CustomerVM> customers;
         public ObservableCollection<CustomerVM> Customers
         {
@@ -115,20 +161,6 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private Boolean noCustomerFound;
-        public Boolean NoCustomerFound
-        {
-            get
-            {
-                return noCustomerFound;
-            }
-            set
-            {
-                noCustomerFound = value;
-                RaisePropertyChanged("NoCustomerFound");
-            }
-        }
-
         #endregion "Properties"
 
         public CustomerListFrameVM(FrameNavigation navigation)
@@ -167,12 +199,14 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        private async Task setCustomers()
+        private async Task setCustomers(Expression<Func<Customer, bool>> whereClause = null, List<Expression<Func<Customer, object>>> orderByClauses = null)
         {
-            List<Expression<Func<Customer, object>>> orderByClauses = new List<Expression<Func<Customer, object>>>();
-            orderByClauses.Add(c => c.Name);
-            orderByClauses.Add(c => c.Surname);
-            Expression<Func<Customer, bool>> whereClause = null;
+            if (null == orderByClauses)
+            {
+                orderByClauses = new List<Expression<Func<Customer, object>>>();
+                orderByClauses.Add(c => c.Name);
+                orderByClauses.Add(c => c.Surname);
+            }
 
             if (string.IsNullOrWhiteSpace(QueryText))
                 whereClause = c => c.Type == Customer.TYPE.REGISTERED;
@@ -180,11 +214,6 @@ namespace CommercialRecordSystem.ViewModels
                 whereClause = c => c.Type == Customer.TYPE.REGISTERED && (c.Name.Contains("") || c.Surname.Contains("ss"));
 
             Customers = new ObservableCollection<CustomerVM>(await CustomerVM.getList<CustomerVM>(whereClause, orderByClauses));
-            NoCustomerFound = true;
-            if (0 < Customers.Count)
-            {
-                NoCustomerFound = false;
-            }
             RowCount = Customers.Count;
 
             double totalAccountBuff = 0.0;

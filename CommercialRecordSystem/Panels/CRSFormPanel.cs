@@ -65,12 +65,15 @@ namespace CommercialRecordSystem.Panels
             bool validated = true;
             foreach (CRSTextBox element in inputElements)
             {
-                element.CheckIsValid();
-                if (!element.IsValid)
+                if (Visibility.Visible == element.Visibility)
                 {
-                    if (!element.AnyClickHandled)
-                        element.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
-                    validated = false;
+                    element.CheckIsValid();
+                    if (!element.IsValid)
+                    {
+                        if (!element.AnyClickHandled)
+                            element.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                        validated = false;
+                    }
                 }
             }
 

@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="list_record_num.Text" xml:space="preserve">
+    <value>Kayıt</value>
+  </data>
+  <data name="payment_header.Text" xml:space="preserve">
+    <value>Ödeme</value>
+  </data>
+  <data name="payment_list_header.Text" xml:space="preserve">
+    <value>Yapılan Ödemeler</value>
+  </data>
+  <data name="payment_paid_amount.EmptyMessage" xml:space="preserve">
+    <value>Ödenen Tutar</value>
+  </data>
+  <data name="payment_remaining_amount.Text" xml:space="preserve">
+    <value>Kalan Tutar</value>
+  </data>
+  <data name="payment_total_paid_amount.Text" xml:space="preserve">
+    <value>Ödenen Tutar</value>
+  </data>
+  <data name="payment_type_cash.Text" xml:space="preserve">
+    <value>Nakit</value>
+  </data>
+  <data name="payment_type_creditcard.Text" xml:space="preserve">
+    <value>Kredi Kartı</value>
+  </data>
+  <data name="payment_type_other.Text" xml:space="preserve">
+    <value>Diğer</value>
+  </data>
+  <data name="sales_amount.EmptyMessage" xml:space="preserve">
+    <value>Miktar</value>
+  </data>
+  <data name="sales_list_amount.Text" xml:space="preserve">
+    <value>Miktar</value>
+  </data>
+  <data name="sales_list_definition.Text" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="sales_list_price.Text" xml:space="preserve">
+    <value>Tutar</value>
+  </data>
+  <data name="sales_list_unitprice.Text" xml:space="preserve">
+    <value>Birim Fiyat</value>
+  </data>
+  <data name="sales_unit_price.EmptyMessage" xml:space="preserve">
+    <value>Birim Fiyat</value>
+  </data>
+  <data name="total_amount.Text" xml:space="preserve">
+    <value>Toplam Tutar</value>
+  </data>
+  <data name="Transacts_List_Header_Customer.Text" xml:space="preserve">
+    <value>Müşteri Bilgisi</value>
+  </data>
+  <data name="Transacts_List_Header_Date.Text" xml:space="preserve">
+    <value>Tarih</value>
+  </data>
+  <data name="Transacts_List_Header_Paid.Text" xml:space="preserve">
+    <value>Ödenen</value>
+  </data>
+  <data name="Transacts_List_Header_RemainingAmount.Text" xml:space="preserve">
+    <value>Kalan Tutar</value>
+  </data>
+  <data name="Transacts_List_Header_Transact.Text" xml:space="preserve">
+    <value>İşlem</value>
+  </data>
+  <data name="Transacts_page_title.Text" xml:space="preserve">
+    <value>Cari İşlemler</value>
+  </data>
+  <data name="transact_add_button.Text" xml:space="preserve">
+    <value>Ekle</value>
+  </data>
+  <data name="transact_definition.EmptyMessage" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="transact_newrecord.Text" xml:space="preserve">
+    <value>Yeni Kayıt</value>
+  </data>
+  <data name="customers_list_footer_rec_count.Text" xml:space="preserve">
+    <value>Kayıt</value>
+  </data>
+  <data name="customers_list_footer_total_account.Text" xml:space="preserve">
+    <value>Toplam</value>
+  </data>
+  <data name="customers_list_header_account.Text" xml:space="preserve">
+    <value>Hesap</value>
+  </data>
+  <data name="customers_list_header_lasttransactdate.Text" xml:space="preserve">
+    <value>Son İşlem Tarihi</value>
+  </data>
+  <data name="customers_list_header_name.Text" xml:space="preserve">
+    <value>İsim</value>
+  </data>
+  <data name="customers_list_header_surname.Text" xml:space="preserve">
+    <value>Soyisim</value>
+  </data>
+  <data name="customers_ordered_by_account.Text" xml:space="preserve">
+    <value>Hesaba Göre Sırala</value>
+  </data>
+  <data name="customers_ordered_by_lasttrdate.Text" xml:space="preserve">
+    <value>Son İşlem Tarihine Göre Sırala</value>
+  </data>
+  <data name="customers_ordered_by_name.Text" xml:space="preserve">
+    <value>İsme Göre Sırala</value>
+  </data>
+  <data name="customers_ordered_by_surname.Text" xml:space="preserve">
+    <value>Soyisme Göre Sırala</value>
+  </data>
+  <data name="customers_page_title.Text" xml:space="preserve">
+    <value>Müşteriler</value>
+  </data>
+  <data name="customer_account_transacts.Text" xml:space="preserve">
+    <value>Cari İşlemler</value>
+  </data>
+</root>

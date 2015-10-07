@@ -40,10 +40,5 @@ namespace CommercialRecordSystem.Views.Customers
             (ColumnChart.Series[1] as AreaSeries).ItemsSource = financialStuffList;
             (ColumnChart.Series[2] as ScatterSeries).ItemsSource = financialStuffList;
         }
-        
-        private void actionList_Tabbed(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(CommercialRecordSystem.Views.Transacts.Sales));
-        }
     }
 }
