@@ -1,6 +1,6 @@
-﻿using CommercialRecordSystem.ViewModels.FrameVMs.CashRegNBank;
+﻿using CommercialRecordSystem.ViewModels.FrameVMs;
 
-namespace CommercialRecordSystem.Views.CashRegNBank
+namespace CommercialRecordSystem.Views.Accounts
 {
     public sealed partial class EnterpriseAccounts : ViewBase
     {

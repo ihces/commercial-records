@@ -9,10 +9,9 @@ namespace CommercialRecordSystem.ViewModels
     class TransactVM : DataVMBase<Transact>
     {
         #region Properties
-
         private int customerId = 0;
         public int CustomerId
-        { 
+        {
             get
             {
                 return customerId;
@@ -22,7 +21,7 @@ namespace CommercialRecordSystem.ViewModels
                 if (customerId != value)
                 {
                     customerId = value;
-                    CustomerVM customerBuff = new CustomerVM();
+                    ActorVM customerBuff = new ActorVM();
                     customerBuff.get(value);
                     CustomerName = customerBuff.Name + " " + customerBuff.Surname;
                 }
@@ -30,7 +29,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private string customerName = string.Empty;
+        private string customerName;
         public string CustomerName
         {
             get
@@ -44,8 +43,22 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private Transact.TYPE type = Transact.TYPE.SALE;
-        public Transact.TYPE Type
+        private int accountId = 0;
+        public int AccountId
+        { 
+            get
+            {
+                return accountId;
+            }
+            set
+            {
+                accountId = value;
+                RaisePropertyChanged("AccountId");
+            }
+        }
+
+        private int type = Transact.TYPE_SALE;
+        public int Type
         {
             get
             {
@@ -72,6 +85,20 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private DateTime modifyDate = DateTime.Now;
+        public DateTime ModifyDate
+        {
+            get
+            {
+                return modifyDate;
+            }
+            set
+            {
+                modifyDate = value;
+                RaisePropertyChanged("ModifyDate");
+            }
+        }
+
         private double cost = 0.0f;
         public double Cost
         {
@@ -83,6 +110,7 @@ namespace CommercialRecordSystem.ViewModels
             {
                 cost = value;
                 RaisePropertyChanged("Cost");
+                RaisePropertyChanged("RemainingCost");
             }
         }
 
@@ -97,6 +125,29 @@ namespace CommercialRecordSystem.ViewModels
             {
                 paid = value;
                 RaisePropertyChanged("Paid");
+                RaisePropertyChanged("RemainingCost");
+            }
+        }
+
+        private int entryCount = 0;
+        public int EntryCount
+        {
+            get
+            {
+                return entryCount;
+            }
+            set
+            {
+                entryCount = value;
+                RaisePropertyChanged("EntryCount");
+            }
+        }
+
+        public double RemainingCost
+        {
+            get
+            {
+                return Cost - Paid;
             }
         }
         #endregion
@@ -107,7 +158,7 @@ namespace CommercialRecordSystem.ViewModels
         {
             var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
             var transactList = db.Table<Transact>()
-                                .Where(t => customerId == t.CustomerId)
+                                .Where(t => accountId == t.AccountId)
                                 .OrderBy(t => t.Date).ToListAsync();
             return await transactList;
         }

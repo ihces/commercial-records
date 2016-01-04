@@ -18,9 +18,9 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Goods
             {
                 if (firmId != value)
                 {
-                    FirmVM firmBuff = new FirmVM();
+                    BrandVM firmBuff = new BrandVM();
                     firmBuff.get(value);
-                    FirmName = firmBuff.Name;
+                    BrandName = firmBuff.Name;
                 }
 
                 firmId = value;
@@ -29,17 +29,17 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Goods
             }
         }
 
-        public string firmName;
-        public string FirmName
+        public string brandName;
+        public string BrandName
         {
             get
             {
-                return firmName;
+                return brandName;
             }
             set
             {
-                firmName = value;
-                RaisePropertyChanged("FirmName");
+                brandName = value;
+                RaisePropertyChanged("BrandName");
 
             }
         }
@@ -111,8 +111,8 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Goods
             }
         }
 
-        private int unit;
-        public int Unit
+        private string unit = "0";
+        public string Unit
         {
             get
             {
@@ -140,17 +140,17 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Goods
             }
         }
 
-        private double cost;
-        public double Cost
+        private double vat;
+        public double Vat
         {
             get
             {
-                return cost;
+                return vat;
             }
             set
             {
-                cost = value;
-                RaisePropertyChanged("Cost");
+                vat = value;
+                RaisePropertyChanged("Vat");
 
             }
         }

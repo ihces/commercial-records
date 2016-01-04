@@ -126,9 +126,6 @@
   <data name="payment_list_header.Text" xml:space="preserve">
     <value>Payments</value>
   </data>
-  <data name="payment_paid_amount.EmptyMessage" xml:space="preserve">
-    <value>Paid Amount</value>
-  </data>
   <data name="payment_remaining_amount.Text" xml:space="preserve">
     <value>Remaining Amount</value>
   </data>
@@ -147,9 +144,6 @@
   <data name="payment_type_other.Text" xml:space="preserve">
     <value>Other</value>
   </data>
-  <data name="sales_amount.EmptyMessage" xml:space="preserve">
-    <value>Amount</value>
-  </data>
   <data name="sales_list_amount.Text" xml:space="preserve">
     <value>Amount</value>
   </data>
@@ -162,14 +156,11 @@
   <data name="sales_list_unitprice.Text" xml:space="preserve">
     <value>Unit Price</value>
   </data>
-  <data name="sales_unit_price.EmptyMessage" xml:space="preserve">
-    <value>Unit Price</value>
-  </data>
   <data name="total_amount.Text" xml:space="preserve">
     <value>Total Amount</value>
   </data>
-  <data name="Transacts_List_Header_Customer.Text" xml:space="preserve">
-    <value>Customer Information</value>
+  <data name="Transacts_List_Header_Actor.Text" xml:space="preserve">
+    <value>Account Information</value>
   </data>
   <data name="Transacts_List_Header_Date.Text" xml:space="preserve">
     <value>Date</value>
@@ -189,46 +180,49 @@
   <data name="transact_add_button.Text" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="transact_definition.EmptyMessage" xml:space="preserve">
-    <value>Definition</value>
-  </data>
   <data name="transact_newrecord.Text" xml:space="preserve">
     <value>New Record</value>
   </data>
-  <data name="customers_list_footer_rec_count.Text" xml:space="preserve">
+  <data name="current_account_list_footer_rec_count.Text" xml:space="preserve">
     <value>Records</value>
   </data>
-  <data name="customers_list_footer_total_account.Text" xml:space="preserve">
+  <data name="current_account_list_footer_total_account.Text" xml:space="preserve">
     <value>Total</value>
   </data>
-  <data name="customers_list_header_account.Text" xml:space="preserve">
+  <data name="current_account_list_header_account.Text" xml:space="preserve">
     <value>Account</value>
   </data>
-  <data name="customers_list_header_lasttransactdate.Text" xml:space="preserve">
+  <data name="current_account_list_header_lasttransactdate.Text" xml:space="preserve">
     <value>Last Transact Date</value>
   </data>
-  <data name="customers_list_header_name.Text" xml:space="preserve">
+  <data name="current_account_list_header_name.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="customers_list_header_surname.Text" xml:space="preserve">
+  <data name="current_account_list_header_surname.Text" xml:space="preserve">
     <value>Surname</value>
   </data>
-  <data name="customers_ordered_by_account.Text" xml:space="preserve">
+  <data name="actors_ordered_by_account.Text" xml:space="preserve">
     <value>Order by Account</value>
   </data>
-  <data name="customers_ordered_by_lasttrdate.Text" xml:space="preserve">
+  <data name="actors_ordered_by_lasttrdate.Text" xml:space="preserve">
     <value>Order by Last Transact Date</value>
   </data>
-  <data name="customers_ordered_by_name.Text" xml:space="preserve">
+  <data name="actors_ordered_by_name.Text" xml:space="preserve">
     <value>Order by Name</value>
   </data>
-  <data name="customers_ordered_by_surname.Text" xml:space="preserve">
+  <data name="actors_ordered_by_surname.Text" xml:space="preserve">
     <value>Order by Surname</value>
   </data>
-  <data name="customers_page_title.Text" xml:space="preserve">
-    <value>Customers</value>
+  <data name="current_accounts_title.Text" xml:space="preserve">
+    <value>Current Accounts</value>
   </data>
-  <data name="customer_account_transacts.Text" xml:space="preserve">
+  <data name="actor_account_transacts.Text" xml:space="preserve">
     <value>Current Transactions</value>
+  </data>
+  <data name="Transacts_List_Header_Cost.Text" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="sales_actor_info_ok.Text" xml:space="preserve">
+    <value>Ok</value>
   </data>
 </root>

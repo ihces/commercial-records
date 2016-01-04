@@ -39,7 +39,7 @@ namespace CommercialRecordSystem.Common
             }
         }
 
-        private Dictionary<string, object> propertyData = null;
+        private Dictionary<string, object> propertyData = new Dictionary<string, object>();
         public Dictionary<string, object> PropertyData
         {
             get

@@ -8,10 +8,7 @@ namespace CommercialRecordSystem.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            IComparable valueObj = (IComparable)value;
-            IComparable parameterObj = (IComparable)parameter;
-
-            if (0 == valueObj.CompareTo(parameterObj))
+            if (0 == value.ToString().CompareTo(parameter.ToString()))
                 return Visibility.Visible;
 
             return Visibility.Collapsed;

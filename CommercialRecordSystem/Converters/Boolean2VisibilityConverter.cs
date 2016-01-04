@@ -8,10 +8,17 @@ namespace CommercialRecordSystem.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (null == value || !(Boolean)value)
-                return Visibility.Collapsed;
+            bool visible = false;
+            if (null != value)
+                visible = (bool)value;
 
-            return Visibility.Visible;
+            if (null != parameter && parameter.ToString().Equals("invert"))
+                visible = !visible;
+
+            if (visible)
+                return Visibility.Visible;
+
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -8,11 +8,11 @@ using System.Linq.Expressions;
 
 namespace CommercialRecordSystem.ViewModels
 {
-    class CustomerVM : InfoDataVMBase<Customer>
+    class ActorVM : InfoDataVMBase<Actor>
     {
         #region Properties
-        private Customer.TYPE type = Customer.TYPE.REGISTERED;
-        public Customer.TYPE Type 
+        private int type = Actor.TYPE_PERSON;
+        public int Type 
         {
             get
             {
@@ -34,7 +34,7 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                name = value;
+                name = UpperCaseFirst(value);
                 RaisePropertyChanged("Name");
             }
         }
@@ -48,8 +48,22 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                surname = value;
+                surname =  UpperCaseFirst(value);
                 RaisePropertyChanged("Surname");
+            }
+        }
+
+        private bool registered = true;
+        public bool Registered
+        {
+            get
+            {
+                return registered;
+            }
+            set
+            {
+                registered = value;
+                RaisePropertyChanged("Registered");
             }
         }
 
@@ -78,6 +92,20 @@ namespace CommercialRecordSystem.ViewModels
             {
                 address = value;
                 RaisePropertyChanged("Address");
+            }
+        }
+
+        private string detail = string.Empty;
+        public string Detail
+        {
+            get
+            {
+                return detail;
+            }
+            set
+            {
+                detail = value;
+                RaisePropertyChanged("Detail");
             }
         }
 
@@ -123,17 +151,41 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private double accountCost = 0.0f;
-        public double AccountCost
+        private double totalCost = 0.0f;
+        public double TotalCost
         {
             get
             {
-                return accountCost;
+                return totalCost;
             }
             set
             {
-                accountCost = value;
-                RaisePropertyChanged("AccountCost");
+                totalCost = value;
+                RaisePropertyChanged("TotalCost");
+                RaisePropertyChanged("RemainingCost");
+            }
+        }
+
+        private double totalPaid = 0.0f;
+        public double TotalPaid
+        {
+            get
+            {
+                return totalPaid;
+            }
+            set
+            {
+                totalPaid = value;
+                RaisePropertyChanged("TotalPaid");
+                RaisePropertyChanged("RemainingCost");
+            }
+        }
+
+        public double RemainingCost
+        {
+            get
+            {
+                return totalCost-totalPaid;
             }
         }
 
@@ -167,11 +219,11 @@ namespace CommercialRecordSystem.ViewModels
 
         #endregion
 
-        public CustomerVM(): base(App.ProfileImgFolder)
+        public ActorVM(): base(App.ProfileImgFolder)
         { }
 
-        public CustomerVM(Customer customer)
-            : base(customer, App.ProfileImgFolder)
+        public ActorVM(Actor actor)
+            : base(actor, App.ProfileImgFolder)
         {
         }
     }

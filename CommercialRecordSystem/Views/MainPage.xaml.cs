@@ -1,7 +1,7 @@
 ﻿using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Views;
+using CommercialRecordSystem.Views.Accounts;
 using CommercialRecordSystem.Views.CashRegNBank;
-using CommercialRecordSystem.Views.Customers;
 using CommercialRecordSystem.Views.Goods;
 using CommercialRecordSystem.Views.Settings;
 using CommercialRecordSystem.Views.Transacts;
@@ -37,7 +37,7 @@ namespace CommercialRecordSystem
 
         private void CostumersGrid_tabbed(object sender, TappedRoutedEventArgs e)
         {
-            GoTo<CustomerList>();
+            GoTo<CurrentAccountList>();
         }
 
         private void GoodsGrid_tabbed(object sender, TappedRoutedEventArgs e)

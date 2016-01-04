@@ -8,9 +8,9 @@ namespace CommercialRecordSystem.Models.Goods
         public int CategoryId { get; set; }
         public string Name { get; set; }
         public int StockAmount { get; set; }
-        public int Unit { get; set; }
+        public string Unit { get; set; }
         public string Detail { get; set; }
-        public double Cost { get; set; }
+        public double Vat { get; set; }
         public double Price { get; set; }
         public string Barcode { get; set; }
         public DateTime CreatedDate { get; set; }

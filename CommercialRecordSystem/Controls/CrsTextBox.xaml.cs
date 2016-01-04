@@ -1,8 +1,8 @@
-﻿using CommercialRecordSystem.Constants;
+﻿using CommercialRecordSystem.Common;
+using CommercialRecordSystem.Constants;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Windows.UI;
@@ -11,11 +11,31 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-
 namespace CommercialRecordSystem.Controls
 {
-    public sealed class CRSTextBox : Control
+    public sealed partial class CrsTextBox : UserControl
     {
+        public CrsTextBox()
+        {
+            this.InitializeComponent();
+
+            FontSize = 32;
+            BorderThickness = new Thickness(3);
+            ThemeBrush = new SolidColorBrush(Colors.BlueViolet);
+            FontWeight = FontWeights.SemiBold;
+            Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+            this.DefaultStyleKey = typeof(CrsTextBox);
+            RequiredSignVisibility = Windows.UI.Xaml.Visibility.Collapsed;
+
+            Grid.SetColumn(iconContainer, 1);
+            this.Loaded += CrsTextBox_Loaded;
+        }
+
+        private void CrsTextBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            OnApplyTemplate();
+        }
+
         #region Properties
         #region InputType
         public INPUTTYPES InputType
@@ -34,7 +54,7 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "InputType",
                 typeof(INPUTTYPES),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(INPUTTYPES.ALL, null)
             );
 
@@ -54,7 +74,7 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "TextChanged",
                 typeof(ICommand),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(null, null)
             );
 
@@ -76,7 +96,7 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "InputMaxLength",
                 typeof(int),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(64, null)
             );
         #endregion
@@ -97,7 +117,7 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "MaxSize",
                 typeof(int),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(32, null)
             );
         #endregion
@@ -118,7 +138,7 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "ReadOnly",
                 typeof(bool),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(false, ReadOnlyChangedHandler)
             );
         #endregion
@@ -139,7 +159,7 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "Required",
                 typeof(bool),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(false)
             );
         #endregion
@@ -160,7 +180,7 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "RequiredSignVisibility",
                 typeof(Visibility),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(false)
             );
         #endregion
@@ -181,7 +201,7 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "IsValid",
                 typeof(bool),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(null)
             );
         #endregion
@@ -202,29 +222,71 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "Multiline",
                 typeof(bool),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(false)
             );
         #endregion
-        #region IconHex
-        public string IconHex
+        #region Icon
+        public IconConsts.SegoeIcons Icon
         {
             get
             {
-                return (string)GetValue(IconHexProperty);
+                return (IconConsts.SegoeIcons)GetValue(IconProperty);
             }
             set
             {
-                SetValue(IconHexProperty, value);
+                SetValue(IconProperty, value);
             }
         }
 
-        public static readonly DependencyProperty IconHexProperty =
+        public static readonly DependencyProperty IconProperty =
             DependencyProperty.Register(
-                "IconHex",
-                typeof(string),
-                typeof(CRSTextBox),
-                new PropertyMetadata("")
+                "Icon",
+                typeof(IconConsts.SegoeIcons),
+                typeof(CrsTextBox),
+                new PropertyMetadata(IconConsts.SegoeIcons.HOME, IconChangedHandler)
+            );
+        #endregion
+        #region IconWidth
+        public double IconWidth
+        {
+            get
+            {
+                return (double)GetValue(IconWidthProperty);
+            }
+            set
+            {
+                SetValue(IconWidthProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty IconWidthProperty =
+            DependencyProperty.Register(
+                "IconWidth",
+                typeof(double),
+                typeof(CrsTextBox),
+                new PropertyMetadata(60.0d, IconWidthChangedHandler)
+            );
+        #endregion
+        #region IconFontSize
+        public double IconFontSize
+        {
+            get
+            {
+                return (double)GetValue(IconFontSizeProperty);
+            }
+            set
+            {
+                SetValue(IconFontSizeProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty IconFontSizeProperty =
+            DependencyProperty.Register(
+                "IconFontSize",
+                typeof(double),
+                typeof(CrsTextBox),
+                new PropertyMetadata(30.0d)
             );
         #endregion
         #region IconVisibility
@@ -245,7 +307,7 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "IconVisibility",
                 typeof(Visibility),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(IconVisibilities.at_Left)
             );
         #endregion
@@ -266,30 +328,31 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "Input",
                 typeof(object),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(null, InputChangedHandler)
             );
         #endregion
-        #region EmptyMessage
-        public string EmptyMessage
+        #region Remark
+        public string Remark
         {
             get
             {
-                return (string)GetValue(EmptyMessageProperty);
+                return (string)GetValue(RemarkProperty);
             }
             set
             {
-                SetValue(EmptyMessageProperty, value);
+                SetValue(RemarkProperty, value);
             }
         }
 
-        public static readonly DependencyProperty EmptyMessageProperty =
+        public static readonly DependencyProperty RemarkProperty =
             DependencyProperty.Register(
-                "EmptyMessage",
+                "Remark",
                 typeof(string),
-                typeof(CRSTextBox),
-                new PropertyMetadata("Bu alanı doldurunuz")
+                typeof(CrsTextBox),
+                new PropertyMetadata("Bu alanı doldurunuz", RemarkChangedHandler)
             );
+
         #endregion
         #region ThemeBrush
         public Brush ThemeBrush
@@ -308,17 +371,17 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "ThemeBrush",
                 typeof(Brush),
-                typeof(CRSTextBox),
+                typeof(CrsTextBox),
                 new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90)))
             );
         #endregion
         #endregion
 
         #region Input Type
-        public enum INPUTTYPES {ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER} 
+        public enum INPUTTYPES { ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER }
 
         delegate object ConvertFromDelegate(string str);
-        private struct InputTypeInfo 
+        private struct InputTypeInfo
         {
             public string Pattern;
             public string StringFormat;
@@ -354,57 +417,46 @@ namespace CommercialRecordSystem.Controls
         //protected static readonly string INPUT_CHANGE_HANDLER = "input_change_handler";
         public bool AnyClickHandled = false;
         private bool isEmpty;
-        private TextBox textBox;
-        private Grid icon;
-        private bool updateInput = false;
-        
-        #endregion
+        private string remarkBuff = string.Empty;
 
-        public CRSTextBox()
-        {
-            FontSize = 32;
-            BorderThickness = new Thickness(3);
-            FontWeight = FontWeights.SemiBold;
-            Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
-            this.DefaultStyleKey = typeof(CRSTextBox);
-            RequiredSignVisibility = Windows.UI.Xaml.Visibility.Collapsed;
-        }
+        #endregion
 
         public void CheckIsValid()//string callFrom = "")
         {
-            if (ReadOnly)
-            {
-                IsValid = true;
-                textBox.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
-            }
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                    isEmpty = true;
+            if (string.IsNullOrWhiteSpace(textbox.Text))
+                isEmpty = true;
 
-                if (isEmpty)
+            if (isEmpty)
+            {
+                setAsEmpty();
+                if (Required)
                 {
-                    setAsEmpty();
-                    if (Required)
-                    {
-                        IsValid = false;
-                        if (AnyClickHandled)
-                            this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
-                    }
+                    IsValid = false;
+                    if (AnyClickHandled)
+                        this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                }
 
-                    //if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
-                        this.Input = null;
+                //if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
+                this.Input = null;
+            }
+            else
+            {
+                if (ReadOnly)
+                {
+                    IsValid = true;
+                    this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
                 }
                 else
                 {
-                    textBox.Text = textBox.Text.Trim();
-                    string text = textBox.Text;
+                    textbox.Text = textbox.Text.Trim();
+                    string text = textbox.Text;
                     if (Regex.IsMatch(text, InputTypeDic[InputType].Pattern))
                     {
                         IsValid = true;
                         //if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
-                          //  justUpdateInput();
+                        //  justUpdateInput();
 
-                        this.Input = InputTypeDic[InputType].ConvertFrom(textBox.Text);
+                        this.Input = InputTypeDic[InputType].ConvertFrom(textbox.Text);
 
                         this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
                     }
@@ -414,7 +466,7 @@ namespace CommercialRecordSystem.Controls
                         this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
 
                         //if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
-                          //  justUpdateInput();
+                        //  justUpdateInput();
 
                         Input = null;
                     }
@@ -427,17 +479,15 @@ namespace CommercialRecordSystem.Controls
             updateInput = true;
         }*/
 
-        protected override void OnApplyTemplate()
+        protected void OnApplyTemplate()
         {
-            textBox = GetTemplateChild("textbox") as TextBox;
-            icon = GetTemplateChild("icon") as Grid;
-
             BorderBrush = ThemeBrush;
+
             if (this.ReadOnly)
-                this.BorderBrush = new SolidColorBrush(Color.FromArgb(0x90, 0x90, 0x90, 0x90));
+                this.BorderBrush = ColorConsts.TEXTBOX_BACKGROUND_VALID;
             else
-            if (this.Required && !this.ReadOnly)
-                RequiredSignVisibility = Visibility.Visible;
+                if (this.Required && !this.ReadOnly)
+                    RequiredSignVisibility = Visibility.Visible;
 
             string newValueStr = string.Format(InputTypeDic[InputType].StringFormat, Input);
             if (string.IsNullOrWhiteSpace(newValueStr))
@@ -447,18 +497,18 @@ namespace CommercialRecordSystem.Controls
             }
             else
             {
-                textBox.Text = newValueStr;
+                textbox.Text = newValueStr;
                 setAsNotEmpty();
             }
 
             if (Multiline)
             {
-                textBox.TextWrapping = TextWrapping.Wrap;
-                textBox.AcceptsReturn = true;
+                textbox.TextWrapping = TextWrapping.Wrap;
+                textbox.AcceptsReturn = true;
             }
-            textBox.GotFocus += new RoutedEventHandler(gotFocusHandler);
-            textBox.LostFocus += new RoutedEventHandler(LostFocusHandler);
-            textBox.TextChanged += new TextChangedEventHandler(TextChangedHandler);
+            textbox.GotFocus += gotFocusHandler;
+            textbox.LostFocus += LostFocusHandler;
+            textbox.TextChanged += TextChangedHandler;
 
             if (Required)
                 IsValid = false;
@@ -467,23 +517,27 @@ namespace CommercialRecordSystem.Controls
 
             this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
 
-            
-            switch(IconVisibility)
+            Thickness thicknessBuff = new Thickness(this.BorderThickness.Top);
+
+            switch (IconVisibility)
             {
                 case IconVisibilities.at_Left:
-                    textBox.Margin = new Thickness(60,0,0,0);
+                    Grid.SetColumn(iconContainer, 1);
+                    thicknessBuff.Left = 0;
+                    this.BorderThickness = thicknessBuff;
                     icon.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
                     break;
                 case IconVisibilities.at_Right:
-                    textBox.Margin = new Thickness(0,0,60,0);
+                    Grid.SetColumn(iconContainer, 3);
+                    thicknessBuff.Right = 0;
                     icon.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Right;
                     break;
                 default:
-                    icon.Visibility = Visibility.Collapsed;
+                    Grid.SetColumn(iconContainer, 0);
                     break;
             }
 
-            base.OnApplyTemplate();
+            BorderThickness = thicknessBuff;
         }
 
         private void gotFocusHandler(object sender, RoutedEventArgs e)
@@ -492,7 +546,7 @@ namespace CommercialRecordSystem.Controls
             {
                 if (isEmpty)
                 {
-                    textBox.Text = string.Empty;
+                    textbox.Text = string.Empty;
                     setAsNotEmpty();
                 }
 
@@ -514,69 +568,118 @@ namespace CommercialRecordSystem.Controls
         private void TextChangedHandler(object sender, RoutedEventArgs e)
         {
             if (null != TextChanged)
-                TextChanged.Execute(isEmpty? "": textBox.Text);
+                TextChanged.Execute(isEmpty ? "" : textbox.Text);
+        }
+
+        private static void IconWidthChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            CrsTextBox crsTextBox = (CrsTextBox)obj;
+
+            if (null != crsTextBox.textbox)
+            {
+                Thickness thicknessBuff = new Thickness(crsTextBox.BorderThickness.Top);
+
+                switch (crsTextBox.IconVisibility)
+                {
+                    case IconVisibilities.at_Left:
+                        thicknessBuff.Left = 0;
+                        Grid.SetColumn(crsTextBox.iconContainer, 1);
+                        break;
+                    case IconVisibilities.at_Right:
+                        thicknessBuff.Right = 0;
+                        Grid.SetColumn(crsTextBox.iconContainer, 3);
+                        break;
+                    default:
+                        break;
+                }
+
+                crsTextBox.BorderThickness = thicknessBuff;
+            }
         }
 
         private static void ReadOnlyChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            CRSTextBox csrTextBox = (CRSTextBox)obj;
+            CrsTextBox CrsTextBox = (CrsTextBox)obj;
             if ((bool)e.NewValue)
             {
-                if (csrTextBox.Required)
+                if (CrsTextBox.Required)
                 {
-                    csrTextBox.RequiredSignVisibility = Visibility.Collapsed;
+                    CrsTextBox.RequiredSignVisibility = Visibility.Collapsed;
                 }
-                if (!csrTextBox.IsValid)
+                if (!CrsTextBox.IsValid)
                 {
-                    csrTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+                    CrsTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
                 }
-                csrTextBox.BorderBrush = new SolidColorBrush(Color.FromArgb(0x90, 0x90, 0x90, 0x90));
+                CrsTextBox.BorderBrush = ColorConsts.TEXTBOX_BACKGROUND_VALID;
             }
             else
             {
-                if (csrTextBox.Required)
+                if (CrsTextBox.Required)
                 {
-                    csrTextBox.RequiredSignVisibility = Visibility.Visible;
-                    if (csrTextBox.isEmpty && !csrTextBox.IsValid)
-                        csrTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                    CrsTextBox.RequiredSignVisibility = Visibility.Visible;
+                    if (CrsTextBox.isEmpty && !CrsTextBox.IsValid && CrsTextBox.AnyClickHandled)
+                        CrsTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
                 }
-                csrTextBox.BorderBrush = csrTextBox.ThemeBrush;
+                CrsTextBox.BorderBrush = CrsTextBox.ThemeBrush;
+            }
+        }
+
+        private static void IconChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            CrsTextBox CrsTextBox = (CrsTextBox)obj;
+
+            if (null != CrsTextBox.iconText)
+            {
+                IconConsts.SegoeIcons iconBuff = (IconConsts.SegoeIcons)e.NewValue;
+
+                if (null != iconBuff)
+                    CrsTextBox.iconText.Text = IconConsts.iconStr(iconBuff);
             }
         }
 
         private static void InputChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            CRSTextBox csrTextBox = (CRSTextBox)obj;
+            CrsTextBox CrsTextBox = (CrsTextBox)obj;
 
-            if (null != csrTextBox.textBox)
+            if (null != CrsTextBox.textbox)
             {
-                /*if (csrTextBox.updateInput)
-                {
-                    csrTextBox.updateInput = false;
-                }
-                else
-                {*/
-                    string newValueStr = string.Format(InputTypeDic[csrTextBox.InputType].StringFormat, e.NewValue);
-                    csrTextBox.textBox.Text = newValueStr;
-                //}
-                csrTextBox.setAsNotEmpty();
-                csrTextBox.CheckIsValid();//INPUT_CHANGE_HANDLER);
+                string newValueStr = string.Format(InputTypeDic[CrsTextBox.InputType].StringFormat, e.NewValue);
+                CrsTextBox.textbox.Text = newValueStr;
+
+                CrsTextBox.setAsNotEmpty();
+                CrsTextBox.CheckIsValid();
             }
         }
 
+        private static void RemarkChangedHandler(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            string remarkTemp = e.NewValue.ToString();
+
+            if (null != remarkTemp && remarkTemp.Length > 0 && remarkTemp[0] == '#')
+            {
+                string[] remarkTokens = remarkTemp.Substring(1).Split(new char[] { '|' });
+
+                if (remarkTokens.Length == 2)
+                {
+                    remarkTemp = CrsDictionary.getInstance().lookup(remarkTokens[0], remarkTokens[1]);
+                }
+            }
+
+            ((CrsTextBox)d).remarkBuff = remarkTemp;
+        }
         private void setAsEmpty()
         {
             isEmpty = true;
-            textBox.Text = EmptyMessage;
-            textBox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
-            textBox.FontStyle = Windows.UI.Text.FontStyle.Italic;
+            textbox.Text = remarkBuff;
+            textbox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
+            textbox.FontStyle = Windows.UI.Text.FontStyle.Italic;
         }
 
         private void setAsNotEmpty()
         {
             isEmpty = false;
-            textBox.Foreground = ColorConsts.TEXTBOX_NOT_EMPTY_FOREGROUND;
-            textBox.FontStyle = Windows.UI.Text.FontStyle.Normal;
+            textbox.Foreground = ColorConsts.TEXTBOX_NOT_EMPTY_FOREGROUND;
+            textbox.FontStyle = Windows.UI.Text.FontStyle.Normal;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
         private readonly string[] category_OrderBy_List = new string[] { "Hiyerarşik Sıralı", "Alfabetik Sıralı" };
         private enum CategoryOrderType { ALPHABETICAL, HIERARCHICAL };
 
-        private List<FirmVM> firmsList;
+        private List<BrandVM> firmsList;
         private List<GoodVM> goodsList;
         private int ignoredCategoryId = 0;
 
@@ -80,8 +80,8 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
             }
         }
 
-        private OrderedListVM<FirmVM, Firm> firmOrderedList;
-        public OrderedListVM<FirmVM, Firm> FirmOrderedList
+        private OrderedListVM<BrandVM, Firm> firmOrderedList;
+        public OrderedListVM<BrandVM, Firm> FirmOrderedList
         {
             get
             {
@@ -193,7 +193,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
                         ShowOrderByCriterias = true;
                         break;
                     case 1:
-                        setFirms(typeof(FirmVM).GetRuntimeProperty("Name"), true);
+                        setFirms(typeof(BrandVM).GetRuntimeProperty("Name"), true);
                         ShowFirms = true;
                         ShowOrderByCriterias = false;
                         break;
@@ -254,7 +254,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
                             setGoods(typeof(GoodVM).GetRuntimeProperty("Name"), true);
                             break;
                         case 1:
-                            setGoods(typeof(GoodVM).GetRuntimeProperty("FirmName"));
+                            setGoods(typeof(GoodVM).GetRuntimeProperty("BrandName"));
                             break;
                         case 2:
                             setGoods(typeof(GoodVM).GetRuntimeProperty("CategoryName"));
@@ -292,8 +292,8 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
             }
         }
 
-        private FirmVM selectedFirm;
-        public FirmVM SelectedFirm
+        private BrandVM selectedFirm;
+        public BrandVM SelectedFirm
         {
             get
             {
@@ -375,7 +375,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
                     OrderByCriteriaIndex = 0;
                     break;
                 case 1:
-                    setFirms(typeof(FirmVM).GetRuntimeProperty("Name"), true);
+                    setFirms(typeof(BrandVM).GetRuntimeProperty("Name"), true);
                     break;
                 case 2:
                     OrderByCriteriaIndex = 1;
@@ -391,7 +391,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
                     Navigation.Navigate<GoodInfo>();
                     break;
                 case 1:
-                    Navigation.Navigate<FirmInfo>();
+                    Navigation.Navigate<BrandInfo>();
                     break;
                 case 2:
                     Navigation.Navigate<CategoryInfo>();
@@ -408,7 +408,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
         {
             if (DEFAULT_VIEW == viewPurpose)
             {
-                navigation.Navigate<FirmInfo>(SelectedFirm.Id);
+                navigation.Navigate<BrandInfo>(SelectedFirm.Id);
             }
             else if (SELECT_FIRM == viewPurpose)
             {
@@ -448,7 +448,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
                         PageTitle = "Marka Seç";
                         ShowOrderByCriterias = false;
                         ShowFirms = true;
-                        setFirms(typeof(FirmVM).GetRuntimeProperty("Name"), true);
+                        setFirms(typeof(BrandVM).GetRuntimeProperty("Name"), true);
                     }
                     else if (SELECT_CATEGORY == viewPurpose)
                     {
@@ -485,11 +485,11 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
             Expression<Func<Firm, bool>> whereClause = null,
             List<Expression<Func<Firm, object>>> orderByClauses = null)
         {
-            firmsList = await FirmVM.getList<FirmVM>(whereClause, orderByClauses);
+            firmsList = await BrandVM.getList<BrandVM>(whereClause, orderByClauses);
             if (!string.IsNullOrWhiteSpace(QueryText))
                 firmsList = firmsList.Where(c => c.Name.ToLower().Contains(QueryText.ToLower())).ToList();
 
-            FirmOrderedList = new OrderedListVM<FirmVM, Firm>();
+            FirmOrderedList = new OrderedListVM<BrandVM, Firm>();
             FirmOrderedList.FillList(firmsList, orderProperty, alphaNumericOrder, reverse);
         }
 

@@ -11,7 +11,7 @@ using CommercialRecordSystem.Views;
 
 namespace CommercialRecordSystem.ViewModels.DataVMs.Goods
 {
-    class FirmVM : InfoDataVMBase<Firm>
+    class BrandVM : InfoDataVMBase<Firm>
     {
         #region Properties
         private string name;
@@ -209,13 +209,13 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Goods
             }
         }*/
 
-        public FirmVM(): base(App.FirmImgFolder)
+        public BrandVM(): base(App.FirmImgFolder)
         {
             /*addGoodCmd = new ICommandImp(addGoodCmdHandler);
             editGoodCmd = new ICommandImp(editGoodCmdHandler);*/
         }
 
-        public FirmVM(Firm firm)
+        public BrandVM(Firm firm)
             : base(firm, App.FirmImgFolder)
         {
             

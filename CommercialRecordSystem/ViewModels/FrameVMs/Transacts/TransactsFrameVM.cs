@@ -72,13 +72,13 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Transacts
         {
             switch (SelectedTransact.Type)
             {
-                case Transact.TYPE.SALE:
+                case Transact.TYPE_SALE:
                     Navigation.Navigate(typeof(Sales), selectedTransact);
                     break;
-                case Transact.TYPE.ORDER:
+                case Transact.TYPE_ORDER:
                     Navigation.Navigate(typeof(Sales), selectedTransact);
                     break;
-                case Transact.TYPE.PAYMENT:
+                case Transact.TYPE_PAYMENT:
                     Navigation.Navigate(typeof(Payments), selectedTransact);
                     break;
             }
@@ -86,7 +86,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Transacts
 
         private void startNewTransact_execute(object obj)
         {
-            Navigation.Navigate(typeof(TransactTypeSelector));
+            Navigation.Navigate(typeof(Sales));
         }
 
         private async Task setTransacts()

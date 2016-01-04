@@ -38,6 +38,20 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        public int goodId = 0;
+        public int GoodId
+        {
+            get
+            {
+                return goodId;
+            }
+            set
+            {
+                goodId = value;
+                RaisePropertyChanged("GoodId");
+            }
+        }
+        
         public int orderState = 0;
         public int OrderState
         {
@@ -66,7 +80,7 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private double amount = 0.0f;
+        private double amount = 1;
         public double Amount
         {
             get
@@ -80,8 +94,8 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private int measure = 0;
-        public int Measure
+        private string measure = "0";
+        public string Measure
         {
             get
             {

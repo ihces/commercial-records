@@ -1,8 +1,7 @@
 ﻿using CommercialRecordSystem.Common;
-using CommercialRecordSystem.Models.EnterpriseAccounts;
+using CommercialRecordSystem.Models.Accounts;
 using CommercialRecordSystem.ViewModels.DataVMs.EnterpriseAccounts;
 using CommercialRecordSystem.ViewModels.DataVMs.IncomeNExpenses;
-using CommercialRecordSystem.Views.EnterpriseAccounts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +9,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CommercialRecordSystem.ViewModels.FrameVMs.CashRegNBank
+namespace CommercialRecordSystem.ViewModels.FrameVMs
 {
     class EnterpriseAccountsFrameVM : FrameVMBase
     {
@@ -129,42 +128,17 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.CashRegNBank
         #endregion
 
         #region Commands
-        private readonly ICommand createNewAccountCmd;
-        public ICommand CreateNewAccountCmd
-        {
-            get
-            {
-                return createNewAccountCmd;
-            }
-        }
-
-        private readonly ICommand editCurrentAccountCmd;
-        public ICommand EditCurrentAccountCmd
-        {
-            get
-            {
-                return editCurrentAccountCmd;
-            }
-        }
+        
         #endregion
 
         #region CommandHandlers
-        public void createNewAccountCmd_execute(object parameter)
-        {
-            Navigation.Navigate<EnterpriseAccountInfo>();
-        }
-
-        public void editCurrentAccountCmd_execute(object parameter)
-        {
-            Navigation.Navigate<EnterpriseAccountInfo>(SelectedAccount.Id);
-        }
+        
         #endregion
 
         public EnterpriseAccountsFrameVM(FrameNavigation navigation)
             : base(navigation)
         {
-            createNewAccountCmd = new ICommandImp(createNewAccountCmd_execute);
-            editCurrentAccountCmd = new ICommandImp(editCurrentAccountCmd_execute);
+            
             setAccounts();
         }
 

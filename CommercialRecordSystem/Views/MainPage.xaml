@@ -47,60 +47,51 @@
             </Grid>
         </Grid>
         <GridView Grid.Row="1" Padding="116,80,40,46" SelectionMode="None">
+            
             <Grid Style="{StaticResource PortraitTile}" Tapped="CostumersGrid_tabbed" >
                 <Grid Background="Green">
-                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE125;"/>
+                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#x1f4dd;"/>
                 </Grid>
                 <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
-                    <TextBlock Text="Müşteriler" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="60" Margin="15,0,15,0"/>
+                    <TextBlock Text="Cari Hesaplar" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="60" Margin="15,0,15,0"/>
                 </Grid>
             </Grid>
             <Grid Style="{StaticResource PortraitTile}" Tapped="GoodsGrid_tabbed">
-                <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}">
-                    <Grid Background="#0097aa">
-                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE1cb;"/>
-                    </Grid>
-                </Border>
+                <Grid Background="#0097aa">
+                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE1cb;"/>
+                </Grid>
                 <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
                     <TextBlock Text="Ürünler" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="60" Margin="15,0,15,0"/>
                 </Grid>
             </Grid>
             <Grid Style="{StaticResource PortraitTile}" Tapped="SalesGrid_tabbed">
-                <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}">
-                    <Grid Background="#d74f2a">
-                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE14d;"/>
-                    </Grid>
-                </Border>
+                <Grid Background="#d74f2a">
+                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE14d;"/>
+                </Grid>
                 <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
                     <TextBlock Text="Cari İşlemler" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="60" Margin="15,0,15,0"/>
                 </Grid>
             </Grid>
             <Grid Style="{StaticResource PortraitTile}" Tapped="DashboardsGrid_tabbed">
-                <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}">
-                    <Grid Background="#9d00a5" Tapped="EnterpriseAccounts_tapped">
-                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#x1f4b0;"/>
-                    </Grid>
-                </Border>
+                <Grid Background="#9d00a5" Tapped="EnterpriseAccounts_tapped">
+                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#x1f4b0;"/>
+                </Grid>
                 <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
                     <TextBlock Text="İşletme Hesapları" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="60" Margin="15,0,15,0"/>
                 </Grid>
             </Grid>
             <Grid Style="{StaticResource PortraitTile}" Tapped="IncomeNExpenses_tapped">
-                <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}">
-                    <Grid Background="#2d89ef">
-                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE1D3;"/>
-                    </Grid>
-                </Border>
+                <Grid Background="#D39D09">
+                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE1D3;"/>
+                </Grid>
                 <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
                     <TextBlock Text="Gelir-Gider" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="60" Margin="15,0,15,0"/>
                 </Grid>
             </Grid>
             <Grid Style="{StaticResource PortraitTile}" Tapped="Settings_tapped">
-                <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}">
-                    <Grid Background="#b01a40">
-                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE115;"/>
-                    </Grid>
-                </Border>
+                <Grid Background="#b01a40">
+                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="144" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE115;"/>
+                </Grid>
                 <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
                     <TextBlock Text="Ayarlar" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="60" Margin="15,0,15,0"/>
                 </Grid>

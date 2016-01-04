@@ -66,12 +66,14 @@
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock x:Uid="Transacts_List_Header_Date" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Date" Margin="10" />
-                            <TextBlock x:Uid="Transacts_List_Header_Transact" Grid.Column="1" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Transact" />
-                            <TextBlock x:Uid="Transacts_List_Header_Customer" Grid.Column="2" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Customer Information" />
-                            <TextBlock x:Uid="Transacts_List_Header_Paid" Grid.Column="3" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Paid"/>
-                            <TextBlock x:Uid="Transacts_List_Header_RemainingAmount" Grid.Column="4" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Remaining Amount" Margin="10" />
+                            <TextBlock x:Uid="Transacts_List_Header_Date" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Date" Margin="10" />
+                            <TextBlock x:Uid="Transacts_List_Header_Transact" Grid.Column="1" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Transact" />
+                            <TextBlock x:Uid="Transacts_List_Header_Customer" Grid.Column="2" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Customer Information" />
+                            <TextBlock x:Uid="Transacts_List_Header_Cost" Grid.Column="3" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Cost"/>
+                            <TextBlock x:Uid="Transacts_List_Header_Paid" Grid.Column="4" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Paid"/>
+                            <TextBlock x:Uid="Transacts_List_Header_RemainingAmount" Grid.Column="5" FontSize="22" TextWrapping="Wrap" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,25,0" TextAlignment="Center" Text="Remaining Amount"  />
                         </Grid>
                     </ListView.Header>
                     <ListView.ItemContainerStyle>
@@ -88,15 +90,18 @@
                                     <ColumnDefinition Width="3*"/>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding Date}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <TextBlock Grid.Column="1" Text="{Binding Type, Converter={StaticResource Value2RemarkConverter}, ConverterParameter='transactTypes'}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <TextBlock Grid.Column="2" Text="{Binding CustomerName}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <TextBlock Grid.Column="3" Text="{Binding Paid}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                <TextBlock Grid.Column="4" Text="{Binding Cost}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <TextBlock Grid.Column="0" Text="{Binding Date}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="1" Text="{Binding Type, Converter={StaticResource Value2RemarkConverter}, ConverterParameter='transactTypes'}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="2" Text="{Binding CustomerName}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="3" Text="{Binding Cost, Converter={StaticResource Double2MoneyConverter}}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="4" Text="{Binding Paid, Converter={StaticResource Double2MoneyConverter}}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="5" Text="{Binding RemainingCost, Converter={StaticResource Double2MoneyConverter}}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Right" />
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+
                 </ListView>
                 <Grid Grid.Row="2" Background="#d74f2a">
                     <Grid.ColumnDefinitions>
@@ -106,7 +111,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0,0,0" Text="{Binding RowCount, Mode=OneWay}" />
+                    <TextBlock Grid.Column="0" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0,0,0" Text="{Binding Path=Transacts.Count}" />
                     <TextBlock x:Uid="list_record_num" Grid.Column="1" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0" Text="Records" />
                     <TextBlock x:Uid="total_amount" Grid.Column="3" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Total Amount" />
                     <TextBlock Grid.Column="4" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,0,0" Text="{Binding TotalAccount, Converter={StaticResource Double2MoneyConverter}, Mode=OneWay}" />

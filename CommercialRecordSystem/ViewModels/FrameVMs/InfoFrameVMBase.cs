@@ -140,7 +140,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
         #endregion
 
         #region Command Handlers
-        private void saveInfoCmdHandler(object parameter)
+        protected virtual void saveInfoCmdHandler(object parameter)
         {
             LoadingVisibility = Visibility.Visible;
 
@@ -151,9 +151,8 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
                 if (0 == CurrentInfo.Id) // new Info
                 {
                     DelButtonCanEnable = true;
-                    CurrentInfo.Id = result;
                 }
-                CurrentInfo.Dirty = false;
+               // CurrentInfo.Dirty = false;
                 message = infoName + " Bilgileri Başarı ile Kaydedildi.";
             }
             else
@@ -175,21 +174,15 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             //LoadingVisibility = Visibility.Collapsed;
         }
 
-        private void delInfoCmdHandler(object parameter)
+        protected virtual void delInfoCmdHandler(object parameter)
         {
             var messageDialog = new MessageDialog(infoName + " Kaydı Kalıcı Olarak Silinecektir. Emin misiniz?", "Kayıt Silme");
 
-            // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
             messageDialog.Commands.Add(new UICommand("Hayır", null));
             messageDialog.Commands.Add(new UICommand("Evet", new UICommandInvokedHandler(this.DelInfoCommandInvokedHandler)));
 
-            // Set the command that will be invoked by default
             messageDialog.DefaultCommandIndex = 1;
-
-            // Set the command to be invoked when escape is pressed
             messageDialog.CancelCommandIndex = 0;
-
-            // Show the message dialog
             messageDialog.ShowAsync();
         }
 

@@ -23,10 +23,21 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
             set
             {
                 id = value;
-                RaisePropertyChanged("Id");
+                RaisePropertyChanged("Id", false);
+                RaisePropertyChanged("Recorded", false);
             }
         }
         #endregion
+
+        public bool Recorded {
+            get
+            {
+                if (Id > 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
         public void Refresh()
         {
@@ -76,6 +87,8 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
 
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
+                db.BeginTransaction();
+
                 E existingEntry = (db.Table<E>().Where(
                         c => c.Id == Id)).SingleOrDefault();
 
@@ -88,6 +101,10 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
                     db.Insert(entryBuff);
                     Id = entryBuff.Id;
                 }
+
+                db.Commit();
+
+                Dirty = false;
             }
 
             return Id;
@@ -110,14 +127,18 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
 
         public virtual DataVMIntf<E> delete()
         {
-            string result = string.Empty;
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
+                db.BeginTransaction();      
                 var existingEntry = (db.Table<E>().Where(
                     c => c.Id == Id)).Single();
 
                 db.Delete(existingEntry);
+
+                db.Commit();
             }
+
+            
 
             return this;
         }
@@ -153,18 +174,25 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
                 }
             }
 
-            resultList = await resultBuff.ToListAsync();
+            try
+            {
+                resultList = await resultBuff.ToListAsync();
+            }
+            catch(Exception ex)
+            {
+
+            }
 
             /*if (0 == keyword.Trim().Length)
             {
                 var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-                customerModelList = await db.Table<E>().Where(c => c.Type == Customer.TYPE.REGISTERED).OrderBy(c => c.Name).OrderBy(c => c.Surname).ToListAsync();
+                customerModelList = await db.Table<E>().Where(c => c.Type == Actor.TYPE.REGISTERED).OrderBy(c => c.Name).OrderBy(c => c.Surname).ToListAsync();
             }
             else
             {
                 keyword = "%" + keyword + "%";
                 var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-                customerModelList = await db.Table<E>().Where(c => c.Type == Customer.TYPE.REGISTERED && (c.Name.Contains(keyword) || c.Surname.Contains(keyword))).ToListAsync();
+                customerModelList = await db.Table<E>().Where(c => c.Type == Actor.TYPE.REGISTERED && (c.Name.Contains(keyword) || c.Surname.Contains(keyword))).ToListAsync();
             }*/
 
             List<T> RecordList = new List<T>();

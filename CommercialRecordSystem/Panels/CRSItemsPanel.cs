@@ -15,7 +15,8 @@ namespace CommercialRecordSystem.Panels
         private List<UIElement> children = new List<UIElement>();
         public List<UIElement> Children
         {
-            get{
+            get
+            {
                 return children;
             }
         }
@@ -60,39 +61,44 @@ namespace CommercialRecordSystem.Panels
                 typeof(CRSItemsPanel),
                 new PropertyMetadata(0, null)
             );
+
         #endregion
+
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            children = new List<UIElement>();
-            if (null != this.ItemsSource && null != this.ItemTemplate)
-                itemSourceDefined = true;
-
-            foreach (UIElement child in this.ItemsPanelRoot.Children)
-            {
-                UIElement childBuff = child;
-                if (itemSourceDefined)
-                    childBuff = (UIElement)VisualTreeHelper.GetChild(childBuff, 0);
-                
-                children.Add(childBuff);
-            }
-
+            loadChildren();
+            
             if (children.Count > 0)
             {
-                double x = 0.0f;
-                double y = 0.0f;
-                int elementNum = children.Count;
-                double elementWidth = (finalSize.Width - (elementNum - 1) * GapSize) / elementNum;
-                for (int i = 0; i < children.Count; ++i)
+                if (ORIENTATION.Vertical.Equals(Orientation))
                 {
-                    if (Visibility.Visible == children[i].Visibility)
+                    double paddingBuff = (double)GapSize / 2;
+
+                    finalSize = base.ArrangeOverride(finalSize);
+                    bool firstChild = true;
+                    foreach (UIElement childBuff in Children)
                     {
-                        if (ORIENTATION.Vertical.Equals(Orientation))
+                        if (firstChild)
                         {
-                            children[i].Arrange(new Rect(x, y, finalSize.Width, children[i].DesiredSize.Height));
-                            y += children[i].DesiredSize.Height + (double)GapSize;
+                            if (null != childBuff.GetValue(MarginProperty))
+                                childBuff.SetValue(MarginProperty, new Thickness(0, 0, 0, paddingBuff));
+                            firstChild = false;
                         }
-                        else
+                        else if (null != childBuff.GetValue(MarginProperty))
+                            childBuff.SetValue(MarginProperty, new Thickness(0, paddingBuff, 0, paddingBuff));
+                    }
+                }
+                else
+                {
+                    double x = 0.0f;
+                    double y = 0.0f;
+                    int elementNum = children.Count;
+                    double elementWidth = (finalSize.Width - (elementNum - 1) * GapSize) / elementNum;
+
+                    for (int i = 0; i < children.Count; ++i)
+                    {
+                        if (Visibility.Visible == children[i].Visibility)
                         {
                             if (i == children.Count - 1)
                             {
@@ -104,11 +110,27 @@ namespace CommercialRecordSystem.Panels
                             x += elementWidth + (double)GapSize;
                         }
                     }
-                    //finalSize.Height = y + element.DesiredSize.Height;
                 }
             }
 
             return finalSize;
+        }
+
+        protected virtual void loadChildren()
+        {
+            children = new List<UIElement>();
+
+            if (null != this.ItemsSource && null != this.ItemTemplate)
+                itemSourceDefined = true;
+
+            foreach (UIElement child in this.ItemsPanelRoot.Children)
+            {
+                UIElement childBuff = child;
+                if (itemSourceDefined)
+                    childBuff = (UIElement)VisualTreeHelper.GetChild(childBuff, 0);
+
+                children.Add(childBuff);
+            }
         }
     }
 }

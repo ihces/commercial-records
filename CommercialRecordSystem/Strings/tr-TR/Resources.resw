@@ -126,9 +126,6 @@
   <data name="payment_list_header.Text" xml:space="preserve">
     <value>Yapılan Ödemeler</value>
   </data>
-  <data name="payment_paid_amount.EmptyMessage" xml:space="preserve">
-    <value>Ödenen Tutar</value>
-  </data>
   <data name="payment_remaining_amount.Text" xml:space="preserve">
     <value>Kalan Tutar</value>
   </data>
@@ -144,9 +141,6 @@
   <data name="payment_type_other.Text" xml:space="preserve">
     <value>Diğer</value>
   </data>
-  <data name="sales_amount.EmptyMessage" xml:space="preserve">
-    <value>Miktar</value>
-  </data>
   <data name="sales_list_amount.Text" xml:space="preserve">
     <value>Miktar</value>
   </data>
@@ -159,13 +153,10 @@
   <data name="sales_list_unitprice.Text" xml:space="preserve">
     <value>Birim Fiyat</value>
   </data>
-  <data name="sales_unit_price.EmptyMessage" xml:space="preserve">
-    <value>Birim Fiyat</value>
-  </data>
   <data name="total_amount.Text" xml:space="preserve">
     <value>Toplam Tutar</value>
   </data>
-  <data name="Transacts_List_Header_Customer.Text" xml:space="preserve">
+  <data name="Transacts_List_Header_Actor.Text" xml:space="preserve">
     <value>Müşteri Bilgisi</value>
   </data>
   <data name="Transacts_List_Header_Date.Text" xml:space="preserve">
@@ -186,46 +177,49 @@
   <data name="transact_add_button.Text" xml:space="preserve">
     <value>Ekle</value>
   </data>
-  <data name="transact_definition.EmptyMessage" xml:space="preserve">
-    <value>Açıklama</value>
-  </data>
   <data name="transact_newrecord.Text" xml:space="preserve">
     <value>Yeni Kayıt</value>
   </data>
-  <data name="customers_list_footer_rec_count.Text" xml:space="preserve">
+  <data name="current_account_list_footer_rec_count.Text" xml:space="preserve">
     <value>Kayıt</value>
   </data>
-  <data name="customers_list_footer_total_account.Text" xml:space="preserve">
+  <data name="current_account_list_footer_total_account.Text" xml:space="preserve">
     <value>Toplam</value>
   </data>
-  <data name="customers_list_header_account.Text" xml:space="preserve">
+  <data name="current_account_list_header_account.Text" xml:space="preserve">
     <value>Hesap</value>
   </data>
-  <data name="customers_list_header_lasttransactdate.Text" xml:space="preserve">
+  <data name="current_account_list_header_lasttransactdate.Text" xml:space="preserve">
     <value>Son İşlem Tarihi</value>
   </data>
-  <data name="customers_list_header_name.Text" xml:space="preserve">
+  <data name="current_account_list_header_name.Text" xml:space="preserve">
     <value>İsim</value>
   </data>
-  <data name="customers_list_header_surname.Text" xml:space="preserve">
+  <data name="current_account_list_header_surname.Text" xml:space="preserve">
     <value>Soyisim</value>
   </data>
-  <data name="customers_ordered_by_account.Text" xml:space="preserve">
+  <data name="actors_ordered_by_account.Text" xml:space="preserve">
     <value>Hesaba Göre Sırala</value>
   </data>
-  <data name="customers_ordered_by_lasttrdate.Text" xml:space="preserve">
+  <data name="actors_ordered_by_lasttrdate.Text" xml:space="preserve">
     <value>Son İşlem Tarihine Göre Sırala</value>
   </data>
-  <data name="customers_ordered_by_name.Text" xml:space="preserve">
+  <data name="actors_ordered_by_name.Text" xml:space="preserve">
     <value>İsme Göre Sırala</value>
   </data>
-  <data name="customers_ordered_by_surname.Text" xml:space="preserve">
+  <data name="actors_ordered_by_surname.Text" xml:space="preserve">
     <value>Soyisme Göre Sırala</value>
   </data>
-  <data name="customers_page_title.Text" xml:space="preserve">
-    <value>Müşteriler</value>
+  <data name="current_accounts_title.Text" xml:space="preserve">
+    <value>Cari Hesaplar</value>
   </data>
-  <data name="customer_account_transacts.Text" xml:space="preserve">
+  <data name="actor_account_transacts.Text" xml:space="preserve">
     <value>Cari İşlemler</value>
+  </data>
+  <data name="Transacts_List_Header_Cost.Text" xml:space="preserve">
+    <value>Tutar</value>
+  </data>
+  <data name="sales_actor_info_ok.Text" xml:space="preserve">
+    <value>Tamam</value>
   </data>
 </root>

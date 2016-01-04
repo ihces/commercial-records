@@ -8,8 +8,8 @@ namespace CommercialRecordSystem.ViewModels.Transacts.Payment
     class PaymentEntryVM : TransactEntryVMBase<PaymentEntry>
     {
         #region Properties
-        private string type = App.EnglishDictionary["paymentTypes"].Keys.LastOrDefault();
-        public string Type
+        private int type = 0;
+        public int Type
         {
             get
             {

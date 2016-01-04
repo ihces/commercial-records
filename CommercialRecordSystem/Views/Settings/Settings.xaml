@@ -4,8 +4,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CommercialRecordSystem"
-    xmlns:CSRControls="using:CommercialRecordSystem.Controls"
-    xmlns:CSRPanels="using:CommercialRecordSystem.Panels"
+    xmlns:CRSControls="using:CommercialRecordSystem.Controls"
+    xmlns:CRSPanels="using:CommercialRecordSystem.Panels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -42,7 +42,7 @@
                 <ColumnDefinition Width="223*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
-            <CSRPanels:CRSRadioButtonPanel Grid.Column="1" GapSize="10" CheckedIndex="{Binding SelectedTransactTypeIndex, Mode=TwoWay}">
+            <CRSPanels:CRSRadioButtonPanel Grid.Column="1" GapSize="10" CheckedIndex="{Binding SelectedTransactTypeIndex, Mode=TwoWay}">
                 <RadioButton GroupName="TransactTypeRadioGroup" Padding="0" Background="#d74f2a" Height="60" Style="{StaticResource CRSRadioButtonStyle}" IsChecked="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                     <Grid Width="330">
                         <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left">İşletme Bilgileri</TextBlock>
@@ -82,7 +82,7 @@
                         <TextBlock FontFamily="Segoe UI Symbol" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Left">Gelir-Gider</TextBlock>
                     </Grid>
                 </RadioButton>
-            </CSRPanels:CRSRadioButtonPanel>
+            </CRSPanels:CRSRadioButtonPanel>
             <Grid Grid.Column="3"></Grid>
         </Grid>
     </Grid>

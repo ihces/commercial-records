@@ -1,6 +1,7 @@
 ﻿using CommercialRecordSystem.Controls;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
@@ -80,12 +81,12 @@ namespace CommercialRecordSystem.Panels
         #endregion
 
         public CRSRadioButtonPanel()
-        {
-            this.Loaded += new RoutedEventHandler(OnLoad);
-        }
+        { }
 
-        private void OnLoad(object sender, RoutedEventArgs e)
+        protected override void loadChildren()
         {
+            base.loadChildren();
+
             foreach (RadioButton item in this.Children)
                 item.Tapped += radioButtonChecked;
 
@@ -106,7 +107,7 @@ namespace CommercialRecordSystem.Panels
 
         private static void CheckedIndexChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            checkedIndexChangedHandler((CRSRadioButtonPanel)obj);
+            checkedIndexChangedHandler((CRSRadioButtonPanel)obj); 
         }
 
         private static void CheckedItemChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)

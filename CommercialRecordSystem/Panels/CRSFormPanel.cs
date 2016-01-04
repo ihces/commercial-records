@@ -11,7 +11,7 @@ namespace CommercialRecordSystem.Panels
     class CRSFormPanel : CRSPanel
     {
         #region Properties
-        private List<CRSTextBox> inputElements = null;
+        private List<CrsTextBox> inputElements = new List<CrsTextBox>();
         #endregion
         public CRSFormPanel()
         {
@@ -20,8 +20,27 @@ namespace CommercialRecordSystem.Panels
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            inputElements = new List<CRSTextBox>();
             determineInputElements(this.Children);
+            adjustIconsArea();
+        }
+
+        private void adjustIconsArea() 
+        {
+            if (inputElements.Count > 0)
+            {
+                double minHeight = inputElements[0].Height;
+                foreach (CrsTextBox textbox in inputElements)
+                {
+                    if (minHeight > textbox.Height)
+                        minHeight = textbox.Height;
+                }
+
+                foreach (CrsTextBox textbox in inputElements)
+                {
+                    textbox.IconWidth = minHeight;
+                    textbox.IconFontSize = minHeight / 2;
+                }
+            }
         }
 
         private void determineInputElements(ICollection<UIElement> elements)
@@ -48,13 +67,13 @@ namespace CommercialRecordSystem.Panels
         private void addInputElements(UIElement element)
         {
             Type elementType = element.GetType();
-            if (elementType.Equals(typeof(CRSTextBox)))
+            if (elementType.Equals(typeof(CrsTextBox)))
             {
-                inputElements.Add(element as CRSTextBox);
+                inputElements.Add(element as CrsTextBox);
             }
-            if (elementType.Equals(typeof(CSRButton)))
+            if (elementType.Equals(typeof(CrsButton)))
             {
-                CSRButton buttonBuff = element as CSRButton;
+                CrsButton buttonBuff = element as CrsButton;
                 if (buttonBuff.Validation)
                     buttonBuff.Click += new RoutedEventHandler(assignButtonCanExecute);
             }
@@ -63,7 +82,7 @@ namespace CommercialRecordSystem.Panels
         private void assignButtonCanExecute(object sender, RoutedEventArgs e)
         { 
             bool validated = true;
-            foreach (CRSTextBox element in inputElements)
+            foreach (CrsTextBox element in inputElements)
             {
                 if (Visibility.Visible == element.Visibility)
                 {
@@ -79,14 +98,14 @@ namespace CommercialRecordSystem.Panels
 
             if (validated)
             {
-                foreach (CRSTextBox element in inputElements)
+                foreach (CrsTextBox element in inputElements)
                 {
                     element.AnyClickHandled = false;
                 }
             }
 
-            if (null != (sender as CSRButton).Command)
-            (sender as CSRButton).Command.CanExecute(validated);
+            if (null != (sender as CrsButton).Command)
+            (sender as CrsButton).Command.CanExecute(validated);
         }
     }
 }

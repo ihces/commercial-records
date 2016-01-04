@@ -1,9 +1,10 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecordSystem.Controls
 {
-    class CSRButton : Button
+    class CrsButton : Button, CrsButtonIntf
     {
         #region Properties
         #region Validation
@@ -23,7 +24,7 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "Validation",
                 typeof(bool),
-                typeof(CSRButton),
+                typeof(CrsButton),
                 new PropertyMetadata(false)
             );
         #endregion
@@ -45,7 +46,7 @@ namespace CommercialRecordSystem.Controls
             DependencyProperty.Register(
                 "Disabled",
                 typeof(bool),
-                typeof(CSRButton),
+                typeof(CrsButton),
                 new PropertyMetadata(false, DisabledChangedHandler)
             );
         #endregion
@@ -55,6 +56,17 @@ namespace CommercialRecordSystem.Controls
         {
             Button button = (Button)obj;
             button.IsEnabled = !(bool)e.NewValue;
+        }
+
+        public void setClickHandler(Action<object, RoutedEventArgs> clickHandlerMethod)
+        {
+            Click += new RoutedEventHandler(clickHandlerMethod);
+        }
+
+        public void setCommandCanExecute(bool canExecute)
+        {
+            if (null != Command)
+                Command.CanExecute(canExecute);
         }
     }
 }

@@ -3,16 +3,16 @@ using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
 using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models;
-using CommercialRecordSystem.Views.Customers;
 using CommercialRecordSystem.Views.Transacts;
+using CommercialRecordSystem.Views.Accounts;
 
 namespace CommercialRecordSystem.ViewModels
 {
     class TransactTypeFrameVM : FrameVMBase
     {
         #region Properties
-        private CustomerVM unregisteredCustomer = new CustomerVM() { Type = Customer.TYPE.UNREGISTERED };
-        private CustomerVM registeredCustomer = new CustomerVM() { Type = Customer.TYPE.REGISTERED };
+        private ActorVM unregisteredActor = new ActorVM() { Type = Actor.TYPE_PERSON, Registered = false };
+        private ActorVM registeredActor = new ActorVM() { Type = Actor.TYPE_PERSON, Registered = false };
         private TransactVM transactInfo = new TransactVM();
 
         public const int SALE_TRANSACT = 0;
@@ -48,18 +48,18 @@ namespace CommercialRecordSystem.ViewModels
                     switch (value)
                     {
                         case 0:
-                            IsRegisteredCustomer = false;
-                            if (CurrentCustomer.Type.Equals(Customer.TYPE.REGISTERED))
-                                registeredCustomer = CurrentCustomer;
-                            CurrentCustomer = unregisteredCustomer;
-                            CurrentCustomer.Refresh();
+                            IsRegisteredActor = false;
+                            if (CurrentActor.Registered)
+                                registeredActor = CurrentActor;
+                            CurrentActor = unregisteredActor;
+                            CurrentActor.Refresh();
                             break;
                         case 1:
-                            if (CurrentCustomer.Type.Equals(Customer.TYPE.UNREGISTERED))
-                                unregisteredCustomer = CurrentCustomer;
-                            CurrentCustomer = registeredCustomer;
-                            CurrentCustomer.Refresh();
-                            IsRegisteredCustomer = true;
+                            if (!CurrentActor.Registered)
+                                unregisteredActor = CurrentActor;
+                            CurrentActor = registeredActor;
+                            CurrentActor.Refresh();
+                            IsRegisteredActor = true;
                             break;
                     }
                 }
@@ -68,17 +68,17 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private CustomerVM currentCustomer = new CustomerVM();
-        public CustomerVM CurrentCustomer
+        private ActorVM currentActor = new ActorVM();
+        public ActorVM CurrentActor
         {
             get
             {
-                return currentCustomer;
+                return currentActor;
             }
             set
             {
-                currentCustomer = value;
-                RaisePropertyChanged("CurrentCustomer");
+                currentActor = value;
+                RaisePropertyChanged("CurrentActor");
             }
         }
 
@@ -96,27 +96,27 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private bool isRegisteredCustomer = false;
-        public bool IsRegisteredCustomer
+        private bool isRegisteredActor = false;
+        public bool IsRegisteredActor
         {
             get
             {
-                return isRegisteredCustomer;
+                return isRegisteredActor;
             }
             set
             {
-                isRegisteredCustomer = value;
-                RaisePropertyChanged("IsRegisteredCustomer");
+                isRegisteredActor = value;
+                RaisePropertyChanged("IsRegisteredActor");
             }
         }
         #endregion
         #region Commands
-        private readonly ICommand selectRecordedCustomerCmd;
-        public ICommand SelectRecordedCustomerCmd
+        private readonly ICommand selectRecordedActorCmd;
+        public ICommand SelectRecordedActorCmd
         {
             get
             {
-                return selectRecordedCustomerCmd;
+                return selectRecordedActorCmd;
             }
         }
 
@@ -131,9 +131,9 @@ namespace CommercialRecordSystem.ViewModels
 
         #endregion
         #region Command Handlers
-        private void selectRecordedCustomerCmdHandler(object parameter)
+        private void selectRecordedActorCmdHandler(object parameter)
         {
-            Navigation.Navigate(typeof(CustomerList));
+            Navigation.Navigate(typeof(CurrentAccountList));
         }
 
         protected void GoBack()
@@ -143,28 +143,28 @@ namespace CommercialRecordSystem.ViewModels
 
         private void startTransactionCmdHandler(object parameter)
         {
-            if (CurrentCustomer.Type.Equals(Customer.TYPE.UNREGISTERED))
+            if (!CurrentActor.Registered)
             {
-                CurrentCustomer.save();
+                CurrentActor.save();
             }
 
             transactInfo.Date = selectedDate;
-            transactInfo.CustomerId = CurrentCustomer.Id;
+            transactInfo.CustomerId = CurrentActor.Id;
 
             switch (SelectedTransactTypeIndex)
             {
                 case SALE_TRANSACT:
-                    transactInfo.Type = Transact.TYPE.SALE;
+                    transactInfo.Type = Transact.TYPE_SALE;
                     transactInfo.save();
                     Navigation.Navigate(typeof(Sales), transactInfo);
                     break;
                 case ORDER_TRANSACT:
-                    transactInfo.Type = Transact.TYPE.ORDER;
+                    transactInfo.Type = Transact.TYPE_ORDER;
                     transactInfo.save();
                     Navigation.Navigate(typeof(Sales), transactInfo);
                     break;
                 case PAYMENT_TRANSACT:
-                    transactInfo.Type = Transact.TYPE.PAYMENT;
+                    transactInfo.Type = Transact.TYPE_PAYMENT;
                     transactInfo.save();
                     Navigation.Navigate(typeof(Payments), transactInfo);
                     break;
@@ -175,7 +175,7 @@ namespace CommercialRecordSystem.ViewModels
         public TransactTypeFrameVM(FrameNavigation navigation)
             : base(navigation)
         {
-            selectRecordedCustomerCmd = new ICommandImp(selectRecordedCustomerCmdHandler);
+            selectRecordedActorCmd = new ICommandImp(selectRecordedActorCmdHandler);
             startTransactionCmd = new ICommandImp(startTransactionCmdHandler);
 
             if (navigation.CanGoForward)
@@ -189,27 +189,27 @@ namespace CommercialRecordSystem.ViewModels
                         SelectedTransactTypeIndex = (int)transactInfo.Type - 1;
                         if (0 != transactInfo.CustomerId)
                         {
-                            currentCustomer.get(transactInfo.CustomerId);
-                            if (currentCustomer.Type.Equals(Customer.TYPE.REGISTERED))
+                            currentActor.get(transactInfo.CustomerId);
+                            if (currentActor.Registered)
                             {
-                                registeredCustomer = currentCustomer;
-                                IsRegisteredCustomer = true;
+                                registeredActor = CurrentActor;
+                                IsRegisteredActor = true;
                             }
                             else
                             {
-                                unregisteredCustomer = currentCustomer;
-                                isRegisteredCustomer = false;
+                                unregisteredActor = CurrentActor;
+                                isRegisteredActor = false;
                             }
                         }
                     }
                 }
-                else if (navigation.Forward.Is<CustomerList>())
+                else if (navigation.Forward.Is<CurrentAccountList>())
                 {
                     if (null != navigation.Message)
                     {
-                        registeredCustomer.get((int)navigation.Message);
-                        CurrentCustomer = registeredCustomer;
-                        CurrentCustomer.Refresh();
+                        registeredActor.get((int)navigation.Message);
+                        CurrentActor = registeredActor;
+                        CurrentActor.Refresh();
                     }
                 }
             }

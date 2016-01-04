@@ -10,6 +10,9 @@ namespace CommercialRecordSystem.ViewModels
     abstract class FrameVMBase : VMBase
     {
         #region Properties
+
+        //private static Logger logger = LogManager.GetCurrentClassLogger();
+
         protected FrameNavigation navigation;
         public FrameNavigation Navigation
         {
@@ -68,6 +71,7 @@ namespace CommercialRecordSystem.ViewModels
 
         public FrameVMBase(FrameNavigation navigation)
         {
+            //logger.Info("info frame");
             this.navigation = navigation;
             this.navigation.Navigated += navigation_Navigated;
 

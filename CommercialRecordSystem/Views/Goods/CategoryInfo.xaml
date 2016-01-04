@@ -4,8 +4,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CommercialRecordSystem.Views"
-    xmlns:CSRControls="using:CommercialRecordSystem.Controls"
-    xmlns:CSRPanels="using:CommercialRecordSystem.Panels"
+    xmlns:CRSControls="using:CommercialRecordSystem.Controls"
+    xmlns:CRSPanels="using:CommercialRecordSystem.Panels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -68,23 +68,23 @@
                     <RowDefinition Height="52" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <CSRPanels:CRSFormPanel Grid.Row="0" GapSize="10">
-                        <CSRControls:CRSTextBox Height="60" Input="{Binding Path=CurrentInfo.Name, Mode=TwoWay}" ThemeBrush="#008299" IconHex="&#xE188;" EmptyMessage="İsim" Required="True" InputType="ALL"  />
+                    <CRSPanels:CrsFormView Grid.Row="0" GapSize="10">
+                        <CRSControls:CrsTextBox Height="60" Input="{Binding Path=CurrentInfo.Name, Mode=TwoWay}" ThemeBrush="#008299" Icon="FOLDER" Remark="İsim" Required="True" InputType="ALL"  />
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="60"/>
                             </Grid.ColumnDefinitions>
-                            <CSRControls:CRSTextBox Grid.Column="0" Height="60" Input="{Binding Path=CurrentInfo.ParentName, Mode=TwoWay}" ReadOnly="True" ThemeBrush="#008299" IconHex="&#xE197;" EmptyMessage="Üst Kategori" Required="False" InputType="ALL"  />
+                            <CRSControls:CrsTextBox Grid.Column="0" Height="60" Input="{Binding Path=CurrentInfo.ParentName, Mode=TwoWay}" ReadOnly="True" ThemeBrush="#008299" Icon="OPENLOCAL" Remark="Üst Kategori" Required="False" InputType="ALL"  />
                             <Button Grid.Column="2" Height="66" Width="66" FontFamily="Segoe UI Symbol" FontSize="23" Margin="-3" Padding="0" Content="&#xE11A;" Background="#008299" Command="{Binding SelectRecordedCategoryCmd}" />
                         </Grid>
-                        <CSRControls:CRSTextBox Height="120" Input="{Binding Path=CurrentInfo.Details, Mode=TwoWay}" ThemeBrush="#008299" IconHex="&#xE134;" EmptyMessage="Açıklama"  Multiline="True" InputType="ALL" InputMaxLength="100" />
+                        <CRSControls:CrsTextBox Height="120" Input="{Binding Path=CurrentInfo.Details, Mode=TwoWay}" ThemeBrush="#008299" Icon="COMMENT" Remark="Açıklama"  Multiline="True" InputType="ALL" InputMaxLength="100" />
                         <Grid Height="120">
-                            <CSRControls:CSRButton Height="60" Width="120" Command="{Binding DelInfoCmd}" Content="Sil"  FontSize="18" Background="#AD103C" Margin="-3" HorizontalAlignment="left" IsEnabled="{Binding Path=DelButtonCanEnable}" />
-                            <CSRControls:CSRButton Height="60" Width="120" Command="{Binding SaveInfoCmd}" Validation="True" Content="Kaydet"  FontSize="18" Background="#008299" Margin="-3" HorizontalAlignment="Right" IsEnabled="{Binding Path=CurrentInfo.Dirty}" />
+                            <CRSControls:CrsButton Height="60" Width="120" Command="{Binding DelInfoCmd}" Content="Sil"  FontSize="18" Background="#AD103C" Margin="-3" HorizontalAlignment="left" IsEnabled="{Binding Path=DelButtonCanEnable}" />
+                            <CRSControls:CrsButton Height="60" Width="120" Command="{Binding SaveInfoCmd}" Validation="True" Content="Kaydet"  FontSize="18" Background="#008299" Margin="-3" HorizontalAlignment="Right" IsEnabled="{Binding Path=CurrentInfo.Dirty}" />
                         </Grid>
-                    </CSRPanels:CRSFormPanel>
+                    </CRSPanels:CrsFormView>
                 </Grid>
             </Grid>
         </Grid>

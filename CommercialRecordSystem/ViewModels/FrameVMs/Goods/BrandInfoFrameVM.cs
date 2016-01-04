@@ -4,10 +4,10 @@ using CommercialRecordSystem.ViewModels.DataVMs.Goods;
 
 namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
 {
-    class FirmInfoFrameVM : InfoFrameVMBase<FirmVM, Firm>
+    class BrandInfoFrameVM : InfoFrameVMBase<BrandVM, Firm>
     {
-        public FirmInfoFrameVM(FrameNavigation navigation)
-            : base(navigation, "Firma", 1.25)
+        public BrandInfoFrameVM(FrameNavigation navigation)
+            : base(navigation, "Marka", 1.25)
         {
 
         }

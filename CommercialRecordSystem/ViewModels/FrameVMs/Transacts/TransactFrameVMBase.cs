@@ -1,6 +1,10 @@
 ﻿using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models;
+using CommercialRecordSystem.Models.Accounts;
 using CommercialRecordSystem.Models.Transacts;
+using CommercialRecordSystem.ViewModels.DataVMs.Accounts;
+using CommercialRecordSystem.ViewModels.Transacts.Payment;
+using CommercialRecordSystem.Views.Transacts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,21 +21,65 @@ namespace CommercialRecordSystem.ViewModels.Transacts
         where T : TransactEntry, new()
     {
         #region Properties
-        private readonly string dateStr = string.Empty;
-        public string DateStr
+        private TransactVM transactInfo = new TransactVM();
+        public TransactVM TransactInfo
         {
             get
             {
-                return dateStr;
+                return transactInfo;
+            }
+            set
+            {
+                transactInfo = value;
+                RaisePropertyChanged("TransactInfo");
             }
         }
 
-        private readonly CustomerVM selectedCustomer = new CustomerVM();
-        public CustomerVM SelectedCustomer
+        private ActorVM currentActor = new ActorVM() {Type = Actor.TYPE_PERSON, Registered=false };
+        public ActorVM CurrentActor
         {
             get
             {
-                return selectedCustomer;
+                return currentActor;
+            }
+            set
+            {
+                currentActor = value;
+                RaisePropertyChanged("CurrentActor");
+            }
+        }
+
+        private CurrentAccountVM currentAccount = new CurrentAccountVM();
+        public CurrentAccountVM CurrentAccount
+        {
+            get
+            {
+                return currentAccount;
+            }
+            set
+            {
+                if (null != currentAccount && !currentAccount.Equals(value))
+                {
+                    currectAccountChanged();
+                }
+
+                currentAccount = value;
+                RaisePropertyChanged("CurrentAccount");
+            }
+        }
+
+        private void currectAccountChanged()
+        {
+            TransactInfo.AccountId = CurrentAccount.Id;
+
+            CurrentActor.LastTransactDate = DateTime.Now;
+            CurrentAccount.LastTransactDate = CurrentActor.LastTransactDate;
+
+            if (TransactInfo.Recorded)
+            {
+                TransactInfo.save();
+                CurrentActor.save();
+                CurrentAccount.save();
             }
         }
 
@@ -99,8 +147,6 @@ namespace CommercialRecordSystem.ViewModels.Transacts
                 RaisePropertyChanged("IsAllChecked");
             }
         }
-
-        protected TransactVM transactInfo = new TransactVM();
         #endregion
         #region Commands
         private readonly ICommand addEntryToListCmd;
@@ -130,19 +176,58 @@ namespace CommercialRecordSystem.ViewModels.Transacts
             }
         }
         #endregion
+
         #region Command Handlers
         protected virtual void addEntryToListCmdHandler(object parameter)
         {
-            EntryBuff.TransactId = transactInfo.Id;
+            if (EntryBuff is PaymentEntryVM)
+            {
+                transactInfo.Paid += EntryBuff.Cost;
+                currentActor.TotalPaid += EntryBuff.Cost;
+                currentAccount.TotalCredit += EntryBuff.Cost;
+            }
+            else
+            {
+                currentActor.TotalCost += EntryBuff.Cost;
+                currentAccount.TotalDept += EntryBuff.Cost;
+                transactInfo.Cost += EntryBuff.Cost;
+            }
+
+            TransactInfo.EntryCount++;
+            TransactInfo.ModifyDate = DateTime.Now;
+            CurrentActor.LastTransactDate = TransactInfo.ModifyDate;
+            CurrentAccount.LastTransactDate = TransactInfo.ModifyDate;
+
+            if (CurrentActor.Registered)
+                CurrentAccount.save();
+            
+            CurrentActor.save();
+            TransactInfo.save();
+            
+            EntryBuff.TransactId = TransactInfo.Id;
             EntryBuff.save();
+            
             Entries.Add(EntryBuff);
+            SelectedEntry = EntryBuff;
+            
             EntryBuff = new E();
             EntryBuff.Refresh();
+            
             IsAllChecked = false;
         }
+
         protected abstract void goNextCmdHandler(object parameter);
         protected override void goBackCmdHandler(object parameter)
         {
+            if (0 == TransactInfo.EntryCount && typeof(Sales) != Navigation.Back.PageType/*back to sales from payment in current transact*/)
+            {
+                if (!CurrentActor.Registered && CurrentActor.Recorded)
+                    CurrentActor.delete();
+
+                if (TransactInfo.Recorded)
+                    TransactInfo.delete();
+            }
+
             Navigation.GoBack(transactInfo);
         }
         private void deleteEntryCmdHandler(object parameter)
@@ -177,13 +262,40 @@ namespace CommercialRecordSystem.ViewModels.Transacts
         private void deleteSelectedEntries(IUICommand command)
         {
             ObservableCollection<E> entriesBuff = new ObservableCollection<E>();
-            for (int i = 0; i < entries.Count; ++i)
+            foreach (E entry in Entries)
             {
-                if (!entries[i].IsChecked)
+                if (entry.IsChecked)
                 {
-                    entriesBuff.Add(entries[i]);
+                    entry.delete();
+
+                    if (entry is PaymentEntryVM)
+                    {
+                        TransactInfo.Paid -= entry.Cost;
+                        currentActor.TotalPaid -= EntryBuff.Cost;
+                        currentAccount.TotalCredit -= EntryBuff.Cost;
+                    }
+                    else
+                    {
+                        currentActor.TotalCost -= EntryBuff.Cost;
+                        currentAccount.TotalDept -= EntryBuff.Cost;
+                        TransactInfo.Cost -= entry.Cost;
+                    }
+
+                    TransactInfo.EntryCount--;
+                }
+                else
+                {
+                    entriesBuff.Add(entry);
                 }
             }
+
+            TransactInfo.ModifyDate = DateTime.Now;
+            currentActor.LastTransactDate = TransactInfo.ModifyDate;
+            currentAccount.LastTransactDate = TransactInfo.ModifyDate;
+
+            currentActor.save();
+            currentAccount.save();
+            TransactInfo.save();
 
             Entries = entriesBuff;
             IsAllChecked = false;
@@ -199,19 +311,20 @@ namespace CommercialRecordSystem.ViewModels.Transacts
 
             if (navigation.Message is TransactVM)
             {
-                transactInfo = (TransactVM)navigation.Message;
-
-                System.DateTime transactDateBuff = transactInfo.Date;
-                dateStr = transactDateBuff.ToString("dd.MM.yyyy");
-                selectedCustomer.get(transactInfo.CustomerId);
-
-                selectedCustomer.Name = UpperCaseFirst(selectedCustomer.Name) + " " + selectedCustomer.Surname.ToUpper();
+                TransactInfo = (TransactVM)navigation.Message;
             }
-
-            setEntries();
+            
+            if (TransactInfo.Recorded)
+            {
+                CurrentActor.get(transactInfo.CustomerId);
+                CurrentAccount.get(transactInfo.AccountId);
+                CurrentActor.Refresh();
+                CurrentAccount.Refresh();
+                setEntries();
+            }
         }
 
-        private async Task setEntries()
+        protected async Task setEntries()
         {
             List<Expression<Func<T, object>>> orderByList = new List<Expression<Func<T, object>>>();
             orderByList.Add(e => e.Id);

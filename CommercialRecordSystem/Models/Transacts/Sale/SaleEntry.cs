@@ -10,7 +10,8 @@ namespace CommercialRecordSystem.Models
         public int OrderState{get; set;}
         public string MoreDetail { get; set; }
         public double Amount{ get; set; }
-        public int Measure{ get; set; }
+        public string Measure{ get; set; }
+        public int GoodId { get; set; }
         public double UnitCost { get; set; }
         public double Cost { get; set; }
     }

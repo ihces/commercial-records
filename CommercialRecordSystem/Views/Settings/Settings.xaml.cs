@@ -4,7 +4,7 @@ namespace CommercialRecordSystem.Views.Settings
     public sealed partial class Settings : ViewBase
     {
         public Settings()
-            : base(typeof(CustomerInfoFrameVM))
+            : base(typeof(ActorInfoFrameVM))
         {
             this.InitializeComponent();
         }

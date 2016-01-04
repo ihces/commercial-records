@@ -106,31 +106,47 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Folder Include="Logs\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CrsDictionary.cs" />
     <Compile Include="Common\ICommandImp.cs" />
     <Compile Include="Common\FrameNavigation.cs" />
     <Compile Include="Constants\ColorConsts.cs" />
+    <Compile Include="Constants\IconConsts.cs" />
+    <Compile Include="Controls\CrsAppBarButton.cs" />
+    <Compile Include="Controls\CrsButtonIntf.cs" />
     <Compile Include="Controls\CRSComboBox.cs" />
-    <Compile Include="Controls\CRSTextBox.cs" />
-    <Compile Include="Controls\CSRButton.cs" />
+    <Compile Include="Controls\CrsButton.cs" />
+    <Compile Include="Controls\CrsTextBox.xaml.cs">
+      <DependentUpon>CrsTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StarRating.xaml.cs">
+      <DependentUpon>StarRating.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\Boolean2IntConverter.cs" />
     <Compile Include="Converters\Boolean2VisibilityConverter.cs" />
     <Compile Include="Converters\Compare2AssignVisibilityConverter.cs" />
     <Compile Include="Converters\Double2MoneyConverter.cs" />
+    <Compile Include="Converters\NullRef2BoolConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
+    <Compile Include="Converters\InvertVisibilityConverter.cs" />
     <Compile Include="Converters\NullRef2VisibilityConverter.cs" />
     <Compile Include="Converters\SizeAdjustmentConverter.cs" />
     <Compile Include="Converters\String2VisibilityConverter.cs" />
     <Compile Include="Converters\Value2RemarkConverter.cs" />
-    <Compile Include="Models\EnterpriseAccounts\EnterpriseAccount.cs" />
+    <Compile Include="Models\Accounts\AccountBase.cs" />
+    <Compile Include="Models\Accounts\CurrentAccount.cs" />
+    <Compile Include="Models\Accounts\EnterpriseAccount.cs" />
     <Compile Include="Models\Goods\Category.cs" />
     <Compile Include="Models\IncomeNExpense\IncomeNExpense.cs" />
     <Compile Include="Models\InfoModelBase.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\Transacts\TransactEntry.cs" />
+    <Compile Include="Panels\CrsFormView.cs" />
     <Compile Include="Panels\CRSItemsPanel.cs" />
     <Compile Include="Panels\CRSPanel.cs" />
-    <Compile Include="Models\Customers\Customer.cs" />
+    <Compile Include="Models\Accounts\Actor.cs" />
     <Compile Include="Models\Goods\Firm.cs" />
     <Compile Include="Models\Goods\Good.cs" />
     <Compile Include="Models\Transacts\Payment\PaymentEntry.cs" />
@@ -139,27 +155,28 @@
     <Compile Include="Panels\CRSFormPanel.cs" />
     <Compile Include="Panels\CRSRadioButtonPanel.cs" />
     <Compile Include="Panels\CSRFirmGridView.cs" />
-    <Compile Include="ViewModels\DataVMs\EnterpriseAccounts\EnterpriseAccountVM.cs" />
+    <Compile Include="ViewModels\DataVMs\Accounts\AccountBaseVM.cs" />
+    <Compile Include="ViewModels\DataVMs\Accounts\CurrentAccountVM.cs" />
+    <Compile Include="ViewModels\DataVMs\Accounts\EnterpriseAccountVM.cs" />
     <Compile Include="ViewModels\DataVMs\DataVMBase.cs" />
     <Compile Include="ViewModels\DataVMs\Goods\CategoryVM.cs" />
     <Compile Include="ViewModels\DataVMs\IncomeNExpenses\IncomeNExpenseVM.cs" />
     <Compile Include="ViewModels\DataVMs\InfoDataVMBase.cs" />
     <Compile Include="ViewModels\DataVMs\OrderedListVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\TransactEntryVMBase.cs" />
-    <Compile Include="ViewModels\FrameVMs\EnterpriseAccounts\EnterpriseAccountInfoFrameVM.cs" />
-    <Compile Include="ViewModels\FrameVMs\EnterpriseAccounts\EnterpriseAccountsFrameVM.cs" />
-    <Compile Include="ViewModels\FrameVMs\Customers\CustomerAccountFrameVM.cs" />
-    <Compile Include="ViewModels\FrameVMs\Customers\CustomerInfoFrameVM.cs" />
-    <Compile Include="ViewModels\FrameVMs\Customers\CustomerListFrameVM.cs" />
-    <Compile Include="ViewModels\DataVMs\Customers\CustomerVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\Accounts\EnterpriseAccountsFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\Accounts\CurrentAccountFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\Accounts\ActorInfoFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\Accounts\CurrentAccountListFrameVM.cs" />
+    <Compile Include="ViewModels\DataVMs\Accounts\ActorVM.cs" />
     <Compile Include="ViewModels\FrameVMs\FrameVMBase.cs" />
-    <Compile Include="ViewModels\DataVMs\Goods\FirmVM.cs" />
+    <Compile Include="ViewModels\DataVMs\Goods\BrandVM.cs" />
     <Compile Include="ViewModels\DataVMs\Goods\GoodVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\Payment\PaymentEntryVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Goods\CategoryInfoFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\IncomeNExpenses\IncomeNExpenseFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\InfoFrameVMBase.cs" />
-    <Compile Include="ViewModels\FrameVMs\Goods\FirmInfoFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\Goods\BrandInfoFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Goods\GoodInfoFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Goods\GoodsFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\ImagePickerFrameVM.cs" />
@@ -172,29 +189,26 @@
     <Compile Include="ViewModels\DataVMs\Transacts\TransactVM.cs" />
     <Compile Include="ViewModels\VMBase.cs" />
     <Compile Include="ViewModels\DataVMs\DataVMIntf.cs" />
-    <Compile Include="Views\EnterpriseAccounts\EnterpriseAccounts.xaml.cs">
+    <Compile Include="Views\Accounts\EnterpriseAccounts.xaml.cs">
       <DependentUpon>EnterpriseAccounts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EnterpriseAccounts\EnterpriseAccountInfo.xaml.cs">
-      <DependentUpon>EnterpriseAccountInfo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Customers\CustomerAccount.xaml.cs">
-      <DependentUpon>CustomerAccount.xaml</DependentUpon>
+    <Compile Include="Views\Accounts\CurrentAccountView.xaml.cs">
+      <DependentUpon>CurrentAccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Customers\CustomerInfo.xaml.cs">
-      <DependentUpon>CustomerInfo.xaml</DependentUpon>
+    <Compile Include="Views\Accounts\ActorInfo.xaml.cs">
+      <DependentUpon>ActorInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Customers\CustomerList.xaml.cs">
-      <DependentUpon>CustomerList.xaml</DependentUpon>
+    <Compile Include="Views\Accounts\CurrentAccountList.xaml.cs">
+      <DependentUpon>CurrentAccountList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Goods\CategoryInfo.xaml.cs">
       <DependentUpon>CategoryInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Goods\FirmInfo.xaml.cs">
-      <DependentUpon>FirmInfo.xaml</DependentUpon>
+    <Compile Include="Views\Goods\BrandInfo.xaml.cs">
+      <DependentUpon>BrandInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Goods\GoodInfo.xaml.cs">
       <DependentUpon>GoodInfo.xaml</DependentUpon>
@@ -235,7 +249,9 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="CommercialRecordSystem_TemporaryKey.pfx" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
     <PRIResource Include="Strings\tr-TR\Resources.resw" />
@@ -248,20 +264,20 @@
     <Content Include="Assets\ymjtryu.jpg" />
     <Content Include="Strings\en-US\en.us.dictionary.xml" />
     <Content Include="Strings\tr-TR\tr.tr.dictionary.xml" />
+    <Page Include="Controls\CrsTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StarRating.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\CRSRadioButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Themes\CRSTextBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\EnterpriseAccounts\EnterpriseAccounts.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EnterpriseAccounts\EnterpriseAccountInfo.xaml">
+    <Page Include="Views\Accounts\EnterpriseAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -269,7 +285,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Goods\FirmInfo.xaml">
+    <Page Include="Views\Goods\BrandInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -301,7 +317,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Customers\CustomerInfo.xaml">
+    <Page Include="Views\Accounts\ActorInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -309,7 +325,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Customers\CustomerAccount.xaml">
+    <Page Include="Views\Accounts\CurrentAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -328,7 +344,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Customers\CustomerList.xaml">
+    <Page Include="Views\Accounts\CurrentAccountList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -344,6 +360,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="MetroLog">
+      <HintPath>..\packages\MetroLog.0.9.0\lib\win81\MetroLog.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroLog.Platform">
+      <HintPath>..\packages\MetroLog.0.9.0\lib\win81\MetroLog.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroLog.WinRT">
+      <HintPath>..\packages\MetroLog.0.9.0\lib\win81\MetroLog.WinRT.winmd</HintPath>
+    </Reference>
     <Reference Include="SQLiteWinRT">
       <HintPath>..\packages\Sqlite-Winrt.3.8.7.1\lib\netcore45\SQLiteWinRT.winmd</HintPath>
     </Reference>
@@ -369,6 +394,9 @@
     <SDKReference Include="SQLite.WinRT81, Version=3.8.7.1">
       <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

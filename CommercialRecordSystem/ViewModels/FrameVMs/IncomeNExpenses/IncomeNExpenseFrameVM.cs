@@ -1,6 +1,6 @@
 ﻿
 using CommercialRecordSystem.Common;
-using CommercialRecordSystem.Models.EnterpriseAccounts;
+using CommercialRecordSystem.Models.Accounts;
 using CommercialRecordSystem.Models.IncomeNExpense;
 using CommercialRecordSystem.ViewModels.DataVMs.EnterpriseAccounts;
 using CommercialRecordSystem.ViewModels.DataVMs.IncomeNExpenses;

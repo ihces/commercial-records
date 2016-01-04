@@ -18,9 +18,10 @@ using CommercialRecordSystem.Models;
 using SQLite;
 using Windows.Storage;
 using CommercialRecordSystem.Models.Goods;
-using CommercialRecordSystem.Models.EnterpriseAccounts;
 using CommercialRecordSystem.Models.IncomeNExpense;
 using System.Xml.Linq;
+using CommercialRecordSystem.Models.Accounts;
+using CommercialRecordSystem.Common;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
 namespace CommercialRecordSystem
@@ -43,15 +44,6 @@ namespace CommercialRecordSystem
             CATEGORY_IMG_FOLDER = "CategoryPhotos",
             FIRM_IMG_FOLDER = "FirmPhotos", 
             COMMON_IMG_FOLDER = "CommonPhotos";
-
-        public static SortedDictionary<string, SortedDictionary<string, string>> TurkishDictionary = new SortedDictionary<string, SortedDictionary<string,string>>();
-        public static SortedDictionary<string, SortedDictionary<string, string>> EnglishDictionary = new SortedDictionary<string, SortedDictionary<string, string>>();
-
-        public const string 
-            TURKISH = "tr-TR",
-            ENGLISH = "en-US";
-
-        public static string CurrentLanguage = TURKISH;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -112,7 +104,7 @@ namespace CommercialRecordSystem
 
             //
             initDatabase();
-            loadDictionaries();
+            CrsDictionary.getInstance();
             //
 
             if (rootFrame.Content == null)
@@ -136,37 +128,13 @@ namespace CommercialRecordSystem
                 db.CreateTable<Good>();
                 db.CreateTable<Firm>();
                 db.CreateTable<Category>();
-                db.CreateTable<Customer>();
+                db.CreateTable<Actor>();
                 db.CreateTable<Transact>();
                 db.CreateTable<SaleEntry>();
                 db.CreateTable<PaymentEntry>();
                 db.CreateTable<EnterpriseAccount>();
+                db.CreateTable<CurrentAccount>();
                 db.CreateTable<IncomeNExpense>();
-            }
-        }
-
-        public void loadDictionaries()
-        {
-            loadDictionaryFromFile("en-US/en.us.dictionary.xml", EnglishDictionary);
-            loadDictionaryFromFile("tr-TR/tr.tr.dictionary.xml", TurkishDictionary);
-        }
-
-        private void loadDictionaryFromFile(string path, SortedDictionary<string, SortedDictionary<string, string>> dictionary)
-        {
-            string dictionaryXMLPath = Path.Combine(Package.Current.InstalledLocation.Path, "Strings/" + path);
-            XDocument loadedData = XDocument.Load(dictionaryXMLPath);
-
-
-            foreach (XElement dicElement in loadedData.Descendants("dictionary"))
-            {
-                SortedDictionary<string, string> dictionaryBuff = new SortedDictionary<string, string>();
-                foreach (XNode node in dicElement.Nodes())
-                {
-                    XElement elementBuff = (XElement)node;
-                    dictionaryBuff.Add(elementBuff.Attribute("key").Value, elementBuff.Value);
-                }
-
-                dictionary.Add(dicElement.Attribute("id").Value, dictionaryBuff);
             }
         }
 

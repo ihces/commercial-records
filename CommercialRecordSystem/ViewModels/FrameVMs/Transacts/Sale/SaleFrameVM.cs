@@ -12,18 +12,133 @@ using System;
 using System.Linq.Expressions;
 using CommercialRecordSystem.ViewModels.DataVMs.Goods;
 using CommercialRecordSystem.Models;
+using CommercialRecordSystem.Models.Accounts;
+using CommercialRecordSystem.ViewModels.DataVMs.Accounts;
+using CommercialRecordSystem.Views.Accounts;
 
 namespace CommercialRecordSystem.ViewModels
 {
     class SaleFrameVM : TransactFrameVMBase<SaleEntryVM, SaleEntry>
     {
         #region Properties
-        private readonly string header = "Satış";
-        public string Header
+        private ActorVM unregisteredActor = new ActorVM() { Type = Actor.TYPE_PERSON, Registered = false };
+        private ActorVM registeredActor = new ActorVM() { Type = Actor.TYPE_PERSON, Registered = false };
+
+        private ObservableCollection<CurrentAccountVM> accounts;
+        public ObservableCollection<CurrentAccountVM> Accounts
         {
             get
             {
-                return header;
+                return accounts;
+            }
+            set
+            {
+                accounts = value;
+                RaisePropertyChanged("Accounts");
+            }
+        }
+
+        private bool transactTypeAssigned = false;
+        public bool TransactTypeAssigned
+        {
+            get
+            {
+                return transactTypeAssigned;
+            }
+            set
+            {
+                transactTypeAssigned = value;
+                RaisePropertyChanged("TransactTypeAssigned");
+            }
+        }
+
+        private bool currentActorInfoEditable = true;
+        public bool CurrentActorInfoEditable
+        {
+            get
+            {
+                return currentActorInfoEditable;
+            }
+            set
+            {
+                currentActorInfoEditable = value;
+                //assign actor info fields should be readonly or not.
+                ActorRegistedIndex = ActorRegistedIndex;
+
+                RaisePropertyChanged("CurrentActorInfoEditable");
+            }
+        }
+
+        private bool currentActorTypeEditable = true;
+        public bool CurrentActorTypeEditable
+        {
+            get
+            {
+                return currentActorTypeEditable;
+            }
+            set
+            {
+                currentActorTypeEditable = value;
+                RaisePropertyChanged("CurrentActorTypeEditable");
+            }
+        }
+
+        private int actorRegistedIndex = NON_REGISTERED;
+        public int ActorRegistedIndex
+        {
+            get
+            {
+                return actorRegistedIndex;
+            }
+            set
+            {
+                if (CurrentActorInfoEditable && NON_REGISTERED == value)
+                {
+                    ActorInfoReadyOnly = false;
+                    CurrentActorTypeEditable = true;
+                }
+                else
+                {
+                    ActorInfoReadyOnly = true;
+                    CurrentActorTypeEditable = false;
+                }
+
+                if (value != actorRegistedIndex)
+                {
+                    switch (value)
+                    {
+                        case NON_REGISTERED:
+                            if (CurrentActor.Registered)
+                                registeredActor = CurrentActor;
+                            CurrentActor = unregisteredActor;
+                            CurrentActor.Refresh();
+                            break;
+                        case REGISTERED:
+                            if (!CurrentActor.Registered)
+                                unregisteredActor = CurrentActor;
+                            CurrentActor = registeredActor;
+                            CurrentActor.Refresh();
+                            setAccounts();
+                            break;
+                    }
+                }
+
+                actorRegistedIndex = value;
+                RaisePropertyChanged("ActorRegistedIndex");
+            }
+        }
+
+        private bool actorInfoReadyOnly = false;
+        public bool ActorInfoReadyOnly
+        {
+            get
+            {
+                return actorInfoReadyOnly;
+            }
+            set
+            {
+                actorInfoReadyOnly = value;
+                RaisePropertyChanged("ActorInfoReadyOnly");
             }
         }
 
@@ -42,21 +157,25 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private ObservableCollection<string> measures = new ObservableCollection<string>(App.EnglishDictionary["measures"].Keys);
+        private ObservableCollection<string> measures = new ObservableCollection<string>(CrsDictionary.getInstance().getKeys("measures"));
         public ObservableCollection<string> Measures
         {
             get
             {
                 return measures;
             }
-            set
+        }
+
+        private ObservableCollection<string> transactTypes = new ObservableCollection<string>(CrsDictionary.getInstance().getKeys("transactTypes"));
+        public ObservableCollection<string> TransactTypes
+        {
+            get
             {
-                measures = value;
-                RaisePropertyChanged("Measures");
+                return transactTypes;
             }
         }
 
-        private GoodVM selectedGood = new GoodVM();
+        private GoodVM selectedGood = null;
         public GoodVM SelectedGood
         {
             get
@@ -65,31 +184,37 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
+                if (null == value)
+                {
+                    EntryBuff.Measure = "0";
+                }
+                else{
+                    EntryBuff.Detail = value.Name;
+                    EntryBuff.UnitCost = value.Price;
+                    EntryBuff.Measure = value.Unit;
+                }
                 selectedGood = value;
                 RaisePropertyChanged("SelectedGood");
             }
         }
+        #endregion
 
-        /*private string saleEntityDetail;
-        public string SaleEntityDetail
+        #region Commands
+        private readonly ICommand selectRecordedActorCmd;
+        public ICommand SelectRecordedActorCmd
         {
             get
             {
-                return saleEntityDetail;
+                return selectRecordedActorCmd;
             }
-            set
-            {
-                saleEntityDetail = value;
-                RaisePropertyChanged("SaleEntityDetail");
-            }
-        }*/
+        }
 
-        private readonly ICommand detailTextChangedCmd;
-        public ICommand DetailTextChangedCmd
+        private readonly ICommand editActorAccountInfoCmd;
+        public ICommand EditActorAccountInfoCmd
         {
             get
             {
-                return detailTextChangedCmd;
+                return editActorAccountInfoCmd;
             }
         }
 
@@ -102,8 +227,34 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private readonly ICommand goodSearchBoxTextChangedCmd;
+        public ICommand GoodSearchBoxTextChangedCmd
+        {
+            get
+            {
+                return goodSearchBoxTextChangedCmd;
+            }
+        }
+
+        private readonly ICommand orderPreviousStateCmd;
+        public ICommand OrderPreviousStateCmd
+        {
+            get
+            {
+                return orderPreviousStateCmd;
+            }
+        }
+
+        private readonly ICommand orderNextStateCmd;
+        public ICommand OrderNextStateCmd
+        {
+            get
+            {
+                return orderNextStateCmd;
+            }
+        }
+
         private bool foundGoodsVisible = false;
-        private bool searchGood = true;
         public bool FoundGoodsVisible
         {
             get
@@ -116,39 +267,131 @@ namespace CommercialRecordSystem.ViewModels
                 RaisePropertyChanged("FoundGoodsVisible");
             }
         }
+
+        private const int
+            NON_REGISTERED = 0,
+            REGISTERED = 1;
         #endregion
 
         #region Command Handlers
-        protected override void goNextCmdHandler(object parameter)
+        private void selectRecordedActorCmdHandler(object parameter)
         {
-            Navigation.Navigate(typeof(Payments), transactInfo);
+            Navigation.Navigate(typeof(CurrentAccountList));
         }
 
-        private void detailTextChangedCmdHandler(object parameter)
+        private void goodSearchBoxTextChangedCmdHandler(object parameter)
         {
-            string searchText = (string)parameter;
-            if (searchGood)
+
+            if (null != parameter)
             {
-                if (!string.IsNullOrWhiteSpace(searchText))
-                    findGoods(searchText);
+                string searchBoxInputBuff = parameter.ToString();
+                if (!string.IsNullOrWhiteSpace(searchBoxInputBuff))
+                    findGoods(searchBoxInputBuff);
                 else
                     FoundGoods = new ObservableCollection<GoodVM>();
             }
-            else
-            {
-                searchGood = true;
-            }
-
         }
 
-        private void selectGoodCmdHandler(object parameter)
+        private void editActorAccountInfoCmdHandler(object parameter)
         {
-            if (null != SelectedGood)
+            if (CurrentActorInfoEditable)
             {
-                searchGood = false;
-                EntryBuff.Detail = SelectedGood.Name;
-                EntryBuff.UnitCost = SelectedGood.Price;
-                FoundGoods = new ObservableCollection<GoodVM>();
+                if (CurrentActor.Registered && !CurrentActor.Recorded)
+                    ;
+                else
+                {
+                    TransactTypeAssigned = true;
+                    if (!CurrentActor.Registered)
+                        CurrentActor.save();
+                    else
+                    {
+                        CurrentAccount.get(CurrentAccount.Id);
+                        TransactInfo.AccountId = CurrentAccount.Id;
+                    }
+
+                    TransactInfo.CustomerId = CurrentActor.Id;
+
+                    TransactInfo.save();
+
+
+                    CurrentActor.Refresh();
+                    TransactInfo.Refresh();
+
+                    CurrentActorInfoEditable = false;
+                }
+            }
+            else
+                CurrentActorInfoEditable = true;
+        }
+
+        protected override void goNextCmdHandler(object parameter)
+        {
+            Navigation.Navigate(typeof(Payments), TransactInfo);
+        }
+
+        private void orderNextStateCmdHandler(object obj)
+        {
+            int checkedCount = 0;
+            int minOrderState = SelectedEntry.OrderState;
+            foreach (SaleEntryVM entry in Entries)
+            {
+                if (entry.IsChecked)
+                {
+                    checkedCount++;
+                    if (minOrderState > entry.OrderState)
+                        minOrderState = entry.OrderState;
+                }
+            }
+
+            if (minOrderState < 5)
+            {
+                minOrderState++;
+                if (checkedCount > 1)
+                {
+                    foreach (SaleEntryVM entry in Entries)
+                    {
+                        entry.OrderState = minOrderState;
+                        entry.save();
+                    }
+                }
+                else
+                {
+                    SelectedEntry.OrderState = minOrderState;
+                    SelectedEntry.save();
+                }
+            }
+        }
+
+        private void orderPreviousStateCmdHandler(object obj)
+        {
+            int checkedCount = 0;
+            int minOrderState = SelectedEntry.OrderState;
+            foreach (SaleEntryVM entry in Entries)
+            {
+                if (entry.IsChecked)
+                {
+                    checkedCount++;
+                    if (minOrderState > entry.OrderState)
+                        minOrderState = entry.OrderState;
+                }
+            }
+
+            if (minOrderState > 0)
+            {
+                minOrderState--;
+                if (checkedCount > 1)
+                {
+                    foreach (SaleEntryVM entry in Entries)
+                    {
+                        entry.OrderState = minOrderState;
+                        entry.save();
+                    }
+                }
+                else
+                {
+                    SelectedEntry.OrderState = minOrderState;
+                    SelectedEntry.save();
+                }
             }
         }
         #endregion
@@ -156,13 +399,42 @@ namespace CommercialRecordSystem.ViewModels
         public SaleFrameVM(FrameNavigation navigation)
             : base(navigation)
         {
-            if (transactInfo.Type.Equals(Transact.TYPE.ORDER))
+            transactTypes.RemoveAt(3);
+            RaisePropertyChanged("TransactTypes");
+
+            if (TransactInfo.Recorded)
             {
-                header = "Sipariş";
+                CurrentActorInfoEditable = false;
+                TransactTypeAssigned = true;
             }
 
-            selectGoodCmd = new ICommandImp(selectGoodCmdHandler);
-            detailTextChangedCmd = new ICommandImp(detailTextChangedCmdHandler);
+            //registered customer selected
+            if (null != navigation.Forward && navigation.Forward.Is<CurrentAccountList>())
+            {
+                if (null != navigation.Message)
+                {
+                    CurrentActorInfoEditable = true;
+                    CurrentActor.get((int)navigation.Message);
+                    setAccounts();
+                }
+            }
+
+            if (CurrentActor.Registered)
+            {
+                registeredActor = CurrentActor;
+                ActorRegistedIndex = 1;
+            }
+            else
+            {
+                unregisteredActor = CurrentActor;
+                ActorRegistedIndex = 0;
+            }
+
+            orderPreviousStateCmd = new ICommandImp(orderPreviousStateCmdHandler);
+            orderNextStateCmd = new ICommandImp(orderNextStateCmdHandler);
+            selectRecordedActorCmd = new ICommandImp(selectRecordedActorCmdHandler);
+            editActorAccountInfoCmd = new ICommandImp(editActorAccountInfoCmdHandler);
+            goodSearchBoxTextChangedCmd = new ICommandImp(goodSearchBoxTextChangedCmdHandler);
         }
 
         protected override void addEntryToListCmdHandler(object parameter)
@@ -171,14 +443,44 @@ namespace CommercialRecordSystem.ViewModels
             base.addEntryToListCmdHandler(parameter);
         }
 
+        //need review
         private async Task findGoods(string searchText)
         {
             List<Expression<Func<Good, object>>> orderByClauses = new List<Expression<Func<Good, object>>>();
             orderByClauses.Add(c => c.Name);
             string findBuff = '%' + searchText + '%';
             FoundGoods = new ObservableCollection<GoodVM>(
-                await GoodVM.getList<GoodVM>(c => c.Name.ToLower().Contains(findBuff.ToLower()),
+                await GoodVM.getList<GoodVM>(c => c.Name.ToLower().Contains(findBuff.ToLower()) || c.Barcode.Contains(findBuff),
                 orderByClauses));
+
+            if (FoundGoods.Count > 0)
+                SelectedGood = FoundGoods[0];
+            else
+                SelectedGood = null;
+        }
+
+        protected async Task setAccounts()
+        {
+            List<Expression<Func<CurrentAccount, object>>> orderByClauses = null;
+            orderByClauses = new List<Expression<Func<CurrentAccount, object>>>();
+            orderByClauses.Add(c => c.Name);
+
+            Accounts = new ObservableCollection<CurrentAccountVM>(
+                await CurrentAccountVM.getList<CurrentAccountVM>(c => c.ActorId == registeredActor.Id, orderByClauses));
+
+            if (0 == TransactInfo.AccountId)
+                CurrentAccount = Accounts[0];
+            else if (0 < TransactInfo.AccountId)
+            {
+                foreach (CurrentAccountVM curAcc in Accounts)
+                    if (curAcc.Id == TransactInfo.AccountId)
+                    {
+                        CurrentAccount = curAcc;
+                        break;
+                    }
+            }
+
+            CurrentAccount.Refresh();
         }
     }
 }

@@ -8,9 +8,8 @@ namespace CommercialRecordSystem.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            string strBuff = (string)value;
 
-            if (string.IsNullOrWhiteSpace(strBuff))
+            if (null == value || string.IsNullOrWhiteSpace(value.ToString()))
                 return Visibility.Collapsed;
 
             return Visibility.Visible;

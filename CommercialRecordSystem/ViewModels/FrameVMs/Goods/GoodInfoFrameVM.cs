@@ -4,11 +4,21 @@ using System;
 using System.Windows.Input;
 using CommercialRecordSystem.Views.Goods;
 using CommercialRecordSystem.ViewModels.DataVMs.Goods;
+using System.Collections.ObjectModel;
 
 namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
 {
     class GoodInfoFrameVM : InfoFrameVMBase<GoodVM, Good>
     {
+        private ObservableCollection<string> measures = new ObservableCollection<string>(CrsDictionary.getInstance().getKeys("measures"));
+        public ObservableCollection<string> Measures
+        {
+            get
+            {
+                return measures;
+            }
+        }
+
         private readonly ICommand selectRecordedFirmCmd = null;
         public ICommand SelectRecordedFirmCmd
         {
@@ -50,9 +60,9 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
                     CategoryVM selectedCategory = (CategoryVM)navigation.Message;
                     CurrentInfo.CategoryId = selectedCategory.Id;
                 }
-                else if (navigation.Message is FirmVM)
+                else if (navigation.Message is BrandVM)
                 {
-                    FirmVM selectedFirm = (FirmVM)navigation.Message;
+                    BrandVM selectedFirm = (BrandVM)navigation.Message;
                     CurrentInfo.FirmId = selectedFirm.Id;
                 }
             }

@@ -10,8 +10,31 @@ namespace CommercialRecordSystem.Converters
         {
             double actualSize = (double)value;
             double change = 0;
-            Double.TryParse(parameter.ToString(), out change);
-
+            if (null != parameter)
+            {
+                string paramStr = parameter.ToString();
+                Double.TryParse(paramStr.Substring(1), out change);
+                if (change > 0)
+                {
+                    switch (paramStr[0])
+                    {
+                        case '+':
+                            actualSize += change;
+                            break;
+                        case '-':
+                            actualSize -= change;
+                            break;
+                        case '.':
+                            actualSize *= change;
+                            break;
+                        case '/':
+                            actualSize /= change;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
             actualSize += change;
             if (actualSize >= 0)
                 return actualSize;

@@ -20,9 +20,9 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        protected virtual void RaisePropertyChanged(string propertyName)
+        protected virtual void RaisePropertyChanged(string propertyName, bool editableByUser = true)
         {
-            if (!Dirty)
+            if (!Dirty && editableByUser)
                 Dirty = true;
             Raise(propertyName);
         }
@@ -38,10 +38,14 @@ namespace CommercialRecordSystem.ViewModels
 
         public string UpperCaseFirst(string str)
         {
+            if (null == str)
+                return str;
+
             string [] tokens = str.Split();
             string resultStr = string.Empty;
             foreach (string token in tokens)
-                resultStr += char.ToUpper(token[0]) + token.Substring(1) + " ";
+                if (token.Length > 0)
+                    resultStr += char.ToUpper(token[0]) + token.Substring(1) + " ";
             return resultStr.Trim();
         }
     }
