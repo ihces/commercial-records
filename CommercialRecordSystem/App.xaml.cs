@@ -22,6 +22,11 @@ using CommercialRecordSystem.Models.IncomeNExpense;
 using System.Xml.Linq;
 using CommercialRecordSystem.Models.Accounts;
 using CommercialRecordSystem.Common;
+using System.Diagnostics;
+using CommercialRecordSystem.DataLayer;
+using System.Globalization;
+using CommercialRecordSystem.Models.Accounts.EnterpriseAccounts;
+using CommercialRecordSystem.ViewModels.DataVMs.Accounts.EnterpriseAccounts;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
 namespace CommercialRecordSystem
@@ -44,6 +49,8 @@ namespace CommercialRecordSystem
             CATEGORY_IMG_FOLDER = "CategoryPhotos",
             FIRM_IMG_FOLDER = "FirmPhotos", 
             COMMON_IMG_FOLDER = "CommonPhotos";
+
+        public static readonly string CurrencySymbol = CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -105,6 +112,7 @@ namespace CommercialRecordSystem
             //
             initDatabase();
             CrsDictionary.getInstance();
+            ScriptLoader.getInstance();
             //
 
             if (rootFrame.Content == null)
@@ -126,7 +134,7 @@ namespace CommercialRecordSystem
             using (var db = new SQLite.SQLiteConnection(DBPath)) 
             {
                 db.CreateTable<Good>();
-                db.CreateTable<Firm>();
+                db.CreateTable<Brand>();
                 db.CreateTable<Category>();
                 db.CreateTable<Actor>();
                 db.CreateTable<Transact>();
@@ -134,7 +142,17 @@ namespace CommercialRecordSystem
                 db.CreateTable<PaymentEntry>();
                 db.CreateTable<EnterpriseAccount>();
                 db.CreateTable<CurrentAccount>();
-                db.CreateTable<IncomeNExpense>();
+                db.CreateTable<EnterpriseAccTransact>();
+
+                EnterpriseAccountVM enterpriseMainAccount = new EnterpriseAccountVM();
+                enterpriseMainAccount.get(1);
+                if (!enterpriseMainAccount.Recorded)
+                {
+                    enterpriseMainAccount.Name = CrsDictionary.getInstance().lookup("instanceLabels", "cashRegAcct1");
+                    enterpriseMainAccount.CreateDate = DateTime.Now;
+                    enterpriseMainAccount.Type = 0;
+                    enterpriseMainAccount.save();
+                }
             }
         }
 

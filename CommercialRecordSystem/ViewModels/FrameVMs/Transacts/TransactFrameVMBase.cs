@@ -3,6 +3,7 @@ using CommercialRecordSystem.Models;
 using CommercialRecordSystem.Models.Accounts;
 using CommercialRecordSystem.Models.Transacts;
 using CommercialRecordSystem.ViewModels.DataVMs.Accounts;
+using CommercialRecordSystem.ViewModels.DataVMs.Accounts.EnterpriseAccounts;
 using CommercialRecordSystem.ViewModels.Transacts.Payment;
 using CommercialRecordSystem.Views.Transacts;
 using System;
@@ -58,28 +59,8 @@ namespace CommercialRecordSystem.ViewModels.Transacts
             }
             set
             {
-                if (null != currentAccount && !currentAccount.Equals(value))
-                {
-                    currectAccountChanged();
-                }
-
                 currentAccount = value;
                 RaisePropertyChanged("CurrentAccount");
-            }
-        }
-
-        private void currectAccountChanged()
-        {
-            TransactInfo.AccountId = CurrentAccount.Id;
-
-            CurrentActor.LastTransactDate = DateTime.Now;
-            CurrentAccount.LastTransactDate = CurrentActor.LastTransactDate;
-
-            if (TransactInfo.Recorded)
-            {
-                TransactInfo.save();
-                CurrentActor.save();
-                CurrentAccount.save();
             }
         }
 
@@ -183,30 +164,26 @@ namespace CommercialRecordSystem.ViewModels.Transacts
             if (EntryBuff is PaymentEntryVM)
             {
                 transactInfo.Paid += EntryBuff.Cost;
-                currentActor.TotalPaid += EntryBuff.Cost;
                 currentAccount.TotalCredit += EntryBuff.Cost;
             }
             else
             {
-                currentActor.TotalCost += EntryBuff.Cost;
-                currentAccount.TotalDept += EntryBuff.Cost;
+                currentAccount.TotalDebt += EntryBuff.Cost;
                 transactInfo.Cost += EntryBuff.Cost;
             }
 
             TransactInfo.EntryCount++;
             TransactInfo.ModifyDate = DateTime.Now;
-            CurrentActor.LastTransactDate = TransactInfo.ModifyDate;
             CurrentAccount.LastTransactDate = TransactInfo.ModifyDate;
 
             if (CurrentActor.Registered)
                 CurrentAccount.save();
             
-            CurrentActor.save();
             TransactInfo.save();
             
             EntryBuff.TransactId = TransactInfo.Id;
             EntryBuff.save();
-            
+
             Entries.Add(EntryBuff);
             SelectedEntry = EntryBuff;
             
@@ -219,7 +196,7 @@ namespace CommercialRecordSystem.ViewModels.Transacts
         protected abstract void goNextCmdHandler(object parameter);
         protected override void goBackCmdHandler(object parameter)
         {
-            if (0 == TransactInfo.EntryCount && typeof(Sales) != Navigation.Back.PageType/*back to sales from payment in current transact*/)
+            if (0 == TransactInfo.EntryCount && !Navigation.Back.Is<Sales>()/*back to sales from payment in current transact*/)
             {
                 if (!CurrentActor.Registered && CurrentActor.Recorded)
                     CurrentActor.delete();
@@ -243,11 +220,13 @@ namespace CommercialRecordSystem.ViewModels.Transacts
 
             if (0 < checkedEntryCnt)
             {
-                MessageDialog messageDialog = new MessageDialog("Seçili " + checkedEntryCnt + " kayıt silinecek. Emin misiniz?", "Kayıt Silme");
+                MessageDialog messageDialog = new MessageDialog(
+                    CrsDictionary.getInstance().lookup("notifications","delRecordMessage", checkedEntryCnt),
+                    CrsDictionary.getInstance().lookup("notifications", "delRecordHeader"));
 
                 // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
-                messageDialog.Commands.Add(new UICommand("Hayır", null));
-                messageDialog.Commands.Add(new UICommand("Evet", new UICommandInvokedHandler(this.deleteSelectedEntries)));
+                messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "noCommand"), null));
+                messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "yesCommand"), new UICommandInvokedHandler(this.deleteSelectedEntries)));
 
                 // Set the command that will be invoked by default
                 messageDialog.DefaultCommandIndex = 1;
@@ -259,7 +238,7 @@ namespace CommercialRecordSystem.ViewModels.Transacts
                 messageDialog.ShowAsync();
             }
         }
-        private void deleteSelectedEntries(IUICommand command)
+        protected virtual void deleteSelectedEntries(IUICommand command)
         {
             ObservableCollection<E> entriesBuff = new ObservableCollection<E>();
             foreach (E entry in Entries)
@@ -271,13 +250,11 @@ namespace CommercialRecordSystem.ViewModels.Transacts
                     if (entry is PaymentEntryVM)
                     {
                         TransactInfo.Paid -= entry.Cost;
-                        currentActor.TotalPaid -= EntryBuff.Cost;
-                        currentAccount.TotalCredit -= EntryBuff.Cost;
+                        currentAccount.TotalCredit -= entry.Cost;
                     }
                     else
                     {
-                        currentActor.TotalCost -= EntryBuff.Cost;
-                        currentAccount.TotalDept -= EntryBuff.Cost;
+                        currentAccount.TotalDebt -= entry.Cost;
                         TransactInfo.Cost -= entry.Cost;
                     }
 
@@ -290,10 +267,8 @@ namespace CommercialRecordSystem.ViewModels.Transacts
             }
 
             TransactInfo.ModifyDate = DateTime.Now;
-            currentActor.LastTransactDate = TransactInfo.ModifyDate;
             currentAccount.LastTransactDate = TransactInfo.ModifyDate;
 
-            currentActor.save();
             currentAccount.save();
             TransactInfo.save();
 
@@ -316,7 +291,7 @@ namespace CommercialRecordSystem.ViewModels.Transacts
             
             if (TransactInfo.Recorded)
             {
-                CurrentActor.get(transactInfo.CustomerId);
+                CurrentActor.get(transactInfo.ActorId);
                 CurrentAccount.get(transactInfo.AccountId);
                 CurrentActor.Refresh();
                 CurrentAccount.Refresh();

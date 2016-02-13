@@ -56,16 +56,18 @@
                     <Image Grid.Row="0" Width="240" Height="300" VerticalAlignment="Top" Source="{Binding Path=CurrentInfo.ImageFileSource, Mode=TwoWay}"/>
                     <Grid Grid.Row="2">
                         <Button VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0" Command="{Binding LoadPhotoViaFileBrowserCmd}" >
-                            <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE188; Dosyadan.." FontSize="20" FontWeight="Light"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiLight" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Text="&#xE188; " />
+                                <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiLight" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#commands|browse'}" />
+                            </StackPanel>
                         </Button>
-                        <Button VerticalAlignment="Top" Name="CapturePhotoFromCamButton" HorizontalAlignment="Right" BorderThickness="0" Command="{Binding CapturePhotoFromCamCmd}" >
-                            <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE114; Kameradan.." FontSize="20" FontWeight="Light"></TextBlock>
+                        <Button VerticalAlignment="Top" HorizontalAlignment="Right" BorderThickness="0" Command="{Binding CapturePhotoFromCamCmd}" >
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiLight" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Text="&#xE114; " />
+                                <TextBlock FontFamily="Segoe UI Symbol" FontSize="20" FontWeight="SemiLight" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#commands|capture'}" />
+                            </StackPanel>
                         </Button>
                     </Grid>
-                    <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock FontFamily="Segoe UI Symbol" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="20" Text="&#xE1CF;" />
-                        <TextBlock FontFamily="Segoe UI Symbol" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="20" Text="&#xE1CE;" />
-                    </StackPanel>
                 </Grid>
                 <Grid Grid.Column="3">
                     <Grid.RowDefinitions>
@@ -76,10 +78,10 @@
                         <CRSPanels:CrsFormView GapSize="5">
                             <CRSPanels:CRSRadioButtonPanel Height="50"  Orientation="Horizontal" CheckedIndex="{Binding Path=CurrentInfo.Type, Mode=TwoWay}">
                                 <RadioButton x:Name="PersonRB" GroupName="ActorTypeRadioGroup" Padding="0" Background="#008A00" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Kişi" />
+                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#actorFields|Person'}" />
                                 </RadioButton>
                                 <RadioButton x:Name="FirmRB" GroupName="ActorTypeRadioGroup" Padding="0" Background="#008A00" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Firma" />
+                                    <TextBlock FontFamily="Segoe UI Symbol" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#actorFields|Firm'}" />
                                 </RadioButton>
                             </CRSPanels:CRSRadioButtonPanel>
                             <Grid Visibility="{Binding Path=IsChecked, ElementName=PersonRB, Converter={StaticResource Boolean2VisibilityConverter}}">
@@ -88,17 +90,17 @@
                                     <ColumnDefinition Width="5" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <CRSControls:CrsTextBox Height="50" FontSize="28" Grid.Column="0" Input="{Binding Path=CurrentInfo.Name, Mode=TwoWay}" ThemeBrush="#008A00" Icon="BOY" Remark="İsim" Required="True" InputType="NAME" />
-                                <CRSControls:CrsTextBox Height="50" FontSize="28" Grid.Column="2" Input="{Binding Path=CurrentInfo.Surname, Mode=TwoWay}" IconVisibility="Collapsed" ThemeBrush="#008A00" Remark="Soyisim" Required="True" InputType="NAME" Visibility="{Binding Path=IsChecked, ElementName=PersonRB, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                                <CRSControls:CrsTextBox Height="50" FontSize="24" Grid.Column="0" Input="{Binding Path=CurrentInfo.Name, Mode=TwoWay}" ThemeBrush="#008A00" Icon="BOY" Remark="#actorFields|Name" Required="True" InputType="NAME" />
+                                <CRSControls:CrsTextBox Height="50" FontSize="24" Grid.Column="2" Input="{Binding Path=CurrentInfo.Surname, Mode=TwoWay}" IconVisibility="Collapsed" ThemeBrush="#008A00" Remark="#actorFields|Surname" Required="True" InputType="NAME" Visibility="{Binding Path=IsChecked, ElementName=PersonRB, Converter={StaticResource Boolean2VisibilityConverter}}" />
                             </Grid>
-                            <CRSControls:CrsTextBox Height="50" FontSize="28" Grid.Column="0" Input="{Binding Path=CurrentInfo.Name, Mode=TwoWay}" ThemeBrush="#008A00" Icon="FIRM" Remark="İsim" Required="True" InputType="NAME" Visibility="{Binding Path=IsChecked, ElementName=FirmRB, Converter={StaticResource Boolean2VisibilityConverter}}" />
-                            <CRSControls:CrsTextBox Height="100" FontSize="22" Input="{Binding Path=CurrentInfo.Address, Mode=TwoWay}" ThemeBrush="#008A00" Icon="PIN" Remark="Adres"  Multiline="True" InputType="ALL" InputMaxLength="100" />
-                            <CRSControls:CrsTextBox Height="50" FontSize="28" Input="{Binding Path=CurrentInfo.PhoneNumber, Mode=TwoWay}" ThemeBrush="#008A00" Icon="PHONE" Remark="Telefon" Required="True" InputType="PHONENUMBER"  />
-                            <CRSControls:CrsTextBox Height="50" FontSize="28" Input="{Binding Path=CurrentInfo.MobileNumber, Mode=TwoWay}" ThemeBrush="#008A00" Icon="CELLPHONE" Remark="Cep Telefonu" InputType="PHONENUMBER" />
-                            <CRSControls:CrsTextBox Height="100" FontSize="22" Input="{Binding Path=CurrentInfo.Detail, Mode=TwoWay}" ThemeBrush="#008A00" Icon="YES" Remark="Açıklama"  Multiline="True" InputType="ALL" InputMaxLength="100" />
+                            <CRSControls:CrsTextBox Height="50" FontSize="24" Grid.Column="0" Input="{Binding Path=CurrentInfo.Name, Mode=TwoWay}" ThemeBrush="#008A00" Icon="FIRM" Remark="#actorFields|Name" Required="True" InputType="NAME" Visibility="{Binding Path=IsChecked, ElementName=FirmRB, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                            <CRSControls:CrsTextBox Height="100" FontSize="24" Input="{Binding Path=CurrentInfo.Address, Mode=TwoWay}" ThemeBrush="#008A00" Icon="PIN" Remark="#actorFields|Address"  Multiline="True" InputType="ALL" InputMaxLength="100" />
+                            <CRSControls:CrsTextBox Height="50" FontSize="24" Input="{Binding Path=CurrentInfo.PhoneNumber, Mode=TwoWay}" ThemeBrush="#008A00" Icon="PHONE" Remark="#actorFields|PhoneNumber" Required="True" InputType="PHONENUMBER"  />
+                            <CRSControls:CrsTextBox Height="50" FontSize="24" Input="{Binding Path=CurrentInfo.MobileNumber, Mode=TwoWay}" ThemeBrush="#008A00" Icon="CELLPHONE" Remark="#actorFields|MobileNumber" InputType="PHONENUMBER" />
+                            <CRSControls:CrsTextBox Height="100" FontSize="24" Input="{Binding Path=CurrentInfo.Detail, Mode=TwoWay}" ThemeBrush="#008A00" Icon="COMMENT" Remark="#commonFields|Detail"  Multiline="True" InputType="ALL" InputMaxLength="100" />
                             <Grid>
-                                <CRSControls:CrsButton Height="50" Width="120" Command="{Binding DelInfoCmd}" Content="Sil"  FontSize="18" Background="#AD103C" Margin="-3" HorizontalAlignment="left" IsEnabled="{Binding Path=DelButtonCanEnable}" />
-                                <CRSControls:CrsButton Height="50" Width="120" Command="{Binding SaveInfoCmd}" Validation="True" Content="Kaydet"  FontSize="18" Background="#008A00" Margin="-3" HorizontalAlignment="Right" IsEnabled="{Binding Path=CurrentInfo.Dirty}" />
+                                <!--<CRSControls:CrsButton Height="50" Width="120" Command="{Binding DelInfoCmd}" Content="Sil"  FontSize="18" Background="#AD103C" Margin="-3" HorizontalAlignment="left" IsEnabled="{Binding Path=DelButtonCanEnable}" />-->
+                                <CRSControls:CrsButton Height="50" Width="120" Command="{Binding SaveInfoCmd}" Validation="True" Content="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#commands|save'}"  FontSize="18" Background="#008A00" Margin="-3" HorizontalAlignment="Right" IsEnabled="{Binding Path=CurrentInfo.Dirty}" />
                             </Grid>
                         </CRSPanels:CrsFormView>
                     </ScrollViewer>

@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.props" Condition="Exists('..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,14 +8,17 @@
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CommercialRecordSystem</RootNamespace>
-    <AssemblyName>CommercialRecordSystem</AssemblyName>
-    <DefaultLanguage>tr-TR</DefaultLanguage>
+    <AssemblyName>Commercial Records</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>TicariKayitSistemi_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <NuGetPackageImportStamp>22c7ebd8</NuGetPackageImportStamp>
+    <PackageCertificateKeyFile>CommercialRecordSystem_StoreKey.pfx</PackageCertificateKeyFile>
+    <NuGetPackageImportStamp>570a7b3c</NuGetPackageImportStamp>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>52F74098582B7846FF7CD02BB5591CB2A252EAF1</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -114,6 +116,7 @@
     <Compile Include="Common\FrameNavigation.cs" />
     <Compile Include="Constants\ColorConsts.cs" />
     <Compile Include="Constants\IconConsts.cs" />
+    <Compile Include="Constants\ScriptConsts.cs" />
     <Compile Include="Controls\CrsAppBarButton.cs" />
     <Compile Include="Controls\CrsButtonIntf.cs" />
     <Compile Include="Controls\CRSComboBox.cs" />
@@ -135,9 +138,11 @@
     <Compile Include="Converters\SizeAdjustmentConverter.cs" />
     <Compile Include="Converters\String2VisibilityConverter.cs" />
     <Compile Include="Converters\Value2RemarkConverter.cs" />
+    <Compile Include="DataLayer\ScriptLoader.cs" />
     <Compile Include="Models\Accounts\AccountBase.cs" />
     <Compile Include="Models\Accounts\CurrentAccount.cs" />
-    <Compile Include="Models\Accounts\EnterpriseAccount.cs" />
+    <Compile Include="Models\Accounts\EnterpriseAccounts\EnterpriseAccount.cs" />
+    <Compile Include="Models\Accounts\EnterpriseAccounts\EnterpriseAccTransact.cs" />
     <Compile Include="Models\Goods\Category.cs" />
     <Compile Include="Models\IncomeNExpense\IncomeNExpense.cs" />
     <Compile Include="Models\InfoModelBase.cs" />
@@ -147,7 +152,7 @@
     <Compile Include="Panels\CRSItemsPanel.cs" />
     <Compile Include="Panels\CRSPanel.cs" />
     <Compile Include="Models\Accounts\Actor.cs" />
-    <Compile Include="Models\Goods\Firm.cs" />
+    <Compile Include="Models\Goods\Brand.cs" />
     <Compile Include="Models\Goods\Good.cs" />
     <Compile Include="Models\Transacts\Payment\PaymentEntry.cs" />
     <Compile Include="Models\Transacts\Sale\SaleEntry.cs" />
@@ -157,7 +162,8 @@
     <Compile Include="Panels\CSRFirmGridView.cs" />
     <Compile Include="ViewModels\DataVMs\Accounts\AccountBaseVM.cs" />
     <Compile Include="ViewModels\DataVMs\Accounts\CurrentAccountVM.cs" />
-    <Compile Include="ViewModels\DataVMs\Accounts\EnterpriseAccountVM.cs" />
+    <Compile Include="ViewModels\DataVMs\Accounts\EnterpriseAccounts\EnterpriseAccountVM.cs" />
+    <Compile Include="ViewModels\DataVMs\Accounts\EnterpriseAccounts\EnterpriseAccTransactVM.cs" />
     <Compile Include="ViewModels\DataVMs\DataVMBase.cs" />
     <Compile Include="ViewModels\DataVMs\Goods\CategoryVM.cs" />
     <Compile Include="ViewModels\DataVMs\IncomeNExpenses\IncomeNExpenseVM.cs" />
@@ -184,7 +190,7 @@
     <Compile Include="ViewModels\FrameVMs\Transacts\Sale\SaleFrameVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\Sale\SaleEntryVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\TransactFrameVMBase.cs" />
-    <Compile Include="ViewModels\FrameVMs\Transacts\TransactsFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\Transacts\TransactListFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\TransactTypeFrameVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\TransactVM.cs" />
     <Compile Include="ViewModels\VMBase.cs" />
@@ -235,11 +241,8 @@
     <Compile Include="Views\Transacts\Sales.xaml.cs">
       <DependentUpon>Sales.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Transacts\Transacts.xaml.cs">
-      <DependentUpon>Transacts.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Transacts\TransactTypeSelector.xaml.cs">
-      <DependentUpon>TransactTypeSelector.xaml</DependentUpon>
+    <Compile Include="Views\Transacts\TransactsList.xaml.cs">
+      <DependentUpon>TransactsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\SQLite.cs" />
     <Compile Include="DataLayer\SQLiteAsync.cs" />
@@ -249,20 +252,22 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="CommercialRecordSystem_StoreKey.pfx" />
     <None Include="CommercialRecordSystem_TemporaryKey.pfx" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
     <PRIResource Include="Strings\tr-TR\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\barcode.png" />
-    <Content Include="Assets\marshall.jpg" />
-    <Content Include="Assets\musluk.jpg" />
+    <Content Include="Assets\SplashScreen.scale-140.png" />
     <Content Include="Assets\SplashScreen.scale-180.png" />
-    <Content Include="Assets\ymjtryu.jpg" />
-    <Content Include="Strings\en-US\en.us.dictionary.xml" />
+    <Content Include="Assets\StoreLogo.scale-140.png" />
+    <Content Include="Assets\StoreLogo.scale-180.png" />
+    <Content Include="DataLayer\Scripts\actor.sql.xml" />
+    <Content Include="DataLayer\Scripts\transacts.sql.xml" />
+    <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Strings\en-US\en.us.dictionary.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Strings\tr-TR\tr.tr.dictionary.xml" />
     <Page Include="Controls\CrsTextBox.xaml">
       <SubType>Designer</SubType>
@@ -305,11 +310,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Transacts\Transacts.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Transacts\TransactTypeSelector.xaml">
+    <Page Include="Views\Transacts\TransactsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -334,7 +335,6 @@
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
-    <Content Include="Assets\vesika.jpg" />
     <Page Include="Views\Goods\GoodsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -360,56 +360,20 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MetroLog">
-      <HintPath>..\packages\MetroLog.0.9.0\lib\win81\MetroLog.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroLog.Platform">
-      <HintPath>..\packages\MetroLog.0.9.0\lib\win81\MetroLog.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroLog.WinRT">
-      <HintPath>..\packages\MetroLog.0.9.0\lib\win81\MetroLog.WinRT.winmd</HintPath>
-    </Reference>
-    <Reference Include="SQLiteWinRT">
-      <HintPath>..\packages\Sqlite-Winrt.3.8.7.1\lib\netcore45\SQLiteWinRT.winmd</HintPath>
-    </Reference>
-    <Reference Include="WinRTXamlToolkit, Version=1.5.4.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\winrtxamltoolkit.1.5.4.3\lib\netcore45\WinRTXamlToolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="WinRTXamlToolkit.Controls.DataVisualization, Version=1.5.4.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WinRTXamlToolkit.Controls.DataVisualization.1.5.4.3\lib\netcore45\WinRTXamlToolkit.Controls.DataVisualization.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
       <Name>Behaviors SDK %28XAML%29</Name>
     </SDKReference>
-    <SDKReference Include="Microsoft.VCLibs, version=12.0">
+    <SDKReference Include="Microsoft.VCLibs, Version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
-    <SDKReference Include="MSAdvertisingXaml, Version=8.1">
-      <Name>MSAdvertisingXaml</Name>
-    </SDKReference>
-    <SDKReference Include="SQLite.WinRT81, Version=3.8.7.1">
+    <SDKReference Include="SQLite.WinRT81, Version=3.10.2">
       <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.props'))" />
-    <Error Condition="!Exists('..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.targets'))" />
-  </Target>
-  <Import Project="..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.targets" Condition="Exists('..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

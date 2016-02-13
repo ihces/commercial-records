@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="list_record_num.Text" xml:space="preserve">
-    <value>Kayıt</value>
-  </data>
   <data name="payment_header.Text" xml:space="preserve">
     <value>Ödeme</value>
   </data>
@@ -132,44 +129,8 @@
   <data name="payment_total_paid_amount.Text" xml:space="preserve">
     <value>Ödenen Tutar</value>
   </data>
-  <data name="payment_type_cash.Text" xml:space="preserve">
-    <value>Nakit</value>
-  </data>
-  <data name="payment_type_creditcard.Text" xml:space="preserve">
-    <value>Kredi Kartı</value>
-  </data>
-  <data name="payment_type_other.Text" xml:space="preserve">
-    <value>Diğer</value>
-  </data>
-  <data name="sales_list_amount.Text" xml:space="preserve">
-    <value>Miktar</value>
-  </data>
-  <data name="sales_list_definition.Text" xml:space="preserve">
-    <value>Açıklama</value>
-  </data>
-  <data name="sales_list_price.Text" xml:space="preserve">
-    <value>Tutar</value>
-  </data>
-  <data name="sales_list_unitprice.Text" xml:space="preserve">
-    <value>Birim Fiyat</value>
-  </data>
   <data name="total_amount.Text" xml:space="preserve">
     <value>Toplam Tutar</value>
-  </data>
-  <data name="Transacts_List_Header_Actor.Text" xml:space="preserve">
-    <value>Müşteri Bilgisi</value>
-  </data>
-  <data name="Transacts_List_Header_Date.Text" xml:space="preserve">
-    <value>Tarih</value>
-  </data>
-  <data name="Transacts_List_Header_Paid.Text" xml:space="preserve">
-    <value>Ödenen</value>
-  </data>
-  <data name="Transacts_List_Header_RemainingAmount.Text" xml:space="preserve">
-    <value>Kalan Tutar</value>
-  </data>
-  <data name="Transacts_List_Header_Transact.Text" xml:space="preserve">
-    <value>İşlem</value>
   </data>
   <data name="Transacts_page_title.Text" xml:space="preserve">
     <value>Cari İşlemler</value>
@@ -177,49 +138,61 @@
   <data name="transact_add_button.Text" xml:space="preserve">
     <value>Ekle</value>
   </data>
-  <data name="transact_newrecord.Text" xml:space="preserve">
-    <value>Yeni Kayıt</value>
-  </data>
-  <data name="current_account_list_footer_rec_count.Text" xml:space="preserve">
-    <value>Kayıt</value>
-  </data>
-  <data name="current_account_list_footer_total_account.Text" xml:space="preserve">
-    <value>Toplam</value>
-  </data>
-  <data name="current_account_list_header_account.Text" xml:space="preserve">
-    <value>Hesap</value>
-  </data>
-  <data name="current_account_list_header_lasttransactdate.Text" xml:space="preserve">
-    <value>Son İşlem Tarihi</value>
-  </data>
-  <data name="current_account_list_header_name.Text" xml:space="preserve">
-    <value>İsim</value>
-  </data>
-  <data name="current_account_list_header_surname.Text" xml:space="preserve">
-    <value>Soyisim</value>
-  </data>
-  <data name="actors_ordered_by_account.Text" xml:space="preserve">
-    <value>Hesaba Göre Sırala</value>
-  </data>
-  <data name="actors_ordered_by_lasttrdate.Text" xml:space="preserve">
-    <value>Son İşlem Tarihine Göre Sırala</value>
-  </data>
-  <data name="actors_ordered_by_name.Text" xml:space="preserve">
-    <value>İsme Göre Sırala</value>
-  </data>
-  <data name="actors_ordered_by_surname.Text" xml:space="preserve">
-    <value>Soyisme Göre Sırala</value>
-  </data>
-  <data name="current_accounts_title.Text" xml:space="preserve">
+  <data name="current_account_list.Text" xml:space="preserve">
     <value>Cari Hesaplar</value>
   </data>
-  <data name="actor_account_transacts.Text" xml:space="preserve">
+  <data name="payment_amount_textbox.Remark" xml:space="preserve">
+    <value>Meblağ</value>
+  </data>
+  <data name="payment_detail_textbox.Remark" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="transact_acct_inf_cb.Text" xml:space="preserve">
+    <value>Hesap Bilgileri</value>
+  </data>
+  <data name="transact_new_rec_cb.Text" xml:space="preserve">
+    <value>Yeni Kayıt</value>
+  </data>
+  <data name="main_page_curr_acct.Text" xml:space="preserve">
+    <value>Cari Hesaplar</value>
+  </data>
+  <data name="main_page_curr_trans.Text" xml:space="preserve">
     <value>Cari İşlemler</value>
   </data>
-  <data name="Transacts_List_Header_Cost.Text" xml:space="preserve">
-    <value>Tutar</value>
+  <data name="main_page_ent_accts.Text" xml:space="preserve">
+    <value>İşletme Hesapları</value>
   </data>
-  <data name="sales_actor_info_ok.Text" xml:space="preserve">
-    <value>Tamam</value>
+  <data name="main_page_goods.Text" xml:space="preserve">
+    <value>Ürünler</value>
+  </data>
+  <data name="main_page_settings.Text" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="main_page_title.Text" xml:space="preserve">
+    <value>Ticari Kayıtlar</value>
+  </data>
+  <data name="main_page_trans_report.Text" xml:space="preserve">
+    <value>İşlem Raporları</value>
+  </data>
+  <data name="sales_amount_textbox.Remark" xml:space="preserve">
+    <value>Miktar</value>
+  </data>
+  <data name="sales_search_textbox.Remark" xml:space="preserve">
+    <value>Ürün Ara</value>
+  </data>
+  <data name="order_date_label.Text" xml:space="preserve">
+    <value>Sipariş Tarihi</value>
+  </data>
+  <data name="order_delivery_date_label.Text" xml:space="preserve">
+    <value>Teslim Tarihi</value>
+  </data>
+  <data name="order_note_textbox.Header" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="order_stt_chg_date_label.Text" xml:space="preserve">
+    <value>Değişiklik Tarihi</value>
+  </data>
+  <data name="enterpriseAccountsPageTitle.Text" xml:space="preserve">
+    <value>İşletme Hesapları</value>
   </data>
 </root>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,11 +23,12 @@ namespace CommercialRecordSystem.Common
 
         private SortedDictionary<string, SortedDictionary<string, string>> Turkish = null;
         private SortedDictionary<string, SortedDictionary<string, string>> English = null;
-        private string CurrentLanguage = TURKISH;
+
+        public static readonly string CurrentLanguage = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
 
         public const string
-                        TURKISH = "tr-TR",
-                        ENGLISH = "en-US";
+                        TURKISH = "tr",
+                        ENGLISH = "en";
 
         private static CrsDictionary instance = null;
 
@@ -48,7 +50,20 @@ namespace CommercialRecordSystem.Common
                 return null;
         }
 
-        public string lookup(string dictionary, string key)
+        public IEnumerable<string> getValues(string dictionary)
+        {
+            if (English.ContainsKey(dictionary))
+            {
+                if (CurrentLanguage == TURKISH)
+                    return Turkish[dictionary].Values;
+                else
+                    return English[dictionary].Values;
+            }
+            else
+                return null;
+        }
+
+        public string lookup(string dictionary, string key, params object[] prms)
         {
             string remark = key;
             switch (CurrentLanguage)
@@ -70,7 +85,7 @@ namespace CommercialRecordSystem.Common
                     break;
             }
 
-            return remark;
+            return String.Format(remark, prms);
         }
 
         private void loadDictionaryFromFile(string path, SortedDictionary<string, SortedDictionary<string, string>> dictionary)

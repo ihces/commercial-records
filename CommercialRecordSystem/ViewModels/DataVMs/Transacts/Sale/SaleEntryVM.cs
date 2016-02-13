@@ -76,6 +76,10 @@ namespace CommercialRecordSystem.ViewModels
             set
             {
                 moreDetail = value;
+                if (Recorded && !Dirty)
+                {
+                    save();
+                }
                 RaisePropertyChanged("MoreDetail");
             }
         }

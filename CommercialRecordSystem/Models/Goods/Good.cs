@@ -4,7 +4,7 @@ namespace CommercialRecordSystem.Models.Goods
 {
     class Good : InfoModelBase
     {
-        public int FirmId { get; set; }
+        public int BrandId { get; set; }
         public int CategoryId { get; set; }
         public string Name { get; set; }
         public int StockAmount { get; set; }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System;
 using SQLite;
+using CommercialRecordSystem.DataLayer;
 
 namespace CommercialRecordSystem.ViewModels.DataVMs
 {
@@ -29,7 +30,8 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
         }
         #endregion
 
-        public bool Recorded {
+        public bool Recorded
+        {
             get
             {
                 if (Id > 0)
@@ -59,7 +61,7 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
                 if (null != property)
                     property.SetValue(this, modelProperty.GetValue(model));
             }
-            
+
             Dirty = false;
         }
 
@@ -72,7 +74,7 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
             foreach (PropertyInfo modelProperty in modelProperties)
             {
                 PropertyInfo property = VMproperties.Where(p => p.Name == modelProperty.Name).Single();
-                if (null != property) 
+                if (null != property)
                     modelProperty.SetValue(model, property.GetValue(this));
             }
 
@@ -129,7 +131,7 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                db.BeginTransaction();      
+                db.BeginTransaction();
                 var existingEntry = (db.Table<E>().Where(
                     c => c.Id == Id)).Single();
 
@@ -137,8 +139,6 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
 
                 db.Commit();
             }
-
-            
 
             return this;
         }
@@ -148,17 +148,18 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
             initWithModel(model);
         }
 
-        public DataVMBase() 
+        public DataVMBase()
         {
-        
+
         }
 
         public static async Task<List<T>> getList<T>(
-            Expression<Func<E, bool>> whereClause, List<Expression<Func<E, object>>> orderByClauses) where T: DataVMIntf<E>, new()
+            Expression<Func<E, bool>> whereClause = null, List<Expression<Func<E, object>>> orderByClauses = null) where T : DataVMIntf<E>, new()
         {
             List<E> resultList = null;
 
             var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
+
             AsyncTableQuery<E> resultBuff = db.Table<E>();
 
             if (null != whereClause)
@@ -178,25 +179,31 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
             {
                 resultList = await resultBuff.ToListAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
 
-            /*if (0 == keyword.Trim().Length)
-            {
-                var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-                customerModelList = await db.Table<E>().Where(c => c.Type == Actor.TYPE.REGISTERED).OrderBy(c => c.Name).OrderBy(c => c.Surname).ToListAsync();
-            }
-            else
-            {
-                keyword = "%" + keyword + "%";
-                var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
-                customerModelList = await db.Table<E>().Where(c => c.Type == Actor.TYPE.REGISTERED && (c.Name.Contains(keyword) || c.Surname.Contains(keyword))).ToListAsync();
-            }*/
+            return converToVM<T>(resultList);
+        }
 
+        public static async Task<List<T>> getList<T>(string query, params object [] args) where T : DataVMIntf<E>, new()
+        {
+            List<E> resultList = null;
+
+            var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
+
+            string scriptBuff = string.Empty;
+            if (!string.IsNullOrEmpty(query))
+                resultList = await db.QueryAsync<E>(string.Format(ScriptLoader.getInstance().getScript(query, args)));
+
+            return converToVM<T>(resultList);
+        }
+
+        private static List<T> converToVM<T>(List<E> resultList) where T : DataVMIntf<E>, new()
+        {
             List<T> RecordList = new List<T>();
-            
+
             foreach (E record in resultList)
             {
                 T recordBuff = new T();
@@ -205,16 +212,5 @@ namespace CommercialRecordSystem.ViewModels.DataVMs
             }
             return RecordList;
         }
-
-        /*public static async Task<OrderedListVM<T,E>> getOrderedList<T>(PropertyInfo orderProperty,
-            Expression<Func<E, bool>> whereClause =null, List<Expression<Func<E, object>>> orderByClauses=null,
-            bool alphaNumericOrder = false, bool reverse = false) where T : DataVMIntf<E>, new()
-        {
-            List<T> dataList = await getList<T>(whereClause, orderByClauses);
-            OrderedListVM<T, E>  orderedList = new OrderedListVM<T, E>();
-            orderedList.FillList(dataList, orderProperty, alphaNumericOrder, reverse);
-            
-            return orderedList;
-        }*/
     }
 }

@@ -21,6 +21,9 @@ namespace CommercialRecordSystem.ViewModels
             set
             {
                 type = value;
+                if (type == Actor.TYPE_FIRM)
+                    Surname = string.Empty;
+
                 RaisePropertyChanged("Type");
             }
         }
@@ -151,33 +154,87 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
-        private double totalCost = 0.0f;
-        public double TotalCost
+        private double receivableAccTotal;
+        public double ReceivableAccTotal
         {
             get
             {
-                return totalCost;
+                return receivableAccTotal;
             }
             set
             {
-                totalCost = value;
-                RaisePropertyChanged("TotalCost");
-                RaisePropertyChanged("RemainingCost");
+                receivableAccTotal = value;
+                RaisePropertyChanged("ReceivableAccTotal");
             }
         }
 
-        private double totalPaid = 0.0f;
-        public double TotalPaid
+        private double receivableAccPaid;
+        public double ReceivableAccPaid
         {
             get
             {
-                return totalPaid;
+                return receivableAccPaid;
             }
             set
             {
-                totalPaid = value;
-                RaisePropertyChanged("TotalPaid");
-                RaisePropertyChanged("RemainingCost");
+                receivableAccPaid = value;
+                RaisePropertyChanged("ReceivableAccPaid");
+            }
+        }
+
+        private double debtAcctTotal;
+        public double DebtAcctTotal
+        {
+            get
+            {
+                return debtAcctTotal;
+            }
+            set
+            {
+                debtAcctTotal = value;
+                RaisePropertyChanged("DebtAcctTotal");
+            }
+        }
+
+        private double debtAcctPaid;
+        public double DebtAcctPaid
+        {
+            get
+            {
+                return debtAcctPaid;
+            }
+            set
+            {
+                debtAcctPaid = value;
+                RaisePropertyChanged("DebtAcctPaid");
+            }
+        }
+
+        private int totalAccount;
+        public int TotalAccount
+        {
+            get
+            {
+                return totalAccount;
+            }
+            set
+            {
+                totalAccount = value;
+                RaisePropertyChanged("TotalAccount");
+            }
+        }
+
+        private int activeAccNum;
+        public int ActiveAccNum
+        {
+            get
+            {
+                return activeAccNum;
+            }
+            set
+            {
+                activeAccNum = value;
+                RaisePropertyChanged("ActiveAccNum");
             }
         }
 
@@ -185,7 +242,21 @@ namespace CommercialRecordSystem.ViewModels
         {
             get
             {
-                return totalCost-totalPaid;
+                return (debtAcctTotal - debtAcctPaid) - (receivableAccTotal - receivableAccPaid);
+            }
+        }
+
+        private double totalAcctForList;
+        public double TotalAcctForList
+        {
+            get
+            {
+                return totalAcctForList;
+            }
+            set
+            {
+                totalAcctForList = value;
+                RaisePropertyChanged("TotalAcctForList");
             }
         }
 

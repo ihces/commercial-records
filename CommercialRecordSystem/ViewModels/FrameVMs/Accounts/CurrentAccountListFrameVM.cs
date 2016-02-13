@@ -1,5 +1,7 @@
 ﻿using CommercialRecordSystem.Common;
+using CommercialRecordSystem.Constants;
 using CommercialRecordSystem.Models;
+using CommercialRecordSystem.Models.Accounts;
 using CommercialRecordSystem.ViewModels.DataVMs;
 using CommercialRecordSystem.Views.Accounts;
 using CommercialRecordSystem.Views.Transacts;
@@ -24,6 +26,48 @@ namespace CommercialRecordSystem.ViewModels
             get
             {
                 return findActorsCmd;
+            }
+        }
+
+        private ObservableCollection<string> accountTypesForList = new ObservableCollection<string>(CrsDictionary.getInstance().getKeys("accountTypesForList"));
+        public ObservableCollection<string> AccountTypesForList
+        {
+            get
+            {
+                return accountTypesForList;
+            }
+            set
+            {
+                accountTypesForList = value;
+                RaisePropertyChanged("AccountTypesForList");
+            }
+        }
+
+        private int selectedAcctTypeBuff = -1;
+
+        private string selectedAccountType;
+        public string SelectedAccountType
+        {
+            get
+            {
+                return selectedAccountType;
+            }
+            set
+            {
+                if (null != value)
+                {
+                    if (value == AccountTypesForList[0])
+                        selectedAcctTypeBuff = -1;
+                    else if (value == AccountTypesForList[1])
+                        selectedAcctTypeBuff = CurrentAccount.TYPE_DEBT;
+                    else if (value == AccountTypesForList[2])
+                        selectedAcctTypeBuff = CurrentAccount.TYPE_RECEIVABLE;
+                }
+
+                setActors();
+
+                selectedAccountType = value;
+                RaisePropertyChanged("SelectedAccountType");
             }
         }
 
@@ -68,6 +112,8 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        /*
+         *unused*
         private int orderByIndex = 0;
         public int OrderByIndex
         {
@@ -80,7 +126,7 @@ namespace CommercialRecordSystem.ViewModels
                 orderByIndex = value;
                 if (value != orderByIndex)
                 {
-                    List<Expression<Func<Actor, object>>>  orderByClauses =
+                    List<Expression<Func<Actor, object>>> orderByClauses =
                         new List<Expression<Func<Actor, object>>>();
                     switch (value)
                     {
@@ -110,7 +156,7 @@ namespace CommercialRecordSystem.ViewModels
                     RaisePropertyChanged("OrderByIndex");
                 }
             }
-        }
+        }*/
 
 
 
@@ -179,7 +225,25 @@ namespace CommercialRecordSystem.ViewModels
             doper4SelectedActorCmd = new ICommandImp(doOper4SelectedActor_execute);
             addActorCmd = new ICommandImp(addActor_execute);
             editCurrentActorCmd = new ICommandImp(editCurrentActorCmd_execute);
-            setActors();
+
+            if (null != navigation.Back && navigation.Back.Is<Sales>())
+            {
+                PageReadOnly = true;
+
+                if (Transact.TYPE_PURCHASE == (int)navigation.Message)
+                {
+                    SelectedAccountType = AccountTypesForList[2];
+                }
+                else
+                {
+                    SelectedAccountType = AccountTypesForList[1];
+                }
+            }
+            else
+            {
+                PageReadOnly = false;
+                SelectedAccountType = AccountTypesForList[0];
+            }
         }
 
         private void editCurrentActorCmd_execute(object obj)
@@ -198,13 +262,13 @@ namespace CommercialRecordSystem.ViewModels
         {
             if (null != SelectedActor)
             {
-                if (Navigation.Back.PageType.Equals(typeof(Sales)))
+                if (Navigation.Back.Is<Sales>())
                 {
                     Navigation.GoBack(SelectedActor.Id);
                 }
                 else
                 {
-                    Navigation.Navigate<CurrentAccountView>(SelectedActor.Id);
+                    Navigation.Navigate<CurrentAccountView>(SelectedActor);
                 }
             }
         }
@@ -215,27 +279,30 @@ namespace CommercialRecordSystem.ViewModels
         }
         #endregion
 
-        private async Task setActors(Expression<Func<Actor, bool>> whereClause = null, List<Expression<Func<Actor, object>>> orderByClauses = null)
+        private async Task setActors()
         {
-            if (null == orderByClauses)
-            {
-                orderByClauses = new List<Expression<Func<Actor, object>>>();
-                orderByClauses.Add(c => c.Name);
-                orderByClauses.Add(c => c.Surname);
-            }
+            Actors = new ObservableCollection<ActorVM>(await ActorVM.getList<ActorVM>(ScriptConsts.QUERY_ACTORS_FOR_LIST,
+                selectedAcctTypeBuff, QueryText));
 
-            if (string.IsNullOrWhiteSpace(QueryText))
-                whereClause = c => c.Registered == true;
-            else
-                whereClause = c => c.Registered == true && (c.Name.Contains(QueryText) || c.Surname.Contains(QueryText));
-
-            Actors = new ObservableCollection<ActorVM>(await ActorVM.getList<ActorVM>(whereClause, orderByClauses));
             RowCount = Actors.Count;
 
             double totalAccountBuff = 0.0;
             foreach (ActorVM actorBuff in Actors)
             {
-                totalAccountBuff += actorBuff.RemainingCost;
+                switch (selectedAcctTypeBuff)
+                {
+                    case -1:
+                        actorBuff.TotalAcctForList = actorBuff.RemainingCost;
+                        break;
+                    case 0:
+                        actorBuff.TotalAcctForList = actorBuff.DebtAcctTotal - actorBuff.DebtAcctPaid;
+                        break;
+                    case 1:
+                        actorBuff.TotalAcctForList = -(actorBuff.ReceivableAccTotal - actorBuff.ReceivableAccPaid);
+                        break;
+                }
+
+                totalAccountBuff += actorBuff.TotalAcctForList;
             }
             TotalAccount = totalAccountBuff;
         }

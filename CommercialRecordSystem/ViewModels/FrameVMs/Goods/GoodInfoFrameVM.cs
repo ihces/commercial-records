@@ -39,7 +39,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
 
         private void selectRecordedFirmCmdHandler(object parameter)
         {
-            Navigation.Navigate(typeof(GoodsView), GoodsFrameVM.SELECT_FIRM);
+            Navigation.Navigate(typeof(GoodsView), GoodsFrameVM.SELECT_BRAND);
         }
 
         private void selectRecordedCategoryCmdHandler(object parameter)
@@ -48,7 +48,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
         }
 
         public GoodInfoFrameVM(FrameNavigation navigation)
-            : base(navigation, "Ürün", 1.0)
+            : base(navigation, CrsDictionary.getInstance().lookup("infoPageTitles","good"), 1.0)
         {
             selectRecordedFirmCmd = new ICommandImp(selectRecordedFirmCmdHandler);
             selectRecordedCategoryCmd = new ICommandImp(selectRecordedCategoryCmdHandler);
@@ -63,7 +63,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
                 else if (navigation.Message is BrandVM)
                 {
                     BrandVM selectedFirm = (BrandVM)navigation.Message;
-                    CurrentInfo.FirmId = selectedFirm.Id;
+                    CurrentInfo.BrandId = selectedFirm.Id;
                 }
             }
         }

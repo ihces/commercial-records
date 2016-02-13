@@ -436,11 +436,12 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
                     }
                     else
                     {
-                        string message = string.Format("Seçilen Görüntünün Boyutu({0}x{1}) en az {2}x{3} olmalıdır.\nLütfen Tekrar Deneyiniz.", decoder.PixelHeight, decoder.PixelWidth, height, width);
-                        var messageDialog = new MessageDialog(message, "Görüntü Boyutu");
+                        string message = CrsDictionary.getInstance().lookup("notifications", "selectedImgSizeMessage", decoder.PixelHeight, decoder.PixelWidth, height, width);
+                        
+                        var messageDialog = new MessageDialog(message, CrsDictionary.getInstance().lookup("notifications", "imageSizeHeader"));
 
                         // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
-                        messageDialog.Commands.Add(new UICommand("Tamam", new UICommandInvokedHandler(ReSelectImageCommandInvokedHandler)));
+                        messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "okCommand"), new UICommandInvokedHandler(ReSelectImageCommandInvokedHandler)));
 
                         // Set the command that will be invoked by default
                         messageDialog.DefaultCommandIndex = 1;

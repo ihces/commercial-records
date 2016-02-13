@@ -4,10 +4,10 @@ using CommercialRecordSystem.ViewModels.DataVMs.Goods;
 
 namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
 {
-    class BrandInfoFrameVM : InfoFrameVMBase<BrandVM, Firm>
+    class BrandInfoFrameVM : InfoFrameVMBase<BrandVM, Brand>
     {
         public BrandInfoFrameVM(FrameNavigation navigation)
-            : base(navigation, "Marka", 1.25)
+            : base(navigation, CrsDictionary.getInstance().lookup("infoPageTitles", "brand"), 1.25)
         {
 
         }

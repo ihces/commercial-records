@@ -14,6 +14,10 @@
     <property key="2">Good Purchase</property>
     <property key="3">Payment</property>
   </dictionary>
+  <dictionary id="enterpriseAccTransactTypes">
+    <property key="0">Received Payment</property>
+    <property key="1">Made Payment</property>
+  </dictionary>
   <dictionary id="paymentTypes">
     <property key="0">Cash</property>
     <property key="1">Credit Card</property>
@@ -28,13 +32,14 @@
     <property key="0">Cash Register Account</property>
     <property key="1">Bank Account</property>
   </dictionary>
-  <dictionary id="depositTypes">
-    <property key="DEMAND">Demand Deposit</property>
-    <property key="TERM">Term Deposit</property>
+  <dictionary id="goodOrderBy">
+    <property key="0">Order By Name</property>
+    <property key="1">Order By Brand</property>
+    <property key="2">Order By Category</property>
   </dictionary>
-  <dictionary id="currencies">
-    <property key="tl">Turkish Lira (₺)</property>
-    <property key="dolar">US Dolar ($)</property>
+  <dictionary id="categoryOrderBy">
+    <property key="0">Order By Name</property>
+    <property key="1">Order By Hierarchy</property>
   </dictionary>
   <dictionary id="orderStateTypes">
     <property key="0">Initial</property>
@@ -44,17 +49,122 @@
     <property key="4">Product Delivered</property>
     <property key="5">Completed</property>
   </dictionary>
+  <dictionary id="commonFields">
+    <property key="CreatedDate">Created Date</property>
+    <property key="LastTransactDate">Last Transact Date</property>
+    <property key="Detail">Detail</property>
+  </dictionary>
+  <dictionary id="accountFields">
+    <property key="Name">Name</property>
+    <property key="BankName">Bank Name</property>
+    <property key="TotalAmount">Total Amount</property>
+    <property key="RemainingAmount">Remaining Amount</property>
+    <property key="PaidAmount">Paid Amount</property>
+    <property key="AccountName">Account Name</property>
+    <property key="AccountNumber">Account Number</property>
+    <property key="Balance">Balance</property>
+  </dictionary>
   <dictionary id="actorFields">
+    <property key="Person">Person</property>
+    <property key="Firm">Firm</property>
+    <property key="Normal">Normal</property>
+    <property key="Registered">Registered</property>
     <property key="Name">Name</property>
     <property key="Surname">Surname</property>
     <property key="Address">Address</property>
     <property key="PhoneNumber">Phone Number</property>
     <property key="MobileNumber">Mobile Number</property>
-    <property key="CreatedDate">Created Date</property>
-    <property key="LastTransactDate">Last Transact Date</property>
-    <property key="TotalCost">Total Cost</property>
-    <property key="TotalPaid">Total Paid</property>
+    <property key="ReceivableAccTotal">Receivable AccTotal</property>
+    <property key="ReceivableAccPaid">ReceivableAccount Paid</property>
+    <property key="DebtAcctTotal">Debt Account Total</property>
+    <property key="DebtAcctPaid">Debt Account Paid</property>
     <property key="RemainingCost">Remaining Cost</property>
-    <property key="Detail">Detail</property>
+  </dictionary>
+  <dictionary id="goodsFields">
+    <property key="Name">Name</property>
+    <property key="DistributorFirm">Distributor Firm</property>
+    <property key="ParentCategory">Parent Category</property>
+    <property key="Brand">Brand</property>
+    <property key="Category">Category</property>
+    <property key="BarcodeNum">Barcode Number</property>
+    <property key="StockAmount">Stock Amount</property>
+    <property key="SalePrice">Sale Price</property>
+    <property key="VATRate">VAT Rate</property>
+  </dictionary>
+  <dictionary id="listFooter">
+    <property key="Records">Records</property>
+    <property key="GrandTotal">Grand Total</property>
+    <property key="TotalCost">Total Cost</property>
+    <property key="Total">Total</property>
+  </dictionary>
+  <dictionary id="listHeader">
+    <property key="Name">Name</property>
+    <property key="AccountNumber">Accounts Number</property>
+    <property key="ActiveAccNum">Active Accounts</property>
+    <property key="TotalAmount">Total Amount</property>
+    <property key="Date">Date</property>
+    <property key="Transact">Transact</property>
+    <property key="AccountInfo">Account Information</property>
+    <property key="Cost">Cost</property>
+    <property key="Paid">Paid</property>
+    <property key="RemainingAmount">Remaining Amount</property>
+    <property key="Amount">Amount</property>
+    <property key="Definition">Definition</property>
+    <property key="Price">Price</property>
+    <property key="UnitPrice">Unit Price</property>
+    <property key="Accounts">Accounts</property>
+    <property key="AccountTransactions">Account Transactions</property>
+    <property key="AccountCode">Account Code:</property>
+  </dictionary>
+  <dictionary id="accountTypesForList">
+    <property key="All">All</property>
+    <property key="DebtAccount">Debt Account(Customer)</property>
+    <property key="ReceivableAccount">Receivable Account(Seller)</property>
+  </dictionary>
+  <dictionary id="goodsSelectList">
+    <property key="0">Goods</property>
+    <property key="1">Brands</property>
+    <property key="2">Categories</property>
+  </dictionary>
+  <dictionary id="accountStatus">
+    <property key="0">Pasive</property>
+    <property key="1">Active</property>
+  </dictionary>
+  <dictionary id="infoPageTitles">
+    <property key="good">Good</property>
+    <property key="category">Category</property>
+    <property key="brand">Brand</property>
+    <property key="person_firm">Person/Firm</property>
+  </dictionary>
+  <dictionary id="instanceLabels">
+    <property key="currentAccount1">Current Account 1</property>
+    <property key="cashRegAcct1">Cash Register Account 1</property>
+  </dictionary>
+  <dictionary id="commands">
+    <property key="save">Save</property>
+    <property key="browse">Browse..</property>
+    <property key="capture">Capture..</property>
+    <property key="doPayment">Do Payment</property>
+    <property key="currentTrans">Current Transactions</property>
+  </dictionary>
+  <dictionary id="notifications">
+    <property key="yesCommand">Yes</property>
+    <property key="noCommand">No</property>
+    <property key="delRecordHeader">Delete Record</property>
+    <property key="delRecordMessage">Selected {0} Records Will Be Deleted. Are You Sure?</property>
+    <property key="saveAccountMessage">Are You Sure to Quit Without Saving Changes?</property>
+    <property key="saveNewAccountMessage">New Account Information Not Saved yet. However, Are You Sure to Quit?</property>
+    <property key="saveNewAccountHeader">Save New Account</property>
+    <property key="saveChangesHeader">Save Changes</property>
+    <property key="newRecordSavedMessage">New Account Saved Successfully</property>
+    <property key="accInfoUpdatedMessage">Account Information Updated Successfully</property>
+    <property key="accountInfoHeader">Account Information</property>
+    <property key="okCommand">Ok</property>
+    <property key="selectedImgSizeMessage">Size of Selected Image ({0}x{1}) Should be at Least {2}x{3}.</property>
+    <property key="imageSizeHeader">Image Size</property>
+    <property key="recordDeleteMessage">{0} Information Will Be Deleted Permanently. Are You Sure?</property>
+    <property key="saveRecordMessage">{0} Information Saved Successfully.</property>
+    <property key="saveRecordFailMessage">{0} Information Could Not Be Saved.</property>
+    <property key="saveInformationHeader">Save Information</property>
   </dictionary>
 </dictionaries>

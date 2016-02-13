@@ -153,15 +153,15 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
                     DelButtonCanEnable = true;
                 }
                // CurrentInfo.Dirty = false;
-                message = infoName + " Bilgileri Başarı ile Kaydedildi.";
+                message = CrsDictionary.getInstance().lookup("notifications", "saveRecordMessage", infoName);
             }
             else
-                message = infoName + " Bilgileri Kaydedilemedi.";
+                message = CrsDictionary.getInstance().lookup("notifications", "saveRecordFailMessage", infoName);
 
-            var messageDialog = new MessageDialog(message, "Kaydetme İşlemi");
+            var messageDialog = new MessageDialog(message, CrsDictionary.getInstance().lookup("notifications", "saveInformationHeader"));
 
             // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
-            messageDialog.Commands.Add(new UICommand("Tamam", new UICommandInvokedHandler(this.SaveInfoCommandInvokedHandler)));
+            messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "okCommand"), new UICommandInvokedHandler(this.SaveInfoCommandInvokedHandler)));
 
             // Set the command that will be invoked by default
             messageDialog.DefaultCommandIndex = 1;
@@ -176,10 +176,12 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
 
         protected virtual void delInfoCmdHandler(object parameter)
         {
-            var messageDialog = new MessageDialog(infoName + " Kaydı Kalıcı Olarak Silinecektir. Emin misiniz?", "Kayıt Silme");
+            var messageDialog = new MessageDialog(
+                CrsDictionary.getInstance().lookup("notifications", "recordDeleteMessage", infoName), 
+                CrsDictionary.getInstance().lookup("notifications", "delRecordHeader"));
 
-            messageDialog.Commands.Add(new UICommand("Hayır", null));
-            messageDialog.Commands.Add(new UICommand("Evet", new UICommandInvokedHandler(this.DelInfoCommandInvokedHandler)));
+            messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "noCommand"), null));
+            messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "yesCommand"), new UICommandInvokedHandler(this.DelInfoCommandInvokedHandler)));
 
             messageDialog.DefaultCommandIndex = 1;
             messageDialog.CancelCommandIndex = 0;

@@ -27,7 +27,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="140"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Margin="39,59,39,0"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
@@ -39,20 +39,17 @@
             <ComboBox Name="transact_type_cb" ItemsSource="{Binding TransactTypes}" IsEnabled="{Binding TransactTypeAssigned, Converter={StaticResource InvertBooleanConverter}}" Margin="0,0,30,25" Padding="0" Grid.Column="1" VerticalAlignment="Bottom" 
                       FontSize="56" FontWeight="Light" HorizontalAlignment="Left" 
                       Foreground="White" Background="#00FFFFFF" BorderThickness="0" 
-                      Style="{StaticResource ComboBoxStyle1}" SelectedIndex="{Binding Path=TransactInfo.Type, Mode=TwoWay}">
+                      Style="{StaticResource ComboBoxStyle1}" SelectedIndex="{Binding Path=TransactTypeIndex, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='transactTypes'}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Column="2" Visibility="{Binding CurrentActorInfoEditable, Converter={StaticResource Boolean2VisibilityConverter}, ConverterParameter='invert'}">
-                <AppBarButton Icon="Shop" Visibility="{Binding Path=SelectedIndex, ElementName=transact_type_cb, Converter={StaticResource Compare2AssignVisibilityConverter}, ConverterParameter=1}" Label="Satış Yap" Margin="20,47,10,0" HorizontalAlignment="Right" 
-                          Command="{Binding GoNextCmd}" />
-                <AppBarButton Icon="Calculator" Visibility="{Binding Path=SelectedIndex, ElementName=transact_type_cb, Converter={StaticResource Compare2AssignVisibilityConverter}, ConverterParameter=0}" Label="Ödeme Yap" Margin="20,47,10,0" HorizontalAlignment="Right" 
+            <AppBarButton IsEnabled="{Binding CurrentActorInfoEditable, Converter={StaticResource InvertBooleanConverter}}" Grid.Column="2" Icon="Calculator" Label="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#commands|doPayment'}" Margin="20,47,20,0" HorizontalAlignment="Right" 
                           Command="{Binding GoNextCmd}"  />
-            </StackPanel>
         </Grid>
+        
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140"/>
@@ -72,11 +69,14 @@
                     <RadioButton x:Name="CustomerInfoRB" GroupName="CustInfoNNewRecRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Text="&#xE136; " />
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Text="Hesap Bilgileri" />
+                            <TextBlock x:Uid="transact_acct_inf_cb" FontFamily="Segoe UI Symbol" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Text="Account Information" />
                         </StackPanel>
                     </RadioButton>
                     <RadioButton x:Name="NewRecordRB" GroupName="CustInfoNNewRecRadioGroup" Padding="0" Background="#d74f2a" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsEnabled="{Binding CurrentActorInfoEditable, Converter={StaticResource InvertBooleanConverter}}">
-                        <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="&#xE193; Yeni Kayıt" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Text="&#xE193; " />
+                            <TextBlock x:Uid="transact_new_rec_cb" FontFamily="Segoe UI Symbol" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Text="New Record" />
+                        </StackPanel>
                     </RadioButton>
                 </CRSPanels:CRSRadioButtonPanel>
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Visibility="{Binding Path=IsChecked, ElementName=CustomerInfoRB, Converter={StaticResource Boolean2VisibilityConverter}}">
@@ -93,32 +93,29 @@
                                     <TextBlock Text="&#xE104;" Visibility="{Binding Path=Visibility, ElementName=saveButtonIcon, Converter={StaticResource InvertVisibilityConverter}}" />
                                 </StackPanel>
                             </CRSControls:CrsButton>
-                            <Border Grid.Column="2" Background="#28ffffff" BorderBrush="#d74f2a"  BorderThickness="3" >
-                                <DatePicker FontSize="10" FontWeight="SemiBold" Date="{Binding Path=TransactInfo.Date, Mode=TwoWay}"  VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{Binding CurrentActorInfoEditable}" />
-                            </Border>
-                        </Grid>
-                        <Grid Height="50">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <ComboBox Grid.Column="0" x:Name="c" BorderThickness="0" Foreground="Black" SelectedIndex="{Binding Path=ActorRegistedIndex, Mode=TwoWay}" Background="Silver" IsEnabled="{Binding CurrentActorInfoEditable}" Style="{StaticResource ComboBoxStyle2}">
-                                <ComboBoxItem>
-                                    <TextBlock FontSize="20" FontWeight="SemiBold" Text="Normal" />
-                                </ComboBoxItem>
-                                <ComboBoxItem x:Name="RegisteredCBItem">
-                                    <TextBlock FontSize="20" FontWeight="SemiBold" Text="Kayıtlı" />
-                                </ComboBoxItem>
-                            </ComboBox>
-                            <ComboBox Grid.Column="2" BorderThickness="0" Foreground="Black" SelectedIndex="{Binding Path=CurrentActor.Type, Mode=TwoWay}" Background="Silver" IsEnabled="{Binding CurrentActorTypeEditable}" Style="{StaticResource ComboBoxStyle2}">
-                                <ComboBoxItem x:Name="PersonCBItem">
-                                    <TextBlock FontSize="20" FontWeight="SemiBold" Text="Kişi" />
-                                </ComboBoxItem>
-                                <ComboBoxItem x:Name="FirmCBItem">
-                                    <TextBlock FontSize="20" FontWeight="SemiBold" Text="Firma" />
-                                </ComboBoxItem>
-                            </ComboBox>
+                            <Grid Height="50" Grid.Column="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Grid.Column="0" BorderThickness="0" Foreground="Black" SelectedIndex="{Binding Path=ActorRegistedIndex, Mode=TwoWay}" Background="Silver" IsEnabled="{Binding CurrentActorInfoEditable}" Style="{StaticResource ComboBoxStyle2}">
+                                    <ComboBoxItem>
+                                        <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#actorFields|Normal'}" />
+                                    </ComboBoxItem>
+                                    <ComboBoxItem x:Name="RegisteredCBItem">
+                                        <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#actorFields|Registered'}" />
+                                    </ComboBoxItem>
+                                </ComboBox>
+                                <ComboBox Grid.Column="2" BorderThickness="0" Foreground="Black" SelectedIndex="{Binding Path=CurrentActor.Type, Mode=TwoWay}" Background="Silver" IsEnabled="{Binding CurrentActorTypeEditable}" Style="{StaticResource ComboBoxStyle2}">
+                                    <ComboBoxItem x:Name="PersonCBItem">
+                                        <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#actorFields|Person'}" />
+                                    </ComboBoxItem>
+                                    <ComboBoxItem x:Name="FirmCBItem">
+                                        <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#actorFields|Firm'}" />
+                                    </ComboBoxItem>
+                                </ComboBox>
+                            </Grid>
                         </Grid>
                         <Grid Visibility="{Binding Path=IsSelected, ElementName=RegisteredCBItem,Converter={StaticResource Boolean2VisibilityConverter}}" >
                             <Grid.ColumnDefinitions>
@@ -128,9 +125,10 @@
                             <Button Grid.Column="0" Height="56" Width="56" Margin="-3" FontFamily="Segoe UI Symbol" FontSize="23" Padding="0" Content="&#xE11A;" Background="#d74f2a" Command="{Binding SelectRecordedActorCmd}" IsEnabled="{Binding CurrentActorInfoEditable}" />
                             <CRSControls:CrsTextBox  Grid.Column="1" FontSize="26" Margin="5,0,0,0"  Height="50" Input="{Binding Path=CurrentActor.Id, Mode=TwoWay}" ThemeBrush="#d74f2a" IconVisibility="Collapsed" Remark="Kayıt Numarası" Required="True" InputType="NUMBER" ReadOnly="True" />
                         </Grid>
-                        <CRSControls:CrsTextBox FontSize="26" Height="50" Input="{Binding Path=CurrentActor.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="BOY" Remark="İsim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=PersonCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
-                        <CRSControls:CrsTextBox FontSize="26" Height="50" Input="{Binding Path=CurrentActor.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="FIRM" Remark="İsim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=FirmCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
-                        <CRSControls:CrsTextBox FontSize="26" Height="50" Input="{Binding Path=CurrentActor.Surname, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="BOY" Remark="Soyisim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=PersonCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                        <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=TransactInfo.Date, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="TODAY" Remark="Tarih" Required="True" InputType="ALL" ReadOnly="True" />
+                        <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="BOY" Remark="İsim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=PersonCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                        <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="FIRM" Remark="İsim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=FirmCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                        <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Surname, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="BOY" Remark="Soyisim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=PersonCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
                         <Grid Height="50" Visibility="{Binding IsSelected, ElementName=RegisteredCBItem, Converter={StaticResource Boolean2VisibilityConverter}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50"/>
@@ -142,7 +140,7 @@
                             <ComboBox Grid.Column="1" Height="50" Grid.Row="0" BorderThickness="0" Foreground="Black" Background="Silver" ItemsSource="{Binding Accounts}" SelectedItem="{Binding CurrentAccount, Mode=TwoWay}" IsEnabled="{Binding CurrentActorInfoEditable}" Style="{StaticResource ComboBoxStyle2}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Background="#18ffffff" Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Id}" />
                                             <TextBlock FontSize="20" FontWeight="SemiBold" Text=" - " />
                                             <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Name}" />
@@ -151,9 +149,9 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </Grid>
-                        <CRSControls:CrsTextBox FontSize="26" Height="50" Input="{Binding Path=CurrentActor.PhoneNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="PHONE" Remark="Telefon" InputType="PHONENUMBER" ReadOnly="{Binding ActorInfoReadyOnly}" />
-                        <CRSControls:CrsTextBox FontSize="26" Height="50" Input="{Binding Path=CurrentActor.MobileNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="CELLPHONE" Remark="Cep Telefonu" InputType="PHONENUMBER" ReadOnly="{Binding ActorInfoReadyOnly}" />
-                        <CRSControls:CrsTextBox FontSize="26" Height="100" Input="{Binding Path=CurrentActor.Address, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="PIN" Remark="Adres"  Multiline="True" InputType="ALL" ReadOnly="{Binding ActorInfoReadyOnly}" />
+                        <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.PhoneNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="PHONE" Remark="Telefon" InputType="PHONENUMBER" ReadOnly="{Binding ActorInfoReadyOnly}" />
+                        <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.MobileNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="CELLPHONE" Remark="Cep Telefonu" InputType="PHONENUMBER" ReadOnly="{Binding ActorInfoReadyOnly}" />
+                        <CRSControls:CrsTextBox FontSize="24" Height="100" Input="{Binding Path=CurrentActor.Address, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="PIN" Remark="Adres"  Multiline="True" InputType="ALL" ReadOnly="{Binding ActorInfoReadyOnly}" />
                     </CRSPanels:CrsFormView>
                 </ScrollViewer>
                 <Grid Grid.Row="2" Visibility="{Binding Path=IsChecked,ElementName=NewRecordRB, Converter={StaticResource Boolean2VisibilityConverter}}">
@@ -176,7 +174,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <CRSControls:CrsTextBox FontSize="26" x:Uid="sales_amount" ThemeBrush="Silver" BorderThickness="2" Height="45" Grid.Column="0" FontWeight="SemiBold" Input="{Binding Path=EntryBuff.Amount, Mode=TwoWay }" InputType="DOUBLE" IconVisibility="Collapsed" Required="True" Remark="Amount"/>
+                                <CRSControls:CrsTextBox FontSize="22" x:Uid="sales_amount_textbox" ThemeBrush="Silver" BorderThickness="2" Height="45" Grid.Column="0" FontWeight="SemiBold" Input="{Binding Path=EntryBuff.Amount, Mode=TwoWay }" InputType="DOUBLE" IconVisibility="Collapsed" Required="True" Remark="Amount"/>
                                 <ComboBox Grid.Column="1" BorderThickness="0" Foreground="Black" ItemsSource="{Binding Measures}" Background="Silver" SelectedIndex="{Binding Path=EntryBuff.Measure, Mode=TwoWay}" IsEnabled="False" Style="{StaticResource ComboBoxStyle2}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
@@ -186,17 +184,12 @@
                                 </ComboBox>
                             </Grid>
                             <CRSControls:CrsButton Grid.Column="2" Height="51" Margin="-3" VerticalAlignment="Stretch" Padding="0" Background="#d74f2a" HorizontalAlignment="Stretch" Command="{Binding AddEntryToListCmd}" Validation="True" IsEnabled="{Binding Path=SelectedItem, ElementName=goodList, Converter={StaticResource NullRef2BoolConverter}}">
-                                <TextBlock x:Uid="transact_add_button" HorizontalAlignment="Center" FontFamily="Segoe UI Symbol" Text="Ekle" FontSize="24" />
+                                <TextBlock x:Uid="transact_add_button" HorizontalAlignment="Center" FontFamily="Segoe UI Symbol" Text="Add" FontSize="24" />
                             </CRSControls:CrsButton>
                         </Grid>
                     </CRSPanels:CrsFormView>
-                    <CRSControls:CrsTextBox FontSize="26" Grid.Row="2" FontWeight="SemiBold" ThemeBrush="Silver" BorderThickness="2" InputType="ALL" IconVisibility="Collapsed" Required="False" Remark="Search Good" TextChanged="{Binding GoodSearchBoxTextChangedCmd}" />
+                    <CRSControls:CrsTextBox x:Uid="sales_search_textbox"  FontSize="22" Grid.Row="2" FontWeight="SemiBold" ThemeBrush="Silver" BorderThickness="2" InputType="ALL" IconVisibility="Collapsed" Required="False" Remark="Search Good" Input="{Binding SearchGoodInput, Mode=TwoWay}" TextChanged="{Binding GoodSearchBoxTextChangedCmd}" />
                     <ListView x:Name="goodList" Grid.Row="4" VerticalAlignment="Top" ItemsSource="{Binding FoundGoods}" SelectedItem="{Binding SelectedGood, Mode=TwoWay}" ItemContainerStyle="{StaticResource ListViewItemStyle1}">
-                        <interactivity:Interaction.Behaviors>
-                            <core:EventTriggerBehavior EventName="Tapped">
-                                <core:InvokeCommandAction Command="{Binding SelectGoodCmd}"/>
-                            </core:EventTriggerBehavior>
-                        </interactivity:Interaction.Behaviors>
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Background="#18ffffff">
@@ -205,10 +198,10 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Column="0" Background="#48ffffff">
-                                        <Grid Grid.Row="0" Height="65" Width="65" Background="#008299" Visibility="{Binding Path=ShowImageLogo, Converter={StaticResource Boolean2VisibilityConverter}}">
-                                            <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE1cb;" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                        <Grid Grid.Row="0" Height="65" Width="65" Background="#008299" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=ShowImageLogo, Converter={StaticResource Boolean2VisibilityConverter}}">
+                                            <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE1cb;" FontSize="30" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
                                         </Grid>
-                                        <Image  Source="{Binding ImageFileSource, Mode=OneWay}" Width="65" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,7,0,0"></Image>
+                                        <Image  Source="{Binding ImageFileSource, Mode=OneWay}" Width="65" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
                                     </Grid>
                                     <Grid Grid.Column="1">
                                         <Grid.RowDefinitions>
@@ -223,16 +216,7 @@
                                             <TextBlock FontFamily="Segoe UI Symbol" FontSize="14" Text="{Binding BrandName, Mode=OneWay}" HorizontalAlignment="Right" Padding="5,0,5,0" VerticalAlignment="Center" />
                                         </Grid>
                                         <Grid Grid.Row="2">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                                <ColumnDefinition Width="25"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid Grid.Column="0">
-                                                <TextBlock Text="{Binding Price, Mode=OneWay}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
-                                            </Grid>
-                                            <Grid Grid.Column="1" Background="#008299">
-                                                <TextBlock Text="₺" FontSize="18" FontWeight="SemiBold" TextAlignment="Center"/>
-                                            </Grid>
+                                            <TextBlock Text="{Binding Price, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" FontFamily="Lucida Console" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,5,0" />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -260,10 +244,10 @@
                                 <ColumnDefinition Width="50"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <CheckBox Grid.Column="0" Margin="3,0,0,0" IsChecked="{Binding IsAllChecked, Mode=TwoWay}"></CheckBox>
-                            <TextBlock x:Uid="sales_list_amount" Grid.Column="1" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Amount" />
-                            <TextBlock x:Uid="sales_list_definition" Grid.Column="2" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Defition" />
-                            <TextBlock x:Uid="sales_list_unitprice" Grid.Column="3" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Unit Price" />
-                            <TextBlock x:Uid="sales_list_price" Grid.Column="4" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Price" />
+                            <TextBlock Grid.Column="1" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listHeader|Amount'}" />
+                            <TextBlock Grid.Column="2" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listHeader|Definition'}" />
+                            <TextBlock Grid.Column="3" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listHeader|UnitPrice'}" />
+                            <TextBlock Grid.Column="4" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listHeader|Price'}" />
                             <Button Width="50" Grid.Column="5" Background="#AD103C" VerticalAlignment="Stretch" Command="{Binding DeleteEntryCmd}">
                                 <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE108;" FontSize="20"></TextBlock>
                             </Button>
@@ -279,6 +263,7 @@
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                         <ColumnDefinition Width="150"></ColumnDefinition>
                                         <ColumnDefinition Width="200"></ColumnDefinition>
+                                        <ColumnDefinition Width="25"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <CheckBox Grid.Column="0" HorizontalAlignment="Left" IsChecked="{Binding IsChecked, Mode=TwoWay}"></CheckBox>
                                     <Grid Grid.Column="1">
@@ -290,8 +275,8 @@
                                         <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Measure, Mode=OneWay, Converter={StaticResource Value2RemarkConverter}, ConverterParameter='measures'}" />
                                     </Grid>
                                     <TextBlock Grid.Column="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Detail, Mode=OneWay}" TextWrapping="Wrap" />
-                                    <TextBlock Grid.Column="3" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding UnitCost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
-                                    <TextBlock Grid.Column="4" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Cost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
+                                    <TextBlock Grid.Column="3" FontFamily="Lucida Console" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding UnitCost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
+                                    <TextBlock Grid.Column="4" FontFamily="Lucida Console" FontSize="26" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Cost, Mode=OneWay, Converter={StaticResource Double2MoneyConverter}}" />
                                 </Grid>
                                 <Grid Visibility="{Binding Path=SelectedIndex, ElementName=transact_type_cb, Converter={StaticResource Compare2AssignVisibilityConverter}, ConverterParameter=1}">
                                     <Grid Height="100" Visibility="{Binding IsSelected, Converter={StaticResource Boolean2VisibilityConverter}}">
@@ -307,17 +292,17 @@
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
                                             <Grid Grid.Row="0">
-                                                <TextBlock VerticalAlignment="Center" FontSize="15">Sipariş Tarihi</TextBlock>
-                                                <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="{Binding Date, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
+                                                <TextBlock x:Uid="order_date_label" VerticalAlignment="Center" FontSize="15" Text="Order Date" />
+                                                <TextBox IsReadOnly="True" BorderBrush="#00ffffff" Background="#88000000" Foreground="White" Text="{Binding Date, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
 
                                             </Grid>
                                             <Grid Grid.Row="1">
-                                                <TextBlock VerticalAlignment="Center" FontSize="15">Değişiklik Tarihi</TextBlock>
-                                                <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="{Binding ModifyDate, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
+                                                <TextBlock x:Uid="order_stt_chg_date_label" VerticalAlignment="Center" FontSize="15" Text="Change Date" />
+                                                <TextBox IsReadOnly="True" BorderBrush="#00ffffff" Background="#88000000" Foreground="White" Text="{Binding ModifyDate, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
                                             </Grid>
                                             <Grid Grid.Row="2">
-                                                <TextBlock VerticalAlignment="Center" FontSize="15">Teslim Tarihi</TextBlock>
-                                                <TextBox BorderBrush="#00ffffff" BorderThickness="3" Text="{Binding DeliveryDate, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
+                                                <TextBlock x:Uid="order_delivery_date_label" VerticalAlignment="Center" FontSize="15" Text="Delivery Date" />
+                                                <TextBox IsReadOnly="True" BorderBrush="#00ffffff" Background="#88000000" Foreground="White" Text="{Binding DeliveryDate, Mode=TwoWay}" HorizontalAlignment="Right" FontSize="14" Width="160"></TextBox>
                                             </Grid>
                                         </Grid>
                                         <Grid Grid.Column="1">
@@ -331,7 +316,7 @@
                                             <AppBarButton Grid.Column="2" VerticalAlignment="Bottom" Icon="Forward" FlowDirection="RightToLeft" Command="{Binding Path=DataContext.OrderNextStateCmd, ElementName=ViewRoot}"></AppBarButton>
                                         </Grid>
                                         <Grid Grid.Column="2">
-                                            <TextBox Header="Açıklama" BorderBrush="#00ffffff" BorderThickness="3" Text="{Binding MoreDetail, Mode=TwoWay}" />
+                                            <TextBox x:Uid="order_note_textbox" Header="Note" Background="#88000000" BorderBrush="#00ffffff" Foreground="White" BorderThickness="3" Text="{Binding MoreDetail, Mode=TwoWay}" />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -348,9 +333,9 @@
                         <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Entries.Count}" />
-                    <TextBlock x:Uid="list_record_num" Grid.Column="1" Padding="10,0,0,0" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Records" />
-                    <TextBlock x:Uid="total_amount" Grid.Column="2" Margin="10" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Total Amount" />
-                    <TextBox Grid.Column="3" FontFamily="Lucida Console" BorderThickness="5" BorderBrush="#00ffffff" Padding="2" TextAlignment="Center" Background="#88000000" Foreground="White" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Stretch" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=TransactInfo.Cost, Converter={StaticResource Double2MoneyConverter}}" />
+                    <TextBlock Grid.Column="1" Padding="10,0,0,0" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listFooter|Records'}" />
+                    <TextBlock Grid.Column="2" Margin="10" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listFooter|TotalCost'}" />
+                    <TextBox Grid.Column="3"  FontFamily="Lucida Console" BorderThickness="5" BorderBrush="#00ffffff" TextAlignment="Center" Background="#88000000" Foreground="White" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Stretch" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=TransactInfo.Cost, Converter={StaticResource Double2MoneyConverter}}" />
                 </Grid>
             </Grid>
         </Grid>

@@ -19,7 +19,7 @@ namespace CommercialRecordSystem.Controls
         {
             this.InitializeComponent();
 
-            FontSize = 32;
+            FontSize = 28;
             BorderThickness = new Thickness(3);
             ThemeBrush = new SolidColorBrush(Colors.BlueViolet);
             FontWeight = FontWeights.SemiBold;
@@ -202,7 +202,7 @@ namespace CommercialRecordSystem.Controls
                 "IsValid",
                 typeof(bool),
                 typeof(CrsTextBox),
-                new PropertyMetadata(null)
+                new PropertyMetadata(true)
             );
         #endregion
         #region Multiline
@@ -381,27 +381,58 @@ namespace CommercialRecordSystem.Controls
         public enum INPUTTYPES { ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER }
 
         delegate object ConvertFromDelegate(string str);
+        delegate string ConvertForEditDelegate(string str);
+
         private struct InputTypeInfo
         {
             public string Pattern;
             public string StringFormat;
             public ConvertFromDelegate ConvertFrom;
+            public ConvertForEditDelegate ConvertForEdit;
 
-            public InputTypeInfo(string pattern, string stringFormat, ConvertFromDelegate convertFrom)
+
+            public InputTypeInfo(string pattern, string stringFormat, ConvertFromDelegate convertFrom, ConvertForEditDelegate convertForEdit)
             {
                 Pattern = pattern;
                 StringFormat = stringFormat;
                 ConvertFrom = convertFrom;
+                ConvertForEdit = convertForEdit;
             }
         }
 
+        private const string moneyPatternEng = @"^\$?\ ?[+-]?[0-9]{1,3}(?:[0-9]*(?:[.,][0-9]{2})?|(?:,[0-9]{3})*(?:\.[0-9]{2})?|(?:\.[0-9]{3})*(?:,[0-9]{2})?)$";
+        private const string moneyPatternTur = @"^([1-9]{1}[\d]{0,2}(\.[\d]{3})*(\,[\d]{0,2})?(\ ?(₺))?|[1-9]{1}[\d]{0,}(\,[\d]{0,2})?(\ ?(₺))?|0(\,[\d]{0,2})?(\ ?(₺))?|(\,[\d]{1,2})?(\ ?(₺))?)$";
+
         private static readonly Dictionary<INPUTTYPES, InputTypeInfo> InputTypeDic = new Dictionary<INPUTTYPES, InputTypeInfo>() { 
-            {INPUTTYPES.ALL, new InputTypeInfo(".*", "{0:g}", delegate(string value){ return value;})},
-            {INPUTTYPES.NAME, new InputTypeInfo(@"^[a-zA-ZçÇıİüÜöÖşŞğĞ]*[\s]*[a-zA-ZçÇıİüÜöÖşŞğĞ|]*$", "{0:g}", delegate(string value){ return value;})},
-            {INPUTTYPES.NUMBER, new InputTypeInfo(@"^\d+$", "{0:#}", delegate(string value){ int returnVal = 0; int.TryParse(value, out returnVal); return returnVal;})},
-            {INPUTTYPES.DOUBLE, new InputTypeInfo(@"^-?\d*\.?\d+$", "{0:#,#.#}", delegate(string value){ double returnVal = 0; double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); return returnVal;})},
-            {INPUTTYPES.MONEY, new InputTypeInfo(@"^((\d+)|(\d{1,3})(\.\d{3})*)(\,\d{2,})?$", "{0:#,#.#}", delegate(string value){ double returnVal = 0; double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); return returnVal;})},
-            {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^(((\+?\d)?\d)?\s?\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", "{0:g}", 
+            {INPUTTYPES.ALL, new InputTypeInfo(".*", "{0:g}", delegate(string value){ return value;}, delegate(string value){return value;})},
+            {INPUTTYPES.NAME, new InputTypeInfo(@"^[a-zA-ZçÇıİüÜöÖşŞğĞ]*[\s]*[a-zA-ZçÇıİüÜöÖşŞğĞ|]*$", "{0:g}", delegate(string value){ return value;}, delegate(string value){return value;})},
+            {INPUTTYPES.NUMBER, new InputTypeInfo(@"^\d+$", "{0:#}", delegate(string value){ int returnVal = 0; int.TryParse(value, out returnVal); return returnVal;}, delegate(string value){return value;})},
+            {INPUTTYPES.DOUBLE, new InputTypeInfo(@"^-?\d*[\.\,]?\d+$", 
+                "{0:0.00}", 
+                delegate(string value){ 
+                    double returnVal = 0; 
+                    double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); 
+                    return returnVal;
+                }, 
+                delegate(string value){
+                        double returnVal = 0; 
+                        double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal);
+                        return string.Format(CultureInfo.CurrentCulture, "{0:0.00}", returnVal);
+                })
+            },
+            {INPUTTYPES.MONEY, new InputTypeInfo(CrsDictionary.CurrentLanguage == CrsDictionary.TURKISH?moneyPatternTur:moneyPatternEng, 
+                "{0:C2}",
+                delegate(string value){ 
+                    double returnVal = 0; 
+                    double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); 
+                    return returnVal;
+                }, 
+                delegate(string value){
+                    double returnVal = 0; 
+                    double.TryParse(value, NumberStyles.Currency, CultureInfo.CurrentCulture, out returnVal);
+                    return string.Format(CultureInfo.CurrentCulture, "{0:0.00}", returnVal);
+                })},
+            {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^(((\+?\d)?\d)?\s?\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", "{0:N}", 
                 delegate(string value){
                     string numberBuff = value.Replace(" ", String.Empty);
                     string part1 = numberBuff.Length >= 4 ? numberBuff.Substring(numberBuff.Length - 4, 4) : "";
@@ -409,6 +440,9 @@ namespace CommercialRecordSystem.Controls
                     string part3 = numberBuff.Length >= 10 ? numberBuff.Substring(numberBuff.Length - 10, 3) + " ": "";
                     string part4 = numberBuff.Length >= 13 ? numberBuff.Substring(numberBuff.Length - 13, 3) + " " : "";
                     return part4 + part3 + part2 + part1;
+                }, 
+                delegate(string value){
+                    return value.Replace(" ", String.Empty);
                 })}
         };
         #endregion
@@ -421,30 +455,31 @@ namespace CommercialRecordSystem.Controls
 
         #endregion
 
-        public void CheckIsValid()//string callFrom = "")
+        public void CheckIsValid()
         {
             if (string.IsNullOrWhiteSpace(textbox.Text))
-                isEmpty = true;
-
-            if (isEmpty)
             {
+                isEmpty = true;
                 setAsEmpty();
-                if (Required)
-                {
-                    IsValid = false;
-                    if (AnyClickHandled)
-                        this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
-                }
+            }
 
-                //if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
-                this.Input = null;
+            if (ReadOnly)
+            {
+                IsValid = true;
+                this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
             }
             else
             {
-                if (ReadOnly)
+                if (isEmpty)
                 {
-                    IsValid = true;
-                    this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+                    if (Required)
+                    {
+                        IsValid = false;
+                        if (AnyClickHandled)
+                            this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                    }
+
+                    this.Input = null;
                 }
                 else
                 {
@@ -453,8 +488,6 @@ namespace CommercialRecordSystem.Controls
                     if (Regex.IsMatch(text, InputTypeDic[InputType].Pattern))
                     {
                         IsValid = true;
-                        //if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
-                        //  justUpdateInput();
 
                         this.Input = InputTypeDic[InputType].ConvertFrom(textbox.Text);
 
@@ -464,58 +497,25 @@ namespace CommercialRecordSystem.Controls
                     {
                         IsValid = false;
                         this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
-
-                        //if (!callFrom.Equals(INPUT_CHANGE_HANDLER))
-                        //  justUpdateInput();
-
-                        Input = null;
                     }
                 }
             }
         }
 
-        /*private void justUpdateInput()
-        {
-            updateInput = true;
-        }*/
-
         protected void OnApplyTemplate()
         {
-            BorderBrush = ThemeBrush;
+            textbox.GotFocus += gotFocusHandler;
+            textbox.LostFocus += LostFocusHandler;
+            textbox.TextChanged += TextChangedHandler;
 
-            if (this.ReadOnly)
-                this.BorderBrush = ColorConsts.TEXTBOX_BACKGROUND_VALID;
-            else
-                if (this.Required && !this.ReadOnly)
-                    RequiredSignVisibility = Visibility.Visible;
-
-            string newValueStr = string.Format(InputTypeDic[InputType].StringFormat, Input);
-            if (string.IsNullOrWhiteSpace(newValueStr))
-            {
-                Input = null; // calls changed handler and set textbox as empty
-                setAsEmpty();
-            }
-            else
-            {
-                textbox.Text = newValueStr;
-                setAsNotEmpty();
-            }
+            if (this.Required && !this.ReadOnly)
+                RequiredSignVisibility = Visibility.Visible;
 
             if (Multiline)
             {
                 textbox.TextWrapping = TextWrapping.Wrap;
                 textbox.AcceptsReturn = true;
             }
-            textbox.GotFocus += gotFocusHandler;
-            textbox.LostFocus += LostFocusHandler;
-            textbox.TextChanged += TextChangedHandler;
-
-            if (Required)
-                IsValid = false;
-            else
-                IsValid = true;
-
-            this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
 
             Thickness thicknessBuff = new Thickness(this.BorderThickness.Top);
 
@@ -537,7 +537,11 @@ namespace CommercialRecordSystem.Controls
                     break;
             }
 
+            BorderBrush = ThemeBrush;
             BorderThickness = thicknessBuff;
+            ApplyChanges4ReadyOnly();
+
+            CheckIsValid();
         }
 
         private void gotFocusHandler(object sender, RoutedEventArgs e)
@@ -555,6 +559,10 @@ namespace CommercialRecordSystem.Controls
                     IsValid = true;
                     this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
                 }
+                else
+                {
+                    textbox.Text = InputTypeDic[InputType].ConvertForEdit(textbox.Text);
+                }
 
                 AnyClickHandled = true;
             }
@@ -563,6 +571,9 @@ namespace CommercialRecordSystem.Controls
         private void LostFocusHandler(object sender, RoutedEventArgs e)
         {
             CheckIsValid();
+            if (IsValid && !isEmpty)
+                textbox.Text = string.Format(InputTypeDic[InputType].StringFormat, InputTypeDic[InputType].ConvertFrom(textbox.Text.Trim()));
+            
         }
 
         private void TextChangedHandler(object sender, RoutedEventArgs e)
@@ -599,29 +610,7 @@ namespace CommercialRecordSystem.Controls
 
         private static void ReadOnlyChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            CrsTextBox CrsTextBox = (CrsTextBox)obj;
-            if ((bool)e.NewValue)
-            {
-                if (CrsTextBox.Required)
-                {
-                    CrsTextBox.RequiredSignVisibility = Visibility.Collapsed;
-                }
-                if (!CrsTextBox.IsValid)
-                {
-                    CrsTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
-                }
-                CrsTextBox.BorderBrush = ColorConsts.TEXTBOX_BACKGROUND_VALID;
-            }
-            else
-            {
-                if (CrsTextBox.Required)
-                {
-                    CrsTextBox.RequiredSignVisibility = Visibility.Visible;
-                    if (CrsTextBox.isEmpty && !CrsTextBox.IsValid && CrsTextBox.AnyClickHandled)
-                        CrsTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
-                }
-                CrsTextBox.BorderBrush = CrsTextBox.ThemeBrush;
-            }
+            ((CrsTextBox)obj).ApplyChanges4ReadyOnly();
         }
 
         private static void IconChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
@@ -644,6 +633,7 @@ namespace CommercialRecordSystem.Controls
             if (null != CrsTextBox.textbox)
             {
                 string newValueStr = string.Format(InputTypeDic[CrsTextBox.InputType].StringFormat, e.NewValue);
+
                 CrsTextBox.textbox.Text = newValueStr;
 
                 CrsTextBox.setAsNotEmpty();
@@ -667,6 +657,33 @@ namespace CommercialRecordSystem.Controls
 
             ((CrsTextBox)d).remarkBuff = remarkTemp;
         }
+
+        private void ApplyChanges4ReadyOnly()
+        {
+            if (ReadOnly)
+            {
+                if (Required)
+                {
+                    RequiredSignVisibility = Visibility.Collapsed;
+                }
+                if (!IsValid)
+                {
+                    Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+                }
+                BorderBrush = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+            }
+            else
+            {
+                if (Required)
+                {
+                    RequiredSignVisibility = Visibility.Visible;
+                    if (isEmpty && !IsValid && AnyClickHandled)
+                        Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                }
+                BorderBrush = ThemeBrush;
+            }
+        }
+
         private void setAsEmpty()
         {
             isEmpty = true;

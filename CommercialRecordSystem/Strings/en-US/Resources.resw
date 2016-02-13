@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="list_record_num.Text" xml:space="preserve">
-    <value>Records</value>
-  </data>
   <data name="payment_header.Text" xml:space="preserve">
     <value>Payment</value>
   </data>
@@ -135,94 +132,67 @@
   <data name="payment_total_paid_amount.Text" xml:space="preserve">
     <value>Total Paid Amount</value>
   </data>
-  <data name="payment_type_cash.Text" xml:space="preserve">
-    <value>Cash</value>
-  </data>
-  <data name="payment_type_creditcard.Text" xml:space="preserve">
-    <value>Credit Card</value>
-  </data>
-  <data name="payment_type_other.Text" xml:space="preserve">
-    <value>Other</value>
-  </data>
-  <data name="sales_list_amount.Text" xml:space="preserve">
-    <value>Amount</value>
-  </data>
-  <data name="sales_list_definiton.Text" xml:space="preserve">
-    <value>Definition</value>
-  </data>
-  <data name="sales_list_price.Text" xml:space="preserve">
-    <value>Price</value>
-  </data>
-  <data name="sales_list_unitprice.Text" xml:space="preserve">
-    <value>Unit Price</value>
-  </data>
-  <data name="total_amount.Text" xml:space="preserve">
-    <value>Total Amount</value>
-  </data>
-  <data name="Transacts_List_Header_Actor.Text" xml:space="preserve">
-    <value>Account Information</value>
-  </data>
-  <data name="Transacts_List_Header_Date.Text" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="Transacts_List_Header_Paid.Text" xml:space="preserve">
-    <value>Paid</value>
-  </data>
-  <data name="Transacts_List_Header_RemainingAmount.Text" xml:space="preserve">
-    <value>Remaining Amount</value>
-  </data>
-  <data name="Transacts_List_Header_Transact.Text" xml:space="preserve">
-    <value>Transact</value>
-  </data>
   <data name="Transacts_page_title.Text" xml:space="preserve">
     <value>Current Transactions</value>
   </data>
   <data name="transact_add_button.Text" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="transact_newrecord.Text" xml:space="preserve">
-    <value>New Record</value>
-  </data>
-  <data name="current_account_list_footer_rec_count.Text" xml:space="preserve">
-    <value>Records</value>
-  </data>
-  <data name="current_account_list_footer_total_account.Text" xml:space="preserve">
-    <value>Total</value>
-  </data>
-  <data name="current_account_list_header_account.Text" xml:space="preserve">
-    <value>Account</value>
-  </data>
-  <data name="current_account_list_header_lasttransactdate.Text" xml:space="preserve">
-    <value>Last Transact Date</value>
-  </data>
-  <data name="current_account_list_header_name.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="current_account_list_header_surname.Text" xml:space="preserve">
-    <value>Surname</value>
-  </data>
-  <data name="actors_ordered_by_account.Text" xml:space="preserve">
-    <value>Order by Account</value>
-  </data>
-  <data name="actors_ordered_by_lasttrdate.Text" xml:space="preserve">
-    <value>Order by Last Transact Date</value>
-  </data>
-  <data name="actors_ordered_by_name.Text" xml:space="preserve">
-    <value>Order by Name</value>
-  </data>
-  <data name="actors_ordered_by_surname.Text" xml:space="preserve">
-    <value>Order by Surname</value>
-  </data>
-  <data name="current_accounts_title.Text" xml:space="preserve">
+  <data name="current_account_list.Text" xml:space="preserve">
     <value>Current Accounts</value>
   </data>
-  <data name="actor_account_transacts.Text" xml:space="preserve">
+  <data name="payment_amount_textbox.Remark" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="payment_detail_textbox.Remark" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="transact_acct_inf_cb.Text" xml:space="preserve">
+    <value>Account Information</value>
+  </data>
+  <data name="transact_new_rec_cb.Text" xml:space="preserve">
+    <value>New Record</value>
+  </data>
+  <data name="main_page_curr_acct.Text" xml:space="preserve">
+    <value>Current Accounts</value>
+  </data>
+  <data name="main_page_curr_trans.Text" xml:space="preserve">
     <value>Current Transactions</value>
   </data>
-  <data name="Transacts_List_Header_Cost.Text" xml:space="preserve">
-    <value>Cost</value>
+  <data name="main_page_ent_accts.Text" xml:space="preserve">
+    <value>Enterprise Accounts</value>
   </data>
-  <data name="sales_actor_info_ok.Text" xml:space="preserve">
-    <value>Ok</value>
+  <data name="main_page_goods.Text" xml:space="preserve">
+    <value>Goods</value>
+  </data>
+  <data name="main_page_settings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="main_page_title.Text" xml:space="preserve">
+    <value>Commercial Records</value>
+  </data>
+  <data name="main_page_trans_report.Text" xml:space="preserve">
+    <value>Transaction Reports</value>
+  </data>
+  <data name="sales_amount_textbox.Remark" xml:space="preserve">
+    <value>Miktar</value>
+  </data>
+  <data name="sales_search_textbox.Remark" xml:space="preserve">
+    <value>Search Good</value>
+  </data>
+  <data name="order_date_label.Text" xml:space="preserve">
+    <value>Order Date</value>
+  </data>
+  <data name="order_delivery_date_label.Text" xml:space="preserve">
+    <value>Delivery Date</value>
+  </data>
+  <data name="order_note_textbox.Header" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="order_stt_chg_date_label.Text" xml:space="preserve">
+    <value>Change Date</value>
+  </data>
+  <data name="enterpriseAccountsPageTitle.Text" xml:space="preserve">
+    <value>Enterprise Accounts</value>
   </data>
 </root>

@@ -7,24 +7,24 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Goods
     class GoodVM : InfoDataVMBase<Good>
     {
         #region Properties
-        public int firmId = 0;
-        public int FirmId
+        public int brandId = 0;
+        public int BrandId
         {
             get
             {
-                return firmId;
+                return brandId;
             }
             set
             {
-                if (firmId != value)
+                if (brandId != value)
                 {
-                    BrandVM firmBuff = new BrandVM();
-                    firmBuff.get(value);
-                    BrandName = firmBuff.Name;
+                    BrandVM brandBuff = new BrandVM();
+                    brandBuff.get(value);
+                    BrandName = brandBuff.Name;
                 }
 
-                firmId = value;
-                RaisePropertyChanged("FirmId");
+                brandId = value;
+                RaisePropertyChanged("BrandId");
 
             }
         }
@@ -140,7 +140,7 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Goods
             }
         }
 
-        private double vat;
+        private double vat = 18.0f;
         public double Vat
         {
             get

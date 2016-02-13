@@ -2,7 +2,7 @@
 using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models.Accounts;
 using CommercialRecordSystem.Models.IncomeNExpense;
-using CommercialRecordSystem.ViewModels.DataVMs.EnterpriseAccounts;
+using CommercialRecordSystem.ViewModels.DataVMs.Accounts.EnterpriseAccounts;
 using CommercialRecordSystem.ViewModels.DataVMs.IncomeNExpenses;
 using System;
 using System.Collections.Generic;

@@ -23,7 +23,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
         }
 
         public CategoryInfoFrameVM(FrameNavigation navigation)
-            : base(navigation, "Kategori", 1.0)
+            : base(navigation, CrsDictionary.getInstance().lookup("infoPageTitles", "category"), 1.0)
         {
             selectRecordedCategoryCmd = new ICommandImp(selectRecordedCategoryCmdHandler);
 

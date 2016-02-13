@@ -16,13 +16,14 @@ using Windows.UI.Xaml.Controls;
 using CommercialRecordSystem.Views;
 using CommercialRecordSystem.ViewModels.FrameVMs;
 using CommercialRecordSystem.ViewModels.DataVMs.Accounts;
+using CommercialRecordSystem.Models.Accounts;
 
 namespace CommercialRecordSystem.ViewModels
 {
     class ActorInfoFrameVM : InfoFrameVMBase<ActorVM, Actor>
     {
         public ActorInfoFrameVM(FrameNavigation navigation)
-            : base(navigation, "Kişi/Firma", 1.25)
+            : base(navigation, CrsDictionary.getInstance().lookup("infoPageTitles", "person_firm"), 1.25)
         {
             
         }
@@ -36,8 +37,8 @@ namespace CommercialRecordSystem.ViewModels
             {
                 CurrentAccountVM defaultAccount = new CurrentAccountVM();
                 defaultAccount.ActorId = CurrentInfo.Id;
-                defaultAccount.Type = "1";
-                defaultAccount.Name = "Cari Hesap 1";
+                defaultAccount.Type = CurrentAccount.TYPE_DEBT;
+                defaultAccount.Name = CrsDictionary.getInstance().lookup("instanceLabels", "currentAccount1");
                 defaultAccount.save();
             }
         }

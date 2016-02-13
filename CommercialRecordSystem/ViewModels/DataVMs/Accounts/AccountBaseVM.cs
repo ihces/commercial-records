@@ -5,8 +5,8 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Accounts
 {
     abstract class AccountBaseVM<E> : DataVMBase<E> where E: AccountBase, new()
     {
-        private string type;
-        public string Type
+        private int type = 0;
+        public int Type
         {
             get
             {
@@ -75,18 +75,18 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Accounts
             }
         }
 
-        private double totalDept;
-        public double TotalDept
+        private double totalDebt;
+        public double TotalDebt
         {
             get
             {
-                return totalDept;
+                return totalDebt;
             }
             set
             {
-                totalDept = value;
-                RaisePropertyChanged("TotalDept", false);
-                RaisePropertyChanged("RemainingDept", false);
+                totalDebt = value;
+                RaisePropertyChanged("TotalDebt", false);
+                RaisePropertyChanged("RemainingDebt", false);
             }
         }
 
@@ -101,21 +101,21 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Accounts
             {
                 totalCredit = value;
                 RaisePropertyChanged("TotalCredit", false);
-                RaisePropertyChanged("RemainingDept", false);
+                RaisePropertyChanged("RemainingDebt", false);
             }
         }
 
-        public double RemainingDept
+        public double RemainingDebt
         {
             get
             {
-                double remainingDept = TotalDept - TotalCredit;
-                if (double.Epsilon > Math.Abs(remainingDept))
+                double remainingDebt = TotalDebt - TotalCredit;
+                if (double.Epsilon > Math.Abs(remainingDebt))
                     Active = false;
                 else
                     Active = true;
 
-                return remainingDept;
+                return remainingDebt;
             }
         }
 

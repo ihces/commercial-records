@@ -1,13 +1,15 @@
 ﻿using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models.Accounts;
-using CommercialRecordSystem.ViewModels.DataVMs.EnterpriseAccounts;
-using CommercialRecordSystem.ViewModels.DataVMs.IncomeNExpenses;
+using CommercialRecordSystem.Models.Accounts.EnterpriseAccounts;
+using CommercialRecordSystem.ViewModels.DataVMs.Accounts.EnterpriseAccounts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecordSystem.ViewModels.FrameVMs
 {
@@ -28,6 +30,30 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             }
         }
 
+        private ObservableCollection<EnterpriseAccTransactVM> transacts = new ObservableCollection<EnterpriseAccTransactVM>();
+        public ObservableCollection<EnterpriseAccTransactVM> Transacts
+        {
+            get
+            {
+                return transacts;
+            }
+            set
+            {
+                transacts = value;
+                RaisePropertyChanged("Transacts");
+            }
+        }
+
+        private ObservableCollection<string> accountTypes = new ObservableCollection<string>(CrsDictionary.getInstance().getKeys("enterpriseAccountTypes"));
+        public ObservableCollection<string> AccountTypes
+        {
+            get
+            {
+                return accountTypes;
+            }
+        }
+
+        private EnterpriseAccountVM newAccountBuff;
         private EnterpriseAccountVM selectedAccount;
         public EnterpriseAccountVM SelectedAccount
         {
@@ -37,108 +63,168 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             }
             set
             {
-                selectedAccount = value;
+                if (null != value && !value.Equals(selectedAccount))
+                {
+                    if (null != selectedAccount && selectedAccount.Dirty)
+                    {
+                        needSaveAccountInfo();
+                    }
+
+                    if (!EnableAccountField)
+                    {
+                        selectedAccount = value;
+                        setTransacts();
+                    }
+                }
                 RaisePropertyChanged("SelectedAccount");
             }
         }
 
-        private ObservableCollection<IncomeNExpenseVM> accountRecords;
-        public ObservableCollection<IncomeNExpenseVM> AccountRecords
+        private void needSaveAccountInfo()
+        {
+            string message = "";
+            string header = "";
+            if (SelectedAccount.Recorded)
+            {
+                header = CrsDictionary.getInstance().lookup("notifications", "saveNewAccountHeader");
+                message = CrsDictionary.getInstance().lookup("notifications", "saveAccountMessage");
+            }
+            else
+            {
+                message = CrsDictionary.getInstance().lookup("notifications", "saveChangesHeader");
+                CrsDictionary.getInstance().lookup("notifications", "saveAccountMessage");
+            }
+            var messageDialog = new MessageDialog(message, header);
+
+            messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "noCommand"), null));
+            messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "yesCommand"), 
+                new UICommandInvokedHandler(this.DelInfoCommandInvokedHandler)));
+
+            messageDialog.DefaultCommandIndex = 1;
+            messageDialog.CancelCommandIndex = 0;
+            messageDialog.ShowAsync();
+        }
+
+        private void DelInfoCommandInvokedHandler(IUICommand command)
+        {
+            EnableAccountField = false;
+
+            if (null != newAccountBuff && !newAccountBuff.Recorded)
+                Accounts.Remove(newAccountBuff);
+        }
+
+        private IconElement accountConfButtonIcon = new SymbolIcon(Symbol.Edit);
+        public IconElement AccountConfButtonIcon
         {
             get
             {
-                return accountRecords;
+                return accountConfButtonIcon;
             }
             set
             {
-                accountRecords = value;
-                RaisePropertyChanged("AccountRecords");
+
+                accountConfButtonIcon = value;
+                RaisePropertyChanged("AccountConfButtonIcon");
             }
         }
 
-        private DateTime startDate;
-        public DateTime StartDate
+        private double totalAmount = 0;
+        public double TotalAmount
         {
             get
             {
-                return startDate;
+                return totalAmount;
             }
             set
             {
-                startDate = value;
-                RaisePropertyChanged("StartDate");
+                totalAmount = value;
+                RaisePropertyChanged("TotalAmount");
             }
         }
-
-        private DateTime endDate;
-        public DateTime EndDate
+        
+        private bool enableAccountField = false;
+        public bool EnableAccountField
         {
             get
             {
-                return endDate;
+                return enableAccountField;
             }
             set
             {
-                endDate = value;
-                RaisePropertyChanged("EndDate");
-            }
-        }
 
-        private int selectedListingModeIndex;
-        public int SelectedListingModeIndex
-        {
-            get
-            {
-                return selectedListingModeIndex;
-            }
-            set
-            {
-                selectedListingModeIndex = value;
-                RaisePropertyChanged("SelectedListingModeIndex");
-            }
-        }
+                enableAccountField = value;
+                if (enableAccountField)
+                    AccountConfButtonIcon = new SymbolIcon(Symbol.Save);
+                else
+                    AccountConfButtonIcon = new SymbolIcon(Symbol.Edit);
 
-        private int totalRecord;
-        public int TotalRecord
-        {
-            get
-            {
-                return totalRecord;
-            }
-            set
-            {
-                totalRecord = value;
-                RaisePropertyChanged("TotalRecord");
-            }
-        }
-
-        private double totalCost;
-        public double    TotalCost
-        {
-            get
-            {
-                return totalCost;
-            }
-            set
-            {
-                totalCost = value;
-                RaisePropertyChanged("TotalCost");
+                RaisePropertyChanged("EnableAccountField");
             }
         }
         #endregion
 
         #region Commands
-        
+        private readonly ICommand editCurrentAccountCmd;
+        public ICommand EditCurrentAccountCmd
+        {
+            get
+            {
+                return editCurrentAccountCmd;
+            }
+        }
+
+        private readonly ICommand createNewAccountCmd;
+        public ICommand CreateNewAccountCmd
+        {
+            get
+            {
+                return createNewAccountCmd;
+            }
+        }
         #endregion
 
         #region CommandHandlers
-        
+        private void createNewAccountCmd_execute(object obj)
+        {
+            if (Accounts[Accounts.Count - 1].Recorded)
+            {
+                newAccountBuff = new EnterpriseAccountVM();
+                newAccountBuff.Type = 0;
+                Accounts.Add(newAccountBuff);
+                SelectedAccount = newAccountBuff;
+                EnableAccountField = true;
+            }
+        }
+
+        private void editCurrentAccountCmd_execute(object obj)
+        {
+            if (EnableAccountField && SelectedAccount.Dirty)
+            {
+                string message = "";
+                if (!SelectedAccount.Recorded)
+                    message = CrsDictionary.getInstance().lookup("notifications", "newRecordSavedMessage");
+                else
+                    message = CrsDictionary.getInstance().lookup("notifications", "accInfoUpdatedMessage");
+                var messageDialog = new MessageDialog(message, CrsDictionary.getInstance().lookup("notifications", "accountInfoHeader"));
+
+                messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "okCommand"), null));
+
+                messageDialog.DefaultCommandIndex = 1;
+                messageDialog.CancelCommandIndex = 0;
+                messageDialog.ShowAsync();
+
+                SelectedAccount.save();
+            }
+
+            EnableAccountField = !EnableAccountField;
+        }
         #endregion
 
         public EnterpriseAccountsFrameVM(FrameNavigation navigation)
             : base(navigation)
         {
-            
+            createNewAccountCmd = new ICommandImp(createNewAccountCmd_execute);
+            editCurrentAccountCmd = new ICommandImp(editCurrentAccountCmd_execute);
             setAccounts();
         }
 
@@ -148,6 +234,21 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs
             orderByClauses.Add(c => c.Name);
 
             Accounts = new ObservableCollection<EnterpriseAccountVM>(await EnterpriseAccountVM.getList<EnterpriseAccountVM>(null, orderByClauses));
+
+            foreach (EnterpriseAccountVM acct in Accounts)
+                TotalAmount += acct.Balance;
+
+            SelectedAccount = Accounts[0];
+        }
+
+        private async Task setTransacts()
+        {
+            List<Expression<Func<EnterpriseAccTransact, object>>> orderByClauses = null;
+            orderByClauses = new List<Expression<Func<EnterpriseAccTransact, object>>>();
+            orderByClauses.Add(c => c.Date);
+
+            Transacts = new ObservableCollection<EnterpriseAccTransactVM>(
+                await EnterpriseAccTransactVM.getList<EnterpriseAccTransactVM>(c => c.AccountId == selectedAccount.Id, orderByClauses));
         }
     }
 }

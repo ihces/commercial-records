@@ -149,7 +149,7 @@ namespace CommercialRecordSystem.ViewModels
             }
 
             transactInfo.Date = selectedDate;
-            transactInfo.CustomerId = CurrentActor.Id;
+            transactInfo.ActorId = CurrentActor.Id;
 
             switch (SelectedTransactTypeIndex)
             {
@@ -187,9 +187,9 @@ namespace CommercialRecordSystem.ViewModels
                     if (this.transactInfo != null)
                     {
                         SelectedTransactTypeIndex = (int)transactInfo.Type - 1;
-                        if (0 != transactInfo.CustomerId)
+                        if (0 != transactInfo.ActorId)
                         {
-                            currentActor.get(transactInfo.CustomerId);
+                            currentActor.get(transactInfo.ActorId);
                             if (currentActor.Registered)
                             {
                                 registeredActor = CurrentActor;

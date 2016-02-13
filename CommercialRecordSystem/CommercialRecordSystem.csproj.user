@@ -7,5 +7,16 @@
     <AllowLocalNetworkLoopback>true</AllowLocalNetworkLoopback>
     <CreateCleanLayout>true</CreateCleanLayout>
     <UseSimulator>false</UseSimulator>
+    <RemoteDebugMachine>10.0.2.15</RemoteDebugMachine>
+    <UseAuthentication>true</UseAuthentication>
+    <RemoteDebugEnabled>false</RemoteDebugEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <UseSimulator>false</UseSimulator>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AppxPackageIsForStore>True</AppxPackageIsForStore>
+    <AppxShowAllApps>False</AppxShowAllApps>
+    <AppxBuildConfigurationSelection>x86|arm</AppxBuildConfigurationSelection>
   </PropertyGroup>
 </Project>

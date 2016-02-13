@@ -1,5 +1,6 @@
 ﻿using CommercialRecordSystem.Common;
 using CommercialRecordSystem.Models.Accounts;
+using System;
 using System.Linq;
 
 namespace CommercialRecordSystem.ViewModels.DataVMs.Accounts
@@ -21,7 +22,7 @@ namespace CommercialRecordSystem.ViewModels.DataVMs.Accounts
 
         public CurrentAccountVM() 
         {
-            Type = CrsDictionary.getInstance().getKeys("enterpriseAccountTypes").LastOrDefault();
+            Type = 0;
             Dirty = false;
         }
     }

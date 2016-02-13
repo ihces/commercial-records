@@ -22,7 +22,7 @@ namespace CommercialRecordSystem.ViewModels
     {
         #region Properties
         private ActorVM unregisteredActor = new ActorVM() { Type = Actor.TYPE_PERSON, Registered = false };
-        private ActorVM registeredActor = new ActorVM() { Type = Actor.TYPE_PERSON, Registered = false };
+        private ActorVM registeredActor = new ActorVM() { Type = Actor.TYPE_PERSON, Registered = true };
 
         private ObservableCollection<CurrentAccountVM> accounts;
         public ObservableCollection<CurrentAccountVM> Accounts
@@ -62,8 +62,7 @@ namespace CommercialRecordSystem.ViewModels
             set
             {
                 currentActorInfoEditable = value;
-                //assign actor info fields should be readonly or not.
-                ActorRegistedIndex = ActorRegistedIndex;
+                assignActorInfoReadOnly();
 
                 RaisePropertyChanged("CurrentActorInfoEditable");
             }
@@ -83,6 +82,36 @@ namespace CommercialRecordSystem.ViewModels
             }
         }
 
+        private void assignActorInfoReadOnly()
+        {
+            if (CurrentActorInfoEditable && NON_REGISTERED == ActorRegistedIndex)
+            {
+                ActorInfoReadyOnly = false;
+                CurrentActorTypeEditable = true;
+            }
+            else
+            {
+                ActorInfoReadyOnly = true;
+                CurrentActorTypeEditable = false;
+            }
+        }
+
+        private int transactTypeIndex = 0;
+        public int TransactTypeIndex
+        {
+            get
+            {
+                return transactTypeIndex;
+            }
+            set
+            {
+                transactTypeIndex = value;
+                TransactInfo.Type = value;
+                ActorRegistedIndex = NON_REGISTERED;
+                RaisePropertyChanged("TransactTypeIndex");
+            }
+        }
+
         private int actorRegistedIndex = NON_REGISTERED;
         public int ActorRegistedIndex
         {
@@ -92,38 +121,28 @@ namespace CommercialRecordSystem.ViewModels
             }
             set
             {
-                if (CurrentActorInfoEditable && NON_REGISTERED == value)
+                switch (value)
                 {
-                    ActorInfoReadyOnly = false;
-                    CurrentActorTypeEditable = true;
-                }
-                else
-                {
-                    ActorInfoReadyOnly = true;
-                    CurrentActorTypeEditable = false;
-                }
-
-                if (value != actorRegistedIndex)
-                {
-                    switch (value)
-                    {
-                        case NON_REGISTERED:
-                            if (CurrentActor.Registered)
-                                registeredActor = CurrentActor;
-                            CurrentActor = unregisteredActor;
-                            CurrentActor.Refresh();
-                            break;
-                        case REGISTERED:
-                            if (!CurrentActor.Registered)
-                                unregisteredActor = CurrentActor;
-                            CurrentActor = registeredActor;
-                            CurrentActor.Refresh();
-                            setAccounts();
-                            break;
-                    }
+                    case NON_REGISTERED:
+                        if (CurrentActor.Registered)
+                            registeredActor = CurrentActor;
+                        CurrentActor = unregisteredActor;
+                        CurrentActor.Refresh();
+                        CurrentAccount = new CurrentAccountVM();
+                        break;
+                    case REGISTERED:
+                        if (!CurrentActor.Registered)
+                            unregisteredActor = CurrentActor;
+                        CurrentActor = registeredActor;
+                        CurrentActor.Refresh();
+                        setAccounts();
+                        break;
                 }
 
                 actorRegistedIndex = value;
+
+                assignActorInfoReadOnly();
+
                 RaisePropertyChanged("ActorRegistedIndex");
             }
         }
@@ -139,6 +158,20 @@ namespace CommercialRecordSystem.ViewModels
             {
                 actorInfoReadyOnly = value;
                 RaisePropertyChanged("ActorInfoReadyOnly");
+            }
+        }
+
+        private string searchGoodInput = string.Empty;
+        public string SearchGoodInput
+        {
+            get
+            {
+                return searchGoodInput;
+            }
+            set
+            {
+                searchGoodInput = value;
+                RaisePropertyChanged("SearchGoodInput");
             }
         }
 
@@ -188,7 +221,8 @@ namespace CommercialRecordSystem.ViewModels
                 {
                     EntryBuff.Measure = "0";
                 }
-                else{
+                else
+                {
                     EntryBuff.Detail = value.Name;
                     EntryBuff.UnitCost = value.Price;
                     EntryBuff.Measure = value.Unit;
@@ -215,15 +249,6 @@ namespace CommercialRecordSystem.ViewModels
             get
             {
                 return editActorAccountInfoCmd;
-            }
-        }
-
-        private readonly ICommand selectGoodCmd;
-        public ICommand SelectGoodCmd
-        {
-            get
-            {
-                return selectGoodCmd;
             }
         }
 
@@ -276,45 +301,54 @@ namespace CommercialRecordSystem.ViewModels
         #region Command Handlers
         private void selectRecordedActorCmdHandler(object parameter)
         {
-            Navigation.Navigate(typeof(CurrentAccountList));
+            Navigation.Navigate(typeof(CurrentAccountList), TransactInfo.Type);
         }
 
         private void goodSearchBoxTextChangedCmdHandler(object parameter)
         {
-
-            if (null != parameter)
-            {
-                string searchBoxInputBuff = parameter.ToString();
-                if (!string.IsNullOrWhiteSpace(searchBoxInputBuff))
-                    findGoods(searchBoxInputBuff);
-                else
-                    FoundGoods = new ObservableCollection<GoodVM>();
-            }
+            if (!string.IsNullOrWhiteSpace((string)parameter))
+                findGoods(parameter.ToString());
+            else
+                FoundGoods = new ObservableCollection<GoodVM>();
         }
 
         private void editActorAccountInfoCmdHandler(object parameter)
         {
             if (CurrentActorInfoEditable)
             {
-                if (CurrentActor.Registered && !CurrentActor.Recorded)
+                if (CurrentActor.Registered && (!CurrentActor.Recorded || null == CurrentAccount))
                     ;
                 else
                 {
                     TransactTypeAssigned = true;
+
                     if (!CurrentActor.Registered)
                         CurrentActor.save();
-                    else
+
+                    if (TransactInfo.Recorded && CurrentAccount.Id != TransactInfo.AccountId)
                     {
-                        CurrentAccount.get(CurrentAccount.Id);
-                        TransactInfo.AccountId = CurrentAccount.Id;
+                        CurrentAccountVM oldAcctInfo = new CurrentAccountVM();
+                        oldAcctInfo.get(TransactInfo.AccountId);
+                        if (oldAcctInfo.Recorded)
+                        {
+                            oldAcctInfo.TotalCredit -= TransactInfo.Paid;
+                            oldAcctInfo.TotalDebt -= TransactInfo.Cost;
+                            oldAcctInfo.save();
+                        }
+
+                        if (CurrentAccount.Recorded)
+                        {
+                            CurrentAccount.TotalCredit += TransactInfo.Paid;
+                            CurrentAccount.TotalDebt += TransactInfo.Cost;
+
+                            CurrentAccount.save();
+                        }
                     }
 
-                    TransactInfo.CustomerId = CurrentActor.Id;
+                    TransactInfo.AccountId = CurrentAccount.Id;
+                    TransactInfo.ActorId = CurrentActor.Id;
 
                     TransactInfo.save();
-
-
-                    CurrentActor.Refresh();
                     TransactInfo.Refresh();
 
                     CurrentActorInfoEditable = false;
@@ -351,12 +385,18 @@ namespace CommercialRecordSystem.ViewModels
                     foreach (SaleEntryVM entry in Entries)
                     {
                         entry.OrderState = minOrderState;
+                        entry.ModifyDate = DateTime.Now;
+                        if (minOrderState == 5)
+                            entry.DeliveryDate = entry.ModifyDate;
                         entry.save();
                     }
                 }
                 else
                 {
                     SelectedEntry.OrderState = minOrderState;
+                    SelectedEntry.ModifyDate = DateTime.Now;
+                    if (minOrderState == 5)
+                        SelectedEntry.DeliveryDate = SelectedEntry.ModifyDate;
                     SelectedEntry.save();
                 }
             }
@@ -384,12 +424,14 @@ namespace CommercialRecordSystem.ViewModels
                     foreach (SaleEntryVM entry in Entries)
                     {
                         entry.OrderState = minOrderState;
+                        entry.ModifyDate = DateTime.Now;
                         entry.save();
                     }
                 }
                 else
                 {
                     SelectedEntry.OrderState = minOrderState;
+                    SelectedEntry.ModifyDate = DateTime.Now;
                     SelectedEntry.save();
                 }
             }
@@ -441,6 +483,7 @@ namespace CommercialRecordSystem.ViewModels
         {
             EntryBuff.Cost = EntryBuff.Amount * EntryBuff.UnitCost;
             base.addEntryToListCmdHandler(parameter);
+            SearchGoodInput = string.Empty;
         }
 
         //need review
@@ -465,8 +508,10 @@ namespace CommercialRecordSystem.ViewModels
             orderByClauses = new List<Expression<Func<CurrentAccount, object>>>();
             orderByClauses.Add(c => c.Name);
 
+            int typeBuff = TransactInfo.Type == 2?1:0;
+
             Accounts = new ObservableCollection<CurrentAccountVM>(
-                await CurrentAccountVM.getList<CurrentAccountVM>(c => c.ActorId == registeredActor.Id, orderByClauses));
+                await CurrentAccountVM.getList<CurrentAccountVM>(c => c.ActorId == registeredActor.Id && c.Type == typeBuff, orderByClauses));
 
             if (0 == TransactInfo.AccountId)
                 CurrentAccount = Accounts[0];

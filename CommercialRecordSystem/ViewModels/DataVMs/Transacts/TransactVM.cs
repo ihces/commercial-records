@@ -9,37 +9,37 @@ namespace CommercialRecordSystem.ViewModels
     class TransactVM : DataVMBase<Transact>
     {
         #region Properties
-        private int customerId = 0;
-        public int CustomerId
+        private int actorId = 0;
+        public int ActorId
         {
             get
             {
-                return customerId;
+                return actorId;
             }
             set
             {
-                if (customerId != value)
+                if (actorId != value)
                 {
-                    customerId = value;
-                    ActorVM customerBuff = new ActorVM();
-                    customerBuff.get(value);
-                    CustomerName = customerBuff.Name + " " + customerBuff.Surname;
+                    actorId = value;
+                    ActorVM actorBuff = new ActorVM();
+                    actorBuff.get(value);
+                    ActorName = actorBuff.Name + " " + actorBuff.Surname;
                 }
-                RaisePropertyChanged("CustomerId");
+                RaisePropertyChanged("ActorId");
             }
         }
 
-        private string customerName;
-        public string CustomerName
+        private string actorName;
+        public string ActorName
         {
             get
             {
-                return customerName;
+                return actorName;
             }
             set
             {
-                customerName = value;
-                RaisePropertyChanged("CustomerName");
+                actorName = value;
+                RaisePropertyChanged("ActorName");
             }
         }
 
@@ -54,6 +54,20 @@ namespace CommercialRecordSystem.ViewModels
             {
                 accountId = value;
                 RaisePropertyChanged("AccountId");
+            }
+        }
+
+        private int enterpriseAccId = 0;
+        public int EnterpriseAccId
+        { 
+            get
+            {
+                return enterpriseAccId;
+            }
+            set
+            {
+                enterpriseAccId = value;
+                RaisePropertyChanged("EnterpriseAccId");
             }
         }
 

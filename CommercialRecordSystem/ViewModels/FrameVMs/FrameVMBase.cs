@@ -1,6 +1,7 @@
 ﻿using CommercialRecordSystem.Common;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Reflection;
 using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
@@ -47,6 +48,20 @@ namespace CommercialRecordSystem.ViewModels
             {
                 showPageTitle = value;
                 RaisePropertyChanged("ShowPageTitle");
+            }
+        }
+
+        private bool pageReadOnly = false;
+        public bool PageReadOnly
+        {
+            get
+            {
+                return pageReadOnly;
+            }
+            set
+            {
+                pageReadOnly = value;
+                RaisePropertyChanged("PageReadOnly");
             }
         }
         #endregion
@@ -102,7 +117,9 @@ namespace CommercialRecordSystem.ViewModels
             this.navigation.PropertyData = new Dictionary<string, object>();
             foreach (PropertyInfo property in properties)
             {
-                if ("Navigation" != property.Name && !(property.PropertyType.Equals(typeof(ICommand))))
+                if ("Navigation" != property.Name && 
+                    !(property.PropertyType.Name.Equals("ICommand") ||
+                    property.PropertyType.Name.Equals("ObservableCollection`1")))
                     this.navigation.PropertyData.Add(property.Name, property.GetValue(this));
             }
 
@@ -111,7 +128,7 @@ namespace CommercialRecordSystem.ViewModels
         private void initPrevData(Dictionary<string, object> dataBuff)
         {
             PropertyInfo propertyBuff = null;
-            foreach (string key in dataBuff.Keys) 
+            foreach (string key in dataBuff.Keys)
             {
                 propertyBuff = this.GetType().GetRuntimeProperty(key);
                 if (propertyBuff.CanWrite)

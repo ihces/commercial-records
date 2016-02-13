@@ -17,7 +17,11 @@ namespace CommercialRecordSystem.Models
         public DateTime LastTransactDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public double TotalCost{ get; set; }
-        public double TotalPaid { get; set; }
+        public double ReceivableAccTotal{ get; set; }
+        public double ReceivableAccPaid { get; set; }
+        public double DebtAcctTotal { get; set; }
+        public double DebtAcctPaid { get; set; }
+        public int TotalAccount { get; set; }
+        public int ActiveAccNum { get; set; }
     }
 }

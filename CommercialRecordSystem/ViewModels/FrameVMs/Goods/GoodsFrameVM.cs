@@ -19,15 +19,15 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
     {
         public static readonly int DEFAULT_VIEW = 0;
         public static readonly int SELECT_GOOD = 1;
-        public static readonly int SELECT_FIRM = 2;
+        public static readonly int SELECT_BRAND = 2;
         public static readonly int SELECT_CATEGORY = 3;
         private int viewPurpose = DEFAULT_VIEW;
 
-        private readonly string[] good_OrderBy_List = new string[] { "Alfabetik Sıralı", "Markaya Göre Sıralı", "Kategoriye Göre Sıralı" };
-        private readonly string[] category_OrderBy_List = new string[] { "Hiyerarşik Sıralı", "Alfabetik Sıralı" };
+        private readonly List<string> good_OrderBy_List = CrsDictionary.getInstance().getValues("goodOrderBy").ToList();
+        private readonly List<string> category_OrderBy_List = CrsDictionary.getInstance().getValues("categoryOrderBy").ToList();
         private enum CategoryOrderType { ALPHABETICAL, HIERARCHICAL };
 
-        private List<BrandVM> firmsList;
+        private List<BrandVM> brandsList;
         private List<GoodVM> goodsList;
         private int ignoredCategoryId = 0;
 
@@ -73,57 +73,43 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
                 if (showGoods)
                 {
                     OrderByCriterias = new ObservableCollection<string>(good_OrderBy_List);
-                    ShowFirms = false;
+                    ShowBrands = false;
                     ShowCategories = false;
                 }
                 RaisePropertyChanged("ShowGoods");
             }
         }
 
-        private OrderedListVM<BrandVM, Firm> firmOrderedList;
-        public OrderedListVM<BrandVM, Firm> FirmOrderedList
+        private OrderedListVM<BrandVM, Brand> brandOrderedList;
+        public OrderedListVM<BrandVM, Brand> BrandOrderedList
         {
             get
             {
-                return firmOrderedList;
+                return brandOrderedList;
             }
             set
             {
-                firmOrderedList = value;
-                RaisePropertyChanged("FirmOrderedList");
+                brandOrderedList = value;
+                RaisePropertyChanged("BrandOrderedList");
             }
         }
-
-        private bool showDisplayList = true;
-        public bool ShowDisplayList
+        
+        private bool showBrands;
+        public bool ShowBrands
         {
             get
             {
-                return showDisplayList;
+                return showBrands;
             }
             set
             {
-                showDisplayList = value;
-                RaisePropertyChanged("ShowDisplayList");
-            }
-        }
-
-        private bool showFirms;
-        public bool ShowFirms
-        {
-            get
-            {
-                return showFirms;
-            }
-            set
-            {
-                showFirms = value;
-                if (showFirms)
+                showBrands = value;
+                if (showBrands)
                 {
                     ShowGoods = false;
                     ShowCategories = false;
                 }
-                RaisePropertyChanged("ShowFirms");
+                RaisePropertyChanged("ShowBrands");
             }
         }
 
@@ -155,13 +141,13 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
                 {
                     OrderByCriterias = new ObservableCollection<string>(category_OrderBy_List);
                     ShowGoods = false;
-                    ShowFirms = false;
+                    ShowBrands = false;
                 }
                 RaisePropertyChanged("ShowCategories");
             }
         }
 
-        private ObservableCollection<string> displayList;
+        private ObservableCollection<string> displayList = new ObservableCollection<string>(CrsDictionary.getInstance().getKeys("goodsSelectList"));
         public ObservableCollection<string> DisplayList
         {
             get
@@ -193,8 +179,8 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
                         ShowOrderByCriterias = true;
                         break;
                     case 1:
-                        setFirms(typeof(BrandVM).GetRuntimeProperty("Name"), true);
-                        ShowFirms = true;
+                        setBrands(typeof(BrandVM).GetRuntimeProperty("Name"), true);
+                        ShowBrands = true;
                         ShowOrderByCriterias = false;
                         break;
                     case 2:
@@ -292,17 +278,17 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
             }
         }
 
-        private BrandVM selectedFirm;
-        public BrandVM SelectedFirm
+        private BrandVM selectedBrand;
+        public BrandVM SelectedBrand
         {
             get
             {
-                return selectedFirm;
+                return selectedBrand;
             }
             set
             {
-                selectedFirm = value;
-                RaisePropertyChanged("SelectedFirm");
+                selectedBrand = value;
+                RaisePropertyChanged("SelectedBrand");
             }
         }
 
@@ -330,12 +316,12 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
             }
         }
 
-        private readonly ICommand tappedFirmCmd;
-        public ICommand TappedFirmCmd
+        private readonly ICommand tappedBrandCmd;
+        public ICommand TappedBrandCmd
         {
             get
             {
-                return tappedFirmCmd;
+                return tappedBrandCmd;
             }
         }
 
@@ -375,7 +361,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
                     OrderByCriteriaIndex = 0;
                     break;
                 case 1:
-                    setFirms(typeof(BrandVM).GetRuntimeProperty("Name"), true);
+                    setBrands(typeof(BrandVM).GetRuntimeProperty("Name"), true);
                     break;
                 case 2:
                     OrderByCriteriaIndex = 1;
@@ -404,15 +390,15 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
             navigation.Navigate<GoodInfo>(SelectedGood.Id);
         }
 
-        private void tappedFirmCmdHandler(object parameter)
+        private void tappedBrandCmdHandler(object parameter)
         {
             if (DEFAULT_VIEW == viewPurpose)
             {
-                navigation.Navigate<BrandInfo>(SelectedFirm.Id);
+                navigation.Navigate<BrandInfo>(SelectedBrand.Id);
             }
-            else if (SELECT_FIRM == viewPurpose)
+            else if (SELECT_BRAND == viewPurpose)
             {
-                navigation.GoBack(SelectedFirm);
+                navigation.GoBack(SelectedBrand);
             }
         }
 
@@ -435,62 +421,49 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
             querySubmittedCmd = new ICommandImp(querySubmittedCmd_execute);
             addButtonCmd = new ICommandImp(addButtonCmd_execute);
             tappedGoodCmd = new ICommandImp(tappedGoodCmdHandler);
-            tappedFirmCmd = new ICommandImp(tappedFirmCmdHandler);
+            tappedBrandCmd = new ICommandImp(tappedBrandCmdHandler);
             tappedCategoryCmd = new ICommandImp(tappedCategoryCmdHandler);
 
             if (null != navigation.Message)
             {
-                if (navigation.Back.PageType.Equals(typeof(GoodInfo)))
+                if (navigation.Back.Is<GoodInfo>())
                 {
                     viewPurpose = (int)navigation.Message;
-                    if (SELECT_FIRM == viewPurpose)
+                    if (SELECT_BRAND == viewPurpose)
                     {
-                        PageTitle = "Marka Seç";
-                        ShowOrderByCriterias = false;
-                        ShowFirms = true;
-                        setFirms(typeof(BrandVM).GetRuntimeProperty("Name"), true);
+                        SelectedDisplayListIndex = 1;
                     }
                     else if (SELECT_CATEGORY == viewPurpose)
                     {
-                        PageTitle = "Kategori Seç";
-                        ShowCategories = true;
-                        setCategories();
+                        SelectedDisplayListIndex = 2;
                     }
                 }
-                else if (navigation.Back.PageType.Equals(typeof(CategoryInfo)))
+                else if (navigation.Back.Is<CategoryInfo>())
                 {
                     ignoredCategoryId = (int)navigation.Message;
                     viewPurpose = SELECT_CATEGORY;
-                    PageTitle = "Kategori Seç";
-                    ShowCategories = true;
-                    setCategories(CategoryOrderType.ALPHABETICAL, ignoredCategoryId);
+                    SelectedDisplayListIndex = 2;
                 }
 
-                ShowDisplayList = false;
+                PageReadOnly = true;
             }
             else if (navigation.Forward == null)
             {
-                DisplayList = new ObservableCollection<string>();
-                DisplayList.Add("Ürünler");
-                DisplayList.Add("Firmalar");
-                DisplayList.Add("Kategoriler");
-
                 SelectedDisplayListIndex = 0;
-                ShowPageTitle = false;
             }
         }
 
-        private async Task setFirms(PropertyInfo orderProperty,
+        private async Task setBrands(PropertyInfo orderProperty,
             bool alphaNumericOrder = false, bool reverse = false,
-            Expression<Func<Firm, bool>> whereClause = null,
-            List<Expression<Func<Firm, object>>> orderByClauses = null)
+            Expression<Func<Brand, bool>> whereClause = null,
+            List<Expression<Func<Brand, object>>> orderByClauses = null)
         {
-            firmsList = await BrandVM.getList<BrandVM>(whereClause, orderByClauses);
+            brandsList = await BrandVM.getList<BrandVM>(whereClause, orderByClauses);
             if (!string.IsNullOrWhiteSpace(QueryText))
-                firmsList = firmsList.Where(c => c.Name.ToLower().Contains(QueryText.ToLower())).ToList();
+                brandsList = brandsList.Where(c => c.Name.ToLower().Contains(QueryText.ToLower())).ToList();
 
-            FirmOrderedList = new OrderedListVM<BrandVM, Firm>();
-            FirmOrderedList.FillList(firmsList, orderProperty, alphaNumericOrder, reverse);
+            BrandOrderedList = new OrderedListVM<BrandVM, Brand>();
+            BrandOrderedList.FillList(brandsList, orderProperty, alphaNumericOrder, reverse);
         }
 
         private async Task setGoods(PropertyInfo orderProperty,
@@ -511,7 +484,7 @@ namespace CommercialRecordSystem.ViewModels.FrameVMs.Goods
         private async Task setCategories(CategoryOrderType orderType = CategoryOrderType.HIERARCHICAL,
             int ignoredCatId = 0)
         {
-            List<CategoryVM> categoriesList = await CategoryVM.getList<CategoryVM>(null, null);
+            List<CategoryVM> categoriesList = await CategoryVM.getList<CategoryVM>();
 
             int depth = 0;
             if (orderType.Equals(CategoryOrderType.HIERARCHICAL))
