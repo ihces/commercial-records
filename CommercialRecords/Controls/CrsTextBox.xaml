@@ -1,0 +1,59 @@
+﻿<UserControl x:Name="TextBoxUC"
+    x:Class="CommercialRecords.Controls.CrsTextBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CommercialRecords.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="60"
+    d:DesignWidth="400" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+    <Grid Grid.Row="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Border x:Name="iconContainer" BorderBrush="{Binding ThemeBrush, ElementName=TextBoxUC}">
+            <Grid x:Name="icon" Background="{Binding ThemeBrush, ElementName=TextBoxUC}"
+                  Width="{Binding IconWidth, ElementName=TextBoxUC}">
+                <TextBlock Name="iconText"
+                           FontFamily="Segoe UI Symbol"
+                           FontWeight="SemiBold"
+                           FontSize="{Binding IconFontSize, ElementName=TextBoxUC}" 
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Stretch"
+                           TextAlignment="Center"
+                           Foreground="White" />
+                <TextBlock 
+                    FontFamily="Segoe UI Symbol" 
+                    FontWeight="SemiBold" 
+                    FontSize="{Binding IconFontSize, ElementName=TextBoxUC}"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Left" 
+                    Text="*"
+                    TextAlignment="Center"
+                    Margin="3,0,0,0"
+                    Foreground="Wheat"
+                    Visibility="{Binding RequiredSignVisibility, ElementName=TextBoxUC}"/>
+                </Grid>
+            </Border>
+        <Border Grid.Column="2"
+                 BorderBrush="{Binding BorderBrush, ElementName=TextBoxUC}"
+                 BorderThickness="{Binding BorderThickness, ElementName=TextBoxUC}">
+            <TextBox
+                 Name="textbox"
+                 TextWrapping="NoWrap"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 FontSize="{Binding FontSize, ElementName=TextBoxUC}"
+                 FontWeight="{Binding FontWeight, ElementName=TextBoxUC}"
+                 TextAlignment="Center" Foreground="White"
+                BorderThickness="0"
+                 Background="{Binding Background, ElementName=TextBoxUC, Mode=TwoWay}"
+                 IsReadOnly="{Binding ReadOnly, ElementName=TextBoxUC}"
+                 MaxLength="{Binding InputMaxLength, ElementName=TextBoxUC}"/>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<scripts>
+  <script id="query_actors_for_list">
+    Select
+    Actor.Id,
+    Actor.Type,
+    Actor.Name,
+    Actor.Surname,
+    Actor.Sincerity,
+    Actor.Address,
+    Actor.Detail,
+    Actor.PhoneNumber,
+    Actor.MobileNumber,
+    Actor.ImageFileName,
+    Actor.LastTransactDate,
+    Actor.CreatedDate,
+    Actor.ModifiedDate,
+    (select sum(TotalDebt) from CurrentAccount where CurrentAccount.ActorId = Actor.Id and CurrentAccount.Type = 1) ReceivableAccTotal,
+    (select sum(TotalCredit) from CurrentAccount where CurrentAccount.ActorId = Actor.Id and CurrentAccount.Type = 1) ReceivableAccPaid,
+    (select sum(TotalDebt) from CurrentAccount where CurrentAccount.ActorId = Actor.Id and CurrentAccount.Type = 0) DebtAcctTotal,
+    (select sum(TotalCredit) from CurrentAccount where CurrentAccount.ActorId = Actor.Id and CurrentAccount.Type = 0) DebtAcctPaid,
+    (select count(1) from CurrentAccount where CurrentAccount.ActorId = Actor.Id and (CurrentAccount.Type = {0} or {0} = -1)) TotalAccount,
+    (select count(1) from CurrentAccount where CurrentAccount.ActorId = Actor.Id and (CurrentAccount.Type = {0} or {0} = -1) and CurrentAccount.TotalDebt != CurrentAccount.TotalCredit) ActiveAccNum
+    from Actor Where
+    Actor.Registered=1 and (upper(Actor.Name) like '%{1}%' or upper(Actor.Surname) like '%{1}%') and
+    exists(select 1 from CurrentAccount where CurrentAccount.ActorId = Actor.Id and (CurrentAccount.Type = {0} or {0} = -1))
+  </script>
+</scripts>

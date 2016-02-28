@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dictionaries>
+  <dictionary id="measures">
+    <property key="0">Adet</property>
+    <property key="1">Paket</property>
+    <property key="2">Torba</property>
+    <property key="3">Kg</property>
+    <property key="4">Galon</property>
+    <property key="5">Tnk</property>
+  </dictionary>
+  <dictionary id="transactTypes">
+    <property key="0">Satış</property>
+    <property key="1">Sipariş</property>
+    <property key="2">Ürün Alımı</property>
+    <property key="3">Ödeme</property>
+  </dictionary>
+  <dictionary id="enterpriseAccTransactTypes">
+    <property key="0">Ödeme Alındı</property>
+    <property key="1">Ödeme Yapıldı</property>
+  </dictionary>
+  <dictionary id="paymentTypes">
+    <property key="0">Peşin</property>
+    <property key="1">Kredi Kartı</property>
+    <property key="2">Diğer</property>
+  </dictionary>
+  <dictionary id="accountTypes">
+    <property key="0">Borç Hesabı</property>
+    <property key="1">Alacak Hesabı</property>
+    <property key="2">Çek/Senet Hesabı</property>
+  </dictionary>
+  <dictionary id="enterpriseAccountTypes">
+    <property key="0">Kasa Hesabı</property>
+    <property key="1">Banka Hesabı</property>
+  </dictionary>
+  <dictionary id="goodOrderBy">
+    <property key="0">İsme Göre Sıralı</property>
+    <property key="1">Markaya Göre Sıralı</property>
+    <property key="2">Kategoriye Göre Sıralı</property>
+  </dictionary>
+  <dictionary id="categoryOrderBy">
+    <property key="0">İsme Göre Sıralı</property>
+    <property key="1">Hiyerarşiye Göre Sıralı</property>
+  </dictionary>
+  <dictionary id="orderStateTypes">
+    <property key="0">Başlangıç</property>
+    <property key="1">Ürün Temin Ediliyor </property>
+    <property key="2">Ürün Temin Edildi</property>
+    <property key="3">Ürün Teslim Ediliyor</property>
+    <property key="4">Ürün Teslim Edildi</property>
+    <property key="5">Tamamlandı</property>
+  </dictionary>
+  <dictionary id="commonFields">
+    <property key="CreatedDate">Oluşturulma Tarihi</property>
+    <property key="LastTransactDate">Son İşlem Tarihi</property>
+    <property key="Detail">Açıklama</property>
+  </dictionary>
+  <dictionary id="accountFields">
+    <property key="Name">İsim</property>
+    <property key="BankName">Banka İsmi</property>
+    <property key="TotalAmount">Toplam Tutar</property>
+    <property key="RemainingAmount">Kalan Tutar</property>
+    <property key="PaidAmount">Ödenen Tutar</property>
+    <property key="AccountName">Hesap İsmi</property>
+    <property key="AccountNumber">Hesap Numarası</property>
+    <property key="Balance">Bakiye</property>
+  </dictionary>
+  <dictionary id="actorFields">
+    <property key="Person">Kişi</property>
+    <property key="Firm">Firma</property>
+    <property key="Normal">Normal</property>
+    <property key="Registered">Kayıtlı</property>
+    <property key="Name">İsim</property>
+    <property key="Surname">Soyisim</property>
+    <property key="Address">Adres</property>
+    <property key="PhoneNumber">Telefon</property>
+    <property key="MobileNumber">Cep Telefonu</property>
+    <property key="ReceivableAccTotal">Alacak Hesabı Toplamı</property>
+    <property key="ReceivableAccPaid">Alacak Hesabı Ödenen</property>
+    <property key="DebtAcctTotal">Borç Hesabı Toplamı</property>
+    <property key="DebtAcctPaid">Borç Hesabı Ödenen</property>
+    <property key="RemainingCost">Kalan Tutar</property>
+  </dictionary>
+  <dictionary id="goodsFields">
+    <property key="Name">İsim</property>
+    <property key="DistributorFirm">Dağıtıcı Firma</property>
+    <property key="ParentCategory">Üst Kategori</property>
+    <property key="Brand">Marka</property>
+    <property key="Category">Kategori</property>
+    <property key="BarcodeNum">Barkod Numarası</property>
+    <property key="StockAmount">Stok Miktarı</property>
+    <property key="SalePrice">Satış Fiyatı</property>
+    <property key="VATRate">KDV Oranı</property>
+  </dictionary>
+  <dictionary id="listFooter">
+    <property key="Records">Kayıt</property>
+    <property key="GrandTotal">Genel Toplam</property>
+    <property key="TotalCost">Toplam Tutar</property>
+    <property key="Total">Toplam</property>
+  </dictionary>
+  <dictionary id="listHeader">
+    <property key="Name">İsim</property>
+    <property key="AccountNumber">Hesap Sayısı</property>
+    <property key="ActiveAccNum">Aktif Hesaplar</property>
+    <property key="TotalAmount">Toplam Hesap</property>
+    <property key="Date">Tarih</property>
+    <property key="Transact">İşlem</property>
+    <property key="AccountInfo">Hesap Bilgisi</property>
+    <property key="Cost">Tutar</property>
+    <property key="Paid">Ödenen</property>
+    <property key="RemainingAmount">Kalan Tutar</property>
+    <property key="Amount">Miktar</property>
+    <property key="Definition">Açıklama</property>
+    <property key="Price">Tutar</property>
+    <property key="UnitPrice">Birim Fiyat</property>
+    <property key="Accounts">Hesaplar</property>
+    <property key="AccountTransactions">Hesap İşlemleri</property>
+    <property key="AccountCode">Hesap Kodu:</property>
+  </dictionary>
+  <dictionary id="accountTypesForList">
+    <property key="All">Tüm</property>
+    <property key="DebtAccount">Borç Hesapları (Müşteri)</property>
+    <property key="ReceivableAccount">Alacak Hesapları (Satıcı)</property>
+  </dictionary>
+  <dictionary id="goodsSelectList">
+    <property key="0">Ürünler</property>
+    <property key="1">Markalar</property>
+    <property key="2">Kategoriler</property>
+  </dictionary>
+  <dictionary id="accountStatus">
+    <property key="0">Pasif</property>
+    <property key="1">Aktif</property>
+  </dictionary>
+  <dictionary id="infoPageTitles">
+    <property key="good">Ürün</property>
+    <property key="category">Kategori</property>
+    <property key="brand">Marka</property>
+    <property key="person_firm">Kişi/Firma</property>
+  </dictionary>
+  <dictionary id="instanceLabels">
+    <property key="currentAccount1">Cari Hesap 1</property>
+    <property key="cashRegAcct1">Kasa Hesabı 1</property>
+  </dictionary>
+  <dictionary id="commands">
+    <property key="save">Kaydet</property>
+    <property key="browse">Dosyadan..</property>
+    <property key="capture">Kameradan..</property>
+    <property key="doPayment">Ödeme Yap</property>
+    <property key="currentTrans">Cari İşlemler</property>
+  </dictionary>
+  <dictionary id="notifications">
+    <property key="yesCommand">Evet</property>
+    <property key="noCommand">Hayır</property>
+    <property key="delRecordHeader">Kayıt Silme</property>
+    <property key="delRecordMessage">Seçilen {0} Kayıt Silinecektir. Emin Misiniz?</property>
+    <property key="saveAccountMessage">Değişiklikler Kaydedilmeden Çıkılacaktır. Emin Misiniz?</property>
+    <property key="saveNewAccountMessage">Yeni Hesap Bilgileri Kaydedilmeden Çıkılacaktır. Emin Misiniz?</property>
+    <property key="saveNewAccountHeader">Yeni Hesap Kaydı</property>
+    <property key="saveChangesHeader">Değişiklikleri Kaydetme</property>
+    <property key="newRecordSavedMessage">Yeni Hesap Başarıyla Kaydedildi.</property>
+    <property key="accInfoUpdatedMessage">Hesap Bilgileri Başarıyla Güncellendi</property>
+    <property key="accountInfoHeader">Hesap Bilgileri</property>
+    <property key="okCommand">Tamam</property>
+    <property key="selectedImgSizeMessage">Seçilen Görüntünün Boyutu({0}x{1}) En Az {2}x{3} Olmalıdır.</property>
+    <property key="imageSizeHeader">Görüntü Boyutu</property>
+    <property key="recordDeleteMessage">{0} Bilgisi Kalıcı Olarak Silinecektir. Emin Misiniz?</property>
+    <property key="saveRecordMessage">{0} Bilgisi Başarıyla Kaydedildi.</property>
+    <property key="saveRecordFailMessage">{0} Bilgisi Kaydedilemedi.</property>
+    <property key="saveInformationHeader">Bilgi Kaydı</property>
+  </dictionary>
+</dictionaries>
