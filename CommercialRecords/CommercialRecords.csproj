@@ -159,12 +159,14 @@
     <Compile Include="DataLayer\SQLite.cs" />
     <Compile Include="DataLayer\SQLiteAsync.cs" />
     <Compile Include="Models\IncomeNExpense\IncomeNExpense.cs" />
+    <Compile Include="Models\Settings\User.cs" />
     <Compile Include="Panels\CRSFormPanel.cs" />
     <Compile Include="Panels\CrsFormView.cs" />
     <Compile Include="Panels\CRSItemsPanel.cs" />
     <Compile Include="Panels\CRSPanel.cs" />
     <Compile Include="Panels\CRSRadioButtonPanel.cs" />
     <Compile Include="Panels\CSRFirmGridView.cs" />
+    <Compile Include="ViewModels\CrsTextBoxDateTimePopupVM.cs" />
     <Compile Include="ViewModels\DataVMs\Accounts\AccountBaseVM.cs" />
     <Compile Include="ViewModels\DataVMs\Accounts\ActorVM.cs" />
     <Compile Include="ViewModels\DataVMs\Accounts\CurrentAccountVM.cs" />
@@ -251,6 +253,12 @@
     <Compile Include="Views\Settings\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Settings\Users.xaml.cs">
+      <DependentUpon>Users.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TransactionReports\TransactionReportsView.xaml.cs">
+      <DependentUpon>TransactionReportsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Transacts\Payments.xaml.cs">
       <DependentUpon>Payments.xaml</DependentUpon>
     </Compile>
@@ -329,6 +337,14 @@
     <Page Include="Views\Settings\Settings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\Users.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TransactionReports\TransactionReportsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Transacts\Payments.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -125,7 +125,7 @@
                             <Button Grid.Column="0" Height="56" Width="56" Margin="-3" FontFamily="Segoe UI Symbol" FontSize="23" Padding="0" Content="&#xE11A;" Background="#d74f2a" Command="{Binding SelectRecordedActorCmd}" IsEnabled="{Binding CurrentActorInfoEditable}" />
                             <CRSControls:CrsTextBox  Grid.Column="1" FontSize="26" Margin="5,0,0,0"  Height="50" Input="{Binding Path=CurrentActor.Id, Mode=TwoWay}" ThemeBrush="#d74f2a" IconVisibility="Collapsed" Remark="Kayıt Numarası" Required="True" InputType="NUMBER" ReadOnly="True" />
                         </Grid>
-                        <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=TransactInfo.Date, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="TODAY" Remark="Tarih" Required="True" InputType="ALL" ReadOnly="True" />
+                        <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=TransactInfo.Date, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="TODAY" Remark="Tarih" Required="True" InputType="DATETIME" />
                         <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="BOY" Remark="İsim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=PersonCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
                         <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="FIRM" Remark="İsim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=FirmCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
                         <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Surname, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="BOY" Remark="Soyisim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=PersonCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
@@ -334,7 +334,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
                 <Grid Grid.Row="2" Background="#d74f2a">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />

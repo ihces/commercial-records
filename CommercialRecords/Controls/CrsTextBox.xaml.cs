@@ -1,14 +1,17 @@
 ﻿using CommercialRecords.Common;
 using CommercialRecords.Constants;
+using CommercialRecords.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
 namespace CommercialRecords.Controls
@@ -378,7 +381,7 @@ namespace CommercialRecords.Controls
         #endregion
 
         #region Input Type
-        public enum INPUTTYPES { ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER }
+        public enum INPUTTYPES { ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER, DATETIME }
 
         delegate object ConvertFromDelegate(string str);
         delegate string ConvertForEditDelegate(string str);
@@ -403,36 +406,36 @@ namespace CommercialRecords.Controls
         private const string moneyPatternEng = @"^\$?\ ?[+-]?[0-9]{1,3}(?:[0-9]*(?:[.,][0-9]{2})?|(?:,[0-9]{3})*(?:\.[0-9]{2})?|(?:\.[0-9]{3})*(?:,[0-9]{2})?)$";
         private const string moneyPatternTur = @"^([1-9]{1}[\d]{0,2}(\.[\d]{3})*(\,[\d]{0,2})?(\ ?(₺))?|[1-9]{1}[\d]{0,}(\,[\d]{0,2})?(\ ?(₺))?|0(\,[\d]{0,2})?(\ ?(₺))?|(\,[\d]{1,2})?(\ ?(₺))?)$";
 
-        private static readonly Dictionary<INPUTTYPES, InputTypeInfo> InputTypeDic = new Dictionary<INPUTTYPES, InputTypeInfo>() { 
+        private static readonly Dictionary<INPUTTYPES, InputTypeInfo> InputTypeDic = new Dictionary<INPUTTYPES, InputTypeInfo>() {
             {INPUTTYPES.ALL, new InputTypeInfo(".*", "{0:g}", delegate(string value){ return value;}, delegate(string value){return value;})},
             {INPUTTYPES.NAME, new InputTypeInfo(@"^[a-zA-ZçÇıİüÜöÖşŞğĞ]*[\s]*[a-zA-ZçÇıİüÜöÖşŞğĞ|]*$", "{0:g}", delegate(string value){ return value;}, delegate(string value){return value;})},
             {INPUTTYPES.NUMBER, new InputTypeInfo(@"^\d+$", "{0:#}", delegate(string value){ int returnVal = 0; int.TryParse(value, out returnVal); return returnVal;}, delegate(string value){return value;})},
-            {INPUTTYPES.DOUBLE, new InputTypeInfo(@"^-?\d*[\.\,]?\d+$", 
-                "{0:0.00}", 
-                delegate(string value){ 
-                    double returnVal = 0; 
-                    double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); 
-                    return returnVal;
-                }, 
+            {INPUTTYPES.DOUBLE, new InputTypeInfo(@"^-?\d*[\.\,]?\d+$",
+                "{0:0.00}",
                 delegate(string value){
-                        double returnVal = 0; 
+                    double returnVal = 0;
+                    double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal);
+                    return returnVal;
+                },
+                delegate(string value){
+                        double returnVal = 0;
                         double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal);
                         return string.Format(CultureInfo.CurrentCulture, "{0:0.00}", returnVal);
                 })
             },
-            {INPUTTYPES.MONEY, new InputTypeInfo(CrsDictionary.CurrentLanguage == CrsDictionary.TURKISH?moneyPatternTur:moneyPatternEng, 
+            {INPUTTYPES.MONEY, new InputTypeInfo(CrsDictionary.CurrentLanguage == CrsDictionary.TURKISH?moneyPatternTur:moneyPatternEng,
                 "{0:C2}",
-                delegate(string value){ 
-                    double returnVal = 0; 
-                    double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal); 
-                    return returnVal;
-                }, 
                 delegate(string value){
-                    double returnVal = 0; 
+                    double returnVal = 0;
+                    double.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out returnVal);
+                    return returnVal;
+                },
+                delegate(string value){
+                    double returnVal = 0;
                     double.TryParse(value, NumberStyles.Currency, CultureInfo.CurrentCulture, out returnVal);
                     return string.Format(CultureInfo.CurrentCulture, "{0:0.00}", returnVal);
                 })},
-            {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^(((\+?\d)?\d)?\s?\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", "{0:N}", 
+            {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^(((\+?\d)?\d)?\s?\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", "{0:N}",
                 delegate(string value){
                     string numberBuff = value.Replace(" ", String.Empty);
                     string part1 = numberBuff.Length >= 4 ? numberBuff.Substring(numberBuff.Length - 4, 4) : "";
@@ -440,9 +443,19 @@ namespace CommercialRecords.Controls
                     string part3 = numberBuff.Length >= 10 ? numberBuff.Substring(numberBuff.Length - 10, 3) + " ": "";
                     string part4 = numberBuff.Length >= 13 ? numberBuff.Substring(numberBuff.Length - 13, 3) + " " : "";
                     return part4 + part3 + part2 + part1;
-                }, 
+                },
                 delegate(string value){
                     return value.Replace(" ", String.Empty);
+                })},
+            {INPUTTYPES.DATETIME, new InputTypeInfo(@"^(\d{2})\-(\d{2})\-(\d{4}) (\d{2}):(\d{2}):(\d{2})$",
+                "{0:dd-MM-yyyy HH:mm:ss}",
+                delegate(string value){
+                    DateTime returnVal = DateTime.Now;
+                    DateTime.TryParse(value, out returnVal);
+                    return returnVal;
+                },
+                delegate(string value){
+                    return value;
                 })}
         };
         #endregion
@@ -485,11 +498,24 @@ namespace CommercialRecords.Controls
                 {
                     textbox.Text = textbox.Text.Trim();
                     string text = textbox.Text;
+
+                    if (InputType.Equals(INPUTTYPES.DATETIME))
+                    {
+                        DateTime dtBuff = (DateTime)InputTypeDic[InputType].ConvertFrom(text);
+                        if (dtBuff < new DateTime(1900, 1, 1) || dtBuff > new DateTime(2100, 1, 1))
+                        {
+                            IsValid = false;
+                            this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                            return;
+                        }
+                    }
+
                     if (Regex.IsMatch(text, InputTypeDic[InputType].Pattern))
                     {
                         IsValid = true;
 
-                        this.Input = InputTypeDic[InputType].ConvertFrom(textbox.Text);
+                        if (!(null != Input && Input.Equals(InputTypeDic[InputType].ConvertFrom(text))))
+                            this.Input = InputTypeDic[InputType].ConvertFrom(text);
 
                         this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
                     }
@@ -533,15 +559,20 @@ namespace CommercialRecords.Controls
                     icon.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Right;
                     break;
                 default:
-                    Grid.SetColumn(iconContainer, 0);
+                    if (!InputType.Equals(INPUTTYPES.DATETIME))
+                        Grid.SetColumn(iconContainer, 0);
                     break;
             }
 
             BorderBrush = ThemeBrush;
             BorderThickness = thicknessBuff;
             ApplyChanges4ReadyOnly();
+            DateTimeSelectPopupContent.Margin = new Thickness(0, this.ActualHeight, 0, 0);
 
             CheckIsValid();
+
+            if (InputType.Equals(INPUTTYPES.DATETIME))
+                this.DateTimePopup.DataContext = new CrsTextBoxDateTimePopupVM(this);
         }
 
         private void gotFocusHandler(object sender, RoutedEventArgs e)
@@ -573,13 +604,55 @@ namespace CommercialRecords.Controls
             CheckIsValid();
             if (IsValid && !isEmpty)
                 textbox.Text = string.Format(InputTypeDic[InputType].StringFormat, InputTypeDic[InputType].ConvertFrom(textbox.Text.Trim()));
-            
         }
 
         private void TextChangedHandler(object sender, RoutedEventArgs e)
         {
             if (null != TextChanged)
                 TextChanged.Execute(isEmpty ? "" : textbox.Text);
+        }
+
+        private static CrsTextBox objRefForDateTimePopup = null;
+
+        private void iconContainer_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (this.InputType.Equals(INPUTTYPES.DATETIME))
+            {
+                DateTimePopup.IsOpen = !DateTimePopup.IsOpen;
+
+                if (DateTimePopup.IsOpen)
+                {
+                    if (null != objRefForDateTimePopup && objRefForDateTimePopup != this)
+                    {
+                        objRefForDateTimePopup.DateTimePopup.IsOpen = false;
+                        objRefForDateTimePopup.icon.Background = objRefForDateTimePopup.ThemeBrush;
+                        objRefForDateTimePopup.iconText.Foreground = new SolidColorBrush(Colors.White);
+                    }
+                    objRefForDateTimePopup = this;
+                    objRefForDateTimePopup.icon.Background = new SolidColorBrush(Colors.White);
+                    objRefForDateTimePopup.iconText.Foreground = new SolidColorBrush(Colors.Black);
+                }
+                else
+                {
+                    icon.Background = this.ThemeBrush;
+                    iconText.Foreground = new SolidColorBrush(Colors.White);
+                }
+            }
+        }
+
+        private void dateTimePopup_OnLayoutUpdated(object sender, object e)
+        {
+            Point actualPosition = TransformToVisual(Window.Current.Content).TransformPoint(new Point(0, 0));
+
+            if (actualPosition.Y + this.ActualHeight < Window.Current.Bounds.Height &&
+                actualPosition.Y - this.ActualHeight < 0)
+            {
+                DateTimeSelectPopupContent.Margin = new Thickness(0, this.ActualHeight, 0, 0);
+            }
+            else if (actualPosition.Y + this.ActualHeight + DateTimeSelectPopupContent.ActualHeight > Window.Current.Bounds.Height)
+            {
+                DateTimeSelectPopupContent.Margin = new Thickness(0, -DateTimeSelectPopupContent.ActualHeight, 0, 0);
+            }
         }
 
         private static void IconWidthChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)

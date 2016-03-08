@@ -3,6 +3,7 @@ using CommercialRecords.Models;
 using CommercialRecords.Models.Accounts;
 using CommercialRecords.Models.Accounts.EnterpriseAccounts;
 using CommercialRecords.Models.Goods;
+using CommercialRecords.Models.IncomeNExpense;
 using CommercialRecords.ViewModels.DataVMs.Accounts.EnterpriseAccounts;
 using CommercialRecords.Views;
 using System;
