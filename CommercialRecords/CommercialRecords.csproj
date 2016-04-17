@@ -128,6 +128,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\CrsAuthentication.cs" />
     <Compile Include="Common\CrsDictionary.cs" />
     <Compile Include="Common\FrameNavigation.cs" />
     <Compile Include="Common\ICommandImp.cs" />
@@ -140,6 +141,9 @@
     <Compile Include="Controls\CRSComboBox.cs" />
     <Compile Include="Controls\CrsTextBox.xaml.cs">
       <DependentUpon>CrsTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CrsUserAuthentication.xaml.cs">
+      <DependentUpon>CrsUserAuthentication.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StarRating.xaml.cs">
       <DependentUpon>StarRating.xaml</DependentUpon>
@@ -160,6 +164,7 @@
     <Compile Include="DataLayer\SQLiteAsync.cs" />
     <Compile Include="Models\IncomeNExpense\IncomeNExpense.cs" />
     <Compile Include="Models\Settings\User.cs" />
+    <Compile Include="Models\TransactReport.cs" />
     <Compile Include="Panels\CRSFormPanel.cs" />
     <Compile Include="Panels\CrsFormView.cs" />
     <Compile Include="Panels\CRSItemsPanel.cs" />
@@ -180,6 +185,8 @@
     <Compile Include="ViewModels\DataVMs\IncomeNExpenses\IncomeNExpenseVM.cs" />
     <Compile Include="ViewModels\DataVMs\InfoDataVMBase.cs" />
     <Compile Include="ViewModels\DataVMs\OrderedListVM.cs" />
+    <Compile Include="ViewModels\DataVMs\Settings\UserVM.cs" />
+    <Compile Include="ViewModels\DataVMs\TransactReportVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\PaymentEntryVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\SaleEntryVM.cs" />
     <Compile Include="ViewModels\DataVMs\Transacts\TransactEntryVMBase.cs" />
@@ -196,11 +203,14 @@
     <Compile Include="ViewModels\FrameVMs\ImagePickerFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\IncomeNExpenses\IncomeNExpenseFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\InfoFrameVMBase.cs" />
+    <Compile Include="ViewModels\FrameVMs\Settings\UserInfoFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\Settings\UsersFrameVM.cs" />
+    <Compile Include="ViewModels\FrameVMs\TransactionReportsFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\PaymentFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\SaleFrameVM.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\TransactFrameVMBase.cs" />
     <Compile Include="ViewModels\FrameVMs\Transacts\TransactListFrameVM.cs" />
-    <Compile Include="ViewModels\FrameVMs\Transacts\TransactTypeFrameVM.cs" />
+    <Compile Include="ViewModels\CrsUserAuthenticationVM.cs" />
     <Compile Include="ViewModels\VMBase.cs" />
     <Compile Include="Views\Accounts\ActorInfo.xaml.cs">
       <DependentUpon>ActorInfo.xaml</DependentUpon>
@@ -253,6 +263,9 @@
     <Compile Include="Views\Settings\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Settings\UserInfo.xaml.cs">
+      <DependentUpon>UserInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Settings\Users.xaml.cs">
       <DependentUpon>Users.xaml</DependentUpon>
     </Compile>
@@ -281,6 +294,10 @@
     <Page Include="Controls\CrsTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CrsUserAuthentication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\StarRating.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -337,6 +354,10 @@
     <Page Include="Views\Settings\Settings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\UserInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Settings\Users.xaml">
       <SubType>Designer</SubType>

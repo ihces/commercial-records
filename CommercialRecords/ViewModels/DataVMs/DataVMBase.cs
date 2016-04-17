@@ -10,7 +10,7 @@ using CommercialRecords.DataLayer;
 
 namespace CommercialRecords.ViewModels.DataVMs
 {
-    abstract class DataVMBase<E> : VMBase, DataVMIntf<E> where E : ModelBase, new()
+    public abstract class DataVMBase<E> : VMBase, DataVMIntf<E> where E : ModelBase, new()
     {
         #region Properties
         private int id = 0;

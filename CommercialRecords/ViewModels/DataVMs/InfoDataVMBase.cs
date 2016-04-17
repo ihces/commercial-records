@@ -5,7 +5,7 @@ using Windows.Storage;
 
 namespace CommercialRecords.ViewModels.DataVMs
 {
-    abstract class InfoDataVMBase<E> : DataVMBase<E> where E:InfoModelBase,new()
+    public abstract class InfoDataVMBase<E> : DataVMBase<E> where E:InfoModelBase,new()
     {
         private StorageFolder imageSourceFolder = App.CommonImgFolder;
         public StorageFolder ImageSourceFolder

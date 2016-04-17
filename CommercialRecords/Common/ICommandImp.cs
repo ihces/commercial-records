@@ -39,8 +39,25 @@ namespace CommercialRecords.Common
 
         public void Execute(object parameter)
         {
-            if (_execute != null)
+            if ((null != parameter && parameter is string && "ignore_session_control" == (string)parameter) && null != _execute)
+            {
                 _execute(parameter);
+                return;
+            }
+
+            CrsAuthentication authInstance = CrsAuthentication.getInstance();
+
+            if (!authInstance.SessionControl.SessionStatus.Equals(CrsAuthentication.SESSION_STATUS.TIME_OUT))
+            {
+                authInstance.updateTimeoutDate();
+
+                if (_execute != null)
+                    _execute(parameter);
+            }
+            else
+            {
+                authInstance.showAuthentication();
+            }
         }
     }
 }

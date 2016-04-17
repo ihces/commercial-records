@@ -1,13 +1,13 @@
 ﻿namespace CommercialRecords.Models.Settings
 {
-    class User : ModelBase
+    public class User : InfoModelBase
     {
         public string Name { get; set; }
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
-        public int Role { get; set; }
+        public string Role { get; set; }
         public int CashRegisterId { get; set; }
         public string Password { get; set; }
-        public string ImageFileName { get; set; }
+        public string Detail { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using CommercialRecords.Common;
+using System.ComponentModel;
 
 namespace CommercialRecords.ViewModels
 {
@@ -16,6 +17,12 @@ namespace CommercialRecords.ViewModels
             set
             {
                 dirty = value;
+
+                if (dirty)
+                {
+                    CrsAuthentication.getInstance().updateTimeoutDate();
+                }
+
                 Raise("Dirty");
             }
         }

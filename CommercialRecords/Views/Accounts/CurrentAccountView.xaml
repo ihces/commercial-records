@@ -13,213 +13,215 @@
     mc:Ignorable="d">
 
     <Grid Style="{StaticResource PageLayout}">
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="52"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="140"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="240" />
-            </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="40,60,40,0"
+        <Grid>
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="52"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="240" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="backButton" Margin="40,60,40,0"
 				Style="{StaticResource NavigationBackButtonNormalStyle}"
 				VerticalAlignment="Top"
 				AutomationProperties.Name="Back"
 				AutomationProperties.AutomationId="BackButton"
 				AutomationProperties.ItemType="Navigation Button" Command="{Binding GoBackCmd}"/>
-            <TextBlock x:Name="pageTitle" Text="{Binding Path=CurrentActor.Name}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                <TextBlock x:Name="pageTitle" Text="{Binding Path=CurrentActor.Name}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="140" />
-                <ColumnDefinition Width="6*" />
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition Width="6*" />
-                <ColumnDefinition Width="40" />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="5" />
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
-                <ListView x:Name="listview1" Grid.Row="0" VerticalAlignment="Top" Height="Auto" ItemsSource="{Binding Accounts}" SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"  IsEnabled="{Binding EnableAccountField, Converter={StaticResource InvertBooleanConverter}}">
-                    <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <core:InvokeCommandAction Command="{Binding OpemTransactionCmd}"/>
-                        </core:EventTriggerBehavior>
-                    </interactivity:Interaction.Behaviors>
-                    <ListView.Header>
-                        <Grid Height="45" Background="#008A00" HorizontalAlignment="Stretch">
-                            <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listHeader|Accounts'}" />
-                            <AppBarButton Margin="-9,-12.5,-27,-9" HorizontalAlignment="Right" Icon="Add" Command="{Binding CreateNewAccountCmd}" />
-                        </Grid>
-                    </ListView.Header>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Background="#18ffffff">
-                                <Grid Height="40">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*" />
-                                        <ColumnDefinition Width="2*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" FontSize="20" Padding="10,0,0,0" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Name}" />
-                                    <TextBlock Grid.Column="1" FontFamily="Lucida Console" FontSize="26" FontWeight="SemiBold" VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="{Binding RemainingDebt, Converter={StaticResource Double2MoneyConverter}}" />
-                                </Grid>
-                                <Grid Height="30">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*" />
-                                        <ColumnDefinition Width="2*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" FontWeight="SemiLight" FontSize="18" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Id}" />
-                                    <Grid Grid.Column="1" Visibility="{Binding Active, Converter={StaticResource Boolean2VisibilityConverter}}">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition Width="30" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" FontSize="18" Padding="0,0,10,0" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountStatus|1'}" />
-                                        <Grid Grid.Column="1" Background="#008A00">
-                                            <TextBlock Grid.Column="0" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="&#xE102;" />
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="1" Visibility="{Binding Active, Converter={StaticResource Boolean2VisibilityConverter}, ConverterParameter='invert'}">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition Width="30" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" FontSize="18" Padding="0,0,10,0" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountStatus|0'}" />
-                                        <Grid Grid.Column="1" Background="Gray">
-                                            <TextBlock Grid.Column="0" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="&#xE15B;" />
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <Grid Height="50" Grid.Row="3" Background="#008A00" HorizontalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock  Padding="10,0,0,0" Grid.Column="0" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Accounts.Count}" />
-                    <TextBlock Grid.Column="1" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listFooter|Records'}" />
-                    <TextBlock Grid.Column="2" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listFooter|Total'}" />
-                    <TextBox Grid.Column="3"  FontFamily="Lucida Console" BorderThickness="5" BorderBrush="#00ffffff" TextAlignment="Center" Background="#88000000" Foreground="White" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Stretch" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=CurrentActor.RemainingCost, Converter={StaticResource Double2MoneyConverter}}" />
-                </Grid>
             </Grid>
-            <ScrollViewer Grid.Column="3" VerticalScrollBarVisibility="Auto">
-                <CRSPanels:CrsFormView GapSize="5">
-                    <Grid Grid.Row="0" Height="45" Background="#008A00" HorizontalAlignment="Stretch">
-                        <StackPanel x:Name="recordedAccountHeader" Orientation="Horizontal" Visibility="{Binding Path=SelectedAccount.Recorded, Converter={StaticResource Boolean2VisibilityConverter}}">
-                            <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Converter={StaticResource Value2RemarkConverter},ConverterParameter='#listHeader|AccountCode'}" />
-                            <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=SelectedAccount.Id}" />
-                        </StackPanel>
-                        <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Yeni Hesap" Visibility="{Binding Path=Visibility, ElementName=recordedAccountHeader, Converter={StaticResource InvertVisibilityConverter}}" />
-                        <CRSControls:CrsAppBarButton Margin="0,-12,-27,-10" HorizontalAlignment="Right" Validation="True" Icon="{Binding Path=AccountConfButtonIcon}" Command="{Binding EditCurrentAccountCmd}" VerticalAlignment="Stretch" />
-                    </Grid>
-                    <CRSControls:CrsTextBox FontSize="22" Height="50" IconWidth="50" Input="{Binding Path=SelectedAccount.Name, Mode=TwoWay}" ThemeBrush="#008A00" Icon="NOTE" Remark="#accountFields|AccountName" InputType="ALL" Required="True" ReadOnly="{Binding Path=EnableAccountField, Converter={StaticResource InvertBooleanConverter}}" />
-                    <Grid Height="50">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Background="#008A00">
-                            <TextBlock FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontFamily="Segoe UI Symbol" Text="&#xe1ec;" TextAlignment="Center" Foreground="White"></TextBlock>
-                        </Grid>
-                        <ComboBox Grid.Column="1" Height="50" Grid.Row="0" HorizontalContentAlignment="Center" BorderThickness="0" Foreground="Black" Background="Silver" SelectedIndex="{Binding Path=SelectedAccount.Type, Mode=TwoWay}" IsEnabled="{Binding EnableAccountField}" Style="{StaticResource ComboBoxStyle2}">
-                            <ComboBoxItem>
-                                <TextBlock FontSize="22" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountTypes|0'}" />
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                <TextBlock FontSize="22" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountTypes|1'}" />
-                            </ComboBoxItem>
-                            <ComboBoxItem IsEnabled="False">
-                                <TextBlock FontSize="22" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountTypes|2'}" />
-                            </ComboBoxItem>
-                        </ComboBox>
-                    </Grid>
-                    <StackPanel Visibility="{Binding Path=SelectedAccount.Recorded, Converter={StaticResource Boolean2VisibilityConverter}}">
-                        <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.CreateDate, Mode=TwoWay}" ThemeBrush="#008A00" Icon="CALENDAR" Remark="#commonFields|CreatedDate" InputType="ALL" ReadOnly="True" />
-                        <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.LastTransactDate , Mode=TwoWay}" ThemeBrush="#008A00" Icon="TODAY" Remark="#commonFields|LastTransactDate" InputType="ALL" ReadOnly="True" />
-                        <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.TotalDebt, Mode=TwoWay}" ThemeBrush="#008A00" Icon="ADD" Remark="#commonFields|TotalAmount" InputType="MONEY" ReadOnly="True" />
-                        <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.TotalCredit, Mode=TwoWay}" ThemeBrush="#008A00" Icon="REMOVE" Remark="#commonFields|PaidAmount" InputType="MONEY" ReadOnly="True" />
-                        <CRSControls:CrsTextBox FontSize="22" Height="50" IconWidth="50" Input="{Binding Path=SelectedAccount.RemainingDebt, Mode=TwoWay}" ThemeBrush="#008A00" Icon="YES" Remark="#commonFields|RemainingAmount" InputType="MONEY" ReadOnly="True" />
-                    </StackPanel>
-                    <CRSControls:CrsTextBox FontSize="18" Height="80" IconWidth="50" Input="{Binding Path=SelectedAccount.Detail, Mode=TwoWay}" ThemeBrush="#008A00" Icon="COMMENT" Remark="#commonFields|Detail" InputType="ALL" ReadOnly="{Binding Path=EnableAccountField, Converter={StaticResource InvertBooleanConverter}}" Multiline="True" />
-                </CRSPanels:CrsFormView>
-            </ScrollViewer>
-            <Grid Grid.Column="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="5" />
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
-                <ListView x:Name="listview2" Grid.Row="0" VerticalAlignment="Top" ItemsSource="{Binding Transacts}" >
-                    <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <core:InvokeCommandAction Command="{Binding OpemTransactionCmd}"/>
-                        </core:EventTriggerBehavior>
-                    </interactivity:Interaction.Behaviors>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.Header>
-                        <Grid Height="45" Background="#008A00" HorizontalAlignment="Stretch">
-                            <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listHeader|AccountTransactions'}" />
-                        </Grid>
-                    </ListView.Header>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Height="60" Background="#18ffffff">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="200*"></ColumnDefinition>
-                                    <ColumnDefinition Width="165*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30" />
-                                        <RowDefinition Height="30" />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Date}" />
-                                    <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Type, Converter={StaticResource Value2RemarkConverter}, ConverterParameter='transactTypes'}" />
-                                </Grid>
-                                <TextBlock Grid.Column="2" FontFamily="Lucida Console" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding RemainingCost, Converter={StaticResource Double2MoneyConverter}}" />
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+                    <ListView x:Name="listview1" Grid.Row="0" VerticalAlignment="Top" Height="Auto" ItemsSource="{Binding Accounts}" SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"  IsEnabled="{Binding EnableAccountField, Converter={StaticResource InvertBooleanConverter}}">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding OpemTransactionCmd}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <ListView.Header>
+                            <Grid Height="45" Background="#008A00" HorizontalAlignment="Stretch">
+                                <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listHeader|Accounts'}" />
+                                <CRSControls:CrsAppBarButton Margin="-9,-12.5,-27,-9" HorizontalAlignment="Right" Icon="Add" Command="{Binding CreateNewAccountCmd}" />
                             </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <Grid Height="50" Grid.Row="3" Background="#008A00" HorizontalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock  Padding="10,0,0,0" Grid.Column="0" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Transacts.Count}" />
-                    <TextBlock Grid.Column="1" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listFooter|Records'}" />
-                    <TextBlock Grid.Column="2" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listFooter|Total'}" />
-                    <TextBox Grid.Column="3"  FontFamily="Lucida Console" BorderThickness="5" BorderBrush="#00ffffff" TextAlignment="Center" Background="#88000000" Foreground="White" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Stretch" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=SelectedAccount.RemainingDebt, Converter={StaticResource Double2MoneyConverter}}" />
+                        </ListView.Header>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Background="#18ffffff">
+                                    <Grid Height="40">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="2*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" FontSize="20" Padding="10,0,0,0" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Name}" />
+                                        <TextBlock Grid.Column="1" FontFamily="Lucida Console" FontSize="26" FontWeight="SemiBold" VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="{Binding RemainingDebt, Converter={StaticResource Double2MoneyConverter}}" />
+                                    </Grid>
+                                    <Grid Height="30">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="2*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" FontWeight="SemiLight" FontSize="18" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Id}" />
+                                        <Grid Grid.Column="1" Visibility="{Binding Active, Converter={StaticResource Boolean2VisibilityConverter}}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="30" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" FontSize="18" Padding="0,0,10,0" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountStatus|1'}" />
+                                            <Grid Grid.Column="1" Background="#008A00">
+                                                <TextBlock Grid.Column="0" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="&#xE102;" />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Grid.Column="1" Visibility="{Binding Active, Converter={StaticResource Boolean2VisibilityConverter}, ConverterParameter='invert'}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="30" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" FontSize="18" Padding="0,0,10,0" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountStatus|0'}" />
+                                            <Grid Grid.Column="1" Background="Gray">
+                                                <TextBlock Grid.Column="0" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="&#xE15B;" />
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Grid Height="50" Grid.Row="3" Background="#008A00" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Padding="10,0,0,0" Grid.Column="0" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Accounts.Count}" />
+                        <TextBlock Grid.Column="1" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listFooter|Records'}" />
+                        <TextBlock Grid.Column="2" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listFooter|Total'}" />
+                        <TextBox Grid.Column="3"  FontFamily="Lucida Console" BorderThickness="5" BorderBrush="#00ffffff" TextAlignment="Center" Background="#88000000" Foreground="White" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Stretch" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=CurrentActor.RemainingCost, Converter={StaticResource Double2MoneyConverter}}" />
+                    </Grid>
+                </Grid>
+                <ScrollViewer Grid.Column="3" VerticalScrollBarVisibility="Auto">
+                    <CRSPanels:CrsFormView GapSize="5">
+                        <Grid Grid.Row="0" Height="45" Background="#008A00" HorizontalAlignment="Stretch">
+                            <StackPanel x:Name="recordedAccountHeader" Orientation="Horizontal" Visibility="{Binding Path=SelectedAccount.Recorded, Converter={StaticResource Boolean2VisibilityConverter}}">
+                                <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Converter={StaticResource Value2RemarkConverter},ConverterParameter='#listHeader|AccountCode'}" />
+                                <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=SelectedAccount.Id}" />
+                            </StackPanel>
+                            <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Yeni Hesap" Visibility="{Binding Path=Visibility, ElementName=recordedAccountHeader, Converter={StaticResource InvertVisibilityConverter}}" />
+                            <CRSControls:CrsAppBarButton Margin="0,-12,-27,-10" HorizontalAlignment="Right" Validation="True" Icon="{Binding Path=AccountConfButtonIcon}" Command="{Binding EditCurrentAccountCmd}" VerticalAlignment="Stretch" />
+                        </Grid>
+                        <CRSControls:CrsTextBox FontSize="22" Height="50" IconWidth="50" Input="{Binding Path=SelectedAccount.Name, Mode=TwoWay}" ThemeBrush="#008A00" Icon="NOTE" Remark="#accountFields|AccountName" InputType="ALL" Required="True" ReadOnly="{Binding Path=EnableAccountField, Converter={StaticResource InvertBooleanConverter}}" />
+                        <Grid Height="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Background="#008A00">
+                                <TextBlock FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontFamily="Segoe UI Symbol" Text="&#xe1ec;" TextAlignment="Center" Foreground="White"></TextBlock>
+                            </Grid>
+                            <ComboBox Grid.Column="1" Height="50" Grid.Row="0" HorizontalContentAlignment="Center" BorderThickness="0" Foreground="Black" Background="Silver" SelectedIndex="{Binding Path=SelectedAccount.Type, Mode=TwoWay}" IsEnabled="{Binding EnableAccountField}" Style="{StaticResource ComboBoxStyle2}">
+                                <ComboBoxItem>
+                                    <TextBlock FontSize="22" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountTypes|0'}" />
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock FontSize="22" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountTypes|1'}" />
+                                </ComboBoxItem>
+                                <ComboBoxItem IsEnabled="False">
+                                    <TextBlock FontSize="22" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountTypes|2'}" />
+                                </ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                        <StackPanel Visibility="{Binding Path=SelectedAccount.Recorded, Converter={StaticResource Boolean2VisibilityConverter}}">
+                            <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.CreateDate, Mode=TwoWay}" ThemeBrush="#008A00" Icon="CALENDAR" Remark="#commonFields|CreatedDate" InputType="ALL" ReadOnly="True" />
+                            <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.LastTransactDate , Mode=TwoWay}" ThemeBrush="#008A00" Icon="TODAY" Remark="#commonFields|LastTransactDate" InputType="ALL" ReadOnly="True" />
+                            <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.TotalDebt, Mode=TwoWay}" ThemeBrush="#008A00" Icon="ADD" Remark="#commonFields|TotalAmount" InputType="MONEY" ReadOnly="True" />
+                            <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.TotalCredit, Mode=TwoWay}" ThemeBrush="#008A00" Icon="REMOVE" Remark="#commonFields|PaidAmount" InputType="MONEY" ReadOnly="True" />
+                            <CRSControls:CrsTextBox FontSize="22" Height="50" IconWidth="50" Input="{Binding Path=SelectedAccount.RemainingDebt, Mode=TwoWay}" ThemeBrush="#008A00" Icon="YES" Remark="#commonFields|RemainingAmount" InputType="MONEY" ReadOnly="True" />
+                        </StackPanel>
+                        <CRSControls:CrsTextBox FontSize="18" Height="80" IconWidth="50" Input="{Binding Path=SelectedAccount.Detail, Mode=TwoWay}" ThemeBrush="#008A00" Icon="COMMENT" Remark="#commonFields|Detail" InputType="ALL" ReadOnly="{Binding Path=EnableAccountField, Converter={StaticResource InvertBooleanConverter}}" Multiline="True" />
+                    </CRSPanels:CrsFormView>
+                </ScrollViewer>
+                <Grid Grid.Column="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+                    <ListView x:Name="listview2" Grid.Row="0" VerticalAlignment="Top" ItemsSource="{Binding Transacts}" >
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding OpemTransactionCmd}"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.Header>
+                            <Grid Height="45" Background="#008A00" HorizontalAlignment="Stretch">
+                                <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listHeader|AccountTransactions'}" />
+                            </Grid>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="60" Background="#18ffffff">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200*"></ColumnDefinition>
+                                        <ColumnDefinition Width="165*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="30" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Date}" />
+                                        <TextBlock Grid.Row="1" FontSize="20" Padding="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Type, Converter={StaticResource Value2RemarkConverter}, ConverterParameter='transactTypes'}" />
+                                    </Grid>
+                                    <TextBlock Grid.Column="2" FontFamily="Lucida Console" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding RemainingCost, Converter={StaticResource Double2MoneyConverter}}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Grid Height="50" Grid.Row="3" Background="#008A00" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Padding="10,0,0,0" Grid.Column="0" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Transacts.Count}" />
+                        <TextBlock Grid.Column="1" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listFooter|Records'}" />
+                        <TextBlock Grid.Column="2" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#listFooter|Total'}" />
+                        <TextBox Grid.Column="3"  FontFamily="Lucida Console" BorderThickness="5" BorderBrush="#00ffffff" TextAlignment="Center" Background="#88000000" Foreground="White" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Stretch" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=SelectedAccount.RemainingDebt, Converter={StaticResource Double2MoneyConverter}}" />
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

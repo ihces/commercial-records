@@ -79,6 +79,8 @@
     <property key="DebtAcctTotal">Debt Account Total</property>
     <property key="DebtAcctPaid">Debt Account Paid</property>
     <property key="RemainingCost">Remaining Cost</property>
+    <property key="Password">Password</property>
+    <property key="PasswordValidation">Password Validation</property>
   </dictionary>
   <dictionary id="goodsFields">
     <property key="Name">Name</property>
@@ -115,6 +117,10 @@
     <property key="Accounts">Accounts</property>
     <property key="AccountTransactions">Account Transactions</property>
     <property key="AccountCode">Account Code:</property>
+    <property key="Role">Role</property>
+    <property key="CashRegister">Cash Register</property>
+    <property key="Detail">Detail</property>
+    <property key="User">User</property>
   </dictionary>
   <dictionary id="accountTypesForList">
     <property key="All">All</property>
@@ -135,6 +141,7 @@
     <property key="category">Category</property>
     <property key="brand">Brand</property>
     <property key="person_firm">Person/Firm</property>
+    <property key="user_info">User</property>
   </dictionary>
   <dictionary id="instanceLabels">
     <property key="currentAccount1">Current Account 1</property>
@@ -146,6 +153,8 @@
     <property key="capture">Capture..</property>
     <property key="doPayment">Do Payment</property>
     <property key="currentTrans">Current Transactions</property>
+    <property key="cancel">Cancel</property>
+    <property key="login">Login</property>
   </dictionary>
   <dictionary id="notifications">
     <property key="yesCommand">Yes</property>
@@ -189,5 +198,19 @@
     <property key="5">Fr</property>
     <property key="6">Sa</property>
     <property key="7">Su</property>
+  </dictionary>
+  <dictionary id="roles">
+    <property key="1">Admin</property>
+    <property key="2">Autherized Cashier</property>
+    <property key="3">Cashier</property>
+    <property key="4">Account Manager</property>
+  </dictionary>
+  <dictionary id="transactions">
+    <property key="100">Create Customer</property>
+    <property key="101">Modify Customer</property>
+    <property key="102">Delete Customer</property>
+    <property key="110">Create Account</property>
+    <property key="111">Modify Account</property>
+    <property key="112">Delete Account</property>
   </dictionary>
 </dictionaries>

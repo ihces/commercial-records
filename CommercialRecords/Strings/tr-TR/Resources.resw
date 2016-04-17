@@ -165,8 +165,8 @@
   <data name="main_page_goods.Text" xml:space="preserve">
     <value>Ürünler</value>
   </data>
-  <data name="main_page_settings.Text" xml:space="preserve">
-    <value>Ayarlar</value>
+  <data name="main_page_users.Text" xml:space="preserve">
+    <value>Kullanıcılar</value>
   </data>
   <data name="main_page_title.Text" xml:space="preserve">
     <value>Ticari Kayıtlar</value>
@@ -197,5 +197,17 @@
   </data>
   <data name="payment_total_amount.Text" xml:space="preserve">
     <value>Toplam Tutar</value>
+  </data>
+  <data name="users_page_title.Text" xml:space="preserve">
+    <value>Kullanıcılar</value>
+  </data>
+  <data name="Transaction_report_page_title.Text" xml:space="preserve">
+    <value>İşlem Raporları</value>
+  </data>
+  <data name="sessionMenu_changeUser.Text" xml:space="preserve">
+    <value>Kullanıcı Değiştir</value>
+  </data>
+  <data name="sessionMenu_logout.Text" xml:space="preserve">
+    <value>Çıkış</value>
   </data>
 </root>

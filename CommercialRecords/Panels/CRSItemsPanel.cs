@@ -1,5 +1,6 @@
 ﻿
 
+using CommercialRecords.Common;
 using System.Collections.Generic;
 using Windows.Foundation;
 using Windows.UI.Xaml;
@@ -10,6 +11,28 @@ namespace CommercialRecords.Panels
     class CRSItemsPanel : ItemsControl
     {
         #region Properties
+        #region FunctionalPermission
+        public int FunctionalPermission
+        {
+            get
+            {
+                return (int)GetValue(FunctionalPermissionProperty);
+            }
+            set
+            {
+                SetValue(FunctionalPermissionProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty FunctionalPermissionProperty =
+            DependencyProperty.Register(
+                "FunctionalPermission",
+                typeof(int),
+                typeof(CRSItemsPanel),
+                new PropertyMetadata(255)
+            );
+        #endregion
+
         protected bool itemSourceDefined = false;
 
         private List<UIElement> children = new List<UIElement>();
@@ -62,8 +85,25 @@ namespace CommercialRecords.Panels
                 new PropertyMetadata(0, null)
             );
 
+        private int permission = 3;
         #endregion
 
+        protected override void OnApplyTemplate()
+        {
+            if (FunctionalPermission >= 0)
+            {
+                permission = CrsAuthentication.getInstance().getPermission(FunctionalPermission);
+
+                if (0 == (permission & 1))
+                {
+                    Visibility = Visibility.Collapsed;
+                }
+                else if (1 == permission)
+                {
+                    IsEnabled = false;
+                }
+            }
+        }
 
         protected override Size ArrangeOverride(Size finalSize)
         {

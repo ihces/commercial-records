@@ -2,7 +2,6 @@
 using CommercialRecords.Models;
 using CommercialRecords.ViewModels.DataVMs;
 using CommercialRecords.Views;
-using CommercialRecords.Views;
 using System;
 using System.IO;
 using System.Windows.Input;
@@ -189,7 +188,7 @@ namespace CommercialRecords.ViewModels.FrameVMs
             messageDialog.ShowAsync();
         }
 
-        private void createNewOneCmdHandler(object parameter)
+        protected virtual void createNewOneCmdHandler(object parameter)
         {
             CurrentInfo = new E();
             Recorded = false;

@@ -145,6 +145,29 @@ namespace CommercialRecords.Controls
                 new PropertyMetadata(false, ReadOnlyChangedHandler)
             );
         #endregion
+
+        #region DataPermission
+        public int DataPermission
+        {
+            get
+            {
+                return (int)GetValue(DataPermissionProperty);
+            }
+            set
+            {
+                SetValue(DataPermissionProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty DataPermissionProperty =
+            DependencyProperty.Register(
+                "DataPermission",
+                typeof(int),
+                typeof(CrsTextBox),
+                new PropertyMetadata(255, null)
+            );
+        #endregion
+
         #region Required
         public bool Required
         {
@@ -381,7 +404,7 @@ namespace CommercialRecords.Controls
         #endregion
 
         #region Input Type
-        public enum INPUTTYPES { ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER, DATETIME }
+        public enum INPUTTYPES { ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER, DATETIME, PASSWORD }
 
         delegate object ConvertFromDelegate(string str);
         delegate string ConvertForEditDelegate(string str);
@@ -456,6 +479,13 @@ namespace CommercialRecords.Controls
                 },
                 delegate(string value){
                     return value;
+                })},
+            {INPUTTYPES.PASSWORD, new InputTypeInfo(".*", "{0:g}",
+                delegate(string value){
+                    return value;
+                },
+                delegate(string value){
+                    return value;
                 })}
         };
         #endregion
@@ -470,7 +500,7 @@ namespace CommercialRecords.Controls
 
         public void CheckIsValid()
         {
-            if (string.IsNullOrWhiteSpace(textbox.Text))
+            if (string.IsNullOrWhiteSpace(getText()))
             {
                 isEmpty = true;
                 setAsEmpty();
@@ -496,8 +526,8 @@ namespace CommercialRecords.Controls
                 }
                 else
                 {
-                    textbox.Text = textbox.Text.Trim();
-                    string text = textbox.Text;
+                    setText(getText().Trim());
+                    string text = getText();
 
                     if (InputType.Equals(INPUTTYPES.DATETIME))
                     {
@@ -530,18 +560,39 @@ namespace CommercialRecords.Controls
 
         protected void OnApplyTemplate()
         {
-            textbox.GotFocus += gotFocusHandler;
-            textbox.LostFocus += LostFocusHandler;
-            textbox.TextChanged += TextChangedHandler;
+            if (DataPermission >= 0)
+            {
+                permission = CrsAuthentication.getInstance().getPermission(DataPermission);
+
+                if (0 == permission)
+                {
+                    Visibility = Visibility.Collapsed;
+                    return;
+                }
+                if (!isEmpty)
+                    maskContentIfNotPermitted();
+            }
 
             if (this.Required && !this.ReadOnly)
                 RequiredSignVisibility = Visibility.Visible;
-
-            if (Multiline)
+            if (InputType.Equals(INPUTTYPES.PASSWORD))
             {
-                textbox.TextWrapping = TextWrapping.Wrap;
-                textbox.AcceptsReturn = true;
+                pwdBox.GotFocus += gotFocusHandler;
+                pwdBox.LostFocus += LostFocusHandler;
+                pwdBox.PasswordChanged += TextChangedHandler;
             }
+            else {
+                textbox.GotFocus += gotFocusHandler;
+                textbox.LostFocus += LostFocusHandler;
+                textbox.TextChanged += TextChangedHandler;
+
+                if (Multiline)
+                {
+                    textbox.TextWrapping = TextWrapping.Wrap;
+                    textbox.AcceptsReturn = true;
+                }
+            }
+
 
             Thickness thicknessBuff = new Thickness(this.BorderThickness.Top);
 
@@ -581,7 +632,7 @@ namespace CommercialRecords.Controls
             {
                 if (isEmpty)
                 {
-                    textbox.Text = string.Empty;
+                    setText(string.Empty);
                     setAsNotEmpty();
                 }
 
@@ -592,7 +643,7 @@ namespace CommercialRecords.Controls
                 }
                 else
                 {
-                    textbox.Text = InputTypeDic[InputType].ConvertForEdit(textbox.Text);
+                    setText(InputTypeDic[InputType].ConvertForEdit(getText()));
                 }
 
                 AnyClickHandled = true;
@@ -603,16 +654,35 @@ namespace CommercialRecords.Controls
         {
             CheckIsValid();
             if (IsValid && !isEmpty)
-                textbox.Text = string.Format(InputTypeDic[InputType].StringFormat, InputTypeDic[InputType].ConvertFrom(textbox.Text.Trim()));
+                setText(
+                    string.Format(
+                        InputTypeDic[InputType].StringFormat,
+                        InputTypeDic[InputType].ConvertFrom(
+                            getText().Trim())));
         }
 
+        private string textBoxTextBuff = string.Empty;
         private void TextChangedHandler(object sender, RoutedEventArgs e)
         {
-            if (null != TextChanged)
-                TextChanged.Execute(isEmpty ? "" : textbox.Text);
+            CrsAuthentication authInstance = CrsAuthentication.getInstance();
+
+            if (!authInstance.SessionControl.SessionStatus.Equals(CrsAuthentication.SESSION_STATUS.TIME_OUT))
+            {
+                textBoxTextBuff = textbox.Text;
+                authInstance.updateTimeoutDate();
+
+                if (null != TextChanged)
+                    TextChanged.Execute(isEmpty ? "" : getText());
+            }
+            else
+            {
+                textbox.Text = textBoxTextBuff;
+                authInstance.showAuthentication();
+            }
         }
 
         private static CrsTextBox objRefForDateTimePopup = null;
+        private int permission = 3;
 
         private void iconContainer_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -659,7 +729,7 @@ namespace CommercialRecords.Controls
         {
             CrsTextBox crsTextBox = (CrsTextBox)obj;
 
-            if (null != crsTextBox.textbox)
+            if (crsTextBox.isTextContainerInitialized())
             {
                 Thickness thicknessBuff = new Thickness(crsTextBox.BorderThickness.Top);
 
@@ -701,16 +771,16 @@ namespace CommercialRecords.Controls
 
         private static void InputChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            CrsTextBox CrsTextBox = (CrsTextBox)obj;
+            CrsTextBox crsTextBox = (CrsTextBox)obj;
 
-            if (null != CrsTextBox.textbox)
+            if (crsTextBox.isTextContainerInitialized())
             {
-                string newValueStr = string.Format(InputTypeDic[CrsTextBox.InputType].StringFormat, e.NewValue);
+                string newValueStr = string.Format(InputTypeDic[crsTextBox.InputType].StringFormat, e.NewValue);
 
-                CrsTextBox.textbox.Text = newValueStr;
+                crsTextBox.setText(newValueStr);
 
-                CrsTextBox.setAsNotEmpty();
-                CrsTextBox.CheckIsValid();
+                crsTextBox.setAsNotEmpty();
+                crsTextBox.CheckIsValid();
             }
         }
 
@@ -733,6 +803,11 @@ namespace CommercialRecords.Controls
 
         private void ApplyChanges4ReadyOnly()
         {
+            if (!ReadOnly && !canBeWritten())
+            {
+                ReadOnly = true;
+            }
+
             if (ReadOnly)
             {
                 if (Required)
@@ -755,21 +830,103 @@ namespace CommercialRecords.Controls
                 }
                 BorderBrush = ThemeBrush;
             }
+
+            textbox.IsReadOnly = ReadOnly;
         }
 
         private void setAsEmpty()
         {
             isEmpty = true;
-            textbox.Text = remarkBuff;
-            textbox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
-            textbox.FontStyle = Windows.UI.Text.FontStyle.Italic;
+            if (InputType.Equals(INPUTTYPES.PASSWORD))
+            {
+                pwdBox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
+                pwdBox.FontStyle = Windows.UI.Text.FontStyle.Italic;
+            }
+            else
+            {
+                textbox.Text = remarkBuff;
+                textbox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
+                textbox.FontStyle = Windows.UI.Text.FontStyle.Italic;
+            }
         }
 
         private void setAsNotEmpty()
         {
             isEmpty = false;
-            textbox.Foreground = ColorConsts.TEXTBOX_NOT_EMPTY_FOREGROUND;
-            textbox.FontStyle = Windows.UI.Text.FontStyle.Normal;
+
+            if (InputType.Equals(INPUTTYPES.PASSWORD))
+            {
+                pwdBox.Foreground = ColorConsts.TEXTBOX_NOT_EMPTY_FOREGROUND;
+                pwdBox.FontStyle = Windows.UI.Text.FontStyle.Normal;
+            }
+            else
+            {
+                textbox.Foreground = ColorConsts.TEXTBOX_NOT_EMPTY_FOREGROUND;
+                textbox.FontStyle = Windows.UI.Text.FontStyle.Normal;
+            }
+
+            maskContentIfNotPermitted();
+        }
+
+        private void maskContentIfNotPermitted()
+        {
+            if (!canBeRead())
+            {
+                setText("****");
+            }
+        }
+
+        private bool canBeRead()
+        {
+            return (permission & 2) > 0;
+        }
+
+        private bool canBeWritten()
+        {
+            return (permission & 3) > 0;
+        }
+
+        private void setText(string newText)
+        {
+            if (InputType.Equals(INPUTTYPES.PASSWORD))
+            {
+                pwdBox.Password = newText;
+            }
+            else
+            {
+                textbox.Text = newText;
+            }
+        }
+
+        private string getText()
+        {
+            if (isTextContainerInitialized())
+            {
+                if (InputType.Equals(INPUTTYPES.PASSWORD))
+                {
+                    return pwdBox.Password;
+                }
+                else {
+                    return textbox.Text;
+                }
+            }
+
+            return null;
+        }
+
+        private bool isTextContainerInitialized()
+        {
+            if (InputType.Equals(INPUTTYPES.PASSWORD) && null != pwdBox)
+            {
+                return true;
+            }
+
+            if (!InputType.Equals(INPUTTYPES.PASSWORD) && null != textbox)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

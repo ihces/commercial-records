@@ -1,4 +1,5 @@
-﻿using CommercialRecords.Controls;
+﻿using CommercialRecords.Common;
+using CommercialRecords.Controls;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Windows.Foundation;
@@ -127,6 +128,8 @@ namespace CommercialRecords.Panels
 
         private static void checkedIndexChangedHandler(CRSRadioButtonPanel panel)
         {
+            CrsAuthentication.getInstance().updateTimeoutDate();
+
             if (panel.Children.Count > 0)
             {
                 if (panel.checkedChangedExternally)

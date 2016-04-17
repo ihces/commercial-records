@@ -1,6 +1,6 @@
 ﻿namespace CommercialRecords.ViewModels
 {
-    interface DataVMIntf<E>
+    public interface DataVMIntf<E>
     {
         void Refresh();
 

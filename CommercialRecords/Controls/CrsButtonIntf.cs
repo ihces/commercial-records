@@ -5,6 +5,8 @@ namespace CommercialRecords.Controls
 {
     interface CrsButtonIntf
     {
+        int FunctionalPermission { get; set; }
+
         bool Validation { get; set; }
 
         bool Disabled { get; set; }

@@ -1,10 +1,8 @@
 ﻿using CommercialRecords.Common;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Reflection;
 using System.Windows.Input;
-using Windows.UI.Xaml.Controls;
 
 namespace CommercialRecords.ViewModels
 {

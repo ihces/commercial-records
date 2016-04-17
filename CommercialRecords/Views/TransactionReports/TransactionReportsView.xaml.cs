@@ -1,11 +1,11 @@
-﻿using CommercialRecords.ViewModels.FrameVMs.Transacts;
+﻿using CommercialRecords.ViewModels.FrameVMs;
 
 namespace CommercialRecords.Views.TransactionReports
 {
     public sealed partial class TransactionReportsView : ViewBase
     {
         public TransactionReportsView()
-            : base(typeof(TransactListFrameVM))
+            : base(typeof(TransactionReportsFrameVM))
         {
             this.InitializeComponent();
         }

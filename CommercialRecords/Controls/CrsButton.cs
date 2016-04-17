@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommercialRecords.Common;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -7,6 +8,28 @@ namespace CommercialRecords.Controls
     class CrsButton : Button, CrsButtonIntf
     {
         #region Properties
+        #region FunctionalPermission
+        public int FunctionalPermission
+        {
+            get
+            {
+                return (int)GetValue(FunctionalPermissionProperty);
+            }
+            set
+            {
+                SetValue(FunctionalPermissionProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty FunctionalPermissionProperty =
+            DependencyProperty.Register(
+                "FunctionalPermission",
+                typeof(int),
+                typeof(CrsAppBarButton),
+                new PropertyMetadata(255)
+            );
+        #endregion
+
         #region Validation
         public bool Validation
         {
@@ -50,12 +73,36 @@ namespace CommercialRecords.Controls
                 new PropertyMetadata(false, DisabledChangedHandler)
             );
         #endregion
+
+        private int permission = 3;
         #endregion
+
+
+        protected override void OnApplyTemplate()
+        {
+            if (FunctionalPermission >= 0)
+            {
+                permission = CrsAuthentication.getInstance().getPermission(FunctionalPermission);
+
+                if (0 == (permission & 1))
+                {
+                    Visibility = Visibility.Collapsed;
+                }
+                else if (1 == permission)
+                {
+                    IsEnabled = false;
+                }
+            }
+        }
 
         private static void DisabledChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            Button button = (Button)obj;
-            button.IsEnabled = !(bool)e.NewValue;
+            CrsButton button = (CrsButton)obj;
+            bool newVal = !(bool)e.NewValue;
+            if (!(1 == button.permission && newVal))
+            {
+                button.IsEnabled = newVal;
+            }
         }
 
         public void setClickHandler(Action<object, RoutedEventArgs> clickHandlerMethod)
