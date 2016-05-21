@@ -8,8 +8,28 @@ namespace CommercialRecords.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (0 == value.ToString().CompareTo(parameter.ToString()))
-                return Visibility.Visible;
+            
+            if (null != value && null != parameter)
+            {
+                string[] parameters = parameter.ToString().Split('|');
+                bool invert = false;
+                if (parameters.Length > 1 && parameters[1] == "Invert")
+                    invert = true;
+
+                if (0 == value.ToString().CompareTo(parameters[0].ToString())){
+                    if (invert)
+                        return Visibility.Collapsed;
+                    else
+                        return Visibility.Visible;
+                }
+                else
+                {
+                    if (invert)
+                        return Visibility.Visible;
+                    else
+                        return Visibility.Collapsed;
+                }
+            }
 
             return Visibility.Collapsed;
         }

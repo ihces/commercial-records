@@ -24,6 +24,20 @@ namespace CommercialRecords.ViewModels.FrameVMs
             }
         }
 
+        private TransactReportVM selectedTransactReport;
+        public TransactReportVM SelectedTransactReport
+        {
+            get
+            {
+                return selectedTransactReport;
+            }
+            set
+            {
+                selectedTransactReport = value;
+                RaisePropertyChanged("SelectedTransactReport");
+            }
+        }
+
         private ObservableCollection<string> transactions = new ObservableCollection<string>(CrsDictionary.getInstance().getKeys("transactions"));
         public ObservableCollection<string> Transactions
         {
@@ -111,6 +125,7 @@ namespace CommercialRecords.ViewModels.FrameVMs
                 SelectedTransaction = Transactions[0];
 
             setUsers();
+            setTransactReports();
         }
 
         private async Task setUsers()
@@ -118,6 +133,11 @@ namespace CommercialRecords.ViewModels.FrameVMs
             Users = new ObservableCollection<UserVM>(await UserVM.getList<UserVM>());
             if (Users.Count > 0)
                 SelectedUser = Users[0];
+        }
+
+        private async Task setTransactReports()
+        {
+            TransactReports = new ObservableCollection<TransactReportVM>(await TransactReportVM.getList<TransactReportVM>());
         }
     }
 }

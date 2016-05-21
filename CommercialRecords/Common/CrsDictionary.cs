@@ -60,6 +60,21 @@ namespace CommercialRecords.Common
                 return null;
         }
 
+        public string lookup2(string dicNkey, params object[] prms)
+        {
+            if (dicNkey.Length > 0 && dicNkey[0] == '#')
+            {
+                string[] remarkTokens = dicNkey.Substring(1).Split(new char[] { '|' });
+
+                if (remarkTokens.Length == 2)
+                {
+                    return lookup(remarkTokens[0], remarkTokens[1]);
+                }
+            }
+
+            return string.Empty;
+        }
+
         public string lookup(string dictionary, string key, params object[] prms)
         {
             string remark = key;

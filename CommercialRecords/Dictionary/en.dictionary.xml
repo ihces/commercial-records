@@ -54,7 +54,7 @@
     <property key="LastTransactDate">Last Transact Date</property>
     <property key="Detail">Detail</property>
   </dictionary>
-  <dictionary id="accountFields">
+  <dictionary id="CurrentAccountFields">
     <property key="Name">Name</property>
     <property key="BankName">Bank Name</property>
     <property key="TotalAmount">Total Amount</property>
@@ -63,8 +63,9 @@
     <property key="AccountName">Account Name</property>
     <property key="AccountNumber">Account Number</property>
     <property key="Balance">Balance</property>
+    <property key="InitialAmount">Initial Amount</property>
   </dictionary>
-  <dictionary id="actorFields">
+  <dictionary id="ActorFields">
     <property key="Person">Person</property>
     <property key="Firm">Firm</property>
     <property key="Normal">Normal</property>
@@ -144,7 +145,7 @@
     <property key="user_info">User</property>
   </dictionary>
   <dictionary id="instanceLabels">
-    <property key="currentAccount1">Current Account 1</property>
+    <property key="mainAccount">Main Account</property>
     <property key="cashRegAcct1">Cash Register Account 1</property>
   </dictionary>
   <dictionary id="commands">
@@ -206,11 +207,11 @@
     <property key="4">Account Manager</property>
   </dictionary>
   <dictionary id="transactions">
-    <property key="100">Create Customer</property>
-    <property key="101">Modify Customer</property>
-    <property key="102">Delete Customer</property>
-    <property key="110">Create Account</property>
-    <property key="111">Modify Account</property>
-    <property key="112">Delete Account</property>
+    <property key="Actor_create">Create Person/Firm</property>
+    <property key="Actor_modify">Modify Person/Firm</property>
+    <property key="Actor_delete">Delete Person/Firm</property>
+    <property key="CurrentAccount_create">Create Current Account</property>
+    <property key="CurrentAccount_modify">Modify Current Account</property>
+    <property key="CurrentAccount_delete">Delete Current Account</property>
   </dictionary>
 </dictionaries>

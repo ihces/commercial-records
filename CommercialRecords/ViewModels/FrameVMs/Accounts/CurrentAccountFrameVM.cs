@@ -43,6 +43,21 @@ namespace CommercialRecords.ViewModels
 
         private CurrentAccountVM newAccountBuff;
 
+        private double initialAmount = 0;
+        public double InitialAmount
+        {
+            get
+            {
+                return initialAmount;
+            }
+            set
+            {
+
+                initialAmount = value;
+                RaisePropertyChanged("InitialAmount");
+            }
+        }
+
         private CurrentAccountVM selectedAccount;
         public CurrentAccountVM SelectedAccount
         {
@@ -63,6 +78,7 @@ namespace CommercialRecords.ViewModels
                     if (!EnableAccountField)
                     {
                         selectedAccount = value;
+                        InitialAmount = 0;
                         setTransacts();
                     }
                 }

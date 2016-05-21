@@ -6,9 +6,13 @@ namespace CommercialRecords.Models
     {
         public const int TYPE_PERSON = 0, TYPE_FIRM = 1;
         public int Type { get; set; }
+
+        [Internal]
         public bool Registered { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+
+        [Internal]
         public int Sincerity { get; set; }
         public string Address { get; set; }
         public string Detail { get; set; }

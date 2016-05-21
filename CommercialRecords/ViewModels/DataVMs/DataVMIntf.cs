@@ -8,10 +8,10 @@
 
         E convert2Model();
 
-        int save();
+        int save(bool recordLog);
 
         DataVMIntf<E> get(int id);
 
-        DataVMIntf<E> delete();
+        DataVMIntf<E> delete(bool recordLog);
     }
 }

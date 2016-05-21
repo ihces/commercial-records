@@ -102,18 +102,18 @@
                                     </Grid.ColumnDefinitions>
                                     <ComboBox Grid.Column="0" BorderThickness="0" Foreground="Black" SelectedIndex="{Binding Path=ActorRegistedIndex, Mode=TwoWay}" Background="Silver" IsEnabled="{Binding CurrentActorInfoEditable}" Style="{StaticResource ComboBoxStyle2}">
                                         <ComboBoxItem>
-                                            <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#actorFields|Normal'}" />
+                                            <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#ActorFields|Normal'}" />
                                         </ComboBoxItem>
                                         <ComboBoxItem x:Name="RegisteredCBItem">
-                                            <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#actorFields|Registered'}" />
+                                            <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#ActorFields|Registered'}" />
                                         </ComboBoxItem>
                                     </ComboBox>
                                     <ComboBox Grid.Column="2" BorderThickness="0" Foreground="Black" SelectedIndex="{Binding Path=CurrentActor.Type, Mode=TwoWay}" Background="Silver" IsEnabled="{Binding CurrentActorTypeEditable}" Style="{StaticResource ComboBoxStyle2}">
                                         <ComboBoxItem x:Name="PersonCBItem">
-                                            <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#actorFields|Person'}" />
+                                            <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#ActorFields|Person'}" />
                                         </ComboBoxItem>
                                         <ComboBoxItem x:Name="FirmCBItem">
-                                            <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#actorFields|Firm'}" />
+                                            <TextBlock FontSize="20" FontWeight="SemiBold" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#ActorFields|Firm'}" />
                                         </ComboBoxItem>
                                     </ComboBox>
                                 </Grid>

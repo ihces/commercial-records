@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System;
 using SQLite;
 using CommercialRecords.DataLayer;
+using CommercialRecords.Common;
 
 namespace CommercialRecords.ViewModels.DataVMs
 {
@@ -80,8 +81,11 @@ namespace CommercialRecords.ViewModels.DataVMs
             return model;
         }
 
-        public virtual int save()
+        public virtual int save(bool recordLog = false)
         {
+            if (!(this is TransactReportVM) && recordLog)
+                saveTransactRecord();
+
             E entryBuff = convert2Model();
             if (Id > 0)
                 entryBuff.Id = Id;
@@ -111,6 +115,56 @@ namespace CommercialRecords.ViewModels.DataVMs
             return Id;
         }
 
+        private void saveTransactRecord(int opType = 0)
+        {
+            string detail1 = string.Empty;
+            string detail2 = string.Empty;
+
+            E newData = this.convert2Model();
+            E oldData = Id > 0 ? get(Id).convert2Model() : null;
+
+            E model1 = opType == 0 ? oldData : newData;
+            E model2 = opType == 0 ? newData : oldData;
+
+            IEnumerable<PropertyInfo> model1Props = model1 != null ? model1.GetType().GetRuntimeProperties() : null;
+            IEnumerable<PropertyInfo> model2Props = model2.GetType().GetRuntimeProperties();
+
+            foreach (PropertyInfo model2Prop in model2Props)
+            {
+                if (((object[])model2Prop.GetCustomAttributes(typeof(ModelBase.InternalAttribute), true)).Count() == 0)
+                {
+                    PropertyInfo property = null;
+
+                    bool valuesEqual = false;
+                    if (model1 != null)
+                    {
+                        property = model1Props.Where(p => p.Name == model2Prop.Name).Single();
+
+                        valuesEqual = (null == model2Prop.GetValue(model2) && null == property.GetValue(model1)) ||
+                            (null != model2Prop.GetValue(model2) && model2Prop.GetValue(model2).Equals(property.GetValue(model1)));
+
+                        if (!valuesEqual)
+                            detail1 += "[#" + model1.GetType().Name + "Fields|" + property.Name + "] = " + property.GetValue(model1) + "\n";
+                    }
+                    if (property == null || !valuesEqual)
+                    {
+                        detail2 += "[#" + model2.GetType().Name + "Fields|" + model2Prop.Name + "] = " + model2Prop.GetValue(model2) + "\n";
+                    }
+                }
+            }
+
+            TransactReportVM transactReport = new TransactReportVM();
+            transactReport.OperatorId = CrsAuthentication.getInstance().SessionControl.CurrentUser.Id;
+            transactReport.Date = DateTime.Now;
+            transactReport.OldData = opType == 0 ? detail1 : detail2;
+            transactReport.NewData = opType == 0 ? detail2 : detail1;
+            transactReport.TransType = model2.GetType().Name + "_" + (opType == 0 ? (oldData == null? "create" : "modify" ) : "delete");
+
+            transactReport.save();
+
+            initWithModel(newData);
+        }
+
         public virtual DataVMIntf<E> get(int id)
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
@@ -126,8 +180,11 @@ namespace CommercialRecords.ViewModels.DataVMs
             return this;
         }
 
-        public virtual DataVMIntf<E> delete()
+        public virtual DataVMIntf<E> delete(bool recordLog = false)
         {
+            if (!(this is TransactReportVM) && recordLog)
+                saveTransactRecord(1);
+
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
                 db.BeginTransaction();

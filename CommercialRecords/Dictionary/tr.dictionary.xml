@@ -54,7 +54,7 @@
     <property key="LastTransactDate">Son İşlem Tarihi</property>
     <property key="Detail">Açıklama</property>
   </dictionary>
-  <dictionary id="accountFields">
+  <dictionary id="CurrentAccountFields">
     <property key="Name">İsim</property>
     <property key="BankName">Banka İsmi</property>
     <property key="TotalAmount">Toplam Tutar</property>
@@ -63,8 +63,9 @@
     <property key="AccountName">Hesap İsmi</property>
     <property key="AccountNumber">Hesap Numarası</property>
     <property key="Balance">Bakiye</property>
+    <property key="InitialAmount">İlk Değer</property>
   </dictionary>
-  <dictionary id="actorFields">
+  <dictionary id="ActorFields">
     <property key="Person">Kişi</property>
     <property key="Firm">Firma</property>
     <property key="Normal">Normal</property>
@@ -144,7 +145,7 @@
     <property key="user_info">Kullanıcı</property>
   </dictionary>
   <dictionary id="instanceLabels">
-    <property key="currentAccount1">Cari Hesap 1</property>
+    <property key="mainAccount">Ana Hesap</property>
     <property key="cashRegAcct1">Kasa Hesabı 1</property>
   </dictionary>
   <dictionary id="commands">
@@ -206,11 +207,11 @@
     <property key="4">Muhasebe</property>
   </dictionary>
   <dictionary id="transactions">
-    <property key="100">Create Customer</property>
-    <property key="101">Modify Customer</property>
-    <property key="102">Delete Customer</property>
-    <property key="110">Create Account</property>
-    <property key="111">Modify Account</property>
-    <property key="112">Delete Account</property>
+    <property key="Actor_create">Kişi/Firma Oluşturma</property>
+    <property key="Actor_modify">Kişi/Firma Değiştirme</property>
+    <property key="Actor_delete">Kişi/Firma Silme</property>
+    <property key="CurrentAccount_create">Cari Hesap Oluşturma</property>
+    <property key="CurrentAccount_modify">Cari Hesap Değiştirme</property>
+    <property key="CurrentAccount_delete">Cari Hesap Silme</property>
   </dictionary>
 </dictionaries>

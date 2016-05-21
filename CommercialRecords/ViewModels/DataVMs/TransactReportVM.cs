@@ -1,23 +1,29 @@
-﻿using CommercialRecords.Models;
+﻿using CommercialRecords.Common;
+using CommercialRecords.Models;
+using CommercialRecords.ViewModels.DataVMs.Settings;
 using System;
 
 namespace CommercialRecords.ViewModels.DataVMs
 {
     class TransactReportVM : DataVMBase<TransactReport>
     {
-        private int type;
-        public int Type {
-            get {
-                return Type;
+        private string transType;
+        public string TransType
+        {
+            get
+            {
+                return transType;
             }
-            set {
-                type = value;
-                RaisePropertyChanged("Type");
+            set
+            {
+                transType = value;
+                RaisePropertyChanged("TransType");
             }
         }
 
         private int operatorId;
-        public int OperatorId {
+        public int OperatorId
+        {
             get
             {
                 return operatorId;
@@ -26,24 +32,24 @@ namespace CommercialRecords.ViewModels.DataVMs
             {
                 operatorId = value;
                 RaisePropertyChanged("OperatorId");
+                RaisePropertyChanged("OperatorName");
             }
         }
 
-        private int transactId;
-        public int TransactId {
+        private string operatorName;
+        public string OperatorName
+        {
             get
             {
-                return transactId;
-            }
-            set
-            {
-                transactId = value;
-                RaisePropertyChanged("TransactId");
+                UserVM user = new UserVM();
+                user.get(OperatorId);
+                return user.Id + " - " + user.Name + " " + user.Surname;
             }
         }
 
         private DateTime date;
-        public DateTime Date {
+        public DateTime Date
+        {
             get
             {
                 return date;
@@ -55,30 +61,66 @@ namespace CommercialRecords.ViewModels.DataVMs
             }
         }
 
-        private string detail;
-        public string Detail {
+        private string oldData;
+        public string OldData
+        {
             get
             {
-                return detail;
+                return oldData;
             }
             set
             {
-                detail = value;
-                RaisePropertyChanged("Detail");
+                oldData = value;
+                RaisePropertyChanged("OldData");
+                RaisePropertyChanged("OldDataCvt");
             }
         }
 
-        private double cost;
-        public double Cost {
+        private string newData;
+        public string NewData
+        {
             get
             {
-                return cost;
+                return newData;
             }
             set
             {
-                cost = value;
-                RaisePropertyChanged("Cost");
+                newData = value;
+                RaisePropertyChanged("NewData");
+                RaisePropertyChanged("NewDataCvt");
             }
+        }
+
+        public string NewDataCvt
+        {
+            get
+            {
+                return localizeData(NewData);
+            }
+        }
+
+        public string OldDataCvt
+        {
+            get
+            {
+                return localizeData(OldData);
+            }
+        }
+
+        private string localizeData(string data)
+        {
+            string strBuff = string.Empty;
+            string[] lines = data.Split('\n');
+
+            foreach (string line in lines)
+            {
+                string[] tokens = line.Split(new char[] { '[', ']' });
+                if (tokens.Length > 1)
+                strBuff += CrsDictionary.getInstance().lookup2(tokens[1]);
+                strBuff += " " + line.Substring(line.IndexOf(']') + 1) + '\n';
+
+            }
+            return strBuff;
         }
     }
 }

@@ -8,18 +8,9 @@ namespace CommercialRecords.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            string remarkKeyBuff = parameter.ToString();
-            if (remarkKeyBuff.Length > 0 && remarkKeyBuff[0] == '#')
-            {
-                string[] remarkTokens = remarkKeyBuff.Substring(1).Split(new char[] { '|' });
-
-                if (remarkTokens.Length == 2)
-                {
-                    return CrsDictionary.getInstance().lookup(remarkTokens[0], remarkTokens[1]);
-                }
-            }
-
-            return CrsDictionary.getInstance().lookup(parameter.ToString(), value.ToString());
+            string remark = CrsDictionary.getInstance().lookup2(parameter.ToString());
+            
+            return remark.Length > 0 ? remark : CrsDictionary.getInstance().lookup(parameter.ToString(), value.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

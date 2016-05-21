@@ -211,24 +211,79 @@ namespace CommercialRecords.Controls
             );
         #endregion
         #region IsValid
+        private bool isValid;
         public bool IsValid
+        {
+            get { return isValid; }
+
+            private set
+            {
+                if (Validate || !value)
+                    isValid = value;
+            }
+        }
+        #endregion
+        #region Validate
+        public bool Validate
         {
             get
             {
-                return (bool)GetValue(IsValidProperty);
+                return (bool)GetValue(ValidateProperty);
             }
             set
             {
-                SetValue(IsValidProperty, value);
+                SetValue(ValidateProperty, value);
             }
         }
 
-        public static readonly DependencyProperty IsValidProperty =
+        public static readonly DependencyProperty ValidateProperty =
             DependencyProperty.Register(
-                "IsValid",
+                "Validate",
                 typeof(bool),
                 typeof(CrsTextBox),
-                new PropertyMetadata(true)
+                new PropertyMetadata(true, ValidateChangedHandler)
+            );
+        #endregion
+        #region LowerBound
+        public object LowerBound
+        {
+            get
+            {
+                return GetValue(LowerBoundProperty);
+            }
+            set
+            {
+                SetValue(LowerBoundProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty LowerBoundProperty =
+            DependencyProperty.Register(
+                "LowerBound",
+                typeof(object),
+                typeof(CrsTextBox),
+                new PropertyMetadata(null, boundChangedHandler)
+            );
+        #endregion
+        #region UpperBound
+        public object UpperBound
+        {
+            get
+            {
+                return GetValue(UpperBoundProperty);
+            }
+            set
+            {
+                SetValue(UpperBoundProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty UpperBoundProperty =
+            DependencyProperty.Register(
+                "UpperBound",
+                typeof(object),
+                typeof(CrsTextBox),
+                new PropertyMetadata(null, boundChangedHandler)
             );
         #endregion
         #region Multiline
@@ -404,7 +459,7 @@ namespace CommercialRecords.Controls
         #endregion
 
         #region Input Type
-        public enum INPUTTYPES { ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER, DATETIME, PASSWORD }
+        public enum INPUTTYPES { ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER, DATE, DATETIME, PASSWORD }
 
         delegate object ConvertFromDelegate(string str);
         delegate string ConvertForEditDelegate(string str);
@@ -470,7 +525,17 @@ namespace CommercialRecords.Controls
                 delegate(string value){
                     return value.Replace(" ", String.Empty);
                 })},
-            {INPUTTYPES.DATETIME, new InputTypeInfo(@"^(\d{2})\-(\d{2})\-(\d{4}) (\d{2}):(\d{2}):(\d{2})$",
+            {INPUTTYPES.DATE, new InputTypeInfo(@"^(\d{2})\-(\d{2})\-(\d{4})$",
+                "{0:dd-MM-yyyy}",
+                delegate(string value){
+                    DateTime returnVal = DateTime.Now;
+                    DateTime.TryParse(value, out returnVal);
+                    return returnVal;
+                },
+                delegate(string value){
+                    return value;
+                })},
+            { INPUTTYPES.DATETIME, new InputTypeInfo(@"^(\d{2})\-(\d{2})\-(\d{4}) (\d{2}):(\d{2}):(\d{2})$",
                 "{0:dd-MM-yyyy HH:mm:ss}",
                 delegate(string value){
                     DateTime returnVal = DateTime.Now;
@@ -529,7 +594,7 @@ namespace CommercialRecords.Controls
                     setText(getText().Trim());
                     string text = getText();
 
-                    if (InputType.Equals(INPUTTYPES.DATETIME))
+                    if (InputType.Equals(INPUTTYPES.DATE) || InputType.Equals(INPUTTYPES.DATETIME))
                     {
                         DateTime dtBuff = (DateTime)InputTypeDic[InputType].ConvertFrom(text);
                         if (dtBuff < new DateTime(1900, 1, 1) || dtBuff > new DateTime(2100, 1, 1))
@@ -540,7 +605,7 @@ namespace CommercialRecords.Controls
                         }
                     }
 
-                    if (Regex.IsMatch(text, InputTypeDic[InputType].Pattern))
+                    if (Regex.IsMatch(text, InputTypeDic[InputType].Pattern) && suitBounds())
                     {
                         IsValid = true;
 
@@ -558,6 +623,48 @@ namespace CommercialRecords.Controls
             }
         }
 
+        private bool suitBounds()
+        {
+            Double inputValue = 0.0, upperBound = 0.0, lowerBound = 0.0;
+
+            if (Input is string)
+                return true;
+
+            
+            if (InputType.Equals(INPUTTYPES.DATE) || InputType.Equals(INPUTTYPES.DATETIME))
+            {
+                DateTime dateBuff = DateTime.Now;
+                DateTime.TryParse(getText(), out dateBuff);
+                inputValue = dateBuff.Ticks;
+                upperBound = (UpperBound != null && UpperBound is DateTime) ? ((DateTime)UpperBound).Ticks : inputValue;
+                lowerBound = (LowerBound != null && LowerBound is DateTime) ? ((DateTime)LowerBound).Ticks : inputValue;
+            }
+            else if  ((
+                InputType.Equals(INPUTTYPES.DOUBLE) || 
+                InputType.Equals(INPUTTYPES.MONEY) || 
+                InputType.Equals(INPUTTYPES.NUMBER)) && 
+                App.IsNumeric(getText()))
+            {
+                inputValue = Double.Parse(getText());
+                upperBound = (UpperBound != null && App.IsNumeric(UpperBound)) ? (double)UpperBound : inputValue;
+                lowerBound = (LowerBound != null && App.IsNumeric(LowerBound)) ? (double)LowerBound : inputValue;
+            }
+
+            bool result = true;
+
+            if (inputValue < lowerBound)
+            {
+                result = false;
+            }
+
+            if (inputValue > upperBound)
+            {
+                result = false;
+            }
+
+            return result;
+        }
+        
         protected void OnApplyTemplate()
         {
             if (DataPermission >= 0)
@@ -610,7 +717,7 @@ namespace CommercialRecords.Controls
                     icon.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Right;
                     break;
                 default:
-                    if (!InputType.Equals(INPUTTYPES.DATETIME))
+                    if (!(InputType.Equals(INPUTTYPES.DATE) || InputType.Equals(INPUTTYPES.DATETIME)))
                         Grid.SetColumn(iconContainer, 0);
                     break;
             }
@@ -622,7 +729,7 @@ namespace CommercialRecords.Controls
 
             CheckIsValid();
 
-            if (InputType.Equals(INPUTTYPES.DATETIME))
+            if (InputType.Equals(INPUTTYPES.DATE) || InputType.Equals(INPUTTYPES.DATETIME))
                 this.DateTimePopup.DataContext = new CrsTextBoxDateTimePopupVM(this);
         }
 
@@ -661,14 +768,12 @@ namespace CommercialRecords.Controls
                             getText().Trim())));
         }
 
-        private string textBoxTextBuff = string.Empty;
         private void TextChangedHandler(object sender, RoutedEventArgs e)
         {
             CrsAuthentication authInstance = CrsAuthentication.getInstance();
 
             if (!authInstance.SessionControl.SessionStatus.Equals(CrsAuthentication.SESSION_STATUS.TIME_OUT))
             {
-                textBoxTextBuff = textbox.Text;
                 authInstance.updateTimeoutDate();
 
                 if (null != TextChanged)
@@ -676,7 +781,6 @@ namespace CommercialRecords.Controls
             }
             else
             {
-                textbox.Text = textBoxTextBuff;
                 authInstance.showAuthentication();
             }
         }
@@ -686,7 +790,7 @@ namespace CommercialRecords.Controls
 
         private void iconContainer_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (this.InputType.Equals(INPUTTYPES.DATETIME))
+            if (InputType.Equals(INPUTTYPES.DATE) || InputType.Equals(INPUTTYPES.DATETIME))
             {
                 DateTimePopup.IsOpen = !DateTimePopup.IsOpen;
 
@@ -712,16 +816,19 @@ namespace CommercialRecords.Controls
 
         private void dateTimePopup_OnLayoutUpdated(object sender, object e)
         {
-            Point actualPosition = TransformToVisual(Window.Current.Content).TransformPoint(new Point(0, 0));
+            if (InputType.Equals(INPUTTYPES.DATE) || InputType.Equals(INPUTTYPES.DATETIME))
+            {
+                Point actualPosition = TransformToVisual(Window.Current.Content).TransformPoint(new Point(0, 0));
 
-            if (actualPosition.Y + this.ActualHeight < Window.Current.Bounds.Height &&
-                actualPosition.Y - this.ActualHeight < 0)
-            {
-                DateTimeSelectPopupContent.Margin = new Thickness(0, this.ActualHeight, 0, 0);
-            }
-            else if (actualPosition.Y + this.ActualHeight + DateTimeSelectPopupContent.ActualHeight > Window.Current.Bounds.Height)
-            {
-                DateTimeSelectPopupContent.Margin = new Thickness(0, -DateTimeSelectPopupContent.ActualHeight, 0, 0);
+                if (actualPosition.Y + this.ActualHeight < Window.Current.Bounds.Height &&
+                    actualPosition.Y - this.ActualHeight < 0)
+                {
+                    DateTimeSelectPopupContent.Margin = new Thickness(0, this.ActualHeight, 0, 0);
+                }
+                else if (actualPosition.Y + this.ActualHeight + DateTimeSelectPopupContent.ActualHeight > Window.Current.Bounds.Height)
+                {
+                    DateTimeSelectPopupContent.Margin = new Thickness(0, -DateTimeSelectPopupContent.ActualHeight, 0, 0);
+                }
             }
         }
 
@@ -754,6 +861,22 @@ namespace CommercialRecords.Controls
         private static void ReadOnlyChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             ((CrsTextBox)obj).ApplyChanges4ReadyOnly();
+        }
+
+        private static void ValidateChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            CrsTextBox CrsTextBox = (CrsTextBox)obj;
+
+            if (CrsTextBox.Validate)
+            {
+                CrsTextBox.IsValid = true;
+                CrsTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+            }
+            else
+            {
+                CrsTextBox.IsValid = false;
+                CrsTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+            }
         }
 
         private static void IconChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
@@ -799,6 +922,11 @@ namespace CommercialRecords.Controls
             }
 
             ((CrsTextBox)d).remarkBuff = remarkTemp;
+        }
+
+        private static void boundChangedHandler(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((CrsTextBox)d).CheckIsValid();
         }
 
         private void ApplyChanges4ReadyOnly()

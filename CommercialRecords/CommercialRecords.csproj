@@ -150,6 +150,7 @@
     </Compile>
     <Compile Include="Converters\Boolean2IntConverter.cs" />
     <Compile Include="Converters\Boolean2VisibilityConverter.cs" />
+    <Compile Include="Converters\Compare2AssignBoolConverter.cs" />
     <Compile Include="Converters\Compare2AssignVisibilityConverter.cs" />
     <Compile Include="Converters\Double2MoneyConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
