@@ -105,7 +105,6 @@ namespace CommercialRecords.ViewModels
             {
                 transactTypeIndex = value;
                 TransactInfo.Type = value;
-                ActorRegistedIndex = NON_REGISTERED;
                 RaisePropertyChanged("TransactTypeIndex");
             }
         }
@@ -446,6 +445,7 @@ namespace CommercialRecords.ViewModels
             {
                 CurrentActorInfoEditable = false;
                 TransactTypeAssigned = true;
+                TransactTypeIndex = TransactInfo.Type;
             }
 
             //registered customer selected
@@ -487,12 +487,10 @@ namespace CommercialRecords.ViewModels
         //need review
         private async Task findGoods(string searchText)
         {
-            List<Expression<Func<Good, object>>> orderByClauses = new List<Expression<Func<Good, object>>>();
-            orderByClauses.Add(c => c.Name);
             string findBuff = '%' + searchText + '%';
             FoundGoods = new ObservableCollection<GoodVM>(
                 await GoodVM.getList<GoodVM>(c => c.Name.ToLower().Contains(findBuff.ToLower()) || c.Barcode.Contains(findBuff),
-                orderByClauses));
+                c => c.Name));
 
             if (FoundGoods.Count > 0)
                 SelectedGood = FoundGoods[0];
@@ -502,14 +500,10 @@ namespace CommercialRecords.ViewModels
 
         protected async Task setAccounts()
         {
-            List<Expression<Func<CurrentAccount, object>>> orderByClauses = null;
-            orderByClauses = new List<Expression<Func<CurrentAccount, object>>>();
-            orderByClauses.Add(c => c.Name);
-
             int typeBuff = TransactInfo.Type == 2?1:0;
 
             Accounts = new ObservableCollection<CurrentAccountVM>(
-                await CurrentAccountVM.getList<CurrentAccountVM>(c => c.ActorId == registeredActor.Id && c.Type == typeBuff, orderByClauses));
+                await CurrentAccountVM.getList<CurrentAccountVM>(c => c.ActorId == registeredActor.Id && c.Type == typeBuff, c => c.Name));
 
             if (0 == TransactInfo.AccountId)
                 CurrentAccount = Accounts[0];

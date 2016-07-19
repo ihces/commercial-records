@@ -16,9 +16,21 @@ using Windows.UI.Xaml.Media;
 
 namespace CommercialRecords.Controls
 {
-    public sealed partial class CrsTextBox : UserControl
+    public class InputChangedEventArgs : EventArgs
     {
-        public CrsTextBox()
+        public object NewValue { get; }
+        public object OldValue { get; }
+
+        InputChangedEventArgs(object newValue, object oldValue)
+        {
+            NewValue = newValue;
+            OldValue = oldValue;
+        }
+    }
+
+    public sealed partial class CrsInput : UserControl
+    {
+        public CrsInput()
         {
             this.InitializeComponent();
 
@@ -27,16 +39,28 @@ namespace CommercialRecords.Controls
             ThemeBrush = new SolidColorBrush(Colors.BlueViolet);
             FontWeight = FontWeights.SemiBold;
             Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
-            this.DefaultStyleKey = typeof(CrsTextBox);
-            RequiredSignVisibility = Windows.UI.Xaml.Visibility.Collapsed;
+            this.DefaultStyleKey = typeof(CrsInput);
+            RequiredSignVisibility = Visibility.Collapsed;
 
             Grid.SetColumn(iconContainer, 1);
-            this.Loaded += CrsTextBox_Loaded;
+            this.Loaded += CrsInput_Loaded;
         }
 
-        private void CrsTextBox_Loaded(object sender, RoutedEventArgs e)
+        public void reset()
+        {
+            if (!validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX))
+                Input = string.Empty;
+
+            IsValid = true;
+            AnyClickHandled = false;
+            Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+        }
+
+        private void CrsInput_Loaded(object sender, RoutedEventArgs e)
         {
             OnApplyTemplate();
+            UCLoaded = true;
+            CheckIsValid();
         }
 
         #region Properties
@@ -57,10 +81,11 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "InputType",
                 typeof(INPUTTYPES),
-                typeof(CrsTextBox),
-                new PropertyMetadata(INPUTTYPES.ALL, null)
+                typeof(CrsInput),
+                new PropertyMetadata(INPUTTYPES.ALL, InputTypeChangedHandler)
             );
-
+        #endregion
+        #region TextChanged
         public ICommand TextChanged
         {
             get
@@ -77,10 +102,67 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "TextChanged",
                 typeof(ICommand),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(null, null)
             );
 
+        public void setKeyUpHandler(Action<object, KeyRoutedEventArgs> inputKeyDownHandler)
+        {
+            switch (InputType)
+            {
+                case INPUTTYPES.MULTISELECT:
+                    comboBox.KeyUp += new KeyEventHandler(inputKeyDownHandler);
+                    break;
+                case INPUTTYPES.PASSWORD:
+                    pwdBox.KeyUp += new KeyEventHandler(inputKeyDownHandler);
+                    break;
+                default:
+                    textbox.KeyUp += new KeyEventHandler(inputKeyDownHandler);
+                    break;
+            }
+        }
+        #endregion
+        #region InputTemplate
+        public DataTemplate InputTemplate
+        {
+            get
+            {
+                return (DataTemplate)GetValue(InputTemplateProperty);
+            }
+            set
+            {
+                SetValue(InputTemplateProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty InputTemplateProperty =
+            DependencyProperty.Register(
+                "InputTemplate",
+                typeof(DataTemplate),
+                typeof(CrsInput),
+                new PropertyMetadata(null, null)
+            );
+        #endregion
+        #region InputsSource
+        public object InputsSource
+        {
+            get
+            {
+                return GetValue(InputsSourceProperty);
+            }
+            set
+            {
+                SetValue(InputsSourceProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty InputsSourceProperty =
+            DependencyProperty.Register(
+                "InputsSource",
+                typeof(object),
+                typeof(CrsInput),
+                new PropertyMetadata(null, null)
+            );
         #endregion
         #region InputMaxLength
         public int InputMaxLength
@@ -99,7 +181,7 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "InputMaxLength",
                 typeof(int),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(64, null)
             );
         #endregion
@@ -120,8 +202,29 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "MaxSize",
                 typeof(int),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(32, null)
+            );
+        #endregion
+        #region ToolTipPopupIsOpen
+        public bool ToolTipPopupIsOpen
+        {
+            get
+            {
+                return (bool)GetValue(ToolTipPopupIsOpenProperty);
+            }
+            set
+            {
+                SetValue(ToolTipPopupIsOpenProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty ToolTipPopupIsOpenProperty =
+            DependencyProperty.Register(
+                "ToolTipPopupIsOpen",
+                typeof(bool),
+                typeof(CrsInput),
+                new PropertyMetadata(false, null)
             );
         #endregion
         #region ReadOnly
@@ -141,11 +244,10 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "ReadOnly",
                 typeof(bool),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(false, ReadOnlyChangedHandler)
             );
         #endregion
-
         #region DataPermission
         public int DataPermission
         {
@@ -163,11 +265,10 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "DataPermission",
                 typeof(int),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(255, null)
             );
         #endregion
-
         #region Required
         public bool Required
         {
@@ -185,7 +286,7 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "Required",
                 typeof(bool),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(false)
             );
         #endregion
@@ -206,22 +307,31 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "RequiredSignVisibility",
                 typeof(Visibility),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(false)
             );
         #endregion
         #region IsValid
-        private bool isValid;
         public bool IsValid
         {
-            get { return isValid; }
-
-            private set
+            get
+            {
+                return (bool)GetValue(IsValidProperty);
+            }
+            set
             {
                 if (Validate || !value)
-                    isValid = value;
+                    SetValue(IsValidProperty, value);
             }
         }
+
+        public static readonly DependencyProperty IsValidProperty =
+            DependencyProperty.Register(
+                "IsValid",
+                typeof(bool),
+                typeof(CrsInput),
+                new PropertyMetadata(true, null)
+            );
         #endregion
         #region Validate
         public bool Validate
@@ -240,7 +350,7 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "Validate",
                 typeof(bool),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(true, ValidateChangedHandler)
             );
         #endregion
@@ -261,7 +371,7 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "LowerBound",
                 typeof(object),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(null, boundChangedHandler)
             );
         #endregion
@@ -282,7 +392,7 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "UpperBound",
                 typeof(object),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(null, boundChangedHandler)
             );
         #endregion
@@ -303,7 +413,7 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "Multiline",
                 typeof(bool),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(false)
             );
         #endregion
@@ -324,7 +434,7 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "Icon",
                 typeof(IconConsts.SegoeIcons),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(IconConsts.SegoeIcons.HOME, IconChangedHandler)
             );
         #endregion
@@ -345,7 +455,7 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "IconWidth",
                 typeof(double),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(60.0d, IconWidthChangedHandler)
             );
         #endregion
@@ -366,7 +476,7 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "IconFontSize",
                 typeof(double),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(30.0d)
             );
         #endregion
@@ -388,11 +498,18 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "IconVisibility",
                 typeof(Visibility),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(IconVisibilities.at_Left)
             );
         #endregion
         #region Input
+        public event EventHandler InputChanged;
+        private void OnInputChanged(InputChangedEventArgs e)
+        {
+            if (null == InputChanged) 
+                InputChanged(this, e);
+        }
+
         public object Input
         {
             get
@@ -409,7 +526,7 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "Input",
                 typeof(object),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(null, InputChangedHandler)
             );
         #endregion
@@ -430,10 +547,53 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "Remark",
                 typeof(string),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata("Bu alanı doldurunuz", RemarkChangedHandler)
             );
 
+        #endregion
+        #region ToolTipHeader
+        public string ToolTipHeader
+        {
+            get
+            {
+                return (string)GetValue(ToolTipHeaderProperty);
+            }
+            set
+            {
+                SetValue(ToolTipHeaderProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty ToolTipHeaderProperty =
+            DependencyProperty.Register(
+                "ToolTipHeader",
+                typeof(string),
+                typeof(CrsInput),
+                new PropertyMetadata("", null)
+            );
+        #endregion
+        #region ToolTipContent
+        public string ToolTipContent
+        {
+            get
+            {
+                return (string)GetValue(ToolTipContentProperty);
+            }
+            set
+            {
+                toolTipVizDuration = (value.Length < 30 ? 30 : value.Length / 10);
+                SetValue(ToolTipContentProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty ToolTipContentProperty =
+            DependencyProperty.Register(
+                "ToolTipContent",
+                typeof(string),
+                typeof(CrsInput),
+                new PropertyMetadata("", null)
+            );
         #endregion
         #region ThemeBrush
         public Brush ThemeBrush
@@ -452,14 +612,14 @@ namespace CommercialRecords.Controls
             DependencyProperty.Register(
                 "ThemeBrush",
                 typeof(Brush),
-                typeof(CrsTextBox),
+                typeof(CrsInput),
                 new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90)))
             );
         #endregion
         #endregion
 
         #region Input Type
-        public enum INPUTTYPES { ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER, DATE, DATETIME, PASSWORD }
+        public enum INPUTTYPES { ALL, NAME, NUMBER, DOUBLE, MONEY, PHONENUMBER, DATE, DATETIME, PASSWORD, MULTISELECT }
 
         delegate object ConvertFromDelegate(string str);
         delegate string ConvertForEditDelegate(string str);
@@ -467,14 +627,16 @@ namespace CommercialRecords.Controls
         private struct InputTypeInfo
         {
             public string Pattern;
+            public string FormatDesc;
             public string StringFormat;
             public ConvertFromDelegate ConvertFrom;
             public ConvertForEditDelegate ConvertForEdit;
 
 
-            public InputTypeInfo(string pattern, string stringFormat, ConvertFromDelegate convertFrom, ConvertForEditDelegate convertForEdit)
+            public InputTypeInfo(string pattern, string formatDesc, string stringFormat, ConvertFromDelegate convertFrom, ConvertForEditDelegate convertForEdit)
             {
                 Pattern = pattern;
+                FormatDesc = formatDesc;
                 StringFormat = stringFormat;
                 ConvertFrom = convertFrom;
                 ConvertForEdit = convertForEdit;
@@ -485,10 +647,10 @@ namespace CommercialRecords.Controls
         private const string moneyPatternTur = @"^([1-9]{1}[\d]{0,2}(\.[\d]{3})*(\,[\d]{0,2})?(\ ?(₺))?|[1-9]{1}[\d]{0,}(\,[\d]{0,2})?(\ ?(₺))?|0(\,[\d]{0,2})?(\ ?(₺))?|(\,[\d]{1,2})?(\ ?(₺))?)$";
 
         private static readonly Dictionary<INPUTTYPES, InputTypeInfo> InputTypeDic = new Dictionary<INPUTTYPES, InputTypeInfo>() {
-            {INPUTTYPES.ALL, new InputTypeInfo(".*", "{0:g}", delegate(string value){ return value;}, delegate(string value){return value;})},
-            {INPUTTYPES.NAME, new InputTypeInfo(@"^[a-zA-ZçÇıİüÜöÖşŞğĞ]*[\s]*[a-zA-ZçÇıİüÜöÖşŞğĞ|]*$", "{0:g}", delegate(string value){ return value;}, delegate(string value){return value;})},
-            {INPUTTYPES.NUMBER, new InputTypeInfo(@"^\d+$", "{0:#}", delegate(string value){ int returnVal = 0; int.TryParse(value, out returnVal); return returnVal;}, delegate(string value){return value;})},
-            {INPUTTYPES.DOUBLE, new InputTypeInfo(@"^-?\d*[\.\,]?\d+$",
+            {INPUTTYPES.ALL, new InputTypeInfo(".*", CrsDictionary.getInstance().lookup("inputFormat", "all"), "{0:g}", delegate(string value){ return value;}, delegate(string value){return value;})},
+            {INPUTTYPES.NAME, new InputTypeInfo(@"^[a-zA-ZçÇıİüÜöÖşŞğĞ]*[\s]*[a-zA-ZçÇıİüÜöÖşŞğĞ|]*$", CrsDictionary.getInstance().lookup("inputFormat", "name"), "{0:g}", delegate(string value){ return value;}, delegate(string value){return value;})},
+            {INPUTTYPES.NUMBER, new InputTypeInfo(@"^\d+$", CrsDictionary.getInstance().lookup("inputFormat", "number"), "{0:#}", delegate(string value){ int returnVal = 0; int.TryParse(value, out returnVal); return returnVal;}, delegate(string value){return value;})},
+            {INPUTTYPES.DOUBLE, new InputTypeInfo(@"^-?\d*[\.\,]?\d+$" , CrsDictionary.getInstance().lookup("inputFormat", "double"),
                 "{0:0.00}",
                 delegate(string value){
                     double returnVal = 0;
@@ -501,7 +663,7 @@ namespace CommercialRecords.Controls
                         return string.Format(CultureInfo.CurrentCulture, "{0:0.00}", returnVal);
                 })
             },
-            {INPUTTYPES.MONEY, new InputTypeInfo(CrsDictionary.CurrentLanguage == CrsDictionary.TURKISH?moneyPatternTur:moneyPatternEng,
+            {INPUTTYPES.MONEY, new InputTypeInfo(CrsDictionary.CurrentLanguage == CrsDictionary.TURKISH?moneyPatternTur:moneyPatternEng, CrsDictionary.getInstance().lookup("inputFormat", "money"),
                 "{0:C2}",
                 delegate(string value){
                     double returnVal = 0;
@@ -513,7 +675,7 @@ namespace CommercialRecords.Controls
                     double.TryParse(value, NumberStyles.Currency, CultureInfo.CurrentCulture, out returnVal);
                     return string.Format(CultureInfo.CurrentCulture, "{0:0.00}", returnVal);
                 })},
-            {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^(((\+?\d)?\d)?\s?\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", "{0:N}",
+            {INPUTTYPES.PHONENUMBER, new InputTypeInfo(@"^(((\+?\d)?\d)?\s?\d{3})?\s?\d{3}\s?\d{2}\s?\d{2}$", CrsDictionary.getInstance().lookup("inputFormat", "phone"), "{0:N}",
                 delegate(string value){
                     string numberBuff = value.Replace(" ", String.Empty);
                     string part1 = numberBuff.Length >= 4 ? numberBuff.Substring(numberBuff.Length - 4, 4) : "";
@@ -525,7 +687,7 @@ namespace CommercialRecords.Controls
                 delegate(string value){
                     return value.Replace(" ", String.Empty);
                 })},
-            {INPUTTYPES.DATE, new InputTypeInfo(@"^(\d{2})\-(\d{2})\-(\d{4})$",
+            {INPUTTYPES.DATE, new InputTypeInfo(@"^(\d{2})\-(\d{2})\-(\d{4})$" , CrsDictionary.getInstance().lookup("inputFormat", "date"),
                 "{0:dd-MM-yyyy}",
                 delegate(string value){
                     DateTime returnVal = DateTime.Now;
@@ -535,7 +697,7 @@ namespace CommercialRecords.Controls
                 delegate(string value){
                     return value;
                 })},
-            { INPUTTYPES.DATETIME, new InputTypeInfo(@"^(\d{2})\-(\d{2})\-(\d{4}) (\d{2}):(\d{2}):(\d{2})$",
+            { INPUTTYPES.DATETIME, new InputTypeInfo(@"^(\d{2})\-(\d{2})\-(\d{4}) (\d{2}):(\d{2}):(\d{2})$" , CrsDictionary.getInstance().lookup("inputFormat", "datetime"),
                 "{0:dd-MM-yyyy HH:mm:ss}",
                 delegate(string value){
                     DateTime returnVal = DateTime.Now;
@@ -545,27 +707,33 @@ namespace CommercialRecords.Controls
                 delegate(string value){
                     return value;
                 })},
-            {INPUTTYPES.PASSWORD, new InputTypeInfo(".*", "{0:g}",
+            {INPUTTYPES.PASSWORD, new InputTypeInfo(".*" , CrsDictionary.getInstance().lookup("inputFormat", "all"), "{0:g}",
                 delegate(string value){
                     return value;
                 },
                 delegate(string value){
                     return value;
-                })}
+                })},
+            {INPUTTYPES.MULTISELECT, new InputTypeInfo(".*", CrsDictionary.getInstance().lookup("inputFormat", "all"), "{0:g}", delegate(string value){ return value;}, delegate(string value){return value;})}
         };
         #endregion
-
         #region Fields
         //protected static readonly string INPUT_CHANGE_HANDLER = "input_change_handler";
         public bool AnyClickHandled = false;
-        private bool isEmpty;
+        private bool isEmpty, UCLoaded = false, isFocussed = false, toolTipVisible = false;
+        private int toolTipVizDurationCnt = 0, toolTipVizDuration = 30, toolTipDelayToShow = 30;
         private string remarkBuff = string.Empty;
-
+        private static CrsInput objRefForDateTimePopup = null;
+        private int permission = 3;
+        DispatcherTimer timer4ToolTip;
+        private INPUTCONTAINERS validInputContainer = INPUTCONTAINERS.TEXTBOX; // 1: textbox, 2: passwordBox, 3: comboBox
+        private enum INPUTCONTAINERS { TEXTBOX, PASSWORDBOX, COMBOBOX }
         #endregion
 
         public void CheckIsValid()
         {
-            if (string.IsNullOrWhiteSpace(getText()))
+            if ((!validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX) && string.IsNullOrWhiteSpace(getText())) ||
+                (validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX) && null == comboBox.SelectedItem && UCLoaded))
             {
                 isEmpty = true;
                 setAsEmpty();
@@ -589,8 +757,12 @@ namespace CommercialRecords.Controls
 
                     this.Input = null;
                 }
-                else
+                else if (validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX))
                 {
+                    IsValid = true;
+                    this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+                }
+                else {
                     setText(getText().Trim());
                     string text = getText();
 
@@ -630,7 +802,7 @@ namespace CommercialRecords.Controls
             if (Input is string)
                 return true;
 
-            
+
             if (InputType.Equals(INPUTTYPES.DATE) || InputType.Equals(INPUTTYPES.DATETIME))
             {
                 DateTime dateBuff = DateTime.Now;
@@ -639,10 +811,10 @@ namespace CommercialRecords.Controls
                 upperBound = (UpperBound != null && UpperBound is DateTime) ? ((DateTime)UpperBound).Ticks : inputValue;
                 lowerBound = (LowerBound != null && LowerBound is DateTime) ? ((DateTime)LowerBound).Ticks : inputValue;
             }
-            else if  ((
-                InputType.Equals(INPUTTYPES.DOUBLE) || 
-                InputType.Equals(INPUTTYPES.MONEY) || 
-                InputType.Equals(INPUTTYPES.NUMBER)) && 
+            else if ((
+                InputType.Equals(INPUTTYPES.DOUBLE) ||
+                InputType.Equals(INPUTTYPES.MONEY) ||
+                InputType.Equals(INPUTTYPES.NUMBER)) &&
                 App.IsNumeric(getText()))
             {
                 inputValue = Double.Parse(getText());
@@ -664,7 +836,7 @@ namespace CommercialRecords.Controls
 
             return result;
         }
-        
+
         protected void OnApplyTemplate()
         {
             if (DataPermission >= 0)
@@ -682,24 +854,17 @@ namespace CommercialRecords.Controls
 
             if (this.Required && !this.ReadOnly)
                 RequiredSignVisibility = Visibility.Visible;
-            if (InputType.Equals(INPUTTYPES.PASSWORD))
+
+            if (validInputContainer.Equals(INPUTCONTAINERS.TEXTBOX) && Multiline)
             {
-                pwdBox.GotFocus += gotFocusHandler;
-                pwdBox.LostFocus += LostFocusHandler;
-                pwdBox.PasswordChanged += TextChangedHandler;
-            }
-            else {
-                textbox.GotFocus += gotFocusHandler;
-                textbox.LostFocus += LostFocusHandler;
-                textbox.TextChanged += TextChangedHandler;
-
-                if (Multiline)
-                {
-                    textbox.TextWrapping = TextWrapping.Wrap;
-                    textbox.AcceptsReturn = true;
-                }
+                textbox.TextWrapping = TextWrapping.Wrap;
+                textbox.AcceptsReturn = true;
             }
 
+            if (validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX) && null != Input)
+            {
+                InputChangedHandler(this, null);
+            }
 
             Thickness thicknessBuff = new Thickness(this.BorderThickness.Top);
 
@@ -727,16 +892,104 @@ namespace CommercialRecords.Controls
             ApplyChanges4ReadyOnly();
             DateTimeSelectPopupContent.Margin = new Thickness(0, this.ActualHeight, 0, 0);
 
-            CheckIsValid();
+            timer4ToolTip = new DispatcherTimer();
+            timer4ToolTip.Tick += timer4ToolTipEventHandler;
+            timer4ToolTip.Interval = new TimeSpan(0, 0, 0, 0, 100);
 
             if (InputType.Equals(INPUTTYPES.DATE) || InputType.Equals(INPUTTYPES.DATETIME))
-                this.DateTimePopup.DataContext = new CrsTextBoxDateTimePopupVM(this);
+                this.DateTimePopup.DataContext = new CrsInputDateTimePopupVM(this);
+        }
+
+        private void timer4ToolTipEventHandler(object sender, object e)
+        {
+            if (toolTipVisible)
+            {
+                if (!ToolTipPopupIsOpen)
+                {
+                    if (toolTipVizDurationCnt < toolTipDelayToShow)
+                        toolTipVizDurationCnt++;
+                    else
+                    {
+                        toolTipVizDurationCnt = 0;
+                        ToolTipPopupIsOpen = true;
+                    }
+                }
+                else {
+                    if (ToolTipPopupContent.Opacity <= 0.9)
+                    {
+                        ToolTipPopupContent.Opacity += 0.2;
+                    }
+                    else if (ToolTipPopupContent.Opacity > 0.9)
+                    {
+                        if (toolTipVizDurationCnt < toolTipVizDuration)
+                        {
+                            toolTipVizDurationCnt++;
+                        }
+                        else
+                        {
+                            toolTipVisible = false;
+                        }
+                    }
+                }
+            }
+            else {
+                if (ToolTipPopupContent.Opacity >= 0.1)
+                {
+                    ToolTipPopupContent.Opacity -= 0.2;
+                }
+                else if (ToolTipPopupContent.Opacity < 0.1)
+                {
+                    closeToolTip();
+                }
+            }
+        }
+
+        private void showToolTip4Notice()
+        {
+            ToolTipPopupIsOpen = true;
+            toolTipContentTextBlock.Text = "asdlid";
+            toolTipVisible = true;
+            toolTipDelayToShow = 5;
+            toolTipVizDuration = 500;
+            toolTipVizDurationCnt = 0;
+            timer4ToolTip.Start();
+        }
+
+        protected override void OnPointerEntered(PointerRoutedEventArgs args)
+        {
+            if (!isFocussed && !ToolTipPopupIsOpen && !DateTimePopup.IsOpen && IsValid && !string.IsNullOrWhiteSpace(ToolTipContent))
+            {
+                toolTipContentTextBlock.Text = ToolTipContent;
+                toolTipVizDurationCnt = 0;
+                toolTipVizDuration = 30;
+                toolTipDelayToShow = 5;
+                ToolTipPopupContent.Opacity = 0.0;
+                toolTipVisible = true;
+                timer4ToolTip.Start();
+            }
+        }
+
+        protected override void OnPointerExited(PointerRoutedEventArgs args)
+        {
+            if (!isFocussed)
+            {
+                closeToolTip();
+            }
+        }
+
+        private void closeToolTip()
+        {
+            ToolTipPopupIsOpen = false;
+            if (null != timer4ToolTip)
+                timer4ToolTip.Stop();
         }
 
         private void gotFocusHandler(object sender, RoutedEventArgs e)
         {
             if (!ReadOnly)
             {
+                closeToolTip();
+
                 if (isEmpty)
                 {
                     setText(string.Empty);
@@ -747,20 +1000,28 @@ namespace CommercialRecords.Controls
                 {
                     IsValid = true;
                     this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+                    if (AnyClickHandled)
+                        showToolTip4Notice();
                 }
-                else
+                else if (!validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX))
                 {
                     setText(InputTypeDic[InputType].ConvertForEdit(getText()));
                 }
 
                 AnyClickHandled = true;
+                isFocussed = true;
             }
         }
 
         private void LostFocusHandler(object sender, RoutedEventArgs e)
         {
+            isFocussed = false;
+
+            if (ToolTipPopupIsOpen)
+                closeToolTip();
+
             CheckIsValid();
-            if (IsValid && !isEmpty)
+            if (IsValid && !isEmpty && !validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX))
                 setText(
                     string.Format(
                         InputTypeDic[InputType].StringFormat,
@@ -768,25 +1029,32 @@ namespace CommercialRecords.Controls
                             getText().Trim())));
         }
 
-        private void TextChangedHandler(object sender, RoutedEventArgs e)
+        private void InputChangedViaUIHandler(object sender, RoutedEventArgs e)
         {
+            if (ToolTipPopupIsOpen)
+                closeToolTip();
+
             CrsAuthentication authInstance = CrsAuthentication.getInstance();
 
             if (!authInstance.SessionControl.SessionStatus.Equals(CrsAuthentication.SESSION_STATUS.TIME_OUT))
             {
                 authInstance.updateTimeoutDate();
 
-                if (null != TextChanged)
-                    TextChanged.Execute(isEmpty ? "" : getText());
+                if (validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX))
+                {
+                    Input = comboBox.SelectedItem;
+                }
+                else
+                {
+                    if (null != TextChanged)
+                        TextChanged.Execute(isEmpty ? "" : getText());
+                }
             }
             else
             {
                 authInstance.showAuthentication();
             }
         }
-
-        private static CrsTextBox objRefForDateTimePopup = null;
-        private int permission = 3;
 
         private void iconContainer_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -816,94 +1084,167 @@ namespace CommercialRecords.Controls
 
         private void dateTimePopup_OnLayoutUpdated(object sender, object e)
         {
+            if (!CommonUIFunctions.isVisible(this))
+            {
+                DateTimePopup.IsOpen = false;
+                return;
+            }
+
             if (InputType.Equals(INPUTTYPES.DATE) || InputType.Equals(INPUTTYPES.DATETIME))
             {
                 Point actualPosition = TransformToVisual(Window.Current.Content).TransformPoint(new Point(0, 0));
-
-                if (actualPosition.Y + this.ActualHeight < Window.Current.Bounds.Height &&
-                    actualPosition.Y - this.ActualHeight < 0)
-                {
-                    DateTimeSelectPopupContent.Margin = new Thickness(0, this.ActualHeight, 0, 0);
-                }
-                else if (actualPosition.Y + this.ActualHeight + DateTimeSelectPopupContent.ActualHeight > Window.Current.Bounds.Height)
+                if (actualPosition.Y + this.ActualHeight + DateTimeSelectPopupContent.ActualHeight > Window.Current.Bounds.Height)
                 {
                     DateTimeSelectPopupContent.Margin = new Thickness(0, -DateTimeSelectPopupContent.ActualHeight, 0, 0);
                 }
+                else
+                {
+                    DateTimeSelectPopupContent.Margin = new Thickness(0, this.ActualHeight, 0, 0);
+                }
+            }
+        }
+
+        private void toolTipPopup_OnLayoutUpdated(object sender, object e)
+        {
+            OnInputChanged(new InputChangedEventArgs(1, 1));
+            if (!CommonUIFunctions.isVisible(this))
+            {
+                closeToolTip();
+                return;
+            }
+
+            Point actualPosition = TransformToVisual(Window.Current.Content).TransformPoint(new Point(0, 0));
+            if (actualPosition.Y > this.ToolTipPopupContent.ActualHeight)
+            {
+                ToolTipPopupContent.Margin = new Thickness(0, -ToolTipPopupContent.ActualHeight, 0, 0);
+            }
+            else
+            {
+                ToolTipPopupContent.Margin = new Thickness(0, this.ActualHeight, 0, 0);
             }
         }
 
         private static void IconWidthChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            CrsTextBox crsTextBox = (CrsTextBox)obj;
+            CrsInput CrsInput = (CrsInput)obj;
 
-            if (crsTextBox.isTextContainerInitialized())
+            if (CrsInput.isTextContainerInitialized())
             {
-                Thickness thicknessBuff = new Thickness(crsTextBox.BorderThickness.Top);
+                Thickness thicknessBuff = new Thickness(CrsInput.BorderThickness.Top);
 
-                switch (crsTextBox.IconVisibility)
+                switch (CrsInput.IconVisibility)
                 {
                     case IconVisibilities.at_Left:
                         thicknessBuff.Left = 0;
-                        Grid.SetColumn(crsTextBox.iconContainer, 1);
+                        Grid.SetColumn(CrsInput.iconContainer, 1);
                         break;
                     case IconVisibilities.at_Right:
                         thicknessBuff.Right = 0;
-                        Grid.SetColumn(crsTextBox.iconContainer, 3);
+                        Grid.SetColumn(CrsInput.iconContainer, 3);
                         break;
                     default:
                         break;
                 }
 
-                crsTextBox.BorderThickness = thicknessBuff;
+                CrsInput.BorderThickness = thicknessBuff;
             }
         }
 
         private static void ReadOnlyChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            ((CrsTextBox)obj).ApplyChanges4ReadyOnly();
+            ((CrsInput)obj).ApplyChanges4ReadyOnly();
         }
 
         private static void ValidateChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            CrsTextBox CrsTextBox = (CrsTextBox)obj;
+            CrsInput CrsInput = (CrsInput)obj;
 
-            if (CrsTextBox.Validate)
+            if (CrsInput.Validate)
             {
-                CrsTextBox.IsValid = true;
-                CrsTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
+                CrsInput.IsValid = true;
+                CrsInput.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
             }
             else
             {
-                CrsTextBox.IsValid = false;
-                CrsTextBox.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                CrsInput.IsValid = false;
+                CrsInput.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
             }
         }
 
         private static void IconChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            CrsTextBox CrsTextBox = (CrsTextBox)obj;
+            CrsInput CrsInput = (CrsInput)obj;
 
-            if (null != CrsTextBox.iconText)
+            if (null != CrsInput.iconText)
             {
                 IconConsts.SegoeIcons iconBuff = (IconConsts.SegoeIcons)e.NewValue;
 
                 if (null != iconBuff)
-                    CrsTextBox.iconText.Text = IconConsts.iconStr(iconBuff);
+                    CrsInput.iconText.Text = IconConsts.iconStr(iconBuff);
             }
         }
 
-        private static void InputChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        private static void InputTypeChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            CrsTextBox crsTextBox = (CrsTextBox)obj;
+            CrsInput crsInput = (CrsInput)obj;
 
-            if (crsTextBox.isTextContainerInitialized())
+            switch (crsInput.InputType)
             {
-                string newValueStr = string.Format(InputTypeDic[crsTextBox.InputType].StringFormat, e.NewValue);
+                case INPUTTYPES.PASSWORD:
+                    crsInput.validInputContainer = INPUTCONTAINERS.PASSWORDBOX;
+                    crsInput.pwdBox.GotFocus += crsInput.gotFocusHandler;
+                    crsInput.pwdBox.LostFocus += crsInput.LostFocusHandler;
+                    crsInput.pwdBox.PasswordChanged += crsInput.InputChangedViaUIHandler;
+                    break;
+                case INPUTTYPES.MULTISELECT:
+                    crsInput.validInputContainer = INPUTCONTAINERS.COMBOBOX;
+                    crsInput.comboBox.SelectionChanged += crsInput.InputChangedViaUIHandler;
+                    crsInput.comboBox.GotFocus += crsInput.gotFocusHandler;
+                    crsInput.comboBox.LostFocus += crsInput.LostFocusHandler;
+                    break;
+                default:
+                    crsInput.validInputContainer = INPUTCONTAINERS.TEXTBOX;
+                    crsInput.textbox.GotFocus += crsInput.gotFocusHandler;
+                    crsInput.textbox.LostFocus += crsInput.LostFocusHandler;
+                    crsInput.textbox.TextChanged += crsInput.InputChangedViaUIHandler;
+                    break;
+            }
+        }
 
-                crsTextBox.setText(newValueStr);
+        private static void InputChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            CrsInput CrsInput = (CrsInput)obj;
 
-                crsTextBox.setAsNotEmpty();
-                crsTextBox.CheckIsValid();
+
+            CrsInput.OnInputChanged(new InputChangedEventArgs(args.NewValue, args.OldValue));
+             
+            object newValue = CrsInput.Input;
+            if (args != null)
+                newValue = args.NewValue;
+
+            if (CrsInput.validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX) && 0 < CrsInput.comboBox.Items.Count)
+            {
+                for (int i = 0; i < CrsInput.comboBox.Items.Count; ++i)
+                {
+                    if (CrsInput.comboBox.Items[i].Equals(newValue))
+                    {
+                        CrsInput.comboBox.SelectedItem = CrsInput.comboBox.Items[i];
+
+                        if (null == CrsInput.comboBox.SelectedItem)
+                            CrsInput.setAsEmpty();
+                        else
+                            CrsInput.setAsNotEmpty();
+                        break;
+                    }
+                }
+            }
+            else if (CrsInput.isTextContainerInitialized())
+            {
+                string newValueStr = string.Format(InputTypeDic[CrsInput.InputType].StringFormat, newValue);
+
+                CrsInput.setText(newValueStr);
+                CrsInput.setAsNotEmpty();
+                CrsInput.CheckIsValid();
             }
         }
 
@@ -921,12 +1262,12 @@ namespace CommercialRecords.Controls
                 }
             }
 
-            ((CrsTextBox)d).remarkBuff = remarkTemp;
+            ((CrsInput)d).remarkBuff = remarkTemp;
         }
 
         private static void boundChangedHandler(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((CrsTextBox)d).CheckIsValid();
+            ((CrsInput)d).CheckIsValid();
         }
 
         private void ApplyChanges4ReadyOnly()
@@ -965,12 +1306,7 @@ namespace CommercialRecords.Controls
         private void setAsEmpty()
         {
             isEmpty = true;
-            if (InputType.Equals(INPUTTYPES.PASSWORD))
-            {
-                pwdBox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
-                pwdBox.FontStyle = Windows.UI.Text.FontStyle.Italic;
-            }
-            else
+            if (validInputContainer.Equals(INPUTCONTAINERS.TEXTBOX))
             {
                 textbox.Text = remarkBuff;
                 textbox.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x90, 0x90, 0x90));
@@ -982,12 +1318,12 @@ namespace CommercialRecords.Controls
         {
             isEmpty = false;
 
-            if (InputType.Equals(INPUTTYPES.PASSWORD))
+            if (validInputContainer.Equals(INPUTCONTAINERS.PASSWORDBOX))
             {
                 pwdBox.Foreground = ColorConsts.TEXTBOX_NOT_EMPTY_FOREGROUND;
                 pwdBox.FontStyle = Windows.UI.Text.FontStyle.Normal;
             }
-            else
+            else if (validInputContainer.Equals(INPUTCONTAINERS.TEXTBOX))
             {
                 textbox.Foreground = ColorConsts.TEXTBOX_NOT_EMPTY_FOREGROUND;
                 textbox.FontStyle = Windows.UI.Text.FontStyle.Normal;
@@ -1016,11 +1352,11 @@ namespace CommercialRecords.Controls
 
         private void setText(string newText)
         {
-            if (InputType.Equals(INPUTTYPES.PASSWORD))
+            if (validInputContainer.Equals(INPUTCONTAINERS.PASSWORDBOX))
             {
                 pwdBox.Password = newText;
             }
-            else
+            else if (validInputContainer.Equals(INPUTCONTAINERS.TEXTBOX))
             {
                 textbox.Text = newText;
             }
@@ -1030,11 +1366,12 @@ namespace CommercialRecords.Controls
         {
             if (isTextContainerInitialized())
             {
-                if (InputType.Equals(INPUTTYPES.PASSWORD))
+                if (validInputContainer.Equals(INPUTCONTAINERS.PASSWORDBOX))
                 {
                     return pwdBox.Password;
                 }
-                else {
+                else if (validInputContainer.Equals(INPUTCONTAINERS.TEXTBOX))
+                {
                     return textbox.Text;
                 }
             }
@@ -1042,19 +1379,60 @@ namespace CommercialRecords.Controls
             return null;
         }
 
+        public Control getActiveControl()
+        {
+            switch (InputType)
+            {
+                case INPUTTYPES.PASSWORD:
+                    return pwdBox;
+                case INPUTTYPES.MULTISELECT:
+                    return comboBox;
+                default:
+                    return textbox;
+            }
+        }
+
         private bool isTextContainerInitialized()
         {
-            if (InputType.Equals(INPUTTYPES.PASSWORD) && null != pwdBox)
-            {
-                return true;
-            }
-
-            if (!InputType.Equals(INPUTTYPES.PASSWORD) && null != textbox)
+            if ((validInputContainer.Equals(INPUTCONTAINERS.PASSWORDBOX) && null != pwdBox) ||
+                (validInputContainer.Equals(INPUTCONTAINERS.TEXTBOX) && null != textbox))
             {
                 return true;
             }
 
             return false;
+        }
+
+        public FocusState GetFocusState()
+        {
+            switch (InputType)
+            {
+                case INPUTTYPES.PASSWORD:
+                    return pwdBox.FocusState;
+                case INPUTTYPES.MULTISELECT:
+                    return comboBox.FocusState;
+                default:
+                    return textbox.FocusState;
+            }
+        }
+
+        public void SetFocusState(FocusState focusState)
+        {
+            if (!focusState.Equals(FocusState.Unfocused))
+            {
+                switch (InputType)
+                {
+                    case INPUTTYPES.PASSWORD:
+                        pwdBox.Focus(focusState);
+                        break;
+                    case INPUTTYPES.MULTISELECT:
+                        comboBox.Focus(focusState);
+                        break;
+                    default:
+                        textbox.Focus(focusState);
+                        break;
+                }
+            }
         }
     }
 }

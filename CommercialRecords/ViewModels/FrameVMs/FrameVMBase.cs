@@ -66,6 +66,8 @@ namespace CommercialRecords.ViewModels
 
         #region Commands
         private readonly ICommand goBackCmd = null;
+        private bool cache;
+
         public ICommand GoBackCmd
         {
             get
@@ -82,13 +84,14 @@ namespace CommercialRecords.ViewModels
         }
         #endregion
 
-        public FrameVMBase(FrameNavigation navigation)
+        public FrameVMBase(FrameNavigation navigation, bool cache = true)
         {
             //logger.Info("info frame");
+            this.cache = cache;
             this.navigation = navigation;
             this.navigation.Navigated += navigation_Navigated;
 
-            if (!navigation.NavigateType.Equals(FrameNavigation.NAVIGATE_TYPE.NAVIGATE))
+            if (cache && !navigation.NavigateType.Equals(FrameNavigation.NAVIGATE_TYPE.NAVIGATE))
             {
                 if (null != navigation.Forward && null != navigation.Forward.Back &&
                     navigation.Forward.Back.PageFrame.GetType().Equals(this.Navigation.PageFrame.GetType()))
@@ -106,7 +109,8 @@ namespace CommercialRecords.ViewModels
 
         private void navigation_Navigated(object sender, EventArgs e)
         {
-            recordInputData();
+            if (cache)
+                recordInputData();
         }
 
         private void recordInputData()

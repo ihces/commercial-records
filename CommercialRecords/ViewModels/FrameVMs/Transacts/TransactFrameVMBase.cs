@@ -297,10 +297,7 @@ namespace CommercialRecords.ViewModels.Transacts
 
         protected async Task setEntries()
         {
-            List<Expression<Func<T, object>>> orderByList = new List<Expression<Func<T, object>>>();
-            orderByList.Add(e => e.Id);
-
-            Entries = new ObservableCollection<E>(await TransactEntryVMBase<T>.getList<E>(e => transactInfo.Id == e.TransactId, orderByList));
+            Entries = new ObservableCollection<E>(await TransactEntryVMBase<T>.getList<E>(e => transactInfo.Id == e.TransactId, e => e.Id));
         }
     }
 }

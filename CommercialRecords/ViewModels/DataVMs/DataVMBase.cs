@@ -28,6 +28,20 @@ namespace CommercialRecords.ViewModels.DataVMs
                 RaisePropertyChanged("Recorded", false);
             }
         }
+
+        private int userId = 0;
+        public int UserId
+        {
+            get
+            {
+                return userId;
+            }
+            set
+            {
+                userId = value;
+                RaisePropertyChanged("UserId", false);
+            }
+        }
         #endregion
 
         public bool Recorded
@@ -89,6 +103,8 @@ namespace CommercialRecords.ViewModels.DataVMs
             E entryBuff = convert2Model();
             if (Id > 0)
                 entryBuff.Id = Id;
+
+            entryBuff.UserId = CrsAuthentication.getInstance().SessionControl.CurrentUser.Id;
 
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
@@ -210,7 +226,7 @@ namespace CommercialRecords.ViewModels.DataVMs
         }
 
         public static async Task<List<T>> getList<T>(
-            Expression<Func<E, bool>> whereClause = null, List<Expression<Func<E, object>>> orderByClauses = null) where T : DataVMIntf<E>, new()
+            Expression<Func<E, bool>> whereClause = null, Expression<Func<E, object>> orderByClause = null) where T : DataVMIntf<E>, new()
         {
             List<E> resultList = null;
 
@@ -221,6 +237,38 @@ namespace CommercialRecords.ViewModels.DataVMs
             if (null != whereClause)
             {
                 resultBuff = resultBuff.Where(whereClause);
+            }
+
+            if (null != orderByClause)
+            {
+                resultBuff = resultBuff.OrderBy(orderByClause);
+            }
+
+            try
+            {
+                resultList = await resultBuff.ToListAsync();
+            }
+            catch (Exception )
+            {
+
+            }
+
+            return converToVM<T>(resultList);
+        }
+
+        public static async Task<List<T>> getList<T>(
+            List<Expression<Func<E, bool>>> whereClauses, List<Expression<Func<E, object>>> orderByClauses) where T : DataVMIntf<E>, new()
+        {
+            List<E> resultList = null;
+
+            var db = new SQLite.SQLiteAsyncConnection(App.DBPath);
+
+            AsyncTableQuery<E> resultBuff = db.Table<E>();
+
+            if (null != whereClauses)
+            {
+                foreach (Expression<Func<E, bool>> where in whereClauses)
+                    resultBuff = resultBuff.Where(where);
             }
 
             if (null != orderByClauses)
@@ -235,7 +283,7 @@ namespace CommercialRecords.ViewModels.DataVMs
             {
                 resultList = await resultBuff.ToListAsync();
             }
-            catch (Exception )
+            catch (Exception)
             {
 
             }

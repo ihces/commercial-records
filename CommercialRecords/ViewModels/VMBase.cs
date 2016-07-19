@@ -1,5 +1,8 @@
 ﻿using CommercialRecords.Common;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 
 namespace CommercialRecords.ViewModels
 {
@@ -54,6 +57,32 @@ namespace CommercialRecords.ViewModels
                 if (token.Length > 0)
                     resultStr += char.ToUpper(token[0]) + token.Substring(1) + " ";
             return resultStr.Trim();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (null != obj && this.GetType().Equals(obj.GetType()))
+            {
+                IEnumerable<PropertyInfo> obj1Props = obj.GetType().GetRuntimeProperties();
+                IEnumerable<PropertyInfo> obj2Props = this.GetType().GetRuntimeProperties();
+
+                foreach (PropertyInfo prop1 in obj1Props)
+                {
+                    PropertyInfo prob2 = obj2Props.Where(p => p.Name == prop1.Name).Single();
+                    if (null == prob2 || (null != prop1.GetValue(obj) && !prop1.GetValue(obj).Equals(prob2.GetValue(this))))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+            
+
+
+            return base.Equals(obj);
         }
     }
 }

@@ -151,12 +151,8 @@ namespace CommercialRecords.ViewModels
 
         protected async Task setEnterpriseAccounts()
         {
-            List<Expression<Func<EnterpriseAccount, object>>> orderByClauses = null;
-            orderByClauses = new List<Expression<Func<EnterpriseAccount, object>>>();
-            orderByClauses.Add(c => c.CreateDate);
-
             EnterpriseAccounts = new ObservableCollection<EnterpriseAccountVM>(
-                await EnterpriseAccountVM.getList<EnterpriseAccountVM>(c=>c.Type == 0, orderByClauses));
+                await EnterpriseAccountVM.getList<EnterpriseAccountVM>(c=>c.Type == 0, c => c.CreateDate));
 
             SelectedEnterpriseAccount = EnterpriseAccounts[0];
             SelectedEnterpriseAccount.Refresh();

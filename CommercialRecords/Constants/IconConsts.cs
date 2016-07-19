@@ -24,7 +24,9 @@ namespace CommercialRecords.Constants
             SHOP,
             SWITCHAPPS,
             FACTORY,
-            PERMISSION
+            PERMISSION,
+            AUTH,
+            WITHDRAWAL
         }
 
         public static string iconStr(SegoeIcons icon)
@@ -70,7 +72,9 @@ namespace CommercialRecords.Constants
             {SegoeIcons.SHOP, System.Net.WebUtility.HtmlDecode("&#xE14D;")},
             {SegoeIcons.SWITCHAPPS, System.Net.WebUtility.HtmlDecode("&#xE1E1;")},
             {SegoeIcons.FACTORY, System.Net.WebUtility.HtmlDecode("&#x1f3ed;")},
-            {SegoeIcons.PERMISSION, System.Net.WebUtility.HtmlDecode("&#xE192;")}
+            {SegoeIcons.PERMISSION, System.Net.WebUtility.HtmlDecode("&#xE192;")},
+            {SegoeIcons.AUTH, System.Net.WebUtility.HtmlDecode("&#xE1A7;")},
+            {SegoeIcons.WITHDRAWAL, System.Net.WebUtility.HtmlDecode("&#x1f3e7;")}
         };
         }
 

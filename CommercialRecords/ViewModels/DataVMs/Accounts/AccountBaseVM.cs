@@ -3,7 +3,7 @@ using System;
 
 namespace CommercialRecords.ViewModels.DataVMs.Accounts
 {
-    abstract class AccountBaseVM<E> : DataVMBase<E> where E: AccountBase, new()
+    public abstract class AccountBaseVM<E> : DataVMBase<E> where E: AccountBase, new()
     {
         private int type = 0;
         public int Type

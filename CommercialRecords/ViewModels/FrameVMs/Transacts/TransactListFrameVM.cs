@@ -1,5 +1,6 @@
 ﻿using CommercialRecords.Common;
 using CommercialRecords.Models;
+using CommercialRecords.ViewModels.DataVMs.Settings;
 using CommercialRecords.Views.Transacts;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,61 @@ namespace CommercialRecords.ViewModels.FrameVMs.Transacts
             {
                 selectedTransact = value;
                 RaisePropertyChanged("SelectedTransact");
+            }
+        }
+
+        private ObservableCollection<string> transactions = new ObservableCollection<string>(CrsDictionary.getInstance().getKeys("transactTypes"));
+        public ObservableCollection<string> Transactions
+        {
+            get
+            {
+                return transactions;
+            }
+        }
+
+        private ObservableCollection<UserVM> users;
+        public ObservableCollection<UserVM> Users
+        {
+            get
+            {
+                return users;
+            }
+            set
+            {
+                users = value;
+                RaisePropertyChanged("Users");
+            }
+        }
+
+        private UserVM selectedUser;
+        public UserVM SelectedUser
+        {
+            get
+            {
+                return selectedUser;
+            }
+            set
+            {
+                selectedUser = value;
+                RaisePropertyChanged("SelectedUser");
+                if (null != selectedUser)
+                    setTransacts();
+            }
+        }
+
+        private string selectedTransaction;
+        public string SelectedTransaction
+        {
+            get
+            {
+                return selectedTransaction;
+            }
+            set
+            {
+                selectedTransaction = value;
+                RaisePropertyChanged("SelectedTransaction");
+                if (null != selectedTransaction)
+                    setTransacts();
             }
         }
 
@@ -72,14 +128,73 @@ namespace CommercialRecords.ViewModels.FrameVMs.Transacts
                 RaisePropertyChanged("Transacts");
             }
         }
+
+        private DateTime startDate = DateTime.Now.AddMonths(-1).AddSeconds(1);
+        public DateTime StartDate
+        {
+            get
+            {
+                return startDate;
+            }
+            set
+            {
+                DateTime startDateBuff = startDate;
+                startDate = value;
+                RaisePropertyChanged("StartDate");
+                if (null != startDate && !startDate.Equals(startDateBuff))
+                    setTransacts();
+            }
+        }
+
+        private DateTime endDate = DateTime.Now;
+        public DateTime EndDate
+        {
+            get
+            {
+                return endDate;
+            }
+            set
+            {
+                DateTime endDateBuff = endDate;
+                endDate = value;
+                RaisePropertyChanged("EndDate");
+                if (null != endDate && !endDate.Equals(endDateBuff))
+                    setTransacts();
+            }
+        }
+
+        public DateTime EndDateBound
+        {
+            get
+            {
+                return DateTime.Now;
+            }
+        }
+
+        public DateTime StartDateBound
+        {
+            get
+            {
+                return DateTime.Now.AddMonths(-1);
+            }
+        }
         #endregion
 
         public TransactListFrameVM(FrameNavigation navigation)
-            : base(navigation)
+            : base(navigation, false)
         {
             openTransactionCmd = new ICommandImp(openTransactionCmd_execute);
             startNewTransactCmd = new ICommandImp(startNewTransact_execute);
-            setTransacts();
+            init();
+        }
+
+        private async Task init()
+        {
+            selectedTransaction = Transactions[0];
+            RaisePropertyChanged("SelectedTransaction");
+
+            await setUsers();
+            await setTransacts();
         }
 
         private void openTransactionCmd_execute(object obj)
@@ -108,10 +223,22 @@ namespace CommercialRecords.ViewModels.FrameVMs.Transacts
 
         private async Task setTransacts()
         {
-            List<Expression<Func<Transact, object>>> orderByClauses = new List<Expression<Func<Transact, object>>>();
-            orderByClauses.Add(c => c.Date);
+            List<Expression<Func<Transact, bool>>> whereClauses = new List<Expression<Func<Transact, bool>>>();
+            whereClauses.Add(t => t.Date >= StartDate && t.Date <= EndDate);
 
-            Transacts = new ObservableCollection<TransactVM>(await TransactVM.getList<TransactVM>(null, orderByClauses));
+            if (!string.IsNullOrWhiteSpace(SelectedTransaction))
+            {
+                int type = Int32.Parse(SelectedTransaction);
+                whereClauses.Add(t => t.Type.Equals(type));
+            }
+
+            if (null != SelectedUser)
+                whereClauses.Add(t=>t.UserId.Equals(SelectedUser.Id));
+
+            List<TransactVM> transactList = await TransactVM.getList<TransactVM>(
+                whereClauses, new List<Expression<Func<Transact, object>>>() { c=>c.Date });
+
+            Transacts = new ObservableCollection<TransactVM>(transactList);
 
             double totalAccountBuff = 0.0;
             foreach (TransactVM transactBuff in Transacts)
@@ -119,6 +246,21 @@ namespace CommercialRecords.ViewModels.FrameVMs.Transacts
                 totalAccountBuff += transactBuff.RemainingCost;
             }
             TotalAmount = totalAccountBuff;
+        }
+
+        private async Task setUsers()
+        {
+            Users = new ObservableCollection<UserVM>(await UserVM.getList<UserVM>());
+            int userId = CrsAuthentication.getInstance().SessionControl.CurrentUser.Id;
+            foreach (UserVM user in Users)
+            {
+                if (userId == user.Id)
+                {
+                    selectedUser = user;
+                    RaisePropertyChanged("SelectedUser");
+                    break;
+                }
+            }
         }
     }
 }

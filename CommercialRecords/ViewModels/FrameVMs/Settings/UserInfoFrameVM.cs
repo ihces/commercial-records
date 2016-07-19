@@ -71,12 +71,8 @@ namespace CommercialRecords.ViewModels.FrameVMs.Settings
 
         protected async Task setCashRegisters()
         {
-            List<Expression<Func<EnterpriseAccount, object>>> orderByClauses = null;
-            orderByClauses = new List<Expression<Func<EnterpriseAccount, object>>>();
-            orderByClauses.Add(c => c.CreateDate);
-
             CashRegisters = new ObservableCollection<EnterpriseAccountVM>(
-                await EnterpriseAccountVM.getList<EnterpriseAccountVM>(c => c.Type == 0, orderByClauses));
+                await EnterpriseAccountVM.getList<EnterpriseAccountVM>(c => c.Type == 0, c => c.CreateDate));
 
             if (CurrentInfo.CashRegisterId > 0)
             {

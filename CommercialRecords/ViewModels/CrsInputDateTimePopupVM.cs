@@ -10,9 +10,9 @@ using Windows.UI.Xaml.Media;
 
 namespace CommercialRecords.ViewModels
 {
-    public class CrsTextBoxDateTimePopupVM : VMBase
+    public class CrsInputDateTimePopupVM : VMBase
     {
-        private CrsTextBox ContextOwner;
+        private CrsInput ContextOwner;
 
         public class CalendarDayButton : VMBase
         {
@@ -220,7 +220,8 @@ namespace CommercialRecords.ViewModels
             set
             {
                 hourValue = value;
-                updateTimeOfInput();
+                if (dateTimePopupIsOpen)
+                    updateTimeOfInput();
                 RaisePropertyChanged("HourValue");
             }
         }
@@ -243,7 +244,8 @@ namespace CommercialRecords.ViewModels
             set
             {
                 minuteValue = value;
-                updateTimeOfInput();
+                if (dateTimePopupIsOpen)
+                    updateTimeOfInput();
                 RaisePropertyChanged("MinuteValue");
             }
         }
@@ -258,7 +260,8 @@ namespace CommercialRecords.ViewModels
             set
             {
                 secondValue = value;
-                updateTimeOfInput();
+                if (dateTimePopupIsOpen)
+                    updateTimeOfInput();
                 RaisePropertyChanged("SecondValue");
             }
         }
@@ -294,7 +297,7 @@ namespace CommercialRecords.ViewModels
 
         private CalendarDayButton selectedCalDay;
 
-        public CrsTextBoxDateTimePopupVM(CrsTextBox ContextOwner)
+        public CrsInputDateTimePopupVM(CrsInput ContextOwner)
         {
             this.ContextOwner = ContextOwner;
 
@@ -302,7 +305,7 @@ namespace CommercialRecords.ViewModels
             goNextMonthCmd = new ICommandImp(goNextMonthCmd_handler);
             selectDayCmd = new ICommandImp(selectDayCmd_handler);
 
-            if (this.ContextOwner.InputType.Equals(CrsTextBox.INPUTTYPES.DATETIME))
+            if (this.ContextOwner.InputType.Equals(CrsInput.INPUTTYPES.DATETIME))
                 initDateTimePopup(ContextOwner.Input);
         }
 

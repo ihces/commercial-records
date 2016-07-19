@@ -2,7 +2,7 @@
 
 namespace CommercialRecords.Models.Accounts
 {
-    class AccountBase : ModelBase
+    public class AccountBase : ModelBase
     {
         public int Type { get; set; }
         public string Name { get; set; }

@@ -243,12 +243,8 @@ namespace CommercialRecords.ViewModels.FrameVMs
 
         private async Task setTransacts()
         {
-            List<Expression<Func<EnterpriseAccTransact, object>>> orderByClauses = null;
-            orderByClauses = new List<Expression<Func<EnterpriseAccTransact, object>>>();
-            orderByClauses.Add(c => c.Date);
-
             Transacts = new ObservableCollection<EnterpriseAccTransactVM>(
-                await EnterpriseAccTransactVM.getList<EnterpriseAccTransactVM>(c => c.AccountId == selectedAccount.Id, orderByClauses));
+                await EnterpriseAccTransactVM.getList<EnterpriseAccTransactVM>(c => c.AccountId == selectedAccount.Id, c => c.Date));
         }
     }
 }

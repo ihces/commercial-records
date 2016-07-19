@@ -124,12 +124,12 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Button Grid.Column="0" Height="56" Width="56" Margin="-3" FontFamily="Segoe UI Symbol" FontSize="23" Padding="0" Content="&#xE11A;" Background="#d74f2a" Command="{Binding SelectRecordedActorCmd}" IsEnabled="{Binding CurrentActorInfoEditable}" />
-                                <CRSControls:CrsTextBox  Grid.Column="1" FontSize="26" Margin="5,0,0,0"  Height="50" Input="{Binding Path=CurrentActor.Id, Mode=TwoWay}" ThemeBrush="#d74f2a" IconVisibility="Collapsed" Remark="Kayıt Numarası" Required="True" InputType="NUMBER" ReadOnly="True" />
+                                <CRSControls:CrsInput  Grid.Column="1" FontSize="26" Margin="5,0,0,0"  Height="50" Input="{Binding Path=CurrentActor.Id, Mode=TwoWay}" ThemeBrush="#d74f2a" IconVisibility="Collapsed" Remark="Kayıt Numarası" Required="True" InputType="NUMBER" ReadOnly="True" />
                             </Grid>
-                            <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=TransactInfo.Date, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="TODAY" Remark="Tarih" Required="True" InputType="DATETIME" />
-                            <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="BOY" Remark="İsim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=PersonCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
-                            <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="FIRM" Remark="İsim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=FirmCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
-                            <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Surname, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="BOY" Remark="Soyisim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=PersonCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                            <CRSControls:CrsInput FontSize="24" Height="50" Input="{Binding Path=TransactInfo.Date, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="TODAY" Remark="Tarih" Required="True" InputType="DATETIME" ReadOnly="{Binding ActorInfoReadyOnly}" />
+                            <CRSControls:CrsInput FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="BOY" Remark="İsim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=PersonCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                            <CRSControls:CrsInput FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Name, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="FIRM" Remark="İsim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=FirmCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                            <CRSControls:CrsInput FontSize="24" Height="50" Input="{Binding Path=CurrentActor.Surname, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="BOY" Remark="Soyisim" Required="True" InputType="NAME" ReadOnly="{Binding ActorInfoReadyOnly}" Visibility="{Binding Path=IsSelected, ElementName=PersonCBItem, Converter={StaticResource Boolean2VisibilityConverter}}" />
                             <Grid Height="50" Visibility="{Binding IsSelected, ElementName=RegisteredCBItem, Converter={StaticResource Boolean2VisibilityConverter}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="50"/>
@@ -150,9 +150,9 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
                             </Grid>
-                            <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.PhoneNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="PHONE" Remark="Telefon" InputType="PHONENUMBER" ReadOnly="{Binding ActorInfoReadyOnly}" />
-                            <CRSControls:CrsTextBox FontSize="24" Height="50" Input="{Binding Path=CurrentActor.MobileNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="CELLPHONE" Remark="Cep Telefonu" InputType="PHONENUMBER" ReadOnly="{Binding ActorInfoReadyOnly}" />
-                            <CRSControls:CrsTextBox FontSize="24" Height="100" Input="{Binding Path=CurrentActor.Address, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="PIN" Remark="Adres"  Multiline="True" InputType="ALL" ReadOnly="{Binding ActorInfoReadyOnly}" />
+                            <CRSControls:CrsInput FontSize="24" Height="50" Input="{Binding Path=CurrentActor.PhoneNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="PHONE" Remark="Telefon" InputType="PHONENUMBER" ReadOnly="{Binding ActorInfoReadyOnly}" />
+                            <CRSControls:CrsInput FontSize="24" Height="50" Input="{Binding Path=CurrentActor.MobileNumber, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="CELLPHONE" Remark="Cep Telefonu" InputType="PHONENUMBER" ReadOnly="{Binding ActorInfoReadyOnly}" />
+                            <CRSControls:CrsInput FontSize="24" Height="100" Input="{Binding Path=CurrentActor.Address, Mode=TwoWay}" ThemeBrush="#d74f2a" Icon="PIN" Remark="Adres"  Multiline="True" InputType="ALL" ReadOnly="{Binding ActorInfoReadyOnly}" />
                         </CRSPanels:CrsFormView>
                     </ScrollViewer>
                     <Grid Grid.Row="2" Visibility="{Binding Path=IsChecked,ElementName=NewRecordRB, Converter={StaticResource Boolean2VisibilityConverter}}">
@@ -175,7 +175,7 @@
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
-                                    <CRSControls:CrsTextBox FontSize="22" x:Uid="sales_amount_textbox" ThemeBrush="Silver" BorderThickness="2" Height="45" Grid.Column="0" FontWeight="SemiBold" Input="{Binding Path=EntryBuff.Amount, Mode=TwoWay }" InputType="DOUBLE" IconVisibility="Collapsed" Required="True" Remark="Amount"/>
+                                    <CRSControls:CrsInput FontSize="22" x:Uid="sales_amount_textbox" ThemeBrush="Silver" BorderThickness="2" Height="45" Grid.Column="0" FontWeight="SemiBold" Input="{Binding Path=EntryBuff.Amount, Mode=TwoWay }" InputType="DOUBLE" IconVisibility="Collapsed" Required="True" Remark="Amount"/>
                                     <ComboBox Grid.Column="1" BorderThickness="0" Foreground="Black" ItemsSource="{Binding Measures}" Background="Silver" SelectedIndex="{Binding Path=EntryBuff.Measure, Mode=TwoWay}" IsEnabled="False" Style="{StaticResource ComboBoxStyle2}">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
@@ -189,7 +189,7 @@
                                 </CRSControls:CrsButton>
                             </Grid>
                         </CRSPanels:CrsFormView>
-                        <CRSControls:CrsTextBox x:Uid="sales_search_textbox"  FontSize="22" Grid.Row="2" FontWeight="SemiBold" ThemeBrush="Silver" BorderThickness="2" InputType="ALL" IconVisibility="Collapsed" Required="False" Remark="Search Good" Input="{Binding SearchGoodInput, Mode=TwoWay}" TextChanged="{Binding GoodSearchBoxTextChangedCmd}" />
+                        <CRSControls:CrsInput x:Uid="sales_search_textbox"  FontSize="22" Grid.Row="2" FontWeight="SemiBold" ThemeBrush="Silver" BorderThickness="2" InputType="ALL" IconVisibility="Collapsed" Required="False" Remark="Search Good" Input="{Binding SearchGoodInput, Mode=TwoWay}" TextChanged="{Binding GoodSearchBoxTextChangedCmd}" />
                         <ListView x:Name="goodList" Grid.Row="4" VerticalAlignment="Top" ItemsSource="{Binding FoundGoods}" SelectedItem="{Binding SelectedGood, Mode=TwoWay}" >
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">

@@ -11,7 +11,7 @@ namespace CommercialRecords.Panels
     class CRSFormPanel : CRSPanel
     {
         #region Properties
-        private List<CrsTextBox> inputElements = new List<CrsTextBox>();
+        private List<CrsInput> inputElements = new List<CrsInput>();
         #endregion
         public CRSFormPanel()
         {
@@ -29,13 +29,13 @@ namespace CommercialRecords.Panels
             if (inputElements.Count > 0)
             {
                 double minHeight = inputElements[0].Height;
-                foreach (CrsTextBox textbox in inputElements)
+                foreach (CrsInput textbox in inputElements)
                 {
                     if (minHeight > textbox.Height)
                         minHeight = textbox.Height;
                 }
 
-                foreach (CrsTextBox textbox in inputElements)
+                foreach (CrsInput textbox in inputElements)
                 {
                     textbox.IconWidth = minHeight;
                     textbox.IconFontSize = minHeight / 2;
@@ -67,9 +67,9 @@ namespace CommercialRecords.Panels
         private void addInputElements(UIElement element)
         {
             Type elementType = element.GetType();
-            if (elementType.Equals(typeof(CrsTextBox)))
+            if (elementType.Equals(typeof(CrsInput)))
             {
-                inputElements.Add(element as CrsTextBox);
+                inputElements.Add(element as CrsInput);
             }
             if (elementType.Equals(typeof(CrsButton)))
             {
@@ -82,7 +82,7 @@ namespace CommercialRecords.Panels
         private void assignButtonCanExecute(object sender, RoutedEventArgs e)
         { 
             bool validated = true;
-            foreach (CrsTextBox element in inputElements)
+            foreach (CrsInput element in inputElements)
             {
                 if (Visibility.Visible == element.Visibility)
                 {
@@ -98,7 +98,7 @@ namespace CommercialRecords.Panels
 
             if (validated)
             {
-                foreach (CrsTextBox element in inputElements)
+                foreach (CrsInput element in inputElements)
                 {
                     element.AnyClickHandled = false;
                 }

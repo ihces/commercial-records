@@ -6,7 +6,7 @@ using System;
 
 namespace CommercialRecords.ViewModels.DataVMs.Accounts.EnterpriseAccounts
 {
-    class EnterpriseAccountVM : AccountBaseVM<EnterpriseAccount>
+    public class EnterpriseAccountVM : AccountBaseVM<EnterpriseAccount>
     {
         public string accountNumber;
         public string AccountNumber

@@ -72,23 +72,30 @@ namespace CommercialRecords.ViewModels.DataVMs.Settings
             {
                 cashRegisterId = value;
 
-                if (cashRegisterId > 0)
-                    CashRegisterName = ((EnterpriseAccountVM)(new EnterpriseAccountVM()).get(cashRegisterId)).Name;
+                if (cashRegisterId > 0 && (null == CashRegister || (null != cashRegister && !cashRegister.Id.Equals(cashRegisterId))))
+                {
+                    cashRegister = new EnterpriseAccountVM();
+                    cashRegister.get(cashRegisterId);
+                    RaisePropertyChanged("CashRegister");
+                }
                 RaisePropertyChanged("CashRegisterId");
             }
         }
 
-        private string cashRegisterName;
-        public string CashRegisterName
+        private EnterpriseAccountVM cashRegister;
+        public EnterpriseAccountVM CashRegister
         {
             get
             {
-                return cashRegisterName;
+                return cashRegister;
             }
             set
             {
-                cashRegisterName = value;
-                RaisePropertyChanged("CashRegisterName");
+                cashRegister = value;
+                if (null != cashRegister && !cashRegister.Id.Equals(CashRegisterId))
+                    CashRegisterId = cashRegister.Id;
+
+                RaisePropertyChanged("CashRegister");
             }
         }
 

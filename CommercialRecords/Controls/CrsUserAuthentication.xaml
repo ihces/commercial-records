@@ -48,8 +48,8 @@
                     </ComboBox>
                 </Grid>
                 <Grid Grid.Row="1" Width="420">
-                    <CRSPanels:CrsFormView GapSize="20" FunctionalPermission="-1">
-                        <CRSControls:CrsTextBox FontSize="22" Height="50" IconWidth="50" Input="{Binding Path=Password, Mode=TwoWay}" DataPermission="-1"  ThemeBrush="#2672ec" Icon="PERMISSION" Remark="#ActorFields|Password" InputType="PASSWORD" Required="True" />
+                    <CRSPanels:CrsFormView x:Name="passwordFormView" GapSize="20" FunctionalPermission="-1" CaptureEnter="True">
+                        <CRSControls:CrsInput FontSize="22" Height="50" IconWidth="50" Input="{Binding Path=Password, Mode=TwoWay}" DataPermission="-1"  ThemeBrush="#2672ec" Icon="PERMISSION" Remark="#ActorFields|Password" InputType="PASSWORD" Required="True" />
                         <Grid>
                             <CRSControls:CrsButton Height="50" Width="120" Content="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#commands|cancel'}"  FontSize="18" FunctionalPermission="-1" Background="#AD103C" Margin="-4,-3,-3,-3" HorizontalAlignment="left" Command="{Binding CancelLoginCmd}" CommandParameter="ignore_session_control" />
                             <CRSControls:CrsButton Height="50" Width="120" Validation="True" Content="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#commands|login'}" FunctionalPermission="-1"  FontSize="18" Background="#2672ec" Margin="-3" HorizontalAlignment="Right" Command="{Binding LoginCmd}" CommandParameter="ignore_session_control" />

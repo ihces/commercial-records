@@ -456,9 +456,9 @@ namespace CommercialRecords.ViewModels.FrameVMs.Goods
         private async Task setBrands(PropertyInfo orderProperty,
             bool alphaNumericOrder = false, bool reverse = false,
             Expression<Func<Brand, bool>> whereClause = null,
-            List<Expression<Func<Brand, object>>> orderByClauses = null)
+            Expression<Func<Brand, object>> orderByClause = null)
         {
-            brandsList = await BrandVM.getList<BrandVM>(whereClause, orderByClauses);
+            brandsList = await BrandVM.getList<BrandVM>(whereClause, orderByClause);
             if (!string.IsNullOrWhiteSpace(QueryText))
                 brandsList = brandsList.Where(c => c.Name.ToLower().Contains(QueryText.ToLower())).ToList();
 
@@ -469,9 +469,9 @@ namespace CommercialRecords.ViewModels.FrameVMs.Goods
         private async Task setGoods(PropertyInfo orderProperty,
             bool alphaNumericOrder = false, bool reverse = false,
             Expression<Func<Good, bool>> whereClause = null,
-            List<Expression<Func<Good, object>>> orderByClauses = null)
+            Expression<Func<Good, object>> orderByClause = null)
         {
-            goodsList = await GoodVM.getList<GoodVM>(whereClause, orderByClauses);
+            goodsList = await GoodVM.getList<GoodVM>(whereClause, orderByClause);
 
             if (!string.IsNullOrWhiteSpace(QueryText))
                 goodsList = goodsList.Where(c => c.Name.ToLower().Contains(QueryText.ToLower())).ToList();

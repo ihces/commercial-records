@@ -78,6 +78,11 @@ namespace CommercialRecords.Controls
                 typeof(CrsUserAuthentication),
                 new PropertyMetadata(false, null)
             );
+
+        public void cleanForm()
+        {
+            passwordFormView.cleanForm();
+        }
         #endregion
     }
 }

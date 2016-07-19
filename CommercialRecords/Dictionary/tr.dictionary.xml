@@ -214,4 +214,14 @@
     <property key="CurrentAccount_modify">Cari Hesap Değiştirme</property>
     <property key="CurrentAccount_delete">Cari Hesap Silme</property>
   </dictionary>
+  <dictionary id="inputFormat">
+    <property key="all">Herhangi bir Değer Giriniz.</property>
+    <property key="name">Sadece Harf Geçerli</property>
+    <property key="number">Sadece Numara</property>
+    <property key="phone">Telefon Numarası Örn: 580 123 45 67</property>
+    <property key="double">Ondalıklı Sayı Örn: 123,45</property>
+    <property key="money">Para Değeri Örn: 123456, 1234₺, 1.234.567,89</property>
+    <property key="date">Tarih Örn: 15/12/2016</property>
+    <property key="datetime">Tarih,Zaman Örn: 15/12/2016 22:33:44</property>
+  </dictionary>
 </dictionaries>

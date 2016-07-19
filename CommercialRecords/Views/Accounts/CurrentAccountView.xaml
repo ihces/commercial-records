@@ -137,7 +137,7 @@
                             <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Yeni Hesap" Visibility="{Binding Path=Visibility, ElementName=recordedAccountHeader, Converter={StaticResource InvertVisibilityConverter}}" />
                             <CRSControls:CrsAppBarButton Margin="0,-12,-27,-10" HorizontalAlignment="Right" Validation="True" Icon="{Binding Path=AccountConfButtonIcon}" Command="{Binding EditCurrentAccountCmd}" VerticalAlignment="Stretch" />
                         </Grid>
-                        <CRSControls:CrsTextBox FontSize="22" Height="50" IconWidth="50" Input="{Binding Path=SelectedAccount.Name, Mode=TwoWay}" ThemeBrush="#008A00" Icon="NOTE" Remark="#CurrentAccountFields|AccountName" InputType="ALL" Required="True" ReadOnly="{Binding Path=EnableAccountField, Converter={StaticResource InvertBooleanConverter}}" />
+                        <CRSControls:CrsInput FontSize="22" Height="50" IconWidth="50" Input="{Binding Path=SelectedAccount.Name, Mode=TwoWay}" ThemeBrush="#008A00" Icon="NOTE" Remark="#CurrentAccountFields|AccountName" InputType="ALL" Required="True" ReadOnly="{Binding Path=EnableAccountField, Converter={StaticResource InvertBooleanConverter}}" />
                         <Grid Height="50">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50"/>
@@ -158,15 +158,15 @@
                                 </ComboBoxItem>
                             </ComboBox>
                         </Grid>
-                        <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=InitialAmount, Mode=TwoWay}" ThemeBrush="#008A00" Icon="CURRENCY" Remark="#CurrentAccountFields|InitialAmount" InputType="MONEY" ReadOnly="False" Visibility="{Binding Path=SelectedAccount.Recorded, Converter={StaticResource Boolean2VisibilityConverter}, ConverterParameter='invert'}" />
+                        <CRSControls:CrsInput FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=InitialAmount, Mode=TwoWay}" ThemeBrush="#008A00" Icon="CURRENCY" Remark="#CurrentAccountFields|InitialAmount" InputType="MONEY" ReadOnly="False" Visibility="{Binding Path=SelectedAccount.Recorded, Converter={StaticResource Boolean2VisibilityConverter}, ConverterParameter='invert'}" />
                         <StackPanel Visibility="{Binding Path=SelectedAccount.Recorded, Converter={StaticResource Boolean2VisibilityConverter}}">
-                            <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.CreateDate, Mode=TwoWay}" ThemeBrush="#008A00" Icon="CALENDAR" Remark="#commonFields|CreatedDate" InputType="ALL" ReadOnly="True" />
-                            <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.LastTransactDate , Mode=TwoWay}" ThemeBrush="#008A00" Icon="TODAY" Remark="#commonFields|LastTransactDate" InputType="ALL" ReadOnly="True" />
-                            <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.TotalDebt, Mode=TwoWay}" ThemeBrush="#008A00" Icon="ADD" Remark="#commonFields|TotalAmount" InputType="MONEY" ReadOnly="True" />
-                            <CRSControls:CrsTextBox FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.TotalCredit, Mode=TwoWay}" ThemeBrush="#008A00" Icon="REMOVE" Remark="#commonFields|PaidAmount" InputType="MONEY" ReadOnly="True" />
-                            <CRSControls:CrsTextBox FontSize="22" Height="50" IconWidth="50" Input="{Binding Path=SelectedAccount.RemainingDebt, Mode=TwoWay}" ThemeBrush="#008A00" Icon="YES" Remark="#commonFields|RemainingAmount" InputType="MONEY" ReadOnly="True" />
+                            <CRSControls:CrsInput FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.CreateDate, Mode=TwoWay}" ThemeBrush="#008A00" Icon="CALENDAR" Remark="#commonFields|CreatedDate" InputType="ALL" ReadOnly="True" />
+                            <CRSControls:CrsInput FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.LastTransactDate , Mode=TwoWay}" ThemeBrush="#008A00" Icon="TODAY" Remark="#commonFields|LastTransactDate" InputType="ALL" ReadOnly="True" />
+                            <CRSControls:CrsInput FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.TotalDebt, Mode=TwoWay}" ThemeBrush="#008A00" Icon="ADD" Remark="#commonFields|TotalAmount" InputType="MONEY" ReadOnly="True" />
+                            <CRSControls:CrsInput FontSize="22" Height="50" Margin="0,0,0,5" IconWidth="50" Input="{Binding Path=SelectedAccount.TotalCredit, Mode=TwoWay}" ThemeBrush="#008A00" Icon="REMOVE" Remark="#commonFields|PaidAmount" InputType="MONEY" ReadOnly="True" />
+                            <CRSControls:CrsInput FontSize="22" Height="50" IconWidth="50" Input="{Binding Path=SelectedAccount.RemainingDebt, Mode=TwoWay}" ThemeBrush="#008A00" Icon="YES" Remark="#commonFields|RemainingAmount" InputType="MONEY" ReadOnly="True" />
                         </StackPanel>
-                        <CRSControls:CrsTextBox FontSize="18" Height="80" IconWidth="50" Input="{Binding Path=SelectedAccount.Detail, Mode=TwoWay}" ThemeBrush="#008A00" Icon="COMMENT" Remark="#commonFields|Detail" InputType="ALL" ReadOnly="{Binding Path=EnableAccountField, Converter={StaticResource InvertBooleanConverter}}" Multiline="True" />
+                        <CRSControls:CrsInput FontSize="18" Height="80" IconWidth="50" Input="{Binding Path=SelectedAccount.Detail, Mode=TwoWay}" ThemeBrush="#008A00" Icon="COMMENT" Remark="#commonFields|Detail" InputType="ALL" ReadOnly="{Binding Path=EnableAccountField, Converter={StaticResource InvertBooleanConverter}}" Multiline="True" />
                     </CRSPanels:CrsFormView>
                 </ScrollViewer>
                 <Grid Grid.Column="5">

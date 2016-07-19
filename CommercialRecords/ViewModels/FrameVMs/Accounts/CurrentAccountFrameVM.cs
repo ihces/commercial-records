@@ -300,23 +300,15 @@ namespace CommercialRecords.ViewModels
         }
 
         private async Task setTransacts()
-        {
-            List<Expression<Func<Transact, object>>> orderByClauses = null;
-            orderByClauses = new List<Expression<Func<Transact, object>>>();
-                orderByClauses.Add(c => c.Date);
-            
+        {   
             Transacts = new ObservableCollection<TransactVM>(
-                await TransactVM.getList<TransactVM>(c => c.AccountId == selectedAccount.Id, orderByClauses));
+                await TransactVM.getList<TransactVM>(c => c.AccountId == selectedAccount.Id, c => c.Date));
         }
 
         private async Task setAccounts()
         {
-            List<Expression<Func<CurrentAccount, object>>> orderByClauses = null;
-            orderByClauses = new List<Expression<Func<CurrentAccount, object>>>();
-            orderByClauses.Add(c => c.Name);
-
             Accounts = new ObservableCollection<CurrentAccountVM>(
-                await CurrentAccountVM.getList<CurrentAccountVM>(c => c.ActorId == CurrentActor.Id, orderByClauses));
+                await CurrentAccountVM.getList<CurrentAccountVM>(c => c.ActorId == CurrentActor.Id, c => c.Name));
 
             SelectedAccount = Accounts[0];
         }
