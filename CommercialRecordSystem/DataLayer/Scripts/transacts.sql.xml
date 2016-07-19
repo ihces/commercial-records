@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<scripts>
-  <script id="asd">
-    Select Actor.* from Actor, CurrentAccount Where
-    Actor.Registered=1 and CurrentAccount.Type = {0}
-    and CurrentAccount.ActorId = Actor.Id
-  </script>
-</scripts>
