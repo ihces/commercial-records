@@ -27,7 +27,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="pageTitle" x:Uid="main_page_title" Text="Commercial Records" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-                <Grid Grid.Column="2" x:Name="session_grid" Tapped="Grid_Tapped" Visibility="{Binding CurrentUser, Converter={StaticResource NullRef2VisibilityConverter}}">
+                <Grid Grid.Column="2" x:Name="session_grid" Tapped="Grid_Tapped" Visibility="{Binding Path=SessionStatus, Converter={StaticResource Compare2AssignVisibilityConverter}, ConverterParameter='LOG_IN'}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>

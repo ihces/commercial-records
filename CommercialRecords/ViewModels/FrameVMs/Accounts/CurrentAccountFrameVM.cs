@@ -20,7 +20,7 @@ namespace CommercialRecords.ViewModels
         #region Properties
         private ActorVM currentActor = new ActorVM();
         public ActorVM CurrentActor
-        { 
+        {
             get
             {
                 return currentActor;
@@ -32,14 +32,14 @@ namespace CommercialRecords.ViewModels
             }
         }
 
-        /*private ObservableCollection<string> accountTypes = new ObservableCollection<string>(CrsDictionary.getInstance().getKeys("accountTypes"));
+        private ObservableCollection<string> accountTypes = new ObservableCollection<string>(CrsDictionary.getInstance().getKeys("accountTypes"));
         public ObservableCollection<string> AccountTypes
-        { 
+        {
             get
             {
                 return accountTypes;
             }
-        }*/
+        }
 
         private CurrentAccountVM newAccountBuff;
 
@@ -67,7 +67,7 @@ namespace CommercialRecords.ViewModels
             }
             set
             {
-                
+
                 if (null != value && !value.Equals(selectedAccount))
                 {
                     if (null != selectedAccount && selectedAccount.Dirty)
@@ -90,7 +90,8 @@ namespace CommercialRecords.ViewModels
         {
             string message = "";
             string header = "";
-            if (SelectedAccount.Recorded){
+            if (SelectedAccount.Recorded)
+            {
                 header = CrsDictionary.getInstance().lookup("notifications", "saveNewAccountHeader");
                 message = CrsDictionary.getInstance().lookup("notifications", "saveAccountMessage");
             }
@@ -114,7 +115,7 @@ namespace CommercialRecords.ViewModels
             EnableAccountField = false;
 
             if (null != newAccountBuff && !newAccountBuff.Recorded)
-            Accounts.Remove(newAccountBuff);
+                Accounts.Remove(newAccountBuff);
         }
 
         private bool enableAccountField = false;
@@ -129,11 +130,49 @@ namespace CommercialRecords.ViewModels
 
                 enableAccountField = value;
                 if (enableAccountField)
+                {
+                    if (!SelectedAccount.Active)
+                        EnableAccountTypeField = true;
+
                     AccountConfButtonIcon = new SymbolIcon(Symbol.Save);
+                }
                 else
+                {
+                    EnableAccountTypeField = false;
                     AccountConfButtonIcon = new SymbolIcon(Symbol.Edit);
+                }
 
                 RaisePropertyChanged("EnableAccountField");
+            }
+        }
+
+        private bool canAccountBeDeleted = false;
+        public bool CanAccountBeDeleted
+        {
+            get
+            {
+                return canAccountBeDeleted;
+            }
+            set
+            {
+
+                canAccountBeDeleted = value;
+                RaisePropertyChanged("CanAccountBeDeleted");
+            }
+        }
+
+        private bool enableAccountTypeField = false;
+        public bool EnableAccountTypeField
+        {
+            get
+            {
+                return enableAccountTypeField;
+            }
+            set
+            {
+
+                enableAccountTypeField = value;
+                RaisePropertyChanged("EnableAccountTypeField");
             }
         }
 
@@ -168,7 +207,7 @@ namespace CommercialRecords.ViewModels
 
         private TransactVM selectedTransact = new TransactVM();
         public TransactVM SelectedTransact
-        { 
+        {
             get
             {
                 return selectedTransact;
@@ -182,7 +221,7 @@ namespace CommercialRecords.ViewModels
 
         private ObservableCollection<TransactVM> transacts = new ObservableCollection<TransactVM>();
         public ObservableCollection<TransactVM> Transacts
-        { 
+        {
             get
             {
                 return transacts;
@@ -191,6 +230,24 @@ namespace CommercialRecords.ViewModels
             {
                 transacts = value;
                 RaisePropertyChanged("Transacts");
+            }
+        }
+
+        private readonly ICommand deleteSelectedAccountCmd;
+        public ICommand DeleteSelectedAccountCmd
+        {
+            get
+            {
+                return deleteSelectedAccountCmd;
+            }
+        }
+
+        private readonly ICommand deleteSelectedTransactCmd;
+        public ICommand DeleteSelectedTransactCmd
+        {
+            get
+            {
+                return deleteSelectedTransactCmd;
             }
         }
 
@@ -223,7 +280,7 @@ namespace CommercialRecords.ViewModels
 
         private void createNewAccountCmd_execute(object obj)
         {
-            if (Accounts[Accounts.Count - 1].Recorded)
+            if (Accounts.Count == 0 || Accounts[Accounts.Count - 1].Recorded)
             {
                 newAccountBuff = new CurrentAccountVM();
                 newAccountBuff.ActorId = CurrentActor.Id;
@@ -243,7 +300,7 @@ namespace CommercialRecords.ViewModels
             }
         }
 
-        
+
 
         private void doPaymentCmd_execute(object obj)
         {
@@ -257,7 +314,7 @@ namespace CommercialRecords.ViewModels
             else
                 Navigation.Navigate(typeof(Sales), SelectedTransact);
         }
-        
+
 
         #endregion
 
@@ -266,14 +323,64 @@ namespace CommercialRecords.ViewModels
         {
             createNewAccountCmd = new ICommandImp(createNewAccountCmd_execute);
             editCurrentAccountCmd = new ICommandImp(editCurrentAccountCmd_execute);
-            doPaymentCmd = new ICommandImp(doPaymentCmd_execute); 
+            deleteSelectedAccountCmd = new ICommandImp(deleteSelectedAccountCmd_execute);
+            doPaymentCmd = new ICommandImp(doPaymentCmd_execute);
             openTransactionCmd = new ICommandImp(openTransactionCmd_execute);
+            deleteSelectedTransactCmd = new ICommandImp(deleteSelectedTransactCmd_execute);
 
-            if (navigation.Back.Is<CurrentAccountList>()) {
+            if (navigation.Back.Is<CurrentAccountList>())
+            {
                 CurrentActor = (ActorVM)navigation.Message;
                 CurrentActor.Name += " " + CurrentActor.Surname;
                 setAccounts();
             }
+        }
+
+        private void deleteSelectedAccountCmd_execute(object obj)
+        {
+            if (SelectedAccount.Active)
+            {
+                var messageDialog = new MessageDialog("Seçilen Hesap Aktif Olduğu İçin Silemiyoruz.", "Hesap Silme");
+                messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "okCommand"), null));
+                messageDialog.DefaultCommandIndex = 1;
+                messageDialog.CancelCommandIndex = 0;
+                messageDialog.ShowAsync();
+
+            }
+            else
+            {
+                var messageDialog = new MessageDialog("Seçili Hesabı Silmek Üzeresiniz. Emin misiniz?", "Hesap Silme");
+
+                messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "noCommand"), null));
+                messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "yesCommand"), new UICommandInvokedHandler(this.DelAccountCommandInvokedHandler)));
+
+                messageDialog.DefaultCommandIndex = 1;
+                messageDialog.CancelCommandIndex = 0;
+                messageDialog.ShowAsync();
+            }
+
+        }
+
+        private void DelAccountCommandInvokedHandler(IUICommand command)
+        {
+            SelectedAccount.delete();
+        }
+
+        private void deleteSelectedTransactCmd_execute(object obj)
+        {
+            var messageDialog = new MessageDialog("Seçili İşlemi Silmek Üzeresiniz. Emin misiniz?", "İşlem Silme");
+
+            messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "noCommand"), null));
+            messageDialog.Commands.Add(new UICommand(CrsDictionary.getInstance().lookup("notifications", "yesCommand"), new UICommandInvokedHandler(this.DelTransactCommandInvokedHandler)));
+
+            messageDialog.DefaultCommandIndex = 1;
+            messageDialog.CancelCommandIndex = 0;
+            messageDialog.ShowAsync();
+        }
+
+        private void DelTransactCommandInvokedHandler(IUICommand command)
+        {
+            SelectedTransact.delete();
         }
 
         private void editCurrentAccountCmd_execute(object obj)
@@ -291,16 +398,30 @@ namespace CommercialRecords.ViewModels
 
                 messageDialog.DefaultCommandIndex = 1;
                 messageDialog.CancelCommandIndex = 0;
-                messageDialog.ShowAsync();
+
+
+                if (!SelectedAccount.Recorded)
+                {
+                    switch (SelectedAccount.Type)
+                    {
+                        case CurrentAccountVM.TYPE_DEBT:
+                            SelectedAccount.TotalDebt = SelectedAccount.InitialAmount;
+                            break;
+                        case CurrentAccountVM.TYPE_RECEIVABLE:
+                            SelectedAccount.TotalCredit = SelectedAccount.InitialAmount;
+                            break;
+                    }
+                }
 
                 SelectedAccount.save();
+                messageDialog.ShowAsync();
             }
 
             EnableAccountField = !EnableAccountField;
         }
 
         private async Task setTransacts()
-        {   
+        {
             Transacts = new ObservableCollection<TransactVM>(
                 await TransactVM.getList<TransactVM>(c => c.AccountId == selectedAccount.Id, c => c.Date));
         }

@@ -1,0 +1,212 @@
+﻿<UserControl x:Name="CrsInputUC"
+    x:Class="CommercialRecords.Controls.CrsInput"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CommercialRecords.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="60"
+    d:DesignWidth="400" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+    <Grid Grid.Row="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Border x:ConnectionId='1' x:Name="iconContainer" BorderBrush="{Binding ThemeBrush, ElementName=CrsInputUC}"                              >
+            <Grid x:Name="icon" Background="{Binding ThemeBrush, ElementName=CrsInputUC}"
+                  Width="{Binding IconWidth, ElementName=CrsInputUC}">
+                <TextBlock Name="iconText"
+                           FontFamily="Segoe UI Symbol"
+                           FontWeight="SemiBold"
+                           FontSize="{Binding IconFontSize, ElementName=CrsInputUC}" 
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Stretch"
+                           TextAlignment="Center"
+                           Foreground="White" />
+                <TextBlock 
+                    FontFamily="Segoe UI Symbol" 
+                    FontWeight="SemiBold" 
+                    FontSize="{Binding IconFontSize, ElementName=CrsInputUC}"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Left" 
+                    Text="*"
+                    TextAlignment="Center"
+                    Margin="3,0,0,0"
+                    Foreground="Wheat"
+                    Visibility="{Binding RequiredSignVisibility, ElementName=CrsInputUC}"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="2"
+                 BorderBrush="{Binding BorderBrush, ElementName=CrsInputUC}"
+                 BorderThickness="{Binding BorderThickness, ElementName=CrsInputUC}">
+            <Grid>
+                <TextBox
+                     Name="textbox"
+                     TextWrapping="NoWrap"
+                     Visibility="{Binding InputType, ElementName=CrsInputUC, 
+                    Converter={StaticResource Compare2AssignVisibilityConverter}, 
+                    ConverterParameter='ALL|NAME|NUMBER|DOUBLE|MONEY|PHONENUMBER|DATE|DATETIME'}"
+                     FontSize="{Binding FontSize, ElementName=CrsInputUC}"
+                     FontWeight="{Binding FontWeight, ElementName=CrsInputUC}"
+                     TextAlignment="Center" Foreground="White"
+                    BorderThickness="0"
+                    Background="{Binding Background, ElementName=CrsInputUC, Mode=TwoWay}"
+                     MaxLength="{Binding InputMaxLength, ElementName=CrsInputUC}" />
+                <PasswordBox
+                     Name="pwdBox"
+                     Visibility="{Binding InputType, ElementName=CrsInputUC, Converter={StaticResource Compare2AssignVisibilityConverter}, ConverterParameter='PASSWORD'}"
+                     FontSize="{Binding FontSize, ElementName=CrsInputUC}"
+                     FontWeight="{Binding FontWeight, ElementName=CrsInputUC}"
+                     Foreground="White"
+                    BorderThickness="0"
+                     Background="{Binding Background, ElementName=CrsInputUC, Mode=TwoWay}"
+                     MaxLength="{Binding InputMaxLength, ElementName=CrsInputUC}" />
+                <ComboBox BorderThickness="0" Name="comboBox"
+                          Foreground="White"
+                          Style="{StaticResource ComboBoxStyle1}"
+                          Background="{Binding Background, ElementName=CrsInputUC, Mode=TwoWay}"
+                          ItemsSource="{Binding InputsSource, ElementName=CrsInputUC}"
+                          IsEnabled="{Binding ReadOnly, ElementName=CrsInputUC, Converter={StaticResource InvertBooleanConverter}}"
+                          Visibility="{Binding InputType, ElementName=CrsInputUC, Converter={StaticResource Compare2AssignVisibilityConverter}, ConverterParameter='MULTISELECT'}"
+                          ItemTemplate="{Binding InputTemplate, ElementName=CrsInputUC}">
+                </ComboBox>
+            </Grid>
+        </Border>
+        <Popup x:ConnectionId='2' x:Name="DateTimePopup" IsOpen="{Binding DateTimePopupIsOpen, Mode=TwoWay}"                                              >
+            <Grid x:Name="DateTimeSelectPopupContent" Height="360" Width="280" Background="{Binding ThemeBrush, ElementName=CrsInputUC}">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="6*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="115" />
+                        <ColumnDefinition Width="85" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Width="30" BorderThickness="0" Padding="0" HorizontalAlignment="Left" Command="{Binding GoPreviousMonthCmd}">
+                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Segoe UI Symbol" FontSize="18" Text="&#xe26c;" />
+                    </Button>
+                    <ComboBox Grid.Column="1" SelectedItem="{Binding MonthValue, Mode=TwoWay}" ItemsSource="{Binding MonthArr}" Style="{StaticResource ComboBoxStyle1}" Foreground="White" BorderThickness="0" Background="Transparent">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='months'}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox Grid.Column="2" SelectedItem="{Binding YearValue, Mode=TwoWay}" ItemsSource="{Binding YearArr}" Style="{StaticResource ComboBoxStyle1}" Foreground="White" BorderThickness="0" Background="Transparent">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding }" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Grid.Column="3" Width="30" BorderThickness="0" HorizontalAlignment="Right" Padding="0" Command="{Binding GoNextMonthCmd}">
+                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Segoe UI Symbol" FontSize="18" Text="&#xe26b;" />
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <ItemsControl ItemsSource="{Binding DaysOfWeek}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="40">
+                                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#ccc" FontSize="16" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='dayOfWeekShort'}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Grid>
+                <ItemsControl Grid.Row="2" ItemsSource="{Binding VisibleDays}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding }">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button BorderThickness="0" Margin="-3" HorizontalAlignment="Left" Width="46" Height="46" Padding="0" Background="{Binding Background}" Command="{Binding Path=DataContext.SelectDayCmd, ElementName=DateTimePopup}" CommandParameter="{Binding }">
+                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding Foreground}" Text="{Binding DateStr}" />
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <Grid Grid.Row="3" Visibility="{Binding Path=InputType, ElementName=CrsInputUC, Converter={StaticResource Compare2AssignVisibilityConverter}, ConverterParameter='DATETIME'}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="15" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Segoe UI Symbol" FontSize="18" Text="&#x1f553;" />
+                    <ComboBox SelectedItem="{Binding HourValue, Mode=TwoWay}" Grid.Column="1" ItemsSource="{Binding HourArr}" Style="{StaticResource ComboBoxStyle1}" Foreground="White" BorderThickness="0" Background="Transparent">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding }" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox SelectedItem="{Binding MinuteValue, Mode=TwoWay}" Grid.Column="3" ItemsSource="{Binding MinuteSecondArr}" Style="{StaticResource ComboBoxStyle1}" Foreground="White" BorderThickness="0" Background="Transparent">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding }" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox SelectedItem="{Binding SecondValue, Mode=TwoWay}" Grid.Column="5" ItemsSource="{Binding MinuteSecondArr}" Style="{StaticResource ComboBoxStyle1}" Foreground="White" BorderThickness="0" Background="Transparent">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding }" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+            </Grid>
+        </Popup>
+        <Popup x:ConnectionId='3' x:Name="ToolTipPopup" IsOpen="{Binding ToolTipPopupIsOpen, ElementName=CrsInputUC, Mode=TwoWay}"                                             >
+            <Grid x:Name="ToolTipPopupContent" MaxHeight="250" MinHeight="50" Width="{Binding Path=ActualWidth, ElementName=CrsInputUC}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Visibility="{Binding Text, ElementName=toolTipHeaderTextBlock, Converter={StaticResource String2VisibilityConverter}}">
+                    <Grid Background="{Binding ThemeBrush, ElementName=CrsInputUC}" Opacity="0.77"></Grid>
+                    <Grid Background="#88000000" Margin="3,3,3,0">
+                        <TextBlock x:Name="toolTipHeaderTextBlock" Padding="5,0,0,0" Foreground="White" FontSize="16" />
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid Background="{Binding ThemeBrush, ElementName=CrsInputUC}" Opacity="0.77"></Grid>
+                    <Grid Background="#48000000" Margin="3">
+                        <TextBlock x:Name="toolTipContentTextBlock" Padding="10" FontSize="14" TextWrapping="Wrap" Foreground="White" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Popup>
+    </Grid>
+</UserControl>
+

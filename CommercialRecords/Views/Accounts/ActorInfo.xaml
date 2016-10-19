@@ -33,7 +33,7 @@
                     <TextBlock FontFamily="Segoe UI Symbol" Text=" &#xE105;" FontSize="34" TextLineBounds="TrimToBaseline"  Foreground="#91D100" Visibility="{Binding Recorded, Converter={StaticResource Boolean2VisibilityConverter}}"
 				 VerticalAlignment="Bottom" />
                 </StackPanel>
-                <CRSControls:CrsAppBarButton Icon="Add" x:Name="addButton" Grid.Column="2" Margin="0,47,10,0" HorizontalAlignment="Right" Command="{Binding CreateNewOneCmd}" />
+                <CRSControls:CrsAppBarButton Icon="Add" x:Name="addButton" Grid.Column="2" Margin="0,47,10,0" HorizontalAlignment="Right" Command="{Binding CreateNewOneCmd}" FunctionalPermission="245" />
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -75,7 +75,7 @@
                         <RowDefinition Height="52" />
                     </Grid.RowDefinitions>
                     <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-                        <CRSPanels:CrsFormView GapSize="5">
+                        <CRSPanels:CrsFormView GapSize="5" FunctionalPermission="245">
                             <CRSPanels:CRSRadioButtonPanel Height="50"  Orientation="Horizontal" CheckedIndex="{Binding Path=CurrentInfo.Type, Mode=TwoWay}">
                                 <RadioButton x:Name="PersonRB" GroupName="ActorTypeRadioGroup" Padding="0" Background="#008A00" Height="50" Style="{StaticResource CRSRadioButtonStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                                     <TextBlock FontFamily="Segoe UI Symbol" FontSize="22" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#ActorFields|Person'}" />
@@ -98,28 +98,8 @@
                             <CRSControls:CrsInput Height="50" FontSize="24" Input="{Binding Path=CurrentInfo.PhoneNumber, Mode=TwoWay}" ThemeBrush="#008A00" Icon="PHONE" Remark="#ActorFields|PhoneNumber" Required="True" InputType="PHONENUMBER"  />
                             <CRSControls:CrsInput Height="50" FontSize="24" Input="{Binding Path=CurrentInfo.MobileNumber, Mode=TwoWay}" ThemeBrush="#008A00" Icon="CELLPHONE" Remark="#ActorFields|MobileNumber" InputType="PHONENUMBER" />
                             <CRSControls:CrsInput Height="100" FontSize="24" Input="{Binding Path=CurrentInfo.Detail, Mode=TwoWay}" ThemeBrush="#008A00" Icon="COMMENT" Remark="#commonFields|Detail"  Multiline="True" InputType="ALL" InputMaxLength="100" />
-                            <Grid Visibility="{Binding Path=CurrentInfo.Recorded, Converter={StaticResource Boolean2VisibilityConverter}, ConverterParameter='invert'}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="5" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Background="#008A00">
-                                    <TextBlock FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontFamily="Segoe UI Symbol" Text="&#xe1ec;" TextAlignment="Center" Foreground="White"></TextBlock>
-                                </Grid>
-                                <ComboBox Grid.Column="1" Height="50" HorizontalContentAlignment="Center" BorderThickness="0" Foreground="Black" Background="Silver" SelectedIndex="{Binding Path=MainAccountType, Mode=TwoWay}" Style="{StaticResource ComboBoxStyle2}">
-                                    <ComboBoxItem>
-                                        <TextBlock FontSize="22" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountTypes|0'}" />
-                                    </ComboBoxItem>
-                                    <ComboBoxItem>
-                                        <TextBlock FontSize="22" Text="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#accountTypes|1'}" />
-                                    </ComboBoxItem>
-                                </ComboBox>
-                                <CRSControls:CrsInput Height="50" FontSize="24" Grid.Column="3" Input="{Binding Path=InitialAmount, Mode=TwoWay}" Icon="CURRENCY" ThemeBrush="#008A00" Remark="#CurrentAccountFields|InitialAmount" Required="False" InputType="MONEY" />
-                            </Grid>
                             <Grid>
-                                <!--<CRSControls:CrsButton Height="50" Width="120" Command="{Binding DelInfoCmd}" Content="Sil"  FontSize="18" Background="#AD103C" Margin="-3" HorizontalAlignment="left" IsEnabled="{Binding Path=DelButtonCanEnable}" />-->
+                                <CRSControls:CrsButton Height="50" Width="120" Command="{Binding DelInfoCmd}" Content="Sil"  FontSize="18" Background="#AD103C" Margin="-3" HorizontalAlignment="left" IsEnabled="{Binding Path=DelButtonCanEnable}" FunctionalPermission="192" />
                                 <CRSControls:CrsButton Height="50" Width="120" Command="{Binding SaveInfoCmd}" Validation="True" Content="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#commands|save'}"  FontSize="18" Background="#008A00" Margin="-3" HorizontalAlignment="Right" IsEnabled="{Binding Path=CurrentInfo.Dirty}" />
                             </Grid>
                         </CRSPanels:CrsFormView>

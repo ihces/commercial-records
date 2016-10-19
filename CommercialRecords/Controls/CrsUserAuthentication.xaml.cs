@@ -1,6 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using CommercialRecords.Common;
+using Windows.Foundation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -78,11 +79,33 @@ namespace CommercialRecords.Controls
                 typeof(CrsUserAuthentication),
                 new PropertyMetadata(false, null)
             );
+        #endregion
+
+        #region AuthSize
+        public Size AuthSize
+        {
+            get
+            {
+                return (Size)GetValue(AuthSizeProperty);
+            }
+            set
+            {
+                SetValue(AuthSizeProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty AuthSizeProperty =
+            DependencyProperty.Register(
+                "AuthSize",
+                typeof(Size),
+                typeof(CrsUserAuthentication),
+                new PropertyMetadata(null, null)
+            );
+        #endregion
 
         public void cleanForm()
         {
             passwordFormView.cleanForm();
         }
-        #endregion
     }
 }

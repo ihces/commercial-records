@@ -16,7 +16,7 @@ namespace CommercialRecords.Common
 
         public class SessionControlVM : VMBase
         {
-            private UserVM currentUser = null;
+            private UserVM currentUser = new UserVM();
             public UserVM CurrentUser
             {
                 get
@@ -256,12 +256,19 @@ namespace CommercialRecords.Common
                 userAuthUC = new CrsUserAuthentication();
                 userAuthUC.IsOpen = true;
                 container.Children.Add(userAuthUC);
+                userAuthUC.AuthSize = new Windows.Foundation.Size(container.ActualWidth, container.ActualHeight);
+                container.SizeChanged += Container_SizeChanged;
             }
             else if (!userAuthUC.IsOpen)
             {
                 userAuthUC.IsOpen = true;
                 userAuthUC.cleanForm();
             }
+        }
+
+        private void Container_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            userAuthUC.AuthSize = e.NewSize;
         }
 
         public void hideAuthentication()

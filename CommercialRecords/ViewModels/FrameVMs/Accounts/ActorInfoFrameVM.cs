@@ -48,7 +48,7 @@ namespace CommercialRecords.ViewModels
             bool newActor = !CurrentInfo.Recorded;
             base.saveInfoCmdHandler(parameter);
             
-            if (newActor && CurrentInfo.Recorded)
+            /*if (newActor && CurrentInfo.Recorded)
             {
                 CurrentAccountVM defaultAccount = new CurrentAccountVM();
                 defaultAccount.ActorId = CurrentInfo.Id;
@@ -62,7 +62,7 @@ namespace CommercialRecords.ViewModels
                     defaultAccount.TotalCredit = InitialAmount;
 
                 defaultAccount.save();
-            }
+            }*/
         }
     }
 }

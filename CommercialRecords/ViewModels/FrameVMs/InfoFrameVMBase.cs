@@ -148,11 +148,7 @@ namespace CommercialRecords.ViewModels.FrameVMs
             string message = null;
             if (result > 0)
             {
-                if (0 == CurrentInfo.Id) // new Info
-                {
-                    DelButtonCanEnable = true;
-                }
-               // CurrentInfo.Dirty = false;
+                DelButtonCanEnable = true;
                 message = CrsDictionary.getInstance().lookup("notifications", "saveRecordMessage", infoName);
             }
             else

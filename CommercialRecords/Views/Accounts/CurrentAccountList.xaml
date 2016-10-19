@@ -67,7 +67,7 @@
                         </interactivity:Interaction.Behaviors>
                     </SearchBox>
                     <CRSControls:CrsAppBarButton Grid.Column="1" Visibility="{Binding PageReadOnly, Converter={StaticResource Boolean2VisibilityConverter}, ConverterParameter='invert'}" Icon="Add"  x:Name="addButton" Label="{Binding Converter={StaticResource Value2RemarkConverter}, ConverterParameter='#infoPageTitles|person_firm'}" Margin="0,47,10,0" HorizontalAlignment="Right" 
-                          Command="{Binding AddActorCmd}"/>
+                          Command="{Binding AddActorCmd}" FunctionalPermission="245" />
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
@@ -84,7 +84,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" Height="45" Background="#008A00" HorizontalAlignment="Stretch">
                         <TextBlock Padding="10,0,0,0" Grid.Column="0" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=SelectedActor.Id}" />
-                        <CRSControls:CrsAppBarButton Margin="-9,-12.5,-27,-9" HorizontalAlignment="Right" Icon="Edit" Command="{Binding EditCurrentActorCmd}" />
+                        <CRSControls:CrsAppBarButton Margin="-9,-12.5,-27,-9" HorizontalAlignment="Right" Icon="Edit" FunctionalPermission="245" Command="{Binding EditCurrentActorCmd}" />
                     </Grid>
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
                         <CRSPanels:CrsFormView Orientation="Vertical" GapSize="5">

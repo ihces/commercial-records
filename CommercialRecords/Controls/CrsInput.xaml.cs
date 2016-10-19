@@ -21,7 +21,7 @@ namespace CommercialRecords.Controls
         public object NewValue { get; }
         public object OldValue { get; }
 
-        InputChangedEventArgs(object newValue, object oldValue)
+        public InputChangedEventArgs(object newValue, object oldValue)
         {
             NewValue = newValue;
             OldValue = oldValue;
@@ -34,6 +34,7 @@ namespace CommercialRecords.Controls
         {
             this.InitializeComponent();
 
+            InputChanged += CrsInput_InputChanged;
             FontSize = 28;
             BorderThickness = new Thickness(3);
             ThemeBrush = new SolidColorBrush(Colors.BlueViolet);
@@ -46,11 +47,19 @@ namespace CommercialRecords.Controls
             this.Loaded += CrsInput_Loaded;
         }
 
+        private void CrsInput_InputChanged(object sender, EventArgs e)
+        {
+            InputChangedEventArgs args = e as InputChangedEventArgs;
+
+
+        }
+
         public void reset()
         {
             if (!validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX))
                 Input = string.Empty;
 
+            closeToolTip();
             IsValid = true;
             AnyClickHandled = false;
             Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
@@ -506,7 +515,7 @@ namespace CommercialRecords.Controls
         public event EventHandler InputChanged;
         private void OnInputChanged(InputChangedEventArgs e)
         {
-            if (null == InputChanged) 
+            if (null != InputChanged)
                 InputChanged(this, e);
         }
 
@@ -608,6 +617,24 @@ namespace CommercialRecords.Controls
             }
         }
 
+        private static CrsInput lastFocussedInput = null;
+        private bool _isFocussed = false;
+        private bool isFocussed
+        {
+            get
+            {
+                return _isFocussed;
+            }
+            set
+            {
+                _isFocussed = value;
+                if (_isFocussed)
+                {
+                    lastFocussedInput = this;
+                }
+            }
+        }
+
         public static readonly DependencyProperty ThemeBrushProperty =
             DependencyProperty.Register(
                 "ThemeBrush",
@@ -623,6 +650,8 @@ namespace CommercialRecords.Controls
 
         delegate object ConvertFromDelegate(string str);
         delegate string ConvertForEditDelegate(string str);
+
+        private static CrsInput inputRef2CloseToolTip = null;
 
         private struct InputTypeInfo
         {
@@ -720,7 +749,7 @@ namespace CommercialRecords.Controls
         #region Fields
         //protected static readonly string INPUT_CHANGE_HANDLER = "input_change_handler";
         public bool AnyClickHandled = false;
-        private bool isEmpty, UCLoaded = false, isFocussed = false, toolTipVisible = false;
+        private bool isEmpty, UCLoaded = false, toolTipVisible = false;
         private int toolTipVizDurationCnt = 0, toolTipVizDuration = 30, toolTipDelayToShow = 30;
         private string remarkBuff = string.Empty;
         private static CrsInput objRefForDateTimePopup = null;
@@ -752,7 +781,11 @@ namespace CommercialRecords.Controls
                     {
                         IsValid = false;
                         if (AnyClickHandled)
+                        {
                             this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                            showToolTip4Notice(CrsDictionary.getInstance().lookup("inputFormat", "required"));
+                        }
+
                     }
 
                     this.Input = null;
@@ -762,7 +795,8 @@ namespace CommercialRecords.Controls
                     IsValid = true;
                     this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
                 }
-                else {
+                else
+                {
                     setText(getText().Trim());
                     string text = getText();
 
@@ -773,11 +807,20 @@ namespace CommercialRecords.Controls
                         {
                             IsValid = false;
                             this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                            showToolTip4Notice(CrsDictionary.getInstance().lookup("inputFormat", "invalidDate"));
                             return;
                         }
                     }
 
-                    if (Regex.IsMatch(text, InputTypeDic[InputType].Pattern) && suitBounds())
+                    if (!suitBounds())
+                    {
+                        IsValid = false;
+                        this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                        showToolTip4Notice(CrsDictionary.getInstance().lookup("inputFormat", "exceedBound", LowerBound, UpperBound));
+                        return;
+                    }
+
+                    if (Regex.IsMatch(text, InputTypeDic[InputType].Pattern))
                     {
                         IsValid = true;
 
@@ -790,6 +833,7 @@ namespace CommercialRecords.Controls
                     {
                         IsValid = false;
                         this.Background = ColorConsts.TEXTBOX_BACKGROUND_INVALID;
+                        showToolTip4Notice(InputTypeDic[InputType].FormatDesc);
                     }
                 }
             }
@@ -914,7 +958,8 @@ namespace CommercialRecords.Controls
                         ToolTipPopupIsOpen = true;
                     }
                 }
-                else {
+                else
+                {
                     if (ToolTipPopupContent.Opacity <= 0.9)
                     {
                         ToolTipPopupContent.Opacity += 0.2;
@@ -932,7 +977,8 @@ namespace CommercialRecords.Controls
                     }
                 }
             }
-            else {
+            else
+            {
                 if (ToolTipPopupContent.Opacity >= 0.1)
                 {
                     ToolTipPopupContent.Opacity -= 0.2;
@@ -944,21 +990,32 @@ namespace CommercialRecords.Controls
             }
         }
 
-        private void showToolTip4Notice()
+        private void showToolTip4Notice(string toolTipContent)
         {
-            ToolTipPopupIsOpen = true;
-            toolTipContentTextBlock.Text = "asdlid";
-            toolTipVisible = true;
-            toolTipDelayToShow = 5;
-            toolTipVizDuration = 500;
-            toolTipVizDurationCnt = 0;
-            timer4ToolTip.Start();
+            if (!isFocussed && (null == lastFocussedInput || (null != lastFocussedInput && !lastFocussedInput.isFocussed)))
+            {
+                if (null != inputRef2CloseToolTip && this != inputRef2CloseToolTip)
+                    inputRef2CloseToolTip.closeToolTip();
+
+                inputRef2CloseToolTip = this;
+                ToolTipPopupIsOpen = true;
+                toolTipContentTextBlock.Text = toolTipContent;
+                toolTipVisible = true;
+                toolTipDelayToShow = 5;
+                toolTipVizDuration = 500;
+                toolTipVizDurationCnt = 0;
+                timer4ToolTip.Start();
+            }
         }
 
         protected override void OnPointerEntered(PointerRoutedEventArgs args)
         {
             if (!isFocussed && !ToolTipPopupIsOpen && !DateTimePopup.IsOpen && IsValid && !string.IsNullOrWhiteSpace(ToolTipContent))
             {
+                if (null != inputRef2CloseToolTip && this != inputRef2CloseToolTip)
+                    inputRef2CloseToolTip.closeToolTip();
+
+                inputRef2CloseToolTip = this;
                 toolTipContentTextBlock.Text = ToolTipContent;
                 toolTipVizDurationCnt = 0;
                 toolTipVizDuration = 30;
@@ -979,6 +1036,7 @@ namespace CommercialRecords.Controls
 
         private void closeToolTip()
         {
+            //toolTipVisible = false;
             ToolTipPopupIsOpen = false;
             if (null != timer4ToolTip)
                 timer4ToolTip.Stop();
@@ -988,7 +1046,10 @@ namespace CommercialRecords.Controls
         {
             if (!ReadOnly)
             {
-                closeToolTip();
+                if (null != inputRef2CloseToolTip && this != inputRef2CloseToolTip)
+                    inputRef2CloseToolTip.closeToolTip();
+                else
+                    closeToolTip();
 
                 if (isEmpty)
                 {
@@ -1000,8 +1061,8 @@ namespace CommercialRecords.Controls
                 {
                     IsValid = true;
                     this.Background = ColorConsts.TEXTBOX_BACKGROUND_VALID;
-                    if (AnyClickHandled)
-                        showToolTip4Notice();
+                    if (AnyClickHandled && !string.IsNullOrWhiteSpace(ToolTipContent))
+                        showToolTip4Notice(ToolTipContent);
                 }
                 else if (!validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX))
                 {
@@ -1073,11 +1134,18 @@ namespace CommercialRecords.Controls
                     objRefForDateTimePopup = this;
                     objRefForDateTimePopup.icon.Background = new SolidColorBrush(Colors.White);
                     objRefForDateTimePopup.iconText.Foreground = new SolidColorBrush(Colors.Black);
+
+                    isFocussed = true;
+                    if (null != inputRef2CloseToolTip && this != inputRef2CloseToolTip)
+                        inputRef2CloseToolTip.closeToolTip();
+                    else
+                        closeToolTip();
                 }
                 else
                 {
                     icon.Background = this.ThemeBrush;
                     iconText.Foreground = new SolidColorBrush(Colors.White);
+                    isFocussed = false;
                 }
             }
         }
@@ -1215,18 +1283,18 @@ namespace CommercialRecords.Controls
         {
             CrsInput CrsInput = (CrsInput)obj;
 
-
-            CrsInput.OnInputChanged(new InputChangedEventArgs(args.NewValue, args.OldValue));
-             
             object newValue = CrsInput.Input;
             if (args != null)
                 newValue = args.NewValue;
+
+            //CrsInput.OnInputChanged(new InputChangedEventArgs(args.NewValue, args.OldValue));
 
             if (CrsInput.validInputContainer.Equals(INPUTCONTAINERS.COMBOBOX) && 0 < CrsInput.comboBox.Items.Count)
             {
                 for (int i = 0; i < CrsInput.comboBox.Items.Count; ++i)
                 {
-                    if (CrsInput.comboBox.Items[i].Equals(newValue))
+                    string str = CrsInput.comboBox.Items[i].ToString();
+                    if (str.Equals(newValue.ToString()))
                     {
                         CrsInput.comboBox.SelectedItem = CrsInput.comboBox.Items[i];
 
@@ -1250,7 +1318,7 @@ namespace CommercialRecords.Controls
 
         private static void RemarkChangedHandler(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            string remarkTemp = e.NewValue.ToString();
+            string remarkTemp = e.NewValue.ToString(), detailTemp = string.Empty;
 
             if (null != remarkTemp && remarkTemp.Length > 0 && remarkTemp[0] == '#')
             {
@@ -1259,10 +1327,17 @@ namespace CommercialRecords.Controls
                 if (remarkTokens.Length == 2)
                 {
                     remarkTemp = CrsDictionary.getInstance().lookup(remarkTokens[0], remarkTokens[1]);
+                    detailTemp = CrsDictionary.getInstance().lookupDetail(remarkTokens[0], remarkTokens[1]);
                 }
             }
 
-            ((CrsInput)d).remarkBuff = remarkTemp;
+            CrsInput inpuRef = ((CrsInput)d);
+            if (string.IsNullOrWhiteSpace(inpuRef.ToolTipContent) && !string.IsNullOrWhiteSpace(detailTemp))
+            {
+                inpuRef.ToolTipContent = detailTemp;
+            }
+
+            inpuRef.remarkBuff = remarkTemp;
         }
 
         private static void boundChangedHandler(DependencyObject d, DependencyPropertyChangedEventArgs e)

@@ -167,7 +167,7 @@ namespace CommercialRecords.ViewModels.FrameVMs.Transacts
         {
             get
             {
-                return DateTime.Now;
+                return DateTime.Now > StartDate ? DateTime.Now : StartDate;
             }
         }
 
@@ -175,7 +175,7 @@ namespace CommercialRecords.ViewModels.FrameVMs.Transacts
         {
             get
             {
-                return DateTime.Now.AddMonths(-1);
+                return EndDate.AddMonths(-1);
             }
         }
         #endregion
@@ -199,21 +199,22 @@ namespace CommercialRecords.ViewModels.FrameVMs.Transacts
 
         private void openTransactionCmd_execute(object obj)
         {
-            switch (SelectedTransact.Type)
-            {
-                case Transact.TYPE_SALE:
-                    Navigation.Navigate(typeof(Sales), selectedTransact);
-                    break;
-                case Transact.TYPE_ORDER:
-                    Navigation.Navigate(typeof(Sales), selectedTransact);
-                    break;
-                case Transact.TYPE_PURCHASE:
-                    Navigation.Navigate(typeof(Sales), selectedTransact);
-                    break;
-                case Transact.TYPE_PAYMENT:
-                    Navigation.Navigate(typeof(Payments), selectedTransact);
-                    break;
-            }
+            if (null != SelectedTransact)
+                switch (SelectedTransact.Type)
+                {
+                    case Transact.TYPE_SALE:
+                        Navigation.Navigate(typeof(Sales), selectedTransact);
+                        break;
+                    case Transact.TYPE_ORDER:
+                        Navigation.Navigate(typeof(Sales), selectedTransact);
+                        break;
+                    case Transact.TYPE_PURCHASE:
+                        Navigation.Navigate(typeof(Sales), selectedTransact);
+                        break;
+                    case Transact.TYPE_PAYMENT:
+                        Navigation.Navigate(typeof(Payments), selectedTransact);
+                        break;
+                }
         }
 
         private void startNewTransact_execute(object obj)
@@ -233,10 +234,10 @@ namespace CommercialRecords.ViewModels.FrameVMs.Transacts
             }
 
             if (null != SelectedUser)
-                whereClauses.Add(t=>t.UserId.Equals(SelectedUser.Id));
+                whereClauses.Add(t => t.UserId.Equals(SelectedUser.Id));
 
             List<TransactVM> transactList = await TransactVM.getList<TransactVM>(
-                whereClauses, new List<Expression<Func<Transact, object>>>() { c=>c.Date });
+                whereClauses, new List<Expression<Func<Transact, object>>>() { c => c.Date });
 
             Transacts = new ObservableCollection<TransactVM>(transactList);
 

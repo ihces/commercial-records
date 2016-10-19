@@ -1,0 +1,124 @@
+﻿<Page
+    x:Class="CommercialRecords.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CommercialRecords"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:CRSControls="using:CommercialRecords.Controls"
+    mc:Ignorable="d">
+
+    <Grid Style="{StaticResource PageLayout}">
+        <Grid>
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="pageTitle" x:Uid="main_page_title" Text="Commercial Records" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+                <Grid x:ConnectionId='7' Grid.Column="2" x:Name="session_grid"                      Visibility="{Binding Path=SessionStatus, Converter={StaticResource Compare2AssignVisibilityConverter}, ConverterParameter='LOG_IN'}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="110" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" Width="50" Height="60" Background="Gray" Visibility="{Binding ShowImageLogo, Converter={StaticResource Boolean2VisibilityConverter}}">
+                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE13D;" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                    <Image Grid.Row="0" Width="50" Source="{Binding Path=CurrentUser.ImageFileSource}"/>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Path=CurrentUser.Name}" Style="{StaticResource SubheaderTextBlockStyle}" Grid.Row="0" TextAlignment="Right" Margin="0, 35, 14, 0" FontSize="34"></TextBlock>
+                        <TextBlock Text="{Binding Path=CurrentUser.Surname}" Style="{StaticResource SubheaderTextBlockStyle}" Grid.Row="1" TextAlignment="Right" Margin="0, -6, 14, 0" FontSize="24"></TextBlock>
+                    </Grid>
+                    <FlyoutBase.AttachedFlyout>
+                        <MenuFlyout x:Name="sessionMenu">
+                            <MenuFlyoutItem x:Name="sessionMenu_changeUser">Change User</MenuFlyoutItem>
+                            <MenuFlyoutItem x:Name="sessionMenu_logout">Logout</MenuFlyoutItem>
+                        </MenuFlyout>
+                    </FlyoutBase.AttachedFlyout>
+                </Grid>
+            </Grid>
+            <GridView Grid.Row="1" Padding="116,80,40,46" SelectionMode="None">
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout/>
+                </FlyoutBase.AttachedFlyout>
+                <GridViewItem IsEnabled="True">
+                    <Grid x:ConnectionId='6' Style="{StaticResource PortraitTile}"                               >
+                        <Grid Background="Green">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#x1f4dd;"/>
+                        </Grid>
+                        <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
+                            <TextBlock x:Uid="main_page_curr_acct" Text="Current Accounts" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="45" Margin="15,0,15,0"/>
+                        </Grid>
+                    </Grid>
+                </GridViewItem>
+                <GridViewItem>
+                    <Grid x:ConnectionId='5' Style="{StaticResource PortraitTile}"                          >
+                        <Grid Background="#0097aa">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE1cb;"/>
+                        </Grid>
+                        <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
+                            <TextBlock x:Uid="main_page_goods" Text="Goods" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="45" Margin="15,0,15,0"/>
+                        </Grid>
+                    </Grid>
+                </GridViewItem>
+                <GridViewItem>
+                    <Grid x:ConnectionId='4' Style="{StaticResource PortraitTile}"                          >
+                        <Grid Background="#d74f2a">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE14d;"/>
+                        </Grid>
+                        <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
+                            <TextBlock x:Uid="main_page_curr_trans" Text="Current Transactions" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="45" Margin="15,0,15,0"/>
+                        </Grid>
+                    </Grid>
+                </GridViewItem>
+                <GridViewItem>
+                    <Grid x:ConnectionId='3' Style="{StaticResource PortraitTile}"                                   >
+                        <Grid Background="#9d00a5">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#x1f3e7;"/>
+                        </Grid>
+                        <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
+                            <TextBlock x:Uid="main_page_ent_accts" Text="Enterprise Accounts" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="45" Margin="15,0,15,0"/>
+                        </Grid>
+                    </Grid>
+                </GridViewItem>
+                <GridViewItem IsEnabled="True">
+                    <Grid x:ConnectionId='2' Style="{StaticResource PortraitTile}"                                   >
+                        <Grid Background="#D39D09">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE1D3;"/>
+                        </Grid>
+                        <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
+                            <TextBlock x:Uid="main_page_trans_report" Text="Transaction Reports" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="45" Margin="15,0,15,0"/>
+                        </Grid>
+                    </Grid>
+                </GridViewItem>
+                <GridViewItem IsEnabled="True">
+                    <Grid x:ConnectionId='1' Style="{StaticResource PortraitTile}"                         >
+                        <Grid Background="#b01a40">
+                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE181;"/>
+                        </Grid>
+                        <Grid VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
+                            <TextBlock x:Uid="main_page_users" Text="Users" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="45" Margin="15,0,15,0"/>
+                        </Grid>
+                    </Grid>
+                </GridViewItem>
+            </GridView>
+        </Grid>
+    </Grid>
+</Page>
+

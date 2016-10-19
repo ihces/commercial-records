@@ -109,7 +109,7 @@ namespace CommercialRecords.Panels
             {
                 CrsInput inputBuff = element as CrsInput;
                 inputElements.Add(inputBuff);
-                inputBuff.Input
+                //inputBuff.Input;
 
                 if (CaptureEnter)
                     inputBuff.setKeyUpHandler(inputKeyDownHandler);

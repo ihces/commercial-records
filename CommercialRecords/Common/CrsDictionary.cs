@@ -13,13 +13,17 @@ namespace CommercialRecords.Common
         {
             Turkish = new SortedDictionary<string, SortedDictionary<string, string>>();
             English = new SortedDictionary<string, SortedDictionary<string, string>>();
+            TurkishDetail = new SortedDictionary<string, SortedDictionary<string, string>>();
+            EnglishDetail = new SortedDictionary<string, SortedDictionary<string, string>>();
 
-            loadDictionaryFromFile("en.dictionary.xml", English);
-            loadDictionaryFromFile("tr.dictionary.xml", Turkish);
+            loadDictionaryFromFile("en.dictionary.xml", English, EnglishDetail);
+            loadDictionaryFromFile("tr.dictionary.xml", Turkish, TurkishDetail);
         }
 
         private SortedDictionary<string, SortedDictionary<string, string>> Turkish = null;
         private SortedDictionary<string, SortedDictionary<string, string>> English = null;
+        private SortedDictionary<string, SortedDictionary<string, string>> TurkishDetail = null;
+        private SortedDictionary<string, SortedDictionary<string, string>> EnglishDetail = null;
 
         public static readonly string CurrentLanguage = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
 
@@ -100,7 +104,32 @@ namespace CommercialRecords.Common
             return String.Format(remark, prms);
         }
 
-        private void loadDictionaryFromFile(string path, SortedDictionary<string, SortedDictionary<string, string>> dictionary)
+        public string lookupDetail(string id, string key, params object[] prms)
+        {
+            string detail = key;
+            switch (CurrentLanguage)
+            {
+                case TURKISH:
+                    if (TurkishDetail.ContainsKey(id) &&
+                        TurkishDetail[id].ContainsKey(key))
+                        detail = TurkishDetail[id][key];
+                    break;
+                case ENGLISH:
+                    if (EnglishDetail.ContainsKey(id) &&
+                        EnglishDetail[id].ContainsKey(key))
+                        detail = EnglishDetail[id][key];
+                    break;
+                default:
+                    if (EnglishDetail.ContainsKey(id) &&
+                        EnglishDetail[id].ContainsKey(key))
+                        detail = EnglishDetail[id][key];
+                    break;
+            }
+
+            return String.Format(detail, prms);
+        }
+
+        private void loadDictionaryFromFile(string path, SortedDictionary<string, SortedDictionary<string, string>> dictionary, SortedDictionary<string, SortedDictionary<string, string>> dictionaryDetail)
         {
             string dictionaryXMLPath = Path.Combine(Package.Current.InstalledLocation.Path, "Dictionary/" + path);
             XDocument loadedData = XDocument.Load(dictionaryXMLPath);
@@ -109,13 +138,29 @@ namespace CommercialRecords.Common
             foreach (XElement dicElement in loadedData.Descendants("dictionary"))
             {
                 SortedDictionary<string, string> dictionaryBuff = new SortedDictionary<string, string>();
+                SortedDictionary<string, string> dictionaryDetailBuff = new SortedDictionary<string, string>();
+
                 foreach (XNode node in dicElement.Nodes())
                 {
                     XElement elementBuff = (XElement)node;
-                    dictionaryBuff.Add(elementBuff.Attribute("key").Value, elementBuff.Value);
+                    if (!elementBuff.HasElements)
+                    {
+                        dictionaryBuff.Add(elementBuff.Attribute("key").Value, elementBuff.Value);
+                    }
+                    else
+                    {
+                        IEnumerator<XNode> nodes = elementBuff.Nodes().GetEnumerator();
+                        nodes.MoveNext();
+                        dictionaryBuff.Add(elementBuff.Attribute("key").Value, ((XText)nodes.Current).Value);
+
+                        nodes.MoveNext();
+                        if (((XElement)nodes.Current) != null)
+                            dictionaryDetailBuff.Add(elementBuff.Attribute("key").Value, ((XElement)nodes.Current).Value);
+                    }
                 }
 
                 dictionary.Add(dicElement.Attribute("id").Value, dictionaryBuff);
+                dictionaryDetail.Add(dicElement.Attribute("id").Value, dictionaryDetailBuff);
             }
         }
     }

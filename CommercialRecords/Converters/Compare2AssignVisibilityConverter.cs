@@ -26,7 +26,7 @@ namespace CommercialRecords.Converters
                         invert = true;
                     }
 
-                    equality = (0 == value.ToString().CompareTo(param));
+                    equality = (0 == value.ToString().CompareTo(paramBuff));
 
                     if (equality ^ invert)
                     {

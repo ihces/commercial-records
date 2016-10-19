@@ -6,8 +6,10 @@ using CommercialRecords.Models.Goods;
 using CommercialRecords.Models.IncomeNExpense;
 using CommercialRecords.Models.Settings;
 using CommercialRecords.ViewModels.DataVMs.Accounts.EnterpriseAccounts;
+using CommercialRecords.ViewModels.DataVMs.Settings;
 using CommercialRecords.Views;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using Windows.ApplicationModel;
@@ -54,7 +56,7 @@ namespace CommercialRecords
                 CommonImgFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(COMMON_IMG_FOLDER, CreationCollisionOption.OpenIfExists);
             }
 
-            private void initDatabase()
+            private async void initDatabase()
             {
                 DBPath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "commercial_records.db");
 
@@ -82,6 +84,19 @@ namespace CommercialRecords
                         enterpriseMainAccount.CreateDate = DateTime.Now;
                         enterpriseMainAccount.Type = 0;
                         enterpriseMainAccount.save();
+                    }
+
+                    List<UserVM> users = await UserVM.getList<UserVM>(); 
+                    if (users.Count == 0)
+                    {
+                        UserVM user = new UserVM()
+                        {   CashRegisterId = 1,
+                            Name = CrsDictionary.getInstance().lookup("instanceLabels", "adminName"),
+                            Surname = CrsDictionary.getInstance().lookup("instanceLabels", "adminSurname"),
+                            Role = "1",
+                            Password = "1234"
+                        };
+                        user.save();
                     }
                 }
             }

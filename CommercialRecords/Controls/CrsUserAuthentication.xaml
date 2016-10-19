@@ -12,10 +12,10 @@
     d:DesignHeight="600"
     d:DesignWidth="800"
     HorizontalContentAlignment="Stretch"
-    VerticalContentAlignment="Center">
+    VerticalContentAlignment="Stretch">
 
     <Popup IsOpen="{Binding IsOpen, ElementName=userAuthenticationUC}">
-        <Grid Background="#48000000" Width="{Binding ActualWidth, ElementName=userAuthenticationUC}" Height="{Binding ActualHeight, ElementName=userAuthenticationUC}">
+        <Grid Background="#48000000" Width="{Binding Path=AuthSize.Width, ElementName=userAuthenticationUC}" Height="{Binding Path=AuthSize.Height, ElementName=userAuthenticationUC}">
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="480" Height="300" Background="#001940">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="160" />

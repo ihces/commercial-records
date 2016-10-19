@@ -18,7 +18,7 @@ namespace CommercialRecords.Views
             this.InitializeComponent();
             App.CRInitializer initializer = new App.CRInitializer();
             initializer.startInit();
-
+            
             session_grid.DataContext = CrsAuthentication.getInstance().SessionControl;
         }
 
